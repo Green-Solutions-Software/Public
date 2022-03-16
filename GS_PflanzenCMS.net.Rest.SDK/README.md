@@ -39,9 +39,9 @@
 
 > [Aktueller Umsatz](#aktueller-umsatz)
 
-**[Webshop Bestellungen](#webshop-bestellungen)**
+> [Webshop Bestellungen](#webshop-bestellungen)
 
-**[Auftragsdaten](#auftragsdaten)**
+> [Auftragsdaten](#auftragsdaten)
 
 **[Videos](#videos)**
 
@@ -58,6 +58,10 @@
 > [Varianten](#Varianten)
 
 > [Dialog Bearbeiten](#dialog-bearbeiten)
+> [Dialog Variante Bearbeiten](#dialog-variante-bearbeiten)
+
+**[Preislisten](#preislisten)**
+> [Preislisten - Einträge](#preislisten-einträge)
 
 **[Bestellungen](#bestellungen)**
 
@@ -100,6 +104,19 @@
 > [Zahlung reservieren](#zahlung-reservieren)
 
 > [Zahlung durchführen](#zahlung-durchführen)
+
+> [Zahlung stornieren](#zahlung-stornieren)
+
+> [Neue Codes erzeugen](#neue-codes-erzeugen)
+
+> [Gutschein kaufen am POS](#gutschein-kaufen-am-pos)
+
+> [Bezahlen per Gutschein am POS](#bezahlen-per-gutschein-am-pos)
+
+> [Stornieren per Gutschein am POS](#stornieren-per-gutschein-am-pos)
+
+> [Barcodes](#barcodes)
+
 
 **[Nachrichten](#nachrichten)**
 
@@ -190,6 +207,10 @@
 > [Upload](#upload)
 
 > [Message](#message)
+
+> [Pricelist](#pricelist)
+
+> [PricelistItem](#pricelistitem)
 
 **[Dialoge](#dialoge)**
 
@@ -422,6 +443,29 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikel-bearbeiten)** )
 
+## Dialog Variante Bearbeiten
+
+| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| --- | --- | --- | --- |
+| api/articles/dialog/key/{id} |ID| **long** | ID der Veriante die bearbeitet werden soll |
+
+Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)**)
+
+# Preislisten
+
+Preislisten / Listungen mit kundenspezifischen Preisen (siehe 35.20)
+
+| Url | api/pricelists |
+| --- | --- |
+
+# Preislisten-Einträge
+
+Die Einträge entsprechen den Artikeln in der Preisliste (siehe 35.21). Die Keys den Varianten der
+Artikel mit den indivduellen Preisen
+
+| Url | api/pricelistitems |
+| --- | --- |
+
 # Bestellungen
 
 | **Url** | **api/orders** |
@@ -605,6 +649,51 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
+## Zahlung stornieren
+
+Eine Zahlung für einen Gutschein stornieren
+
+| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| --- | --- | --- | --- |
+| api/vouchers/cancel |voucherID| **long** | Gutschein ID ||
+|voucherCodeID| **long** | Gutschein Code ID ||
+|amount| **double** | Betrag der reserviert werden soll ||
+|currencyName| **string** | Währung (z.B. EUR) ||
+|info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird ||
+
+Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
+
+## Neue Codes erzeugen
+
+Erzeugt neue Codes ohne diese in der Datenbank anzulegen (für eigene gedruckte Gutscheine)
+
+| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| --- | --- | --- | --- |
+| api/vouchers/generate/codes |count| **int** | Anzahl der Codes ||
+
+Rückgabe: Eine Liste von Gutschein – Codes (siehe **[VoucherCode](#vouchercode)**)
+
+## Gutschein kaufen am POS
+
+Der Kunde kauft einen Gutschein offline und dieser wird dann per **[Gutschein erstellen](#gutschein-erstellen)** online erstellt.
+
+## Bezahlen per Gutschein am POS
+
+Der Kunde kauf offline und bezahlt per online Gutschein. Dazu wird erst der Gutschein gesucht (**[Gutschein finden](#gutschein-finden)**).
+Wird keiner gefunden ist der Gutschein kein gültiger Online Gutschein. Wird einer gefunden muss die
+gewünschte Zahlung reserviert werden (**[Zahlung reservieren](#zahlung-reservieren)**). Sollte der Saldo nicht mehr ausreichen wird ein
+entsprechender Fehler zurückgegeben. Nach Abschluss der Bezahlung wird dann die Zahlung
+durchgeführt (**[Zahlung durchführen](#zahlung-durchführen)**). Der Gutschein steht nun Online zu Verfügung
+
+## Stornieren per Gutschein am POS
+
+Der Kunde storniert offline eine Ware, die per Gutschein bezahlt wurde. Nun wird diese Zahlung auch online storniert (**[Zahlung stornieren](#zahlung-stornieren)**).
+
+## Barcodes
+
+Aktuell stehen folgende Barcode - Typen zum Druck zur Verfügung:
+- Code 128
+- EAN 13
 
 # Nachrichten
 
@@ -1805,7 +1894,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-## Gutschein - Code
+## VoucherCode
 
 ```csharp
 {
@@ -2196,6 +2285,115 @@ public enum MessageDirection {
   "External_DM_ID": null,
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#12#71#157",
+  "Deleted": false
+}
+```
+
+# Pricelist
+
+```csharp
+{
+  "PricelistID": 2,
+  "Name": "Großkunden",
+  "ShortName": null,
+  "Description": null,
+  "Key": null,
+  "Color": "#000000",
+  "Priority": null,
+  "Public": false,
+  "Items": [],
+  "CustomerGroups": [],
+  "Members": [],
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#11#195#46",
+  "Deleted": false
+}
+```
+
+# PricelistItem
+
+```csharp
+{
+  "PricelistItemID": 13,
+  "Article": {
+    "ID": 1365,
+    "RowVersion": "#0#0#0#0#0#6#81#143",
+    "External_Key": "SANA018230",
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Pricelist": {
+    "ID": 2,
+    "RowVersion": "#0#0#0#0#0#11#195#46",
+    "External_Key": null,
+    Seite 55 "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Keys": [{
+    "PricelistKeyID": 13,
+    "ArticleKey": {
+      "ID": 1271,
+      "RowVersion": "#0#0#0#0#0#4#8#5",
+      "External_Key": "001826721076602",
+      "External_RowVersion": null,
+      "External_COR_ID": null
+    },
+    "CustomerEAN": null,
+    "CustomerArticleNumber": null,
+    "CustomerPrice": 15.0,
+    "Individual": false,
+    "Top": false,
+    "Currency": {
+      "ID": 1,
+      "RowVersion": "#0#0#0#0#0#6#99#130",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": 4
+    },
+    "Teaser": null,
+    "Notes": null,
+    "External_Data": null,
+    "Prices": [{
+      "PricelistPriceID": 13,
+      "Quantity": null,
+      "Price": 10.0,
+      "PriceOld": null,
+      "PriceNet": false,
+      "TaxIncluded": false,
+      "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#6#99#130",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 4
+      },
+      "Type": 0,
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null,
+      "External_DM_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#2#54#179",
+      Seite 56 "Deleted": false
+    }],
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#2#54#180",
+    "Deleted": false
+  }],
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#2#54#177",
   "Deleted": false
 }
 ```
