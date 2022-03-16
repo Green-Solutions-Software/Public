@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EDC8653F-FF52-48D2-B67B-7386A7D7066F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GS.PflanzenCMS.Rest.SDK</RootNamespace>
+    <AssemblyName>GS.PflanzenCMS.Rest.SDK</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Args\CreateCashdeskArgs.cs" />
+    <Compile Include="Args\CreateOrderArgs.cs" />
+    <Compile Include="Args\CreateShipmentOrderArgs.cs" />
+    <Compile Include="Args\Import.cs" />
+    <Compile Include="Args\MemberMessageArgs.cs" />
+    <Compile Include="Args\OrderTransactionArgs.cs" />
+    <Compile Include="Args\SearchArgs.cs" />
+    <Compile Include="Args\SearchCrossArgs.cs" />
+    <Compile Include="Args\UploadArgs.cs" />
+    <Compile Include="Client\AccountRepository.cs" />
+    <Compile Include="Client\ArticleGroupsRepository.cs" />
+    <Compile Include="Client\ArticleKeysRepository.cs" />
+    <Compile Include="Client\ArticlePropertiesRepository.cs" />
+    <Compile Include="Client\ArticlesRepository.cs" />
+    <Compile Include="Client\BaseRepository.cs" />
+    <Compile Include="Client\ChannelsRepository.cs" />
+    <Compile Include="Client\CacheRepository.cs" />
+    <Compile Include="Client\BrandsRepository.cs" />
+    <Compile Include="Client\ResultsRepository.cs" />
+    <Compile Include="Client\JobsRepository.cs" />
+    <Compile Include="Client\DocumentsRepository.cs" />
+    <Compile Include="Client\InvoicesRepository.cs" />
+    <Compile Include="Client\CategoriesRepository.cs" />
+    <Compile Include="Client\ChainStoresRepository.cs" />
+    <Compile Include="Client\ContainersRepository.cs" />
+    <Compile Include="Client\Context.cs" />
+    <Compile Include="Client\ContextUOW.cs" />
+    <Compile Include="Client\CountriesRepository.cs" />
+    <Compile Include="Client\CurrenciesRepository.cs" />
+    <Compile Include="Client\CustomerGroupsRepository.cs" />
+    <Compile Include="Client\FeaturesRepository.cs" />
+    <Compile Include="Client\FeatureTypesRepository.cs" />
+    <Compile Include="Client\FieldsRepository.cs" />
+    <Compile Include="Client\GalleriesRepository.cs" />
+    <Compile Include="Client\LanguagesRepository.cs" />
+    <Compile Include="Client\LeafletsRepository.cs" />
+    <Compile Include="Client\MailTemplatesRepository.cs" />
+    <Compile Include="Client\MembersRepository.cs" />
+    <Compile Include="Client\MenusRepository.cs" />
+    <Compile Include="Client\NewsletterMailingsRepository.cs" />
+    <Compile Include="Client\NewsRepository.cs" />
+    <Compile Include="Client\OrdersRepository.cs" />
+    <Compile Include="Client\OrderTransactionsRepository.cs" />
+    <Compile Include="Client\PagesRepository.cs" />
+    <Compile Include="Client\PaymentMethodsRepository.cs" />
+    <Compile Include="Client\PicturesRepository.cs" />
+    <Compile Include="Client\PricelistsRepository.cs" />
+    <Compile Include="Client\ProducersRepository.cs" />
+    <Compile Include="Client\ReportsRepository.cs" />
+    <Compile Include="Client\Retry.cs" />
+    <Compile Include="Client\RightsRepository.cs" />
+    <Compile Include="Client\RolesRepository.cs" />
+    <Compile Include="Client\Samples.cs" />
+    <Compile Include="Client\SearchRepository.cs" />
+    <Compile Include="Client\ShipmentOrdersRepository.cs" />
+    <Compile Include="Client\ShippingMethodsRepository.cs" />
+    <Compile Include="Client\SocialMediaPostsRepository.cs" />
+    <Compile Include="Client\StorageRepository.cs" />
+    <Compile Include="Client\TagsRepository.cs" />
+    <Compile Include="Client\TaxRatesRepository.cs" />
+    <Compile Include="Client\TeasersRepository.cs" />
+    <Compile Include="Client\TimelinesRepository.cs" />
+    <Compile Include="Client\VideosRepository.cs" />
+    <Compile Include="Client\VouchersRepository.cs" />
+    <Compile Include="Exceptions\RequestException.cs" />
+    <Compile Include="Filters\Base.cs" />
+    <Compile Include="Filters\Results.cs" />
+    <Compile Include="Filters\Orders.cs" />
+    <Compile Include="Filters\Invoices.cs" />
+    <Compile Include="Interfaces\IAccountRepository.cs" />
+    <Compile Include="Interfaces\IArticleGroupsRepository.cs" />
+    <Compile Include="Interfaces\IArticleKeysRepository.cs" />
+    <Compile Include="Interfaces\IArticlePropertiesRepository.cs" />
+    <Compile Include="Interfaces\IArticlesRepository.cs" />
+    <Compile Include="Interfaces\IChannelsRepository.cs" />
+    <Compile Include="Interfaces\ICacheRepository.cs" />
+    <Compile Include="Interfaces\IBrandsRepository.cs" />
+    <Compile Include="Interfaces\IResultsRepository.cs" />
+    <Compile Include="Interfaces\ICategoriesRepository.cs" />
+    <Compile Include="Interfaces\IChainStoresRepository.cs" />
+    <Compile Include="Interfaces\IContainersRepository.cs" />
+    <Compile Include="Interfaces\ICountriesRepository.cs" />
+    <Compile Include="Interfaces\ICurrenciesRepository.cs" />
+    <Compile Include="Interfaces\ICustomerGroupsRepository.cs" />
+    <Compile Include="Interfaces\IDocumentsRepository.cs" />
+    <Compile Include="Interfaces\IExtSourcesUnitOfWork.cs" />
+    <Compile Include="Interfaces\IFeaturesRepository.cs" />
+    <Compile Include="Interfaces\IFeatureTypesRepository.cs" />
+    <Compile Include="Interfaces\IFieldsRepository.cs" />
+    <Compile Include="Interfaces\IGalleriesRepository.cs" />
+    <Compile Include="Interfaces\ILanguagesRepository.cs" />
+    <Compile Include="Interfaces\ILeafletsRepository.cs" />
+    <Compile Include="Interfaces\IMailTemplatesRepository.cs" />
+    <Compile Include="Interfaces\IMembersRepository.cs" />
+    <Compile Include="Interfaces\IMenusRepository.cs" />
+    <Compile Include="Interfaces\INewsletterMailingRepository.cs" />
+    <Compile Include="Interfaces\INewsRepository.cs" />
+    <Compile Include="Interfaces\IInvoicesRepository.cs" />
+    <Compile Include="Interfaces\IOrdersRepository.cs" />
+    <Compile Include="Interfaces\IOrderTransactionsRepository.cs" />
+    <Compile Include="Interfaces\IPagesRepository.cs" />
+    <Compile Include="Interfaces\IPaymentMethodsRepository.cs" />
+    <Compile Include="Interfaces\IPicturesRepository.cs" />
+    <Compile Include="Interfaces\IPricelistsRepository.cs" />
+    <Compile Include="Interfaces\IProducersRepository.cs" />
+    <Compile Include="Interfaces\IReportsRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IJobsRepository.cs" />
+    <Compile Include="Interfaces\IRightsRepository.cs" />
+    <Compile Include="Interfaces\IRolesRepository.cs" />
+    <Compile Include="Interfaces\ISearchRepository.cs" />
+    <Compile Include="Interfaces\IShipmentOrdersRepository.cs" />
+    <Compile Include="Interfaces\IShippingMethodsRepository.cs" />
+    <Compile Include="Interfaces\ISocialMediaPostsRepository.cs" />
+    <Compile Include="Interfaces\IStorageRepository.cs" />
+    <Compile Include="Interfaces\ITagsRepository.cs" />
+    <Compile Include="Interfaces\ITaxRatesRepository.cs" />
+    <Compile Include="Interfaces\ITeasersRepository.cs" />
+    <Compile Include="Interfaces\ITimelinesRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IVideosRepository.cs" />
+    <Compile Include="Interfaces\IVouchersRepository.cs" />
+    <Compile Include="Models\AccountInfo.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AmazonAccount.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleAttachment.cs" />
+    <Compile Include="Models\ArticleGroup.cs" />
+    <Compile Include="Models\ArticleGroupProperty.cs" />
+    <Compile Include="Models\ArticleKey.cs" />
+    <Compile Include="Models\ArticleKeyAttachment.cs" />
+    <Compile Include="Models\ArticleKeyChannel.cs" />
+    <Compile Include="Models\ArticleKeyPhoto.cs" />
+    <Compile Include="Models\ArticleKeyPrice.cs" />
+    <Compile Include="Models\ArticlePhoto.cs" />
+    <Compile Include="Models\ArticleProperty.cs" />
+    <Compile Include="Models\ArticleRating.cs" />
+    <Compile Include="Models\ArticleReference.cs" />
+    <Compile Include="Models\ArticleTask.cs" />
+    <Compile Include="Models\ArticleText.cs" />
+    <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\Availability.cs" />
+    <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\InvoicePosition.cs" />
+    <Compile Include="Models\InvoiceState.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\CalendarItem.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryPhoto.cs" />
+    <Compile Include="Models\ChainStore.cs" />
+    <Compile Include="Models\ChainStorePhoto.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactAddress.cs" />
+    <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\ContainerItem.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\CustomerGroup.cs" />
+    <Compile Include="Models\CustomField.cs" />
+    <Compile Include="Models\DataFile.cs" />
+    <Compile Include="Models\DeliverTime.cs" />
+    <Compile Include="Models\Dialog.cs" />
+    <Compile Include="Models\Documentation.cs" />
+    <Compile Include="Models\EBayAccount.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\EntityReference.cs" />
+    <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\FeatureType.cs" />
+    <Compile Include="Models\Field.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FoundVoucher.cs" />
+    <Compile Include="Models\Gallery.cs" />
+    <Compile Include="Models\GallerySlide.cs" />
+    <Compile Include="Models\GallerySlideAttachment.cs" />
+    <Compile Include="Models\GoogleShoppingAccount.cs" />
+    <Compile Include="Models\ImageRect.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Leaflet.cs" />
+    <Compile Include="Models\LeafletAttachment.cs" />
+    <Compile Include="Models\LeafletPhoto.cs" />
+    <Compile Include="Models\MailTemplate.cs" />
+    <Compile Include="Models\MailTemplateAttachment.cs" />
+    <Compile Include="Models\MainEntity.cs" />
+    <Compile Include="Models\MarketPlaceAccount.cs" />
+    <Compile Include="Models\MarketPlaceArticle.cs" />
+    <Compile Include="Models\Media.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\MemberPhoto.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NewsAttachment.cs" />
+    <Compile Include="Models\NewsletterMailing.cs" />
+    <Compile Include="Models\NewsletterTemplateAttachment.cs" />
+    <Compile Include="Models\OpeningTime.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDocumentation.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderItemPhoto.cs" />
+    <Compile Include="Models\OrderTransaction.cs" />
+    <Compile Include="Models\OrderTransactionDocumentation.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\PageLinkTarget.cs" />
+    <Compile Include="Models\Paginated.cs" />
+    <Compile Include="Models\PaginatedSearch.cs" />
+    <Compile Include="Models\Paragraph.cs" />
+    <Compile Include="Models\ParagraphMedia.cs" />
+    <Compile Include="Models\ParagraphPhoto.cs" />
+    <Compile Include="Models\Patch.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\Pricelist.cs" />
+    <Compile Include="Models\PricelistItem.cs" />
+    <Compile Include="Models\PricelistKey.cs" />
+    <Compile Include="Models\PricelistPrice.cs" />
+    <Compile Include="Models\Producer.cs" />
+    <Compile Include="Models\RemoveOwnerType.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportMedia.cs" />
+    <Compile Include="Models\ReportPhoto.cs" />
+    <Compile Include="Models\ResolvedPicto.cs" />
+    <Compile Include="Models\Right.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SearchFacett.cs" />
+    <Compile Include="Models\SearchFacettValue.cs" />
+    <Compile Include="Models\SEOMainEntity.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\SetupConfig.cs" />
+    <Compile Include="Models\SetupConfigPage.cs" />
+    <Compile Include="Models\ShipmentOrder.cs" />
+    <Compile Include="Models\ShipmentOrderItem.cs" />
+    <Compile Include="Models\ShippingMethod.cs" />
+    <Compile Include="Models\SocialMediaPost.cs" />
+    <Compile Include="Models\Summary.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TagSynonym.cs" />
+    <Compile Include="Models\TaxRate.cs" />
+    <Compile Include="Models\Teaser.cs" />
+    <Compile Include="Models\Timeline.cs" />
+    <Compile Include="Models\TimelineItem.cs" />
+    <Compile Include="Models\TimePeriod.cs" />
+    <Compile Include="Models\Types.cs" />
+    <Compile Include="Models\UrlResult.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Video.cs" />
+    <Compile Include="Models\VideoFile.cs" />
+    <Compile Include="Models\VideoPhoto.cs" />
+    <Compile Include="Models\Voucher.cs" />
+    <Compile Include="Models\VoucherCode.cs" />
+    <Compile Include="Models\WebsiteTemplate.cs" />
+    <Compile Include="Classes\DataUri.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Basics\VD_Library\VD_Library.csproj">
+      <Project>{bb646153-58ec-4f24-9484-c7dd44111a8e}</Project>
+      <Name>VD_Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Basics\VD_Locale\VD_Locale.csproj">
+      <Project>{a81c0bf1-1e2d-478a-a017-c87a8e5062c6}</Project>
+      <Name>VD_Locale</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.15.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
