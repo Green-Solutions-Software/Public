@@ -265,11 +265,11 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
 
     public enum OrderType : short
     {
-        [VD.Locale.Texts.Description("Bestellung")]
+        [Description("Bestellung")]
         Order,
-        [VD.Locale.Texts.Description("Anfrage")]
+        [Description("Anfrage")]
         Inquiry,
-        [VD.Locale.Texts.Description("Entwurf")]
+        [Description("Entwurf")]
         Draft
     }
 

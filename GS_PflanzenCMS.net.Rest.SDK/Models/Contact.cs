@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using GS.PflanzenCMS.Rest.SDK.Classes;
 
 namespace GS.PflanzenCMS.Rest.SDK.Models
 {
@@ -41,7 +42,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
             if (this.Apellation == Apellation.Company)
             {
                 if (!string.IsNullOrEmpty(this.Company))
-                    return VD.Library.Enums.Description(Apellation.Company) + " " + this.Company;
+                    return Enums.Description(Apellation.Company) + " " + this.Company;
                 else
                     return (this.FirstName + " " + this.LastName).Trim();
             }
@@ -51,9 +52,9 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
 
             StringBuilder sb = new StringBuilder();
             if (!string.IsNullOrEmpty(this.Company))
-                sb.Append(VD.Library.Enums.Description(Apellation.Company) + " " + this.Company + ", ");
+                sb.Append(Enums.Description(Apellation.Company) + " " + this.Company + ", ");
 
-            sb.Append((VD.Library.Enums.Description(this.Apellation) + " " + this.FirstName + " " + this.LastName).Trim());
+            sb.Append((Enums.Description(this.Apellation) + " " + this.FirstName + " " + this.LastName).Trim());
 
             return sb.ToString();
         }

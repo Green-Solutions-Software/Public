@@ -53,7 +53,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
             get
             {
                 if (this.QuantityConfirmed != null)
-                    return VD.Locale.Texts.Format("{1} statt {0}", this.Quantity, this.QuantityConfirmed);
+                    return string.Format("{1} statt {0}", this.Quantity, this.QuantityConfirmed);
 
                 return this.Quantity.ToString();
             }

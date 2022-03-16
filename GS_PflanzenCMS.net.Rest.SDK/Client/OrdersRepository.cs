@@ -52,7 +52,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
         }
         public Paginated<Order.Summary> FindAll(string search, int pageIndex, int pageSize, string orderBy, Filters.Orders filter = null, long[] ids = null)
         {
-            return FindAll(search, pageIndex, pageSize, orderBy, filter != null ? filter.ToString() : (string)null, ids != null ? VD.Library.Strings.ListStringCombine(ids,m=>m.ToString(),",") : null);
+            return FindAll(search, pageIndex, pageSize, orderBy, filter != null ? filter.ToString() : (string)null, ids != null ? GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(ids,m=>m.ToString(),",") : null);
         }
     }
 }

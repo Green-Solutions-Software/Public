@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GS.PflanzenCMS.Rest.SDK.Interfaces;
 using GS.PflanzenCMS.Rest.SDK.Models;
-using VD.Library.Logging;
 
 namespace GS.PflanzenCMS.Rest.SDK.Client
 {
     public class ContextUOW : IUnitOfWork, IDisposable
     {
-        ContextLog log = new ContextLog(typeof(ContextUOW));
 
         public Context Context { get; set; }
 
@@ -631,7 +629,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Fehler", ex);
+                    //log.Error("Fehler", ex);
                     e = ex;
                 }
                 resultFunc(result);

@@ -1,4 +1,5 @@
 ﻿using GS.PflanzenCMS.Rest.SDK.Api.Args;
+using GS.PflanzenCMS.Rest.SDK.Classes;
 using GS.PflanzenCMS.Rest.SDK.Exceptions;
 using GS.PflanzenCMS.Rest.SDK.Interfaces;
 using GS.PflanzenCMS.Rest.SDK.Models;
@@ -563,7 +564,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
         public T Get<T>(string resource, long[] ids, string[] properties = null) where T : class, new()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict.Add("ids", VD.Library.Strings.ListStringCombine(ids, m => m.ToString(), ","));
+            dict.Add("ids", GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(ids, m => m.ToString(), ","));
             if (properties != null)
                 dict.Add("properties", toString(properties));
 
@@ -701,7 +702,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             webClient.Headers.Add("vendor", this.vendor);
             webClient.Headers.Add("token", this.token);
             var file = System.IO.Path.GetTempFileName() + ".pdf";
-            webClient.DownloadFile(VD.Library.Web.Combine(this.endpoint, "api/shipmentorders/items/label/" + id + "?type=" + type), file);
+            webClient.DownloadFile(Web.Combine(this.endpoint, "api/shipmentorders/items/label/" + id + "?type=" + type), file);
             return file;
         }
 
@@ -871,7 +872,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             webClient.Headers.Add("vendor", this.vendor);
             webClient.Headers.Add("token", this.token);
             var file = System.IO.Path.GetTempFileName() + ".pdf";
-            webClient.DownloadFile(VD.Library.Web.Combine(this.endpoint, "/api/documents/order/" + orderId + "/" + type), file);
+            webClient.DownloadFile(Web.Combine(this.endpoint, "/api/documents/order/" + orderId + "/" + type), file);
             return file;
         }
 
@@ -881,7 +882,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             webClient.Headers.Add("vendor", this.vendor);
             webClient.Headers.Add("token", this.token);
             var file = System.IO.Path.GetTempFileName() + ".pdf";
-            var url = VD.Library.Web.Combine(this.endpoint, "api/public/documents/orders/?id=" + VD.Library.Strings.ListStringCombine(orderId, m => m.ToString(), ",") + "&type=" + type+"&guid="+Guid.NewGuid().ToString());
+            var url = Web.Combine(this.endpoint, "api/public/documents/orders/?id=" + GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(orderId, m => m.ToString(), ",") + "&type=" + type+"&guid="+Guid.NewGuid().ToString());
             webClient.DownloadFile(url, file);
             return file;
         }
@@ -892,7 +893,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             webClient.Headers.Add("vendor", this.vendor);
             webClient.Headers.Add("token", this.token);
             var file = System.IO.Path.GetTempFileName() + ".pdf";
-            webClient.DownloadFile(VD.Library.Web.Combine(this.endpoint, "/api/documents/order/" + orderId + "/" + type + "/" + transactionId), file);
+            webClient.DownloadFile(Web.Combine(this.endpoint, "/api/documents/order/" + orderId + "/" + type + "/" + transactionId), file);
             return file;
         }
 

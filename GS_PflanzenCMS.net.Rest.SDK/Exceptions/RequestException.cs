@@ -61,7 +61,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Exceptions
                     // Do nothing
                 }
 
-                return VD.Library.Strings.ListStringCombine(sb, m => m, " ");
+                return GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(sb, m => m, " ");
             }
         }
 

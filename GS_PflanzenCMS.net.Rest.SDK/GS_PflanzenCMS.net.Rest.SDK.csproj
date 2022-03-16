@@ -51,6 +51,9 @@
     <Compile Include="Args\SearchArgs.cs" />
     <Compile Include="Args\SearchCrossArgs.cs" />
     <Compile Include="Args\UploadArgs.cs" />
+    <Compile Include="Classes\Web.cs" />
+    <Compile Include="Classes\Enums.cs" />
+    <Compile Include="Classes\Strings.cs" />
     <Compile Include="Client\AccountRepository.cs" />
     <Compile Include="Client\ArticleGroupsRepository.cs" />
     <Compile Include="Client\ArticleKeysRepository.cs" />
@@ -302,16 +305,6 @@
     <Compile Include="Models\WebsiteTemplate.cs" />
     <Compile Include="Classes\DataUri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Basics\VD_Library\VD_Library.csproj">
-      <Project>{bb646153-58ec-4f24-9484-c7dd44111a8e}</Project>
-      <Name>VD_Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Basics\VD_Locale\VD_Locale.csproj">
-      <Project>{a81c0bf1-1e2d-478a-a017-c87a8e5062c6}</Project>
-      <Name>VD_Locale</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

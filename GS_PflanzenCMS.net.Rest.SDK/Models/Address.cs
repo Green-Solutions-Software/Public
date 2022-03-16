@@ -34,12 +34,12 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         {
             var result = (this.Street + " " + this.HouseNumber).Trim();
             //if (!string.IsNullOrEmpty(this.HouseNumber))
-            //    result = VD.Library.Strings.strCombine(result, this.HouseNumber, ", ");
+            //    result = GS.PflanzenCMS.Rest.SDK.Classes.Strings.strCombine(result, this.HouseNumber, ", ");
             if (!string.IsNullOrEmpty(this.Zip + " " + this.City))
-                result = VD.Library.Strings.strCombine(result, (this.Zip + " " + this.City).Trim(), ", ");
+                result = GS.PflanzenCMS.Rest.SDK.Classes.Strings.strCombine(result, (this.Zip + " " + this.City).Trim(), ", ");
 
             //if (this.Country != null)
-            //    result = VD.Library.Strings.strCombine(result, this.Country.Name, ", ");
+            //    result = GS.PflanzenCMS.Rest.SDK.Classes.Strings.strCombine(result, this.Country.Name, ", ");
 
             if (!string.IsNullOrEmpty(this.Postbox))
                 result += ", " + this.Postbox;

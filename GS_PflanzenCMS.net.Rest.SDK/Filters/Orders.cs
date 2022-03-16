@@ -29,15 +29,15 @@ namespace GS.PflanzenCMS.Rest.SDK.Filters
                 dict["supplierid"] = "null";
 
             if (CategoryIds != null)
-                dict["categoryid"] = VD.Library.Strings.ListStringCombine(CategoryIds, m=>m.ToString(),",");
+                dict["categoryid"] = GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(CategoryIds, m=>m.ToString(),",");
 
             if (BrandIds != null)
-                dict["brandid"] = VD.Library.Strings.ListStringCombine(BrandIds, m => m.ToString(), ",");
+                dict["brandid"] = GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(BrandIds, m => m.ToString(), ",");
             if (ProducerIds != null)
-                dict["producerid"] = VD.Library.Strings.ListStringCombine(ProducerIds, m => m.ToString(), ",");
+                dict["producerid"] = GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(ProducerIds, m => m.ToString(), ",");
 
             if (StockLocations != null)
-                dict["stocklocations"] = VD.Library.Strings.ListStringCombine(StockLocations, m => m.ToString(), ",");
+                dict["stocklocations"] = GS.PflanzenCMS.Rest.SDK.Classes.Strings.ListStringCombine(StockLocations, m => m.ToString(), ",");
 
             if (Status != null)
                 dict["status"] = ((short)Status).ToString();
