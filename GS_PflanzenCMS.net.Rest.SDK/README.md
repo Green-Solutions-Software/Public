@@ -14,13 +14,13 @@ Datum: 16.03.2022
 
 **[Fehlerbehandlung](#fehlerbehandlung)**
 
-**[Voraussetzungen](#_Toc8988925)**
+**[Voraussetzungen](#voraussetzungen)**
 
-**[Server](#_Toc8988926)**
+**[Server](#Server)**
 
-**[Abfragen](#_Toc8988927)**
+**[Abfragen](#abfragen)**
 
-**[Postman](#_Toc8988928)**
+**[Postman](#postman)**
 
 **[Authorisierung](#_Toc8988929)**
 
@@ -232,7 +232,7 @@ Die Anfragen werden über die folgende URL aufgerufen:
 
 http://{domain}/api/
 
-# 7.Abfragen
+# Abfragen
 
 Es gibt 6 Arten von Anfragen die für alle Entitäten gleich sind:
 
@@ -271,7 +271,7 @@ Bei dem GET und PUT zu einer Entität (Abfragen/Updaten) kann noch ein Parameter
 
 api/articles/4687?properties=Name,Name2,Photos,Keys,Keys.Info,Keys.Value,Keys.EAN,Keys.Photos
 
-# 8.Postman
+# Postman
 
 Ein gutes Tool um die Schnittstelle zu testen vor der Implementation finden Sie hier:
 
@@ -279,7 +279,7 @@ Ein gutes Tool um die Schnittstelle zu testen vor der Implementation finden Sie 
 
 Damit können Sie alles Abfragen ausprobieren ohne die Schnittstelle implementiert zu haben.
 
-# 9.Authorisierung
+# Authorisierung
 
 Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der daraus entstehende Token kann dann dauerhaft für den Zugriff verwendet werden ohne dass das Benutzername/Passwort erneut übertragen werden muss:
 
@@ -291,22 +291,22 @@ Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der darau
 
 Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
 
-# 10.Währungen
+# Währungen
 
 | Url | api/currencies |
 | --- | --- |
 
-# 11.Länder (inkl. MwSt. Sätze)
+# Länder (inkl. MwSt. Sätze)
 
 | Url | api/countries |
 | --- | --- |
 
-# 12.Kategorien
+# Kategorien
 
 | Url | api/categories |
 | --- | --- |
 
-# 13.Berichte
+# Berichte
 
 | Url | api/reports |
 | --- | --- |
@@ -314,12 +314,12 @@ Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mit
 #
 
 
-# 14.Kundenkarten
+# Kundenkarten
 
 | Url | api/debitcards |
 | --- | --- |
 
-## 14.1Neue Kundenkarten abfragen
+## Neue Kundenkarten abfragen
 
 Listet neue Kundenkarten ohne Validierung an den Anfang der Liste. Sie können dann pageweise immer weitergehen bis ein Datensatz erscheint der bereits validiert wurde.
 
@@ -331,7 +331,7 @@ Listet neue Kundenkarten ohne Validierung an den Anfang der Liste. Sie können d
 | --- | --- | --- | --- |
 | **orderby** | _string_ | Sortierung | Listet die noch nicht zugeordneten Kundenkarten nach oben |
 
-## 14.2Neue Kundenkarten validieren
+## Neue Kundenkarten validieren
 
 Neue Kundenkarten müssen von der WaWi einmalig validiert werden das diese auch von dem eingeloggten Benutzer verwendet werden dürfen. Hierzu laden Sie sich bitte den Kunden, der der Karte zugeordnet ist und vergleichen z.B. Adressdaten
 
@@ -344,43 +344,43 @@ Neue Kundenkarten müssen von der WaWi einmalig validiert werden das diese auch 
 | **Error** | _string_ | Falls nicht gültig kann hier der Grund angegeben werden. Dieser Text wird dann dem Kunden angezeigt, wenn er versucht mit der Karte zu kaufen. Ansonsten bitte leer mitgeben |
 | **Turnover** | _Double_ | Aktueller Umsatz auf der Kundenkarte |
 
-## 14.3Aktueller Umsatz
+## Aktueller Umsatz
 
 In festen Intervallen müssen der aktuelle Umsatz sowie die einzelnen Auftragsdaten übertragen werden.
 
 Setzen Sie hierfür das Turnover Feld auf den aktuell gebuchten Umsatz.
 
-## 14.4Webshop Bestellungen
+## Webshop Bestellungen
 
 Webshop Aufträge haben nun eine Verknüpfung „DebitCard&quot; zu der Kundenkarte, der sie zugeordnet werden sollen.
 
-## 14.5Auftragsdaten
+## Auftragsdaten
 
 Die Aufträge können als api/orders mit dem Status „Ready&quot; im System angelegt und dann über das DebitCard Feld mit der Kundenkarte verknüpft werden. Bitte verwenden Sie bei der Transaction den Type Cashdesc (4) damit das System weiß, das der Auftrag über die Kasse gelaufen ist.
 
 **Wichtig:** Bitte achten Sie darauf uns nur Bestellungen zu übermitteln die Sie nicht von uns bekommen haben!
 
-# 15.Videos
+# Videos
 
 | Url | api/videos |
 | --- | --- |
 
-# 16.Filialen
+# Filialen
 
 | Url | api/chainstores |
 | --- | --- |
 
-# 17.Kunden
+# Kunden
 
 | Url | api/members |
 | --- | --- |
 
-# 18.Artikel
+# Artikel
 
 | Url | api/articles |
 | --- | --- |
 
-## 18.1Erweiterte Anlage
+## Erweiterte Anlage
 
 Mit dieser Funktion kann ein Artikel angelegt und direkt mit einem Green – Solutions Artikel um Informationen angereichert werden
 
@@ -393,7 +393,7 @@ Mit dieser Funktion kann ein Artikel angelegt und direkt mit einem Green – Sol
 | _ **compareNameSecondary** _ | _bool_ | Name 2 vergleichen? |
  |
 
-## 18.2Transaktionen
+## Transaktionen
 
 Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und die Preise aktualisiert werden
 
@@ -403,12 +403,12 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 | --- | --- | --- | --- |
 | _ **BODY** _ | _ArticleTransactionArgs[]_ | Ein Array mit mehreren Transaktionen | Siehe **34.14** |
 
-## 18.3Varianten
+## Varianten
 
 | Url | api/articlekeys |
 | --- | --- |
 
-## 18.4Dialog „Bearbeiten&quot;
+## Dialog „Bearbeiten&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -416,20 +416,20 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.3** )
 
-# 19.Bestellungen
+# Bestellungen
 
 | **Url** | **api/orders** |
 | --- | --- |
 | Filter | ownermemberid |
 
-## 19.1Alle Shop Bestellungen
+## Alle Shop Bestellungen
 
 | Url | api/orders/all |
 | --- | --- |
 
 **Hinweis:** Diese Funktion ist nur zulässig von Benutzern innerhalb des Hauptaccount des Shops! Andernfalls wird ein entsprechender Fehler ausgelöst.
 
-## 19.2Status anpassen
+## Status anpassen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -439,7 +439,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.3** )
 
 Als Rückgabe wird die Bestellung zurückgegeben (siehe **34.6** )
 
-## 19.3Dialog „Versenden&quot;
+## Dialog „Versenden&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -447,7 +447,7 @@ Als Rückgabe wird die Bestellung zurückgegeben (siehe **34.6** )
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.1** )
 
-## 19.4Dialog „Bestätigen&quot;
+## Dialog „Bestätigen&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -455,7 +455,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.1** )
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.4** )
 
-## 19.5Dialog „Erledigen&quot;
+## Dialog „Erledigen&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -463,7 +463,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.4** )
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.6** )
 
-## 19.6Dialog „Stornieren&quot;
+## Dialog „Stornieren&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -471,7 +471,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.6** )
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.5** )
 
-## 19.7Dialog „Auftragsverwaltung&quot;
+## Dialog „Auftragsverwaltung&quot;
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -482,9 +482,9 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.5** )
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.2** )
 
-# 20.Dokumente
+# Dokumente
 
-## 20.1Lieferschein Bestellung
+## Lieferschein Bestellung
 
 Liefert den Lieferschein zu einer Bestellung.
 
@@ -499,7 +499,7 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
  | output |
  | DOCX, PDF |
 
-## 20.2Lieferschein Teilbestellung
+## Lieferschein Teilbestellung
 
 Liefert den Lieferschein zu einer Teilbestellung.
 
@@ -516,7 +516,7 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
  | _Output_ |
  | DOCX, PDF |
 
-# 21.Versandaufträge
+# Versandaufträge
 
 Enthält eine Liste aller Versandaufträge im System. Jeder Versandauftrag kann mehrere Items enthalten (Sendungen)
 
@@ -525,7 +525,7 @@ Enthält eine Liste aller Versandaufträge im System. Jeder Versandauftrag kann 
 
 Siehe 34.2
 
-## 21.1Packetaufkleber abfragen
+## Packetaufkleber abfragen
 
 Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür eine der ShipmentOrderID des Versandauftrags (siehe **20** )
 
@@ -535,12 +535,12 @@ Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür
 
 Als Rückgabe wird die Pdf zurückgegeben
 
-# 22.Dateien
+# Dateien
 
 | Url | api/datafiles |
 | --- | --- |
 
-## 22.1Dateien Hochladen
+## Dateien Hochladen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -548,7 +548,7 @@ Als Rückgabe wird die Pdf zurückgegeben
 
 Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 
-## 22.2Bilder hochladen
+## Bilder hochladen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -556,13 +556,13 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 
 Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 
-# 23.Gutscheine
+# Gutscheine
 
 | Url | api/vouchers |
  |
 | --- | --- | --- |
 
-## 23.1Gutschein erstellen
+## Gutschein erstellen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -578,7 +578,7 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 
-## 23.2Gutschein finden
+## Gutschein finden
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -586,7 +586,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 
 Rückgabe: Gutschein –Code (siehe **34.8** )
 
-## 23.3Zahlung reservieren
+## Zahlung reservieren
 
 Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz als verbraucht bis die Zeit abläuft und kann nicht an anderer Stelle verbraucht werden.
 
@@ -606,7 +606,7 @@ Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz
 
 Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **34.5** ).
 
-## 23.4Zahlung durchführen
+## Zahlung durchführen
 
 Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt werden (während der Zeit der Reservierung)
 
@@ -616,12 +616,12 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 
-# 24.Aufträge (asynchrone Jobs)
+# Aufträge (asynchrone Jobs)
 
 | Url | api/jobs |
 | --- | --- |
 
-# 25.Container
+# Container
 
 | Url | api/containers |
  |
@@ -629,7 +629,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 | Schlüssel | api/containers/key/{key} | Container mit Schlüssel suchen |
 | Items | Api/containers/items/{id} | Alle Einträge eines Containers (inkl. Paging) |
 
-# 26.Jahresplanungen
+# Jahresplanungen
 
 | Url | api/timelines |
  |
@@ -638,7 +638,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 | Items | api/timelines/items/{id} | Alle Einträge einer Planung (inkl. Paging) |
 | Current | api/timelines/current/{id} | Alle aktuellen Einträge einer Planung (inkl. Paging) |
 
-# 27.Piktogramme
+# Piktogramme
 
 **Funktion:** api/pictos/{id}
 
@@ -662,7 +662,7 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 | Url | string | URL für die Grafik |
 | PictoID | long | Primärschlüssel |
 
-# 28.Suche
+# Suche
 
 **Funktion:** api/search
 
@@ -685,7 +685,7 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 | _ **GrowthTo** _ | _double_ | Zuwachs bis | cm |
 | _ **FeatureIds** _ | _long[]_ | Merkmale | ID&#39;s der Merkmale (siehe Admin/Features) |
 
-# 29.Verknüpfte Inhalte für Artikel
+# Verknüpfte Inhalte für Artikel
 
 **Funktion:** api/cross/articles{id}
 
@@ -699,7 +699,7 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
  |
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
-# 30.Verknüpfte Inhalte für Bericht
+# Verknüpfte Inhalte für Bericht
 
 **Funktion:** api/cross/reports/{id}
 
@@ -713,7 +713,7 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
  |
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
-# 31.Verknüpfte Inhalte für Video
+# Verknüpfte Inhalte für Video
 
 **Funktion:** api/cross/videos/{id}
 
@@ -727,11 +727,11 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
  |
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
-# 32.Extern hinzufügen
+# Extern hinzufügen
 
 Über diese Funktion können Inhalte aus der Green-Solutions Datenbank gesucht und in die lokale CMS Datenbank importiert werden. Siehe „Extern Hinzufügen&quot; im CMS Backend!
 
-## 32.1Suchen
+## Suchen
 
 **Funktion:** api/external/search
 
@@ -745,7 +745,7 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 Eine Liste aller externen Suchergebnisse
 
-## 32.2Nach einem Artikel suchen
+## Nach einem Artikel suchen
 
 **Funktion:** api/external/search/article
 
@@ -755,7 +755,7 @@ Eine Liste aller externen Suchergebnisse
 **Rückgabe:**
 Den am besten passenden Artikel
 
-## 32.3Pflanzen importieren
+## Pflanzen importieren
 
 **Funktion:** api/external/import/plants/{id}
 
@@ -763,35 +763,35 @@ Den am besten passenden Artikel
 | --- | --- |
 | _to_ | _ID des Artikels in den importiert werden soll (optional)_ |
 
-## 32.4Videos importieren
+## Videos importieren
 
 **Funktion:** api/external/import/videos/{id}
 
 | _id_ | Externe ID des Videos das importiert werden soll |
 | --- | --- |
 
-## 32.5Berichte importieren
+## Berichte importieren
 
 **Funktion:** api/external/import/reports/{id}
 
 | _id_ | Externe ID des Berichts der importiert werden soll |
 | --- | --- |
 
-## 32.6Bilder importieren
+## Bilder importieren
 
 **Funktion:** api/external/import/pictures/{id}
 
 | _id_ | Externe ID des Bildes das importiert werden soll |
 | --- | --- |
 
-## 32.7Pflanzenfotos importieren
+## Pflanzenfotos importieren
 
 **Funktion:** api/external/import/plantpictures/{id}
 
 | _id_ | Externe ID des Pflanzenfotos das importiert werden soll |
 | --- | --- |
 
-# 33.Zwischenspeicher (Cache)
+# Zwischenspeicher (Cache)
 
 Zur Verbesserung der Performance arbeitet das System mit einigen Caches die bei Bedarf gelöscht werden müssen. Momentan gibt es die folgenden Caches:
 
@@ -802,21 +802,21 @@ Zur Verbesserung der Performance arbeitet das System mit einigen Caches die bei 
 
 Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespondierende Cache gelöscht werden damit die Änderung direkt sichtbar wird.
 
-## 33.1Alle caches löschen
+## Alle caches löschen
 
 **Funktion:** POSTapi/cache/clear
 
-## 33.2Datenbank- Cache löschen
+## Datenbank- Cache löschen
 
 **Funktion:** POSTapi/cache/clear/efcache
 
-## 33.3Caches aufräumen
+## Caches aufräumen
 
 **Funktion:** POSTapi/cache/purge
 
-# 34.Datenstrukturen
+# Datenstrukturen
 
-## 34.1Bestellungen
+## Bestellungen
 
 {
 
@@ -1484,7 +1484,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.2Versandaufträge
+## Versandaufträge
 
 {
 
@@ -1938,7 +1938,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.3Artikel
+## Artikel
 
 {
 
@@ -2434,7 +2434,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.5Zahlung
+## Zahlung
 
 {
 
@@ -2470,7 +2470,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.6Gutschein
+## Gutschein
 
 {
 
@@ -2790,7 +2790,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.7Gutschein - Code
+## Gutschein - Code
 
 {
 
@@ -2826,7 +2826,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.8Gefundener Gutschein
+## Gefundener Gutschein
 
 {
 
@@ -2852,7 +2852,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 }
 
-## 34.9Auftragsstatus
+## Auftragsstatus
 
 public enum OrderStatusType : short
 
@@ -2868,7 +2868,7 @@ Ready // Erledigt
 
 }
 
-## 34.10Abwicklungsstatus
+## Abwicklungsstatus
 
 public enum TransactionStatus : short
 
@@ -2882,7 +2882,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.11Dokumentation
+## Dokumentation
 
 {
 
@@ -2906,7 +2906,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.12Artikelstatus
+## Artikelstatus
 
 {
 
@@ -2918,7 +2918,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.13Datei
+## Datei
 
 {
 
@@ -2976,7 +2976,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.14Transaktion
+## Transaktion
 
 {
 
@@ -3000,7 +3000,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.15Statusmeldung
+## Statusmeldung
  ```csharp
 {
 
@@ -3055,7 +3055,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.16Kundenkarte
+## Kundenkarte
 
 {
 
@@ -3193,7 +3193,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.17Result
+## Result
 
 {
 
@@ -3205,7 +3205,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.18Dialog
+## Dialog
 
 {
 
@@ -3219,7 +3219,7 @@ Ready // Steht Bereit
 
 }
 
-## 34.19Upload
+## Upload
 
 {
 
@@ -3235,45 +3235,45 @@ Ready // Steht Bereit
 
 }
 
-# 35.Dialoge
+# Dialoge
 
 Ausgesuchte Dialog können extern „aufgerufen werden&quot;. Dazu bekommen Sie von den entsprechenden API Funktionen einen Dialog (siehe **34.18** ).
 
 Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe und mit dem Titel. Danach navigieren Sie in dem Fenster zu der übergebenen Url!
 
-## 35.1Versenden
+## Versenden
 
 ![](RackMultipart20220316-4-1b19uaa_html_6033246c2359d7e7.png)
 
-## 35.2Auftragsverwaltung
+## Auftragsverwaltung
 
 ![](RackMultipart20220316-4-1b19uaa_html_8aa30f124fe80c06.png)
 
-## 35.3Artikel bearbeiten
+## Artikel bearbeiten
 
 ![](RackMultipart20220316-4-1b19uaa_html_c4730d08f1e2b93e.png)
 
-## 35.4Bestellung bestätigen
+## Bestellung bestätigen
 
 ![](RackMultipart20220316-4-1b19uaa_html_3d9d355a6c018a5d.png)
 
-## 35.5Bestellung stornieren
+## Bestellung stornieren
 
 ![](RackMultipart20220316-4-1b19uaa_html_c1a373ffd988a0a4.png)
 
-## 35.6Bestellung erledigen
+## Bestellung erledigen
 
 ![](RackMultipart20220316-4-1b19uaa_html_2a65965b4aff3ab9.png)
 
-# 36.Beispiele + API
+# Beispiele + API
 
-## 36.1Beispiel Applikation + C# .Net API
+## Beispiel Applikation + C# .Net API
 
 Eine Beispiel Applikation sowieso eine API für C# .Net auf denen die nachfolgenden Beispiele basieren finden Sie hier:
 
 [http://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip](http://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip)
 
-## 36.2Token abfragen zur Authentifizierung
+## Token abfragen zur Authentifizierung
 
 var unitOfWork = new Api.Client.ContextUOW(null, &quot;&quot;);
 
@@ -3281,7 +3281,7 @@ var token = unitOfWork.Account.Validate(&quot;Benutzer&quot;, &quot;Passwort&quo
 
 Das Token kann nun bei allen folgenden Posts als Header „token&quot; mitgesendet werden!
 
-## 36.3Artikel anlegen
+## Artikel anlegen
 
 var unitOfWork = new Api.Client.ContextUOW(null,&quot;&quot;);
 
@@ -3383,7 +3383,7 @@ unitOfWork.Articles.Create(article); // POST api/articles/create?importExternal=
 
 // PUT api/articles/{id} zum updaten
 
-## 36.4Bestellungen abfragen
+## Bestellungen abfragen
 
 var unitOfWork = new Api.Client.ContextUOW(null, &quot;&quot;);
 
@@ -3442,5 +3442,3 @@ Console.WriteLine(&quot;Bestätigt:&quot; + (position.IsConfirmed==true ? &quot;
 }
 
 }
-
-Seite 86
