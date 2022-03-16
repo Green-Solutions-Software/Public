@@ -1457,51 +1457,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
 
             var member = new Member();
-            // URC/Jungpflanzen
-            member.Conditions.Set(
-                // Name des Kalkulationssatzes
-                "URC / Jungpflanzen - Dzillum, Karin",
-                // Transportpauschale (EUR)
-                36,
-                // Währung
-                new EntityReference(10),
-                // Wahrengruppen
-                new EntityReference[]
-                {
-                    // URC
-                    new EntityReference(1),
-                    // Jungpflanzen
-                    new EntityReference(2)
-                },
-                // Kalkulationsgruppe (statisch pro Mandant)
-                new EntityReference(11)
-            );
+            
 
-            // Saatgut
-            member.Conditions.Set(
-                // Name des Kalkulationssatzes
-                "Saatgut - Dzillum, Karin",
-                // Mindermengenzuschlag (EUR)
-                10,
-                // Limit (EUR)
-                47.5,
-                // Währung
-                new EntityReference(10),
-                // Wahrengruppen
-                new EntityReference[]
-                {
-                    // Saatgut
-                    new EntityReference(3)
-                },
-                // Kalkulationsgruppe (statisch pro Mandant)
-                new EntityReference(11)
-            );
-
-#if DDEBUG
             string connectionString = "vendor=Test,token=8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplS70KURnyjuUT2iVgfaxWqTjmZ72owjsBYZfAd79WYirvSrDyUwKAgU=,endpoint=http://localhost:61235/";
-#else
-            string connectionString = "vendor=Test,token=8xn+HVHclg5TyZcN1p5I2DM+N3TSNsnOk0++pXFXaBeVE2SCg8+GvcEm4HixjnxLomrD/AmYAYzIUx8Qhv2XHAYtTUER0LBQTJNaoEvijF664DMuABDntVceI7EJPudRKdaVIrUWRK4=,endpoint=https://wwstest.gswebapps.net ";
-#endif
 
             using (var unitOfWork = new ContextUOW(connectionString))
             {
