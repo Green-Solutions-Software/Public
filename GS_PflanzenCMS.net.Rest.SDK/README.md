@@ -285,9 +285,8 @@ Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der darau
 
 | **Funktion** | **Paramete** | **Beschreibung** |
 | --- | --- | --- |
-| api/account/validate |user| Benutzername |
-|
- |password| Passwort |
+| api/account/validate |user| Benutzername ||
+|password| Passwort |
 
 Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
 
@@ -388,10 +387,8 @@ Mit dieser Funktion kann ein Artikel angelegt und direkt mit einem Green – Sol
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| **importExternal** |bool| Externe Daten hinzufügen? |
- |
-| **compareNameSecondary** |bool| Name 2 vergleichen? |
- |
+| **importExternal** |bool| Externe Daten hinzufügen? ||
+| **compareNameSecondary** |bool| Name 2 vergleichen? ||
 
 ## Transaktionen
 
@@ -433,9 +430,8 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/transactions/status/{ID} |ID| **long** | ID der Bestellung |
-|
- |BODY| **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
+| api/orders/transactions/status/{ID} |ID| **long** | ID der Bestellung ||
+|BODY| **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
 
 Als Rückgabe wird die Bestellung zurückgegeben (siehe **[Order](#order)** )
 
@@ -502,9 +498,9 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
 | api/documents/order/{orderid}/{type}/{transactionid} |orderid| **long** | ID der Bestellung ||
- |type| **string** | DeliverySlip ||
- |Transactionid| **long** | ID der Teilbestellung ||
- |Output|**string**| DOCX, PDF |
+|type| **string** | DeliverySlip ||
+|Transactionid| **long** | ID der Teilbestellung ||
+|Output|**string**| DOCX, PDF |
 
 # Versandaufträge
 
@@ -555,15 +551,11 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/create |name| **string** | Name für den neuen Gutschein |
-|
- |amount| **double** | Betrag |
-|
- |currencyName| **string** | Währung (z.B. EUR) |
-|
- |info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird |
-|
- |deleted| **bool** | Gelöscht anlegen |
+| api/vouchers/create |name| **string** | Name für den neuen Gutschein ||
+|amount| **double** | Betrag ||
+|currencyName| **string** | Währung (z.B. EUR) ||
+|info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird ||
+|deleted| **bool** | Gelöscht anlegen |
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
@@ -581,17 +573,12 @@ Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/reserve |voucherID| **long** | Gutschein ID |
-|
- |voucherCodeID| **long** | Gutschein Code ID |
-|
- |amount| **double** | Betrag der reserviert werden soll |
-|
- |currencyName| **string** | Währung (z.B. EUR) |
-|
- |info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird |
-|
- |minutes| **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
+| api/vouchers/reserve |voucherID| **long** | Gutschein ID ||
+|voucherCodeID| **long** | Gutschein Code ID ||
+|amount| **double** | Betrag der reserviert werden soll ||
+|currencyName| **string** | Währung (z.B. EUR) ||
+|info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird ||
+|minutes| **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
 
 Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
 
@@ -655,10 +642,8 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| **search** |string| Suchbegriff |
- |
-| **orderBy** |string| Title, Title2 |
- |
+| **search** |string| Suchbegriff ||
+| **orderBy** |string| Title, Title2 ||
 | **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 | **BloomingTimeFrom** |int| Blütezeit von | Monate |
 | **BloomingTimeTo** |int| Blütezeit bis | Monate |
