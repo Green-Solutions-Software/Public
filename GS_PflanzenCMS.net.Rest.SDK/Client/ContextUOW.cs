@@ -477,6 +477,14 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             }
         }
 
+        public IMessagesRepository Messages
+        {
+            get
+            {
+                return new MessagesRepository(this.Context);
+            }
+        }
+
         public IChannelsRepository Channels
         {
             get

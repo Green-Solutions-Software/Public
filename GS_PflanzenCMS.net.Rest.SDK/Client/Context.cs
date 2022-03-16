@@ -897,6 +897,16 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             return file;
         }
 
+        // Messages
+        public Message SubmitMessage(Message message)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/create", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(message);
+            return executeRequest<Message>(request);
+        }
+
         public void ClearLocalCache()
         {
             this.cache.Clear();

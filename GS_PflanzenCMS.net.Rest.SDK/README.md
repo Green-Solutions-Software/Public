@@ -101,6 +101,10 @@
 
 > [Zahlung durchführen](#zahlung-durchführen)
 
+**[Nachrichten](#nachrichten)**
+
+> [Nachricht erstellen](#nachricht-erstellen)
+
 **[Aufträge](#aufträge)**
 
 **[Container](#container)**
@@ -547,6 +551,23 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 | --- | --- | --- |
 
 ## Gutschein erstellen
+
+| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| --- | --- | --- | --- |
+| api/vouchers/create |name| **string** | Name für den neuen Gutschein ||
+|amount| **double** | Betrag ||
+|currencyName| **string** | Währung (z.B. EUR) ||
+|info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird ||
+|deleted| **bool** | Gelöscht anlegen |
+
+Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
+
+# Nachrichten
+
+| Url | api/messages ||
+| --- | --- | --- |
+
+## Nachricht erstellen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |

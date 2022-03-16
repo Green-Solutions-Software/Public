@@ -60,6 +60,7 @@
     <Compile Include="Client\ArticlePropertiesRepository.cs" />
     <Compile Include="Client\ArticlesRepository.cs" />
     <Compile Include="Client\BaseRepository.cs" />
+    <Compile Include="Client\MessagesRepository.cs" />
     <Compile Include="Client\ChannelsRepository.cs" />
     <Compile Include="Client\CacheRepository.cs" />
     <Compile Include="Client\BrandsRepository.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Interfaces\IArticleKeysRepository.cs" />
     <Compile Include="Interfaces\IArticlePropertiesRepository.cs" />
     <Compile Include="Interfaces\IArticlesRepository.cs" />
+    <Compile Include="Interfaces\IMessagesRepository.cs" />
     <Compile Include="Interfaces\IChannelsRepository.cs" />
     <Compile Include="Interfaces\ICacheRepository.cs" />
     <Compile Include="Interfaces\IBrandsRepository.cs" />
@@ -191,6 +193,8 @@
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\MessagePosition.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\CalculationGroupItem.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\Result.cs" />

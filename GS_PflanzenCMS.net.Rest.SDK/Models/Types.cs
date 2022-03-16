@@ -273,6 +273,106 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         Draft
     }
 
+    public enum ReturnReason
+    {
+        [Description("Versehentlich bestellt")]
+        OrderedByMistake,
+        [Description("Preiswerter gesehen")]
+        SeenCheaper,
+        [Description("Kein Grund spezifizieren")]
+        DontSpecifyAReason,
+        [Description("Ungenügende Qualität")]
+        InsufficientQuality,
+        [Description("Artikel beschädigt")]
+        DamagedItems,
+        [Description("Lieferdatum nicht eingehalten")]
+        DeliveryDateNotMet,
+        [Description("Artikel unvollständig")]
+        ArticleIncomplete,
+        [Description("Falscher Artikel geliefert")]
+        WrongArticleDelivered,
+        [Description("Artikel fehlerhaft")]
+        ItemFaulty,
+        [Description("Gefällt mir nicht")]
+        IDoNotLikeIt,
+        [Description("Nicht autorisierter Kauf")]
+        UnauthorizedPurchase,
+        [Description("Entspricht nicht der Beschreibung")]
+        DoesNotMatchTheDescription
+    }
+
+    public enum MessageType
+    {
+        [Description("Anfrage Stornierung")]
+        CancellationRequested,
+        [Description("Anfrage Retoure")]
+        ReturnRequested,
+        [Description("Bestellung")]
+        Order,
+        [Description("Bestellung Empfangsbestätigung (5)")]
+        ProcessBegun,
+        [Description("Ware versendet / Ware an Spedition übergeben (24)")]
+        DeliveryArranged,
+        [Description("Lieferung durchgeführt (21)")]
+        DeliveryCompleted,
+        [Description("Annahme der Lieferung verweigert (325)")]
+        DeliveryRefusedByRecipient,
+        [Description("Lieferung unvollständig (73)")]
+        ReceiptOfGoodParticiallyAcknowledged,
+        [Description("Bestätigung des Liefertermins (209)")]
+        DeliveryScheduled,
+        [Description("Kunde nicht angetroffen (210)")]
+        DeliveryUnsuccessfullAttempt,
+        [Description("Änderung des Liefertermins (212)")]
+        DeliveryChangeSchedule,
+        [Description("Ware beschädigt (218)")]
+        Damaged,
+        [Description("Kunde nicht erreicht (216)")]
+        DeliveryPendingAwaitingSpecificDateTimes,
+        [Description("Terminavisierung nicht möglich 243")]
+        NotDeliverable,
+        [Description("Abholauftrag erhalten (64)")]
+        CollectionPickUpAwaited,
+        [Description("Bestätigung des Abholtermins (13)")]
+        CollectionDateTimeAcknowledged,
+        [Description("Retourenlieferung ist eingegangen (82)")]
+        CollectionPickUpCompleted,
+        [Description("Retouren-Prüfung bestanden (80)")]
+        ReturnsInspectionPassed,
+        [Description("Retouren-Prüfung nicht bestanden (81)")]
+        ReturnsInspectionFailed,
+        [Description("Stornoanfrage des Kunden bestätigt (275)")]
+        CancellationRequestConfirmed,
+        [Description("Storno nicht mehr möglich (71)")]
+        CancellationIsNoLongerPossible,
+        [Description("Storno vom Lieferanten gemeldet (56)")]
+        CancellationBeportedBySupplier,
+        [Description("E-Mail Nachricht")]
+        EMail,
+        [Description("Anfrage akzeptiert")]
+        RequestAccepted,
+        [Description("Anfrage abgelehnt")]
+        RequestRejected,
+        [Description("Status aktualisieren")]
+        UpdateStatus,
+        [Description("Retoure (per E-Mail erhalten)")]
+        ReturnViaEMail,
+        [Description("Bestandsmeldung")]
+        InventoryReport,
+        [Description("Rechnung")]
+        Invoice,
+        [Description("Storno (per E-Mail erhalten)")]
+        CancellationViaEmail
+    }
+
+    public enum MessageDirection
+    {
+        [Description("Eingehend")]
+        Inbound,
+        [Description("Ausgehend")]
+        Outbound
+    }
+
     public enum OrderStatusType : short
     {
         [Description("Noch nicht bearbeitet")]

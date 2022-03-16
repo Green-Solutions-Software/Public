@@ -117,4 +117,9 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         }
     }
 
+    public class EntityReferenceWithGuid : EntityReference
+    {
+        public Guid Guid { get; set; }
+    }
+
 }
