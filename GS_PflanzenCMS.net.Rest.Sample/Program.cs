@@ -1,7 +1,8 @@
-﻿using GS.PflanzenCMS.Rest.Sample.Api.Args;
-using GS.PflanzenCMS.Rest.Sample.Api.Client;
-using GS.PflanzenCMS.Rest.Sample.Api.Models;
-using GS.PflanzenCMS.Rest.Sample.Extensions;
+﻿
+using GS.PflanzenCMS.Rest.SDK.Api.Args;
+using GS.PflanzenCMS.Rest.SDK.Client;
+using GS.PflanzenCMS.Rest.SDK.Extensions;
+using GS.PflanzenCMS.Rest.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -224,7 +225,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             item.Currency = new EntityReference(euro.CurrencyID);
             item.Quantity = 1;
             item.Position = 1;
-            item.TaxRate = new EntityReference(taxRate7.TaxRateID);
+            item.TaxRate = new TaxRateEntityReference(taxRate7.TaxRateID);
 
             var summary = unitOfWork.Orders.Create(args);  // POST api/orders/create
             Console.WriteLine("Bestellung wurde angelegt. ID = " + summary.OrderID);
@@ -266,7 +267,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             items.Add(item);
 
             args.Items = items;
-            var summary = unitOfWork.Orders.Create(args);  // POST api/orders/create
+            var summary = unitOfWork.Orders.CreateCashDesk(args);  // POST api/orders/create
             Console.WriteLine("Bestellung wurde angelegt. ID = " + summary.OrderID);
         }
 
@@ -278,7 +279,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 // Wir holen die Bestellungen nach OrderID absteigend sortiert
                 // damit wir die neueste zuerst und danach die anderen bekommen
-                var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc").Items; // GET api/orders/all
+                var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.PflanzenCMS.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
 
                 // Geänderte Bestellungen (inkl. neu angelegte abfragen)
                 // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
@@ -332,7 +333,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 // Wir holen die Bestellungen nach OrderID absteigend sortiert
                 // damit wir die neueste zuerst und danach die anderen bekommen
-                var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc").Items; // GET api/orders/all
+                var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.PflanzenCMS.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
 
                 // Geänderte Bestellungen (inkl. neu angelegte abfragen)
                 // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all

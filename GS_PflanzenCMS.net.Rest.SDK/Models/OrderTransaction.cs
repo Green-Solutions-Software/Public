@@ -20,10 +20,11 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         }
 
         
-public long OrderTransactionID { get; set; }
+        public long OrderTransactionID { get; set; }
         public string DeliveredTrackAndTraceID { get; set; }
         public string DeliveredTrackAndTraceURL { get; set; }
         public OrderTransactionStatusType Status { get; set; }
+        public DateTime? AvailableOn { get; set; }
         public DateTime? StatusOn { get; set; }
         public TransactionType Type { get; set; }
         public string External_CMS_Number { get; set; }

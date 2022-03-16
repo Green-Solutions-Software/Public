@@ -48,7 +48,6 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
                 this.Context.Endpoint = value;
             }
         }
-
         public string Name
         {
             get
@@ -615,6 +614,11 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
                 this.Context.Invalidate = false;
             }
 
+        }
+
+        public void Invalidate()
+        {
+            this.Context.ClearLocalCache();
         }
 
         public virtual void Async<T>(Func<IUnitOfWork, T> func, Action<T> resultFunc)

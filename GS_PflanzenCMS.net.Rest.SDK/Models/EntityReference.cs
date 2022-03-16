@@ -104,6 +104,17 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
     public class TaxRateEntityReference : EntityReference
     {
         public double Percent { get; set; }
+
+        public TaxRateEntityReference()
+            :base()
+        {
+
+        }
+
+        public TaxRateEntityReference(long id)
+            :base(id)
+        {
+        }
     }
 
 }

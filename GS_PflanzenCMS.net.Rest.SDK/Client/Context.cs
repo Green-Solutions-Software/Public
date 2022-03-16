@@ -897,9 +897,10 @@ namespace GS.PflanzenCMS.Rest.SDK.Client
             return file;
         }
 
-       
-
-
+        public void ClearLocalCache()
+        {
+            this.cache.Clear();
+        }
 
     }
 }

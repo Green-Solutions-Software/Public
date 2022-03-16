@@ -13,6 +13,8 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         public List<EntityReference> ArticleGroups { get; set; }
         public DateTime Date { get; set; }
         public DateTime DeliveryDate { get; set; }
+        public OrderTransactionStatusType? Status { get; set; }
+        public int? QuantityAvailable { get; set; }
         public string Info { get; set; }
         public string Info2 { get; set; }
         public string Info3 { get; set; }
@@ -47,6 +49,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Models
         public string CustomerEAN { get; set; }
         public string CustomerArticleNumber { get; set; }
         public double? CustomerPrice { get; set; } // 10 EUR
+        public DateTime? AvailableOn { get; set; }
 
         public string QuantityInfo
         {
