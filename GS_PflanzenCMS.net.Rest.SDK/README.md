@@ -167,6 +167,10 @@
 
 > [TransactionStatus](#transactionstatus)
 
+> [MessageType](#messagetype)
+
+> [MessageDirection](#messagedirection)
+
 > [Documentation](#documentation)
 
 > [Artikelstatus](#artikelstatus)
@@ -270,7 +274,7 @@ Alle Funktionen die Listen zurückgeben haben folgende Parameter:
 | **orderBy** | Sortierung (string) |
 | **filter** | Filterkriterien |
 
-**WICHTIG: Nur ausgewählte Felder abfragen/aktualisieren**
+> **Nur ausgewählte Felder abfragen/aktualisieren**
 
 Bei dem GET und PUT zu einer Entität (Abfragen/Updaten) kann noch ein Parameter „properties&quot; mitgegeben werden um zu definieren welche Felder aus dem Model überhaupt verwendet/gefüllt werden sollen. Für z.B. Artikel sähe sowas wie folgt aus:
 
@@ -362,7 +366,7 @@ Webshop Aufträge haben nun eine Verknüpfung „DebitCard&quot; zu der Kundenka
 
 Die Aufträge können als api/orders mit dem Status „Ready&quot; im System angelegt und dann über das DebitCard Feld mit der Kundenkarte verknüpft werden. Bitte verwenden Sie bei der Transaction den Type Cashdesc (4) damit das System weiß, das der Auftrag über die Kasse gelaufen ist.
 
-**Wichtig:** Bitte achten Sie darauf uns nur Bestellungen zu übermitteln die Sie nicht von uns bekommen haben!
+> Bitte achten Sie darauf uns nur Bestellungen zu übermitteln die Sie nicht von uns bekommen haben!
 
 # Videos
 
@@ -426,10 +430,14 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **
 
 ## Alle Shop Bestellungen
 
+
+> Diese Funktion ist nur zulässig von Benutzern innerhalb des Hauptaccount des Shops! Andernfalls wird ein entsprechender Fehler ausgelöst.
+
+
 | Url | api/orders/all |
 | --- | --- |
 
-**Hinweis:** Diese Funktion ist nur zulässig von Benutzern innerhalb des Hauptaccount des Shops! Andernfalls wird ein entsprechender Fehler ausgelöst.
+
 
 ## Status anpassen
 
@@ -566,8 +574,16 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** )
 
 # Nachrichten
 
+Es werden Daten zwischen dem Webshop und dem Lieferanten über Nachrichten ausgetauscht. 
+Jede Nachricht kann einen der **[MessageType](#messagetype)** definierten Typen haben. Es können ausgehende oder eingehende Nachrichten erzeugt werden (siehe **[MessageDirection](#messagedirection)**).
+Bei einer ausgehenden Nachricht setzen Sie bitte den "Receiver" und bei eingehenden den "Sender".
+
+> Bitte beachten Sie das manche Nachrichten als Antwort auf eine eingehende Nachricht gedacht Sind und daher per "Parent" miteinander verknüpft werden müssen.
+
 | Url | api/messages ||
 | --- | --- | --- |
+
+Siehe **[Message](#message)**
 
 ## Nachricht erstellen
 
@@ -575,7 +591,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** )
 | --- | --- | --- | --- |
 | api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
 
-Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ).
+Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
 
 ## Gutschein finden
 
@@ -1850,6 +1866,51 @@ public enum TransactionStatus : short
 }
 
 ```
+## MessageType
+```csharp
+public enum MessageType {
+  CancellationRequested, //Anfrage Stornierung
+  ReturnRequested, // Anfrage Retoure
+  Order, // Bestellung
+  ProcessBegun, // Bestellung Empfangsbestätigung (5)
+  DeliveryArranged, // Ware versendet / Ware an Spedition übergeben (24)
+  DeliveryCompleted, // Lieferung durchgeführt (21)
+  DeliveryRefusedByRecipient, // Annahme der Lieferung verweigert (325)
+  ReceiptOfGoodParticiallyAcknowledged, // Lieferung unvollständig (73)
+  DeliveryScheduled, // Bestätigung des Liefertermins (209)
+  DeliveryUnsuccessfullAttempt, // Kunde nicht angetroffen (210)
+  DeliveryChangeSchedule, // Änderung des Liefertermins (212)
+  Damaged, // Ware beschädigt (218)
+  DeliveryPendingAwaitingSpecificDateTimes, // Kunde nicht erreicht (216)
+  NotDeliverable, // Terminavisierung nicht möglich 243
+  CollectionPickUpAwaited, // Abholauftrag erhalten (64)
+  CollectionDateTimeAcknowledged, // Bestätigung des Abholtermins (13)
+  CollectionPickUpCompleted, // Retourenlieferung ist eingegangen (82)
+  ReturnsInspectionPassed, // Retouren-Prüfung bestanden (80)
+  ReturnsInspectionFailed, // Retouren-Prüfung nicht bestanden (81)
+  CancellationRequestConfirmed, // Stornoanfrage des Kunden bestätigt (275)
+  CancellationIsNoLongerPossible, // Storno nicht mehr möglich (71)
+  CancellationBeportedBySupplier, // Storno vom Lieferanten gemeldet (56)
+  EMail, // E-Mail Nachricht
+  RequestAccepted, // Anfrage akzeptiert
+  RequestRejected, // Anfrage abgelehnt
+  UpdateStatus, // Status aktualisieren
+  ReturnViaEMail, // Retoure (per E-Mail erhalten)
+  InventoryReport, // Bestandsmeldung
+  Invoice, // Rechnung
+  CancellationViaEmail // Storno (per E-Mail erhalten)
+}
+
+```
+
+## MessageDirection
+```csharp
+public enum MessageDirection {
+  Inbound, // Eingehend
+  Outbound // Ausgehend
+}
+```
+
 
 ## Documentation
 ```csharp
@@ -2060,11 +2121,11 @@ public enum TransactionStatus : short
 ```csharp
 {
   "MessageID": 145,
-  "Key": null,
-  "Number": "2022-145",
+  "Key": null, // Schlüssel der Nachricht
+  "Number": "2022-145", // Nummer (wird vom System vergeben)
   "Guid": "674116e3-815b-439d-a44e-ee46c13f6bef",
-  "Type": 21,
-  "Direction": 1,
+  "Type": 21, // Siehe MessageType
+  "Direction": 1, // Siehe MessageDirection
   "ProcessedOn": "2022-03-14T15:19:48.817",
   "DoneOn": null,
   "SenderConfirm": false,
@@ -2076,12 +2137,13 @@ public enum TransactionStatus : short
   "CreatedOn": "2022-03-14T15:19:09.93",
   "DoneBy": null,
   "Editor": null,
-  "Subject": "Storno vom Lieferanten gemeldet (56)",
-  "Body": null,
-  "Html": null,
+  "Subject": "Storno vom Lieferanten gemeldet (56)", // Betreff der Nachricht
+  "Body": null, // Inhalt (falls E-Mail)
+  "Html": null, // Html - Inhalt (falls E-Mail)
+  // Externe Daten (z.B. EDI)
   "External_Data": "UNA:+.? '\nUNB+UNOC:3+{Message.Sender.GLN}:14+{Message.Receiver.GLN}:14+220314:1619+{Message.Number}+++++EANCOM+0'\r\nUNH+{Message.Number}+OSTRPT:D:01B:UN:EAN008'\r\nBGM+348+{Message.Number}+9'\r\nDTM+137:20220314:102'\r\nNAD+SU+{Message.Sender.SupplierNumber}::92'\r\nDOC+227+21357682'\r\nDTM+137:20220314:102'\r\nLIN+1++4251628174130:SRV'\r\nPIA+1+29013960:IN'\r\nRFF+ON:1033161696'\r\nDTM+171:20220314:102'\r\nRFF+ABO:1'\r\nSTS+1+56'\r\nDTM+334:20220314:102'\r\nQTY+46:1:PCE'\r\nUNT+15+{Message.Number}'\r\nUNZ+1+{Message.Number}'",
   "External_Data2": null,
-  "External_CMS_Number": "21357682",
+  "External_CMS_Number": "21357682", // Externe Bestellnummer
   "External_CMS_ID": null,
   "External_CMS_CAPS": null,
   "ExternalID": null,
@@ -2090,6 +2152,7 @@ public enum TransactionStatus : short
   "SupplierNumber": null,
   "GLN": "4024506000001",
   "Channel": null,
+  // Verknüpfte Bestellung
   "Order": {
     "ID": 898,
     "RowVersion": "#0#0#0#0#0#12#71#131",
@@ -2097,6 +2160,7 @@ public enum TransactionStatus : short
     "External_RowVersion": "9491c979cb9d11d9878021cd2dee133a",
     "External_COR_ID": null
   },
+  // Vorherige Nachricht auf die geantwortet wird
   "Parent": {
     "Guid": "4b4d48c3-fe9f-421c-8f65-accaf272730c",
     "ID": 143,
@@ -2105,6 +2169,7 @@ public enum TransactionStatus : short
     "External_RowVersion": "#0#0#0#0#0#3#18#211",
     "External_COR_ID": null
   },
+  // Sender
   "Sender": {
     "ID": 1,
     "RowVersion": "#0#0#0#0#0#12#83#161",
@@ -2113,6 +2178,7 @@ public enum TransactionStatus : short
     "External_COR_ID": null
   },
   "SendedBy": null,
+  // Empfänger
   "Receiver": {
     "ID": 5,
     "RowVersion": "#0#0#0#0#0#12#84#94",
