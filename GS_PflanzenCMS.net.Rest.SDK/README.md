@@ -146,35 +146,35 @@ Datum: 16.03.2022
 
 > [Order](#order)
 
-> [Versandaufträge](#versandaufträge)
+> [ShipmentOrder](#shipmentorder)
 
-> [Artikel](#artikel)
+> [Article](#article)
 
-> [Aufträge](#aufträge)
+> [Job](#job)
 
-> [Zahlung](#zahlung)
+> [Payment](#payment)
 
-> [Gutschein](#gutschein)
+> [Voucher](#voucher)
 
-> [Gutschein-Code](#gutschein-code)
+> [VoucherCode](#vouchercode)
 
-> [Gefundener Gutschein](#gefundener-gutschein)
+> [FoundVoucher](#foundvoucher)
 
-> [Auftragsstatus](#auftragsstatus)
+> [OrderStatusType](#orderstatustype)
 
-> [Abwicklungsstatus](#abwicklungsstatus)
+> [TransactionStatus](#transactionstatus)
 
-> [Dokumentation](#dokumentation)
+> [Documentation](#documentation)
 
 > [Artikelstatus](#artikelstatus)
 
-> [Datei](#datei)
+> [File](#file)
 
 > [Transaktion](#transaktion)
 
-> [Statusmeldung](#statusmeldung)
+> [OrderStatus](#orderstatus)
 
-> [Kundenkarte](#kundenkarte)
+> [DebitCard](#debitcard)
 
 > [Result](#result)
 
@@ -605,7 +605,7 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 
-# Aufträge (asynchrone Jobs)
+# Aufträge
 
 | Url | api/jobs |
 | --- | --- |
@@ -1129,1069 +1129,800 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-## Artikel
-
+## ShipmentOrder
+```csharp
 {
-
-&quot;ArticleID&quot;: 1375,
-
-&quot;Name&quot;: &quot;Abies koreana &#39;Veredelung&#39;&quot;,
-
-&quot;Name2&quot;: &quot;Koreatanne &#39;Veredelung&#39;&quot;,
-
-&quot;Description&quot;: &quot;Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n&quot;,
-
-&quot;ShortDescription&quot;: null,
-
-&quot;Photos&quot;: [],
-
-&quot;ArticleGroups&quot;: [],
-
-&quot;Categories&quot;: [
-
-{
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#15#209&quot;
-
+  "ShipmentOrderID": 18,
+  "Name": "Versand für 2018-241",
+  "Items": [{
+    "ShipmentOrderItemID": 16,
+    "Number": "222201010028682105",
+    "Transaction": {
+      "ID": 145,
+      "RowVersion": "#0#0#0#0#0#9#45#2",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null
+    },
+    "ShipmentOrder": {
+      "ID": 18,
+      "RowVersion": "#0#0#0#0#0#9#45#3",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null
+    },
+    "WeightInKg": 10,
+    "LengthInCM": null,
+    "WidthInCM": null,
+    "HeightInCM": null,
+    "Data": "{}",
+    "TakenOn": "2018-04-23T08:52:48.913",
+    "CancelledOn": null,
+    "HasShipmentLabel": true,
+    "HasReturnLabel": false,
+    "HasExportLabel": false,
+    "HasCodeLabel": false,
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#9#44#253",
+    "Deleted": false
+  }],
+  "PaymentMethod": null,
+  "ShippingMethod": {
+    "ID": 3,
+    "RowVersion": "#0#0#0#0#0#9#44#222",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Member": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#9#45#9",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "AddressFrom": {
+    "ContactAddressID": 73,
+    "Type": 2,
+    "Address": {
+      "AddressID": 78,
+      "Street": "Bahnhofstraße",
+      "HouseNumber": "1",
+      "Zip": "26129",
+      "City": "Musterhausen",
+      "Postbox": null,
+      "Country": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#6#134#52",
+        "External_Key": null,
+        "External_RowVersion": "#0#0#0#0#0#0#7#211",
+        "External_COR_ID": null
+      },
+      "Type": 2,
+      "Longitude": null,
+      "Latitude": null,
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null,
+      "External_DM_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#9#44#125",
+      "Deleted": false
+    },
+    "Contact": {
+      "ContactID": 216,
+      "Picture": null,
+      "Apellation": 1,
+      "FirstName": "Max",
+      "LastName": "Mustermann",
+      "Phone": "0123456789",
+      "Mobile": null,
+      "Fax": null,
+      "Position": null,
+      "Homepage": null,
+      "EMail": "tt@tt.de",
+      "Company": null,
+      "DisplayText": null,
+      "Language": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#6#100#222",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 1
+      },
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null,
+      "External_DM_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#9#44#126",
+      "Deleted": false
+    },
+    "Member": {
+      "ID": 1,
+      "RowVersion": "#0#0#0#0#0#9#45#9",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null
+    },
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#9#44#127",
+    "Deleted": false
+  },
+  "AddressTo": {
+    "ContactAddressID": 9,
+    "Type": 2,
+    "Address": {
+      "AddressID": 10,
+      "Street": "gdsshgdshd",
+      "HouseNumber": "235253",
+      "Zip": "23789",
+      "City": "hsdshdshd",
+      "Postbox": "23236263",
+      "Country": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#6#134#52",
+        "External_Key": null,
+        "External_RowVersion": "#0#0#0#0#0#0#7#211",
+        "External_COR_ID": null
+      },
+      "Type": 2,
+      "Longitude": null,
+      "Latitude": null,
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null,
+      "External_DM_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#2#35#228",
+      "Deleted": false
+    },
+    "Contact": {
+      "ContactID": 26,
+      "Picture": null,
+      "Apellation": 0,
+      "FirstName": "asgagsgas",
+      "LastName": "asgagsga",
+      "Phone": "23524362643",
+      "Mobile": null,
+      "Fax": null,
+      "Position": null,
+      "Homepage": null,
+      "EMail": "gaf@bkjfas.de",
+      "Company": "gasgas",
+      "DisplayText": null,
+      "Language": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#6#100#222",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 1
+      },
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null,
+      "External_DM_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#0#76#25",
+      "Deleted": false
+    },
+    "Member": {
+      "ID": 1,
+      "RowVersion": "#0#0#0#0#0#9#45#9",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": null
+    },
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#2#35#231",
+    "Deleted": false
+  },
+  "Order": {
+    "ID": 241,
+    "RowVersion": "#0#0#0#0#0#9#45#1",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Transaction": {
+    "ID": 145,
+    "RowVersion": "#0#0#0#0#0#9#45#2",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Date": "2018-04-24T00:00:00",
+  "TakenOn": "2018-04-23T08:52:48.913",
+  "CancelledOn": null,
+  "Data": "{\"Product\":0}",
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#9#45#3",
+  "Deleted": false
 }
+```
 
-],
-
-&quot;Countries&quot;: [],
-
-&quot;Available&quot;: [],
-
-&quot;Keys&quot;: [
-
+## Article
+```csharp
 {
-
-&quot;ArticleKeyID&quot;: 1291,
-
-&quot;Info&quot;: &quot;Sol C 20 125- 150&quot;,
-
-&quot;Value&quot;: &quot;98820121&quot;,
-
-&quot;Decimals&quot;: 0,
-
-&quot;PackingUnit&quot;: 0,
-
-&quot;PackingSize&quot;: null,
-
-&quot;PackingUnitType&quot;: 0,
-
-&quot;PackingForm&quot;: null,
-
-&quot;DeliverSize&quot;: null,
-
-&quot;DeliverUnitType&quot;: null,
-
-&quot;DeliverType&quot;: null,
-
-&quot;StockQuantity&quot;: 1,
-
-&quot;EAN&quot;: &quot;4011266062981&quot;,
-
-&quot;Country&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#58#151&quot;
-
-},
-
-&quot;TaxRate&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#0#230#203&quot;
-
-},
-
-&quot;AvailableForShippingText&quot;: null,
-
-&quot;AvailableForShippingDeliverTime&quot;: null,
-
-&quot;AvailableForRadiusDeliveryText&quot;: null,
-
-&quot;AvailableForClickAndCollectText&quot;: null,
-
-&quot;GrowthFrom&quot;: null,
-
-&quot;GrowthTo&quot;: null,
-
-&quot;WeightFrom&quot;: null,
-
-&quot;WeightTo&quot;: null,
-
-&quot;WidthFrom&quot;: null,
-
-&quot;WidthTo&quot;: null,
-
-&quot;HeightFrom&quot;: null,
-
-&quot;HeightTo&quot;: null,
-
-&quot;DeliverHeightFrom&quot;: null,
-
-&quot;DeliverHeightTo&quot;: null,
-
-&quot;LengthFrom&quot;: null,
-
-&quot;LengthTo&quot;: null,
-
-&quot;DepthFrom&quot;: null,
-
-&quot;DepthTo&quot;: null,
-
-&quot;PotSize&quot;: null,
-
-&quot;PotSizeL&quot;: null,
-
-&quot;FillAmountFrom&quot;: null,
-
-&quot;FillAmountTo&quot;: null,
-
-&quot;DiameterFrom&quot;: null,
-
-&quot;DiameterTo&quot;: null,
-
-&quot;LoadingCapacityFrom&quot;: null,
-
-&quot;LoadingCapacityTo&quot;: null,
-
-&quot;BloomingTimeFrom&quot;: null,
-
-&quot;BloomingTimeTo&quot;: null,
-
-&quot;BloomingTimePeriod&quot;: null,
-
-&quot;BloomingTimePeriod2&quot;: null,
-
-&quot;Size&quot;: null,
-
-&quot;Quality&quot;: null,
-
-&quot;Features&quot;: [],
-
-&quot;Tasks&quot;: [],
-
-&quot;Grower&quot;: null,
-
-&quot;Brand&quot;: null,
-
-&quot;BotanicName&quot;: null,
-
-&quot;NameTranslation&quot;: null,
-
-&quot;Photos&quot;: [],
-
-&quot;Prices&quot;: [
-
-{
-
-&quot;ArticleKeyPriceID&quot;: 1712,
-
-&quot;Quantity&quot;: 0,
-
-&quot;Price&quot;: 189.5,
-
-&quot;PriceUnitAmount&quot;: null,
-
-&quot;ValueUnitType&quot;: null,
-
-&quot;PriceOld&quot;: null,
-
-&quot;PriceNet&quot;: false,
-
-&quot;TaxIncluded&quot;: true,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
+  "ArticleID": 1375,
+  "Name": "Abies koreana 'Veredelung'",
+  "Name2": "Koreatanne 'Veredelung'",
+  "Description": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
+  "ShortDescription": null,
+  "Photos": [],
+  "ArticleGroups": [],
+  "Categories": [{
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#2#15#209"
+  }],
+  "Countries": [],
+  "Available": [],
+  "Keys": [{
+    "ArticleKeyID": 1291,
+    "Info": "Sol C 20  125- 150",
+    "Value": "98820121",
+    "Decimals": 0,
+    "PackingUnit": 0,
+    "PackingSize": null,
+    "PackingUnitType": 0,
+    "PackingForm": null,
+    "DeliverSize": null,
+    "DeliverUnitType": null,
+    "DeliverType": null,
+    "StockQuantity": 1,
+    "EAN": "4011266062981",
+    "Country": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#2#58#151"
+    },
+    "TaxRate": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#0#230#203"
+    },
+    "AvailableForShippingText": null,
+    "AvailableForShippingDeliverTime": null,
+    "AvailableForRadiusDeliveryText": null,
+    "AvailableForClickAndCollectText": null,
+    "GrowthFrom": null,
+    "GrowthTo": null,
+    "WeightFrom": null,
+    "WeightTo": null,
+    "WidthFrom": null,
+    "WidthTo": null,
+    "HeightFrom": null,
+    "HeightTo": null,
+    "DeliverHeightFrom": null,
+    "DeliverHeightTo": null,
+    "LengthFrom": null,
+    "LengthTo": null,
+    "DepthFrom": null,
+    "DepthTo": null,
+    "PotSize": null,
+    "PotSizeL": null,
+    "FillAmountFrom": null,
+    "FillAmountTo": null,
+    "DiameterFrom": null,
+    "DiameterTo": null,
+    "LoadingCapacityFrom": null,
+    "LoadingCapacityTo": null,
+    "BloomingTimeFrom": null,
+    "BloomingTimeTo": null,
+    "BloomingTimePeriod": null,
+    "BloomingTimePeriod2": null,
+    "Size": null,
+    "Quality": null,
+    "Features": [],
+    "Tasks": [],
+    "Grower": null,
+    "Brand": null,
+    "BotanicName": null,
+    "NameTranslation": null,
+    "Photos": [],
+    "Prices": [{
+      "ArticleKeyPriceID": 1712,
+      "Quantity": 0,
+      "Price": 189.5,
+      "PriceUnitAmount": null,
+      "ValueUnitType": null,
+      "PriceOld": null,
+      "PriceNet": false,
+      "TaxIncluded": true,
+      "Currency": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#77#11"
+      },
+      "External_Key": null,
+      "External_COR_ID": null
+    }],
+    "Attachments": [],
+    "Available": [],
+    "CustomFields": [{
+      "CustomFieldID": 1061,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#20"
+      },
+      "StringValue": "P",
+      "IntValue": null,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    }],
+    "Inactive": false,
+    "AvailableForShipping": true,
+    "AvailableForRadiusDelivery": false,
+    "AvailableForClickAndCollect": false,
+    "AvailableForMarketPlaces": false,
+    "External_Key": "98820121",
+    "External_COR_ID": null
+  }],
+  "Texts": [{
+      "ArticleTextID": 14006,
+      "Position": 0,
+      "Type": 31,
+      "Title": null,
+      "Value": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14007,
+      "Position": 0,
+      "Type": 87,
+      "Title": null,
+      "Value": "Nadelbaum mit attraktivem Zapfenschmuck\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14008,
+      "Position": 0,
+      "Type": 88,
+      "Title": null,
+      "Value": "Standort (Boden): kalkverträglich, lehmig, nährstoffreich; Standort (Licht): vollsonnig bis leicht schattig; Winterhärte: frosthart; Besonderheiten (Pflegetipp): Schnitt unüblich\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14009,
+      "Position": 0,
+      "Type": 65,
+      "Title": null,
+      "Value": "Blütezeit (Geruch): April bis Mai@Blütenfarbe: purpur@Blattfarbe, -phase: dunkelgrün, immergrün@Blattform: Nadeln bis 2 cm@Zapfen/Frucht: Zapfen blau-violett, später braun, eiförmig, aufrecht, bis 7 cm, sehr dekorativ@Wuchshöhe: über 5 m@Habitus: Nadelbaum@Standort (Boden): kalkverträglich, lehmig, nährstoffreich@Standort (Licht): vollsonnig bis leicht schattig@Verwendung Teil 1: Hausgarten, Steingarten, Einzelstellung, zusammen mit Rhododendron und Stauden@Rinde: im Alter rau@Winterhärte: frosthart\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    }
+  ],
+  "Tasks": [],
+  "Ratings": [],
+  "Tags": [],
+  "Features": [],
+  "CustomFields": [{
+      "CustomFieldID": 1059,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#19"
+      },
+      "StringValue": null,
+      "IntValue": 24180,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "CustomFieldID": 1060,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#20"
+      },
+      "StringValue": "P",
+      "IntValue": null,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    }
+  ],
+  "RatingCount": null,
+  "Teaser": null,
+  "Inactive": false,
+  "GrowthFrom": null,
+  "GrowthTo": null,
+  "WeightFrom": null,
+  "WeightTo": null,
+  "WidthFrom": null,
+  "WidthTo": null,
+  "HeightFrom": null,
+  "HeightTo": null,
+  "DeliverHeightFrom": null,
+  "DeliverHeightTo": null,
+  "LengthFrom": null,
+  "LengthTo": null,
+  "DepthFrom": null,
+  "DepthTo": null,
+  "PotSize": null,
+  "PotSizeL": null,
+  "FillAmountFrom": null,
+  "FillAmountTo": null,
+  "DiameterFrom": null,
+  "DiameterTo": null,
+  "LoadingCapacityFrom": null,
+  "LoadingCapacityTo": null,
+  "BloomingTimeFrom": null,
+  "BloomingTimeTo": null,
+  "BloomingTimePeriod": null,
+  "BloomingTimePeriod2": null,
+  "Size": null,
+  "Quality": null,
+  "Grower": null,
+  "Brand": null,
+  "BotanicName": null,
+  "NameTranslation": null,
+  "External_Key": "98820121",
+  "External_COR_ID": null
 }
+```
 
-],
 
-&quot;Attachments&quot;: [],
+## Job
 
-&quot;Available&quot;: [],
-
-&quot;CustomFields&quot;: [
-
+```csharp
 {
-
-&quot;CustomFieldID&quot;: 1061,
-
-&quot;Field&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#34#20&quot;
-
-},
-
-&quot;StringValue&quot;: &quot;P&quot;,
-
-&quot;IntValue&quot;: null,
-
-&quot;DateValue&quot;: null,
-
-&quot;FloatValue&quot;: null,
-
-&quot;BoolValue&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
+  "JobID": 5,
+  "Name": "Sortimentsaktualisierung",
+  "Percent": 100,
+  "Status": "2 aktualisiert",
+  "Started": "2016-05-11T14:26:12.407",
+  "Finished": "2016-05-11T14:26:15.05",
+  "Alive": null,
+  "Aborted": null,
+  "Succeeded": true,
+  "External_Key": null,
+  "External_COR_ID": null
 }
+```
+## Payment
 
-],
-
-&quot;Inactive&quot;: false,
-
-&quot;AvailableForShipping&quot;: true,
-
-&quot;AvailableForRadiusDelivery&quot;: false,
-
-&quot;AvailableForClickAndCollect&quot;: false,
-
-&quot;AvailableForMarketPlaces&quot;: false,
-
-&quot;External\_Key&quot;: &quot;98820121&quot;,
-
-&quot;External\_COR\_ID&quot;: null
-
+```csharp
+{
+  "PaymentID": 1,
+  "ReservedUntil": null,
+  "Info": null,
+  "Price": 10,
+  "Currency": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#3#93#115",
+    "External_Key": null
+  },
+  "VoucherCode": null,
+  "External_Key": null,
+  "External_COR_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#5#130#114",
+  "Deleted": true
 }
+```
 
-],
+## Voucher
 
-&quot;Texts&quot;: [
-
+```csharp
 {
-
-&quot;ArticleTextID&quot;: 14006,
-
-&quot;Position&quot;: 0,
-
-&quot;Type&quot;: 31,
-
-&quot;Title&quot;: null,
-
-&quot;Value&quot;: &quot;Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-{
-
-&quot;ArticleTextID&quot;: 14007,
-
-&quot;Position&quot;: 0,
-
-&quot;Type&quot;: 87,
-
-&quot;Title&quot;: null,
-
-&quot;Value&quot;: &quot;Nadelbaum mit attraktivem Zapfenschmuck\n&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-{
-
-&quot;ArticleTextID&quot;: 14008,
-
-&quot;Position&quot;: 0,
-
-&quot;Type&quot;: 88,
-
-&quot;Title&quot;: null,
-
-&quot;Value&quot;: &quot;Standort (Boden): kalkverträglich, lehmig, nährstoffreich; Standort (Licht): vollsonnig bis leicht schattig; Winterhärte: frosthart; Besonderheiten (Pflegetipp): Schnitt unüblich\n&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-{
-
-&quot;ArticleTextID&quot;: 14009,
-
-&quot;Position&quot;: 0,
-
-&quot;Type&quot;: 65,
-
-&quot;Title&quot;: null,
-
-&quot;Value&quot;: &quot;Blütezeit (Geruch): April bis Mai@Blütenfarbe: purpur@Blattfarbe, -phase: dunkelgrün, immergrün@Blattform: Nadeln bis 2 cm@Zapfen/Frucht: Zapfen blau-violett, später braun, eiförmig, aufrecht, bis 7 cm, sehr dekorativ@Wuchshöhe: über 5 m@Habitus: Nadelbaum@Standort (Boden): kalkverträglich, lehmig, nährstoffreich@Standort (Licht): vollsonnig bis leicht schattig@Verwendung Teil 1: Hausgarten, Steingarten, Einzelstellung, zusammen mit Rhododendron und Stauden@Rinde: im Alter rau@Winterhärte: frosthart\n&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
+  "VoucherID": 28,
+  "Name": "Auftrag 2017-184, Firma Blumen Cordes",
+  "ValidFrom": null,
+  "ValidTo": "2019-08-10T00:00:00",
+  "KeyValue": null,
+  "Type": 1,
+  "OrderItem": {
+    "ID": 213,
+    "RowVersion": "#0#0#0#0#0#5#126#37",
+    "External_Key": null
+  },
+  "Price": 50,
+  "Remaining": 0.00999999999999801,
+  "Info": null,
+  "Currency": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#3#93#115",
+    "External_Key": null
+  },
+  "Codes": [{
+    "VoucherCodeID": 1781,
+    "UsedOn": null,
+    "KeyValue": "4039T4GJ6M3MP6JK",
+    "EAN": "800000000204",
+    "Voucher": {
+      "ID": 28,
+      "RowVersion": "#0#0#0#0#0#5#132#3",
+      "External_Key": null
+    },
+    "External_Key": null,
+    "External_COR_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#5#126#34",
+    "Deleted": false
+  }],
+  "Payments": [{
+      "PaymentID": 1,
+      "ReservedUntil": null,
+      "Info": null,
+      "Price": 10,
+      "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#3#93#115",
+        "External_Key": null
+      },
+      "VoucherCode": null,
+      "External_Key": null,
+      "External_COR_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#5#130#114",
+      "Deleted": true
+    },
+    {
+      "PaymentID": 12,
+      "ReservedUntil": null,
+      "Info": null,
+      "Price": 39.99,
+      "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#3#93#115",
+        "External_Key": null
+      },
+      "VoucherCode": {
+        "VoucherCodeID": 1781,
+        "UsedOn": null,
+        "KeyValue": "4039T4GJ6M3MP6JK",
+        "EAN": "800000000204",
+        "Voucher": {
+          "ID": 28,
+          "RowVersion": "#0#0#0#0#0#5#132#3",
+          "External_Key": null
+        },
+        "External_Key": null,
+        "External_COR_ID": null,
+        "External_COR_Owner": null,
+        "RowVersion": "#0#0#0#0#0#5#126#34",
+        "Deleted": false
+      },
+      "External_Key": null,
+      "External_COR_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#5#131#195",
+      "Deleted": true
+    },
+    {
+      "PaymentID": 18,
+      "ReservedUntil": null,
+      "Info": null,
+      "Price": 44.99,
+      "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#3#93#115",
+        "External_Key": null
+      },
+      "VoucherCode": {
+        "VoucherCodeID": 1781,
+        "UsedOn": null,
+        "KeyValue": "4039T4GJ6M3MP6JK",
+        "EAN": "800000000204",
+        "Voucher": {
+          "ID": 28,
+          "RowVersion": "#0#0#0#0#0#5#132#3",
+          "External_Key": null
+        },
+        "External_Key": null,
+        "External_COR_ID": null,
+        "External_COR_Owner": null,
+        "RowVersion": "#0#0#0#0#0#5#126#34",
+        "Deleted": false
+      },
+      "External_Key": null,
+      "External_COR_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#5#131#218",
+      "Deleted": true
+    },
+    {
+      "PaymentID": 19,
+      "ReservedUntil": null,
+      "Info": "Test",
+      "Price": 49.99,
+      "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#3#93#115",
+        "External_Key": null
+      },
+      "VoucherCode": {
+        "VoucherCodeID": 1781,
+        "UsedOn": null,
+        "KeyValue": "4039T4GJ6M3MP6JK",
+        "EAN": "800000000204",
+        "Voucher": {
+          "ID": 28,
+          "RowVersion": "#0#0#0#0#0#5#132#3",
+          "External_Key": null
+        },
+        "External_Key": null,
+        "External_COR_ID": null,
+        "External_COR_Owner": null,
+        "RowVersion": "#0#0#0#0#0#5#126#34",
+        "Deleted": false
+      },
+      "External_Key": null,
+      "External_COR_ID": null,
+      "External_COR_Owner": null,
+      "RowVersion": "#0#0#0#0#0#5#132#12",
+      "Deleted": false
+    }
+  ],
+  "External_Key": null,
+  "External_COR_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#5#132#3",
+  "Deleted": false
 }
-
-],
-
-&quot;Tasks&quot;: [],
-
-&quot;Ratings&quot;: [],
-
-&quot;Tags&quot;: [],
-
-&quot;Features&quot;: [],
-
-&quot;CustomFields&quot;: [
-
-{
-
-&quot;CustomFieldID&quot;: 1059,
-
-&quot;Field&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#34#19&quot;
-
-},
-
-&quot;StringValue&quot;: null,
-
-&quot;IntValue&quot;: 24180,
-
-&quot;DateValue&quot;: null,
-
-&quot;FloatValue&quot;: null,
-
-&quot;BoolValue&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-{
-
-&quot;CustomFieldID&quot;: 1060,
-
-&quot;Field&quot;: {
-
-&quot;ID&quot;: 0,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#34#20&quot;
-
-},
-
-&quot;StringValue&quot;: &quot;P&quot;,
-
-&quot;IntValue&quot;: null,
-
-&quot;DateValue&quot;: null,
-
-&quot;FloatValue&quot;: null,
-
-&quot;BoolValue&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-}
-
-],
-
-&quot;RatingCount&quot;: null,
-
-&quot;Teaser&quot;: null,
-
-&quot;Inactive&quot;: false,
-
-&quot;GrowthFrom&quot;: null,
-
-&quot;GrowthTo&quot;: null,
-
-&quot;WeightFrom&quot;: null,
-
-&quot;WeightTo&quot;: null,
-
-&quot;WidthFrom&quot;: null,
-
-&quot;WidthTo&quot;: null,
-
-&quot;HeightFrom&quot;: null,
-
-&quot;HeightTo&quot;: null,
-
-&quot;DeliverHeightFrom&quot;: null,
-
-&quot;DeliverHeightTo&quot;: null,
-
-&quot;LengthFrom&quot;: null,
-
-&quot;LengthTo&quot;: null,
-
-&quot;DepthFrom&quot;: null,
-
-&quot;DepthTo&quot;: null,
-
-&quot;PotSize&quot;: null,
-
-&quot;PotSizeL&quot;: null,
-
-&quot;FillAmountFrom&quot;: null,
-
-&quot;FillAmountTo&quot;: null,
-
-&quot;DiameterFrom&quot;: null,
-
-&quot;DiameterTo&quot;: null,
-
-&quot;LoadingCapacityFrom&quot;: null,
-
-&quot;LoadingCapacityTo&quot;: null,
-
-&quot;BloomingTimeFrom&quot;: null,
-
-&quot;BloomingTimeTo&quot;: null,
-
-&quot;BloomingTimePeriod&quot;: null,
-
-&quot;BloomingTimePeriod2&quot;: null,
-
-&quot;Size&quot;: null,
-
-&quot;Quality&quot;: null,
-
-&quot;Grower&quot;: null,
-
-&quot;Brand&quot;: null,
-
-&quot;BotanicName&quot;: null,
-
-&quot;NameTranslation&quot;: null,
-
-&quot;External\_Key&quot;: &quot;98820121&quot;,
-
-&quot;External\_COR\_ID&quot;: null
-
-}
-
-## 34.4Aufträge (asynchrone Jobs)
-
-{
-
-&quot;JobID&quot;: 5,
-
-&quot;Name&quot;: &quot;Sortimentsaktualisierung&quot;,
-
-&quot;Percent&quot;: 100,
-
-&quot;Status&quot;: &quot;2 aktualisiert&quot;,
-
-&quot;Started&quot;: &quot;2016-05-11T14:26:12.407&quot;,
-
-&quot;Finished&quot;: &quot;2016-05-11T14:26:15.05&quot;,
-
-&quot;Alive&quot;: null,
-
-&quot;Aborted&quot;: null,
-
-&quot;Succeeded&quot;: true,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-}
-
-## Zahlung
-
-{
-
-&quot;PaymentID&quot;: 1,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: null,
-
-&quot;Price&quot;: 10,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;VoucherCode&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#130#114&quot;,
-
-&quot;Deleted&quot;: true
-
-}
-
-## Gutschein
-
-{
-
-&quot;VoucherID&quot;: 28,
-
-&quot;Name&quot;: &quot;Auftrag 2017-184, Firma Blumen Cordes&quot;,
-
-&quot;ValidFrom&quot;: null,
-
-&quot;ValidTo&quot;: &quot;2019-08-10T00:00:00&quot;,
-
-&quot;KeyValue&quot;: null,
-
-&quot;Type&quot;: 1,
-
-&quot;OrderItem&quot;: {
-
-&quot;ID&quot;: 213,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#37&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;Price&quot;: 50,
-
-&quot;Remaining&quot;: 0.00999999999999801,
-
-&quot;Info&quot;: null,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;Codes&quot;: [
-
-{
-
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Voucher&quot;: {
-
-&quot;ID&quot;: 28,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#34&quot;,
-
-&quot;Deleted&quot;: false
-
-}
-
-],
-
-&quot;Payments&quot;: [
-
-{
-
-&quot;PaymentID&quot;: 1,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: null,
-
-&quot;Price&quot;: 10,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;VoucherCode&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#130#114&quot;,
-
-&quot;Deleted&quot;: true
-
-},
-
-{
-
-&quot;PaymentID&quot;: 12,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: null,
-
-&quot;Price&quot;: 39.99,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;VoucherCode&quot;: {
-
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Voucher&quot;: {
-
-&quot;ID&quot;: 28,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#34&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#131#195&quot;,
-
-&quot;Deleted&quot;: true
-
-},
-
-{
-
-&quot;PaymentID&quot;: 18,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: null,
-
-&quot;Price&quot;: 44.99,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;VoucherCode&quot;: {
-
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Voucher&quot;: {
-
-&quot;ID&quot;: 28,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#34&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#131#218&quot;,
-
-&quot;Deleted&quot;: true
-
-},
-
-{
-
-&quot;PaymentID&quot;: 19,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: &quot;Test&quot;,
-
-&quot;Price&quot;: 49.99,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#3#93#115&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;VoucherCode&quot;: {
-
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Voucher&quot;: {
-
-&quot;ID&quot;: 28,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#34&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#12&quot;,
-
-&quot;Deleted&quot;: false
-
-}
-
-],
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;Deleted&quot;: false
-
-}
+```
 
 ## Gutschein - Code
 
+```csharp
 {
+  "VoucherCodeID": 1781,
+  "UsedOn": null,
+  "KeyValue": "4039T4GJ6M3MP6JK",
+  "EAN": "800000000204",
+  "Voucher": {
+    "ID": 28,
+    "RowVersion": "#0#0#0#0#0#5#132#3",
+    "External_Key": null
+  },
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#5#126#34",
+  "Deleted": false
+}
+```
 
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Voucher&quot;: {
-
-&quot;ID&quot;: 28,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#132#3&quot;,
-
-&quot;External\_Key&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#5#126#34&quot;,
-
-&quot;Deleted&quot;: false
-
+## FoundVoucher
+```csharp
+{
+    "VoucherID": 28,
+    "VoucherCodeID": 1781,
+    "UsedOn": null,
+    "KeyValue": "4039T4GJ6M3MP6JK",
+    "EAN": "800000000204",
+    "Currency":{  
+       "ID":0,
+       "RowVersion":"#0#0#0#0#0#0#77#11"
+    },
+    "Remaining": 0.00999999999999801
 }
 
-## Gefundener Gutschein
+```
 
-{
+## OrderStatusType
 
-&quot;VoucherID&quot;: 28,
-
-&quot;VoucherCodeID&quot;: 1781,
-
-&quot;UsedOn&quot;: null,
-
-&quot;KeyValue&quot;: &quot;4039T4GJ6M3MP6JK&quot;,
-
-&quot;EAN&quot;: &quot;800000000204&quot;,
-
-&quot;Currency&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;Remaining&quot;: 0.00999999999999801
-
-}
-
-## Auftragsstatus
-
+```csharp
 public enum OrderStatusType : short
-
 {
-
-NotEdited, // Noch nicht bearbeitet
-
-Confirmed, // Bestätigt
-
-Canceled, // Storniert
-
-Ready // Erledigt
-
+	NotEdited, // Noch nicht bearbeitet
+	Confirmed, // Bestätigt
+	Canceled, // Storniert
+	Ready // Erledigt
 }
 
-## Abwicklungsstatus
+```
+## TransactionStatus
 
+```csharp
 public enum TransactionStatus : short
-
 {
-
-NotDelivered, // Noch nicht bearbeitet
-
-Delivered, // Ausgeliefert
-
-Ready // Steht Bereit
-
+	NotDelivered, // Noch nicht bearbeitet
+	Delivered, // Ausgeliefert
+	Ready // Steht Bereit
 }
 
-## Dokumentation
+```
 
+## Documentation
+```csharp
 {
-
-&quot;DocumentationID&quot;: 28,
-
-&quot;Thumbnail&quot;: null,
-
-&quot;DataFile&quot;: &quot;:{
-
-&quot;ID&quot;:10,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
+  "DocumentationID": 28,
+  "Thumbnail": null,
+  "DataFile": ":{  
+  "ID": 10,
+  "RowVersion": "#0#0#0#0#0#0#77#11"
 },
-
-&quot;Language&quot;: null,
-
-&quot;Title&quot;: null,
-
-&quot;Type&quot;:&quot;Invoice&quot;
-
+"Language": null,
+"Title": null,
+"Type": "Invoice"
 }
+```
 
 ## Artikelstatus
 
+```csharp
 {
-
-&quot;External\_Key&quot;:&quot;abcdef&quot;
-
-&quot;Confirmed&quot;: true,
-
-&quot;QuantityConfirmed&quot;: null, // oder die Anzahl bei Teillieferungen
-
+    "External_Key":"abcdef"
+    "Confirmed": true,
+    "QuantityConfirmed": null, // oder die Anzahl bei Teillieferungen
 }
 
-## Datei
+```
 
+## File
+```csharp
 {
-
-&quot;FileID&quot;: 8965,
-
-&quot;Revision&quot;: 2,
-
-&quot;Name&quot;: &quot;testAnhang.pdf&quot;,
-
-&quot;Type&quot;: &quot;file/pdf&quot;,
-
-&quot;Guid&quot;: &quot;c4b4b19a-ce6d-4729-923f-c6ab922a70c8&quot;,
-
-&quot;Url&quot;: &quot;http://localhost:61235/Files?id=8965&quot;,
-
-&quot;SmallUrl&quot;: &quot;http://localhost:61235/Files?id=8965&amp;width=200&amp;height=200&quot;,
-
-&quot;MediumUrl&quot;: &quot;http://localhost:61235/Files?id=8965&amp;width=600&amp;height=600&quot;,
-
-&quot;LargeUrl&quot;: &quot;http://localhost:61235/Files?id=8965&amp;width=1200&amp;height=1200&quot;,
-
-&quot;Size&quot;: 373790,
-
-&quot;Title&quot;: null,
-
-&quot;SearchKeywords&quot;: null,
-
-&quot;Storename&quot;: &quot;testAnhang.pdf&quot;,
-
-&quot;StoreName200x200ProportionalBiggest&quot;: null,
-
-&quot;StoreName600x600ProportionalBiggest&quot;: null,
-
-&quot;StoreName1200x1200ProportionalBiggest&quot;: null,
-
-&quot;FrameCount&quot;: null,
-
-&quot;StoreNameFrames&quot;: null,
-
-&quot;StoreNameFramesMedium&quot;: null,
-
-&quot;External\_Key&quot;: &quot;testAnhang.pdf&quot;,
-
-&quot;External\_RowVersion&quot;: &quot;5769b59763194354b0096cb7c6eb8e46&quot;,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#10#88&quot;,
-
-&quot;Deleted&quot;: false
-
+  "FileID": 8965,
+  "Revision": 2,
+  "Name": "testAnhang.pdf",
+  "Type": "file/pdf",
+  "Guid": "c4b4b19a-ce6d-4729-923f-c6ab922a70c8",
+  "Url": "http://localhost:61235/Files?id=8965",
+  "SmallUrl": "http://localhost:61235/Files?id=8965&width=200&height=200",
+  "MediumUrl": "http://localhost:61235/Files?id=8965&width=600&height=600",
+  "LargeUrl": "http://localhost:61235/Files?id=8965&width=1200&height=1200",
+  "Size": 373790,
+  "Title": null,
+  "SearchKeywords": null,
+  "Storename": "testAnhang.pdf",
+  "StoreName200x200ProportionalBiggest": null,
+  "StoreName600x600ProportionalBiggest": null,
+  "StoreName1200x1200ProportionalBiggest": null,
+  "FrameCount": null,
+  "StoreNameFrames": null,
+  "StoreNameFramesMedium": null,
+  "External_Key": "testAnhang.pdf",
+  "External_RowVersion": "5769b59763194354b0096cb7c6eb8e46",
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#6#10#88",
+  "Deleted": false
 }
+```
 
 ## Transaktion
-
+```csharp
 {
-
-&quot;External\_Key&quot;: &quot;4711&quot;,
-
-&quot;StockQuantity&quot;: 100,
-
-&quot;Prices&quot;: &quot;:[
-
-{
-
-&quot;Quantity&quot;:null,
-
-&quot;Price&quot;:5.9,
-
-&quot;PriceOld&quot;:6.5,
-
+    "External_Key": "4711",
+    "StockQuantity": 100,
+    "Prices": [
+       {  
+          "Quantity":null,
+          "Price":5.9,
+          "PriceOld":6.5,
+       }
+    ]
 }
 
-]
+```
 
-}
-
-## Statusmeldung
+## OrderStatus
  ```csharp
 {
 
@@ -2220,211 +1951,107 @@ Ready // Steht Bereit
 }
 ```
 
+## DebitCard
+```csharp
 {
-
-&quot;OrderStatus&quot; : 1, // Siehe 34.9
-
-&quot;OrderTransactionID&quot; : 10, // ID der Abwicklung
-
-&quot;Status&quot;: 1, // Siehe 34.10
-
-&quot;StatusOn&quot;: &quot;2018-04-03T14:30:05.037&quot;, // Wann wurde z.B. ausgeliefert
-
-&quot;TrackAndTraceID&quot; : null, // Tracking ID
-
-&quot;TrackAndTraceURL&quot; : null, // Tracking URL
-
-&quot;Documentations&quot; : null, // Array von Dokumentationten **34.11**
-
-&quot;InvoiceURI&quot; : null, // Rechnung als DataURI
-
-&quot;InvoiceFilename&quot; : null, // Dateiname Rechnung
-
-&quot;InvoiceMimeType&quot; : null, // Mimetype Rechnung
-
-&quot;Articles&quot; : null, // Array von ArtikelStatus **34.12**
-
+  "DebitCardID": 1,
+  "KeyValue": "test",
+  "Valid": true,
+  "ValidatedOn": "2018-11-15T13:16:28.7",
+  "ValidatedBy": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#11#103#56",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Member": {
+    "ID": 70,
+    "RowVersion": "#0#0#0#0#0#9#35#145",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Turnover": 55,
+  "Currency": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#6#99#130",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": 4
+  },
+  "Orders": [{
+    "ID": 269,
+    "RowVersion": "#0#0#0#0#0#12#59#49",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  }],
+  "Payments": [{
+    "PaymentID": 155,
+    "ReservedUntil": null,
+    "Info": "Test",
+    "Price": 15,
+    "Currency": {
+      "ID": 1,
+      "RowVersion": "#0#0#0#0#0#6#99#130",
+      "External_Key": null,
+      "External_RowVersion": null,
+      "External_COR_ID": 4
+    },
+    "VoucherCode": null,
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#12#59#50",
+    "Deleted": false
+  }],
+  "Results": [],
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#12#62#22",
+  "Deleted": false
 }
-
-## Kundenkarte
-
-{
-
-&quot;DebitCardID&quot;: 1,
-
-&quot;KeyValue&quot;: &quot;test&quot;,
-
-&quot;Valid&quot;: true,
-
-&quot;ValidatedOn&quot;: &quot;2018-11-15T13:16:28.7&quot;,
-
-&quot;ValidatedBy&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#11#103#56&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Member&quot;: {
-
-&quot;ID&quot;: 70,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#35#145&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Turnover&quot;: 55,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#99#130&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: 4
-
-},
-
-&quot;Orders&quot;: [
-
-{
-
-&quot;ID&quot;: 269,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#12#59#49&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-}
-
-],
-
-&quot;Payments&quot;: [
-
-{
-
-&quot;PaymentID&quot;: 155,
-
-&quot;ReservedUntil&quot;: null,
-
-&quot;Info&quot;: &quot;Test&quot;,
-
-&quot;Price&quot;: 15,
-
-&quot;Currency&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#99#130&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: 4
-
-},
-
-&quot;VoucherCode&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#12#59#50&quot;,
-
-&quot;Deleted&quot;: false
-
-}
-
-],
-
-&quot;Results&quot;: [],
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#12#62#22&quot;,
-
-&quot;Deleted&quot;: false
-
-}
+```
 
 ## Result
-
+```csharp
 {
-
-&quot;ResultID&quot;: 43576,
-
-&quot;Text&quot;: &quot;Kundenkarte nicht korrekt&quot;,
-
-&quot;ResultType&quot;: &quot;ResultError&quot;, // ResultError oder ResultInfo
-
+    "ResultID": 43576,
+    "Text": "Kundenkarte nicht korrekt",
+    "ResultType": "ResultError", // ResultError oder ResultInfo
 }
+
+```
 
 ## Dialog
 
+```csharp
 {
-
-&quot;Url&quot;: &quot;http://localhost:61235/Plugin/OrderTransactions/Delivered/145&quot;,
-
-&quot;Title&quot;: &quot;Auftrag versenden&quot;,
-
-&quot;Width&quot;: 600,
-
-&quot;Height&quot;: 400
-
+  "Url": "http://localhost:61235/Plugin/OrderTransactions/Delivered/145",
+  "Title": "Auftrag versenden",
+  "Width": 600,
+  "Height": 400
 }
+```
+
 
 ## Upload
-
+```csharp
 {
-
-&quot;Filename&quot; : &quot;Test.png&quot;,
-
-&quot;Data&quot; : &quot;iVBORwjsjhb67gjh…5ErkJggg==&quot;, // Dateiinhalt als Data URI https://de.wikipedia.org/wiki/Data-URL
-
-&quot;Type&quot; : &quot;image/png&quot;, // Mime Type (z.B. application/pdf)
-
-&quot;Deleted&quot; : &quot;false&quot;,
-
-&quot;Rotation&quot;: 0 // Nur bei api/pictures/upload, Rotation im Uhrzeigersinn (1=90 Grad, 2=180 Grad usw.)
-
+    "Filename" : "Test.png",
+    "Data" : "iVBORwjsjhb67gjh…5ErkJggg==", // Dateiinhalt als Data URI https://de.wikipedia.org/wiki/Data-URL
+    "Type" : "image/png", // Mime Type (z.B. application/pdf)
+    "Deleted" : "false",
+    "Rotation": 0 // Nur bei api/pictures/upload, Rotation im Uhrzeigersinn (1=90 Grad, 2=180 Grad usw.)
 }
+
+```
 
 # Dialoge
 
@@ -2462,174 +2089,127 @@ Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe u
 
 Eine Beispiel Applikation sowieso eine API für C# .Net auf denen die nachfolgenden Beispiele basieren finden Sie hier:
 
-[http://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip](http://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip)
+[https://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip](https://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip)
 
 ## Token abfragen zur Authentifizierung
 
-var unitOfWork = new Api.Client.ContextUOW(null, &quot;&quot;);
-
-var token = unitOfWork.Account.Validate(&quot;Benutzer&quot;, &quot;Passwort&quot;); // POST api/account/validate?user={benutzer}&amp;password={passwort}
-
+```csharp
+var unitOfWork = new Api.Client.ContextUOW(null, "");
+var token = unitOfWork.Account.Validate("Benutzer", "Passwort"); // POST api/account/validate?user={benutzer}&password={passwort}
+```
 Das Token kann nun bei allen folgenden Posts als Header „token&quot; mitgesendet werden!
 
 ## Artikel anlegen
-
-var unitOfWork = new Api.Client.ContextUOW(null,&quot;&quot;);
+```csharp
+var unitOfWork = new Api.Client.ContextUOW(null, "");
 
 var article = new Article();
 
-article.Name = &quot;Acer Palmatum Bloodgood&quot;;
-
-article.Name2 = &quot;Fächerahorn Bloodgood&quot;;
-
-article.Description = &quot;Dies ist eine lange Beschreibung&quot;;
-
-article.ShortDescription = &quot;Dies ist eine kurze Beschreibung&quot;;
+article.Name = "Acer Palmatum Bloodgood";
+article.Name2 = "Fächerahorn Bloodgood";
+article.Description = "Dies ist eine lange Beschreibung";
+article.ShortDescription = "Dies ist eine kurze Beschreibung";
 
 // Warengruppe setzen (evtl. Hierachie beachten)
-
-var articleGroup = unitOfWork.ArticleGroups.FindAll(&quot;Pflanzen&quot;, 0, 100, null).Items.First(); // GET api/articlegroups
-
-article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
+var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
+article.ArticleGroups.Add(new EntityReference() {
+  ID = articleGroup.ArticleGroupID
+});
 
 // Kategorie setzen (evtl. Hierachie beachten)
-
-var category = unitOfWork.Categories.FindAll(&quot;Zubehör&quot;, 0, 100, null).Items.First(); // GET api/categories
-
-article.Categories.Add(new EntityReference() { ID = category.CategoryID });
+var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
+article.Categories.Add(new EntityReference() {
+  ID = category.CategoryID
+});
 
 // Texte hinzufügen
-
 var text = new ArticleText();
-
 article.Texts.Add(text);
-
 text.Type = Types.TextType.BulletPoints;
-
-text.Title = &quot;Kaufargumente&quot;;
-
-text.Value = &quot; \* frosthart \* duftend \* wintergrün \* Kübel geeignet&quot;;
+text.Title = "Kaufargumente";
+text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
 
 // Verfügbarkeiten
-
 var timePeriod = new TimePeriod();
-
 article.Available.Add(timePeriod);
-
 timePeriod.FromCW = 10; // Kalendarwoche (von)
-
 timePeriod.ToCW = 20; // Kalendarwoche (bis)
 
 // Varianten (Artikelnummern) hinzufügen
-
 var articleKey = new ArticleKey();
-
 article.Keys.Add(articleKey);
 
-articleKey.Value = &quot;47811&quot;; // Artikelnummer
-
-articleKey.Info = &quot;C/ 50 - 60&quot;;
-
-articleKey.AvailableForClickAndCollect = true; // Click &amp; Collect
-
+articleKey.Value = "47811"; // Artikelnummer
+articleKey.Info = "C/  50 - 60";
+articleKey.AvailableForClickAndCollect = true; // Click & Collect
 articleKey.AvailableForRadiusDelivery = true; // Liefern
-
 articleKey.AvailableForShipping = true; // Versenden
-
 articleKey.PackingSize = 20; // VE
-
 articleKey.StockQuantity = 10; // Bestand
 
 // Steuersatz
-
-var taxRate = unitOfWork.Countries.Get(&quot;DE&quot;).TaxRates.Single(m =\&gt; m.Percent == 19); // GET api/countries
-
-articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
+var taxRate = unitOfWork.Countries.Get("DE").TaxRates.Single(m => m.Percent == 19); // GET api/countries
+articleKey.TaxRate = new EntityReference() {
+  ID = taxRate.TaxRateID
+};
 
 // Preise
-
-var currency = unitOfWork.Currencies.Get(&quot;EUR&quot;); // GET api/currencies
+var currency = unitOfWork.Currencies.Get("EUR"); // GET api/currencies
 
 var articleKeyPrice = new ArticleKeyPrice();
-
 articleKey.Prices.Add(articleKeyPrice);
-
 articleKeyPrice.Price = 17; // Preis
-
 articleKeyPrice.PriceOld = 25; // Streichpreis
-
 articleKeyPrice.PriceUnitAmount = 10; // pro 10
-
 articleKeyPrice.ValueUnitType = Types.PriceUnitType.Liter; // Liter
-
 articleKeyPrice.Quantity = 1; // Ab Stückzahl
-
-articleKeyPrice.Currency = new EntityReference() { ID = currency.CurrencyID };
-
+articleKeyPrice.Currency = new EntityReference() {
+  ID = currency.CurrencyID
+};
 articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
-
 articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
 
-unitOfWork.Articles.Create(article); // POST api/articles/create?importExternal=true
-
+unitOfWork.Articles.Create(article); // POST api/articles/create?importExternal=true 
 // PUT api/articles/{id} zum updaten
+```
 
 ## Bestellungen abfragen
 
-var unitOfWork = new Api.Client.ContextUOW(null, &quot;&quot;);
+```csharp
+var unitOfWork = new Api.Client.ContextUOW(null, "");
+var orders = unitOfWork.Orders.FindAll(null, 0, 100, "OrderID desc").Items; // GET api/orders/all
 
-var orders = unitOfWork.Orders.FindAll(null, 0, 100, &quot;OrderID desc&quot;).Items; // GET api/orders/all
+foreach(var orderSummary in orders) {
+  var order = unitOfWork.Orders.Get(orderSummary.OrderID); // GET api/orders/{id}
 
-foreach(var orderSummary in orders)
+  Console.WriteLine("Auftragsnummer:" + order.OrderID);
+  Console.WriteLine("Datum:" + order.CreatedOn.ToShortDateString());
 
-{
+  var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
+  Console.WriteLine("Kunde:" + owner.MainContact.Company);
 
-var order = unitOfWork.Orders.Get(orderSummary.OrderID); // GET api/orders/{id}
+  Console.WriteLine("Rechnungsadresse:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+  Console.WriteLine("Lieferadresse:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
-Console.WriteLine(&quot;Auftragsnummer:&quot; + order.OrderID);
+  var paymentMethod = unitOfWork.PaymentMethods.Get(order.PaymentMethod.ID); // GET api/paymentmethods/{id}
+  Console.WriteLine("Bezahlart:" + paymentMethod.Name);
 
-Console.WriteLine(&quot;Datum:&quot; + order.CreatedOn.ToShortDateString());
+  var shippingMethod = unitOfWork.ShippingMethods.Get(order.ShippingMethod.ID); // GET api/shippingmethods/{id}
+  Console.WriteLine("Versandart:" + shippingMethod.Name);
 
-var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
+  // Positionen
+  foreach(var position in order.Items) {
+    var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
+    var articleKey = article.Keys.SingleOrDefault(m => m.ArticleKeyID == position.ArticleKey.ID);
 
-Console.WriteLine(&quot;Kunde:&quot; + owner.MainContact.Company);
-
-Console.WriteLine(&quot;Rechnungsadresse:&quot; + order.InvoiceAddress.Contact.Company+&quot; &quot;+order.InvoiceAddress.Address.Street+&quot; &quot;+order.InvoiceAddress.Address.HouseNumber);
-
-Console.WriteLine(&quot;Lieferadresse:&quot; + order.ShippingAddress.Contact.Company + &quot; &quot; + order.ShippingAddress.Address.Street + &quot; &quot; + order.ShippingAddress.Address.HouseNumber);
-
-var paymentMethod = unitOfWork.PaymentMethods.Get(order.PaymentMethod.ID); // GET api/paymentmethods/{id}
-
-Console.WriteLine(&quot;Bezahlart:&quot; + paymentMethod.Name);
-
-var shippingMethod = unitOfWork.ShippingMethods.Get(order.ShippingMethod.ID); // GET api/shippingmethods/{id}
-
-Console.WriteLine(&quot;Versandart:&quot; + shippingMethod.Name);
-
-// Positionen
-
-foreach (var position in order.Items)
-
-{
-
-var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
-
-var articleKey = article.Keys.SingleOrDefault(m=\&gt;m.ArticleKeyID == position.ArticleKey.ID);
-
-Console.WriteLine(&quot;Artikel:&quot; + article.Name+&quot; / &quot;+article.Name2);
-
-Console.WriteLine(&quot;Artikelnummer:&quot; + articleKey.Value);
-
-Console.WriteLine(&quot;Abwicklung:&quot; + position.TransactionType); // CLick&amp;Collect, Versenden u.s.w.
-
-Console.WriteLine(&quot;Menge:&quot; + position.Quantity);
-
-Console.WriteLine(&quot;Einzelpreis:&quot; + position.Price);
-
-Console.WriteLine(&quot;Gesamtpreis:&quot; + position.TotalCosts);
-
-Console.WriteLine(&quot;Bestätigt:&quot; + (position.IsConfirmed==true ? &quot;Ja&quot; : &quot;Nein&quot;) );
+    Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
+    Console.WriteLine("Artikelnummer:" + articleKey.Value);
+    Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
+    Console.WriteLine("Menge:" + position.Quantity);
+    Console.WriteLine("Einzelpreis:" + position.Price);
+    Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
+    Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
+  }
 
 }
-
-}
+```
