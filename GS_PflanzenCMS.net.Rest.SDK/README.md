@@ -187,7 +187,7 @@
 
 > [Auftragsverwaltung](#auftragsverwaltung)
 
-> [Artikel bearbeiten](#artikelbearbeiten)
+> [Artikel bearbeiten](#artikel-bearbeiten)
 
 > [Bestellung bestätigen](#bestellung-bestätigen)
 
@@ -410,7 +410,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 | --- | --- | --- | --- |
 | api/articles/dialog/{id} |ID| **long** | ID des Artikels der bearbeitet werden soll |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikelbearbeiten)** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikel-bearbeiten)** )
 
 # Bestellungen
 

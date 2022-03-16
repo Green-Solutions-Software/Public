@@ -110,6 +110,9 @@
     <Compile Include="Client\VideosRepository.cs" />
     <Compile Include="Client\VouchersRepository.cs" />
     <Compile Include="Exceptions\RequestException.cs" />
+    <Compile Include="Extensions\CalculationGroupItemExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
     <Compile Include="Filters\Base.cs" />
     <Compile Include="Filters\Results.cs" />
     <Compile Include="Filters\Orders.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\CalculationGroupItem.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\InvoicePosition.cs" />
