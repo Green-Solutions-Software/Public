@@ -20,191 +20,191 @@ Datum: 16.03.2022
 
 **[Abfragen](#_Toc8988927)**
 
-**[8. Postman 7](#_Toc8988928)**
+**[Postman](#_Toc8988928)**
 
-**[9. Authorisierung 8](#_Toc8988929)**
+**[Authorisierung](#_Toc8988929)**
 
-**[10. Währungen 8](#_Toc8988930)**
+**[Währungen](#_Toc8988930)**
 
-**[11. Länder (inkl. MwSt. Sätze) 8](#_Toc8988931)**
+**[Länder (inkl. MwSt. Sätze)](#_Toc8988931)**
 
-**[12. Kategorien 8](#_Toc8988932)**
+**[Kategorien](#_Toc8988932)**
 
-**[13. Berichte 8](#_Toc8988933)**
+**[Berichte](#_Toc8988933)**
 
-**[14. Kundenkarten 9](#_Toc8988934)**
+> [Kundenkarten](#_Toc8988934)
 
-[14.1 Neue Kundenkarten abfragen 9](#_Toc8988935)
+> [Neue Kundenkarten abfragen](#_Toc8988935)
 
-[14.2 Neue Kundenkarten validieren 9](#_Toc8988936)
+> [Neue Kundenkarten validieren](#_Toc8988936)
 
-[14.3 Aktueller Umsatz 9](#_Toc8988937)
+> [Aktueller Umsatz](#_Toc8988937)
 
-[14.4 Webshop Bestellungen 9](#_Toc8988938)
+**[Webshop Bestellungen](#_Toc8988938)**
 
-[14.5 Auftragsdaten 10](#_Toc8988939)
+**[Auftragsdaten](#_Toc8988939)**
 
-**[15. Videos 10](#_Toc8988940)**
+**[Videos](#_Toc8988940)**
 
-**[16. Filialen 10](#_Toc8988941)**
+**[Filialen](#_Toc8988941)**
 
-**[17. Kunden 10](#_Toc8988942)**
+**[Kunden](#_Toc8988942)**
 
-**[18. Artikel 10](#_Toc8988943)**
+**[Artikel](#_Toc8988943)**
 
-[18.1 Erweiterte Anlage 10](#_Toc8988944)
+> [Erweiterte Anlage](#_Toc8988944)
 
-[18.2 Transaktionen 11](#_Toc8988945)
+> [Transaktionen](#_Toc8988945)
 
-[18.3 Varianten 11](#_Toc8988946)
+> [Varianten](#_Toc8988946)
 
-[18.4 Dialog „Bearbeiten&quot; 11](#_Toc8988947)
+> [Dialog „Bearbeiten&quot;](#_Toc8988947)
 
-**[19. Bestellungen 12](#_Toc8988948)**
+**[Bestellungen](#_Toc8988948)**
 
-[19.1 Alle Shop Bestellungen 12](#_Toc8988949)
+> [Alle Shop Bestellungen](#_Toc8988949)
 
-[19.2 Status anpassen 12](#_Toc8988950)
+> [Status anpassen](#_Toc8988950)
 
-[19.3 Dialog „Versenden&quot; 12](#_Toc8988951)
+> [Dialog „Versenden&quot;](#_Toc8988951)
 
-[19.4 Dialog „Bestätigen&quot; 12](#_Toc8988952)
+> [Dialog „Bestätigen&quot;](#_Toc8988952)
 
-[19.5 Dialog „Erledigen&quot; 12](#_Toc8988953)
+> [Dialog „Erledigen&quot;](#_Toc8988953)
 
-[19.6 Dialog „Stornieren&quot; 13](#_Toc8988954)
+> [Dialog „Stornieren&quot;](#_Toc8988954)
 
-[19.7 Dialog „Auftragsverwaltung&quot; 13](#_Toc8988955)
+> [Dialog „Auftragsverwaltung&quot;](#_Toc8988955)
 
-**[20. Dokumente 14](#_Toc8988956)**
+**[Dokumente](#_Toc8988956)**
 
-[20.1 Lieferschein Bestellung 14](#_Toc8988957)
+> [Lieferschein Bestellung](#_Toc8988957)
 
-[20.2 Lieferschein Teilbestellung 14](#_Toc8988958)
+> [Lieferschein Teilbestellung](#_Toc8988958)
 
-**[21. Versandaufträge 14](#_Toc8988959)**
+**[Versandaufträge](#_Toc8988959)**
 
-[21.1 Packetaufkleber abfragen 14](#_Toc8988960)
+> [Packetaufkleber abfragen](#_Toc8988960)
 
-**[22. Dateien 15](#_Toc8988961)**
+**[Dateien](#_Toc8988961)**
 
-[22.1 Dateien Hochladen 15](#_Toc8988962)
+> [Dateien Hochladen](#_Toc8988962)
 
-[22.2 Bilder hochladen 15](#_Toc8988963)
+> [Bilder hochladen](#_Toc8988963)
 
-**[23. Gutscheine 15](#_Toc8988964)**
+**[Gutscheine](#_Toc8988964)**
 
-[23.1 Gutschein erstellen 15](#_Toc8988965)
+> [Gutschein erstellen](#_Toc8988965)
 
-[23.2 Gutschein finden 15](#_Toc8988966)
+> [Gutschein finden](#_Toc8988966)
 
-[23.3 Zahlung reservieren 16](#_Toc8988967)
+> [Zahlung reservieren](#_Toc8988967)
 
-[23.4 Zahlung durchführen 16](#_Toc8988968)
+> [Zahlung durchführen](#_Toc8988968)
 
-**[24. Aufträge (asynchrone Jobs) 16](#_Toc8988969)**
+**[Aufträge (asynchrone Jobs)](#_Toc8988969)**
 
-**[25. Container 16](#_Toc8988970)**
+**[Container](#_Toc8988970)**
 
-**[26. Jahresplanungen 17](#_Toc8988971)**
+**[Jahresplanungen](#_Toc8988971)**
 
-**[27. Piktogramme 18](#_Toc8988972)**
+**[Piktogramme](#_Toc8988972)**
 
-**[28. Suche 19](#_Toc8988973)**
+**[Suche](#_Toc8988973)**
 
-**[29. Verknüpfte Inhalte für Artikel 20](#_Toc8988974)**
+**[Verknüpfte Inhalte für Artikel](#_Toc8988974)**
 
-**[30. Verknüpfte Inhalte für Bericht 20](#_Toc8988975)**
+**[Verknüpfte Inhalte für Bericht](#_Toc8988975)**
 
-**[31. Verknüpfte Inhalte für Video 20](#_Toc8988976)**
+**[Verknüpfte Inhalte für Video](#_Toc8988976)**
 
-**[32. Extern hinzufügen 21](#_Toc8988977)**
+**[Extern hinzufügen](#_Toc8988977)**
 
-[32.1 Suchen 21](#_Toc8988978)
+> [Suchen](#_Toc8988978)
 
-[32.2 Nach einem Artikel suchen 21](#_Toc8988979)
+> [Nach einem Artikel suchen](#_Toc8988979)
 
-[32.3 Pflanzen importieren 22](#_Toc8988980)
+> [Pflanzen importieren](#_Toc8988980)
 
-[32.4 Videos importieren 22](#_Toc8988981)
+> [Videos importieren](#_Toc8988981)
 
-[32.5 Berichte importieren 22](#_Toc8988982)
+> [Berichte importieren](#_Toc8988982)
 
-[32.6 Bilder importieren 22](#_Toc8988983)
+> [Bilder importieren](#_Toc8988983)
 
-[32.7 Pflanzenfotos importieren 22](#_Toc8988984)
+> [Pflanzenfotos importieren](#_Toc8988984)
 
-**[33. Zwischenspeicher (Cache) 23](#_Toc8988985)**
+**[Zwischenspeicher (Cache)](#_Toc8988985)**
 
-[33.1 Alle caches löschen 23](#_Toc8988986)
+> [Alle caches löschen](#_Toc8988986)
 
-[33.2 Datenbank- Cache löschen 23](#_Toc8988987)
+> [Datenbank- Cache löschen](#_Toc8988987)
 
-[33.3 Caches aufräumen 23](#_Toc8988988)
+> [Caches aufräumen](#_Toc8988988)
 
-**[34. Datenstrukturen 24](#_Toc8988989)**
+**[Datenstrukturen](#_Toc8988989)**
 
-[34.1 Bestellungen 24](#_Toc8988990)
+> [Bestellungen](#_Toc8988990)
 
-[34.2 Versandaufträge 31](#_Toc8988991)
+> [Versandaufträge](#_Toc8988991)
 
-[34.3 Artikel 38](#_Toc8988992)
+> [Artikel](#_Toc8988992)
 
-[34.4 Aufträge (asynchrone Jobs) 44](#_Toc8988993)
+> [Aufträge (asynchrone Jobs)](#_Toc8988993)
 
-[34.5 Zahlung 44](#_Toc8988994)
+> [Zahlung](#_Toc8988994)
 
-[34.6 Gutschein 44](#_Toc8988995)
+> [Gutschein](#_Toc8988995)
 
-[34.7 Gutschein - Code 48](#_Toc8988996)
+> [Gutschein - Code](#_Toc8988996)
 
-[34.8 Gefundener Gutschein 48](#_Toc8988997)
+> [Gefundener Gutschein](#_Toc8988997)
 
-[34.9 Auftragsstatus 48](#_Toc8988998)
+> [Auftragsstatus](#_Toc8988998)
 
-[34.10 Abwicklungsstatus 49](#_Toc8988999)
+> [Abwicklungsstatus](#_Toc8988999)
 
-[34.11 Dokumentation 49](#_Toc8989000)
+> [Dokumentation](#_Toc8989000)
 
-[34.12 Artikelstatus 49](#_Toc8989001)
+> [Artikelstatus](#_Toc8989001)
 
-[34.13 Datei 49](#_Toc8989002)
+> [Datei](#_Toc8989002)
 
-[34.14 Transaktion 50](#_Toc8989003)
+> [Transaktion](#_Toc8989003)
 
-[34.15 Statusmeldung 50](#_Toc8989004)
+> [Statusmeldung](#_Toc8989004)
 
-[34.16 Kundenkarte 51](#_Toc8989005)
+> [Kundenkarte](#_Toc8989005)
 
-[34.17 Result 52](#_Toc8989006)
+> [Result](#_Toc8989006)
 
-[34.18 Dialog 52](#_Toc8989007)
+> [Dialog](#_Toc8989007)
 
-[34.19 Upload 53](#_Toc8989008)
+> [Upload](#_Toc8989008)
 
-**[35. Dialoge 53](#_Toc8989009)**
+**[Dialoge](#_Toc8989009)**
 
-[35.1 Versenden 53](#_Toc8989010)
+> [Versenden](#_Toc8989010)
 
-[35.2 Auftragsverwaltung 54](#_Toc8989011)
+> [Auftragsverwaltung](#_Toc8989011)
 
-[35.3 Artikel bearbeiten 55](#_Toc8989012)
+> [Artikel bearbeiten](#_Toc8989012)
 
-[35.4 Bestellung bestätigen 56](#_Toc8989013)
+> [Bestellung bestätigen](#_Toc8989013)
 
-[35.5 Bestellung stornieren 56](#_Toc8989014)
+> [Bestellung stornieren](#_Toc8989014)
 
-[35.6 Bestellung erledigen 57](#_Toc8989015)
+> [Bestellung erledigen](#_Toc8989015)
 
-**[36. Beispiele + API 58](#_Toc8989016)**
+**[Beispiele + API](#_Toc8989016)**
 
-[36.1 Beispiel Applikation + C# .Net API 58](#_Toc8989017)
+> [Beispiel Applikation + C# .Net API](#_Toc8989017)
 
-[36.2 Token abfragen zur Authentifizierung 58](#_Toc8989018)
+> [Token abfragen zur Authentifizierung](#_Toc8989018)
 
-[36.3 Artikel anlegen 59](#_Toc8989019)
+> [Artikel anlegen](#_Toc8989019)
 
-[36.4 Bestellungen abfragen 61](#_Toc8989020)
+> [Bestellungen abfragen](#_Toc8989020)
 
 # Übersicht
 
