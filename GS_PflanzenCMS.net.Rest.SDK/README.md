@@ -195,7 +195,7 @@
 
 > [Bestellung erledigen](#bestellung-erledigen)
 
-**[Beispiele + API](#beispiele-+-api)**
+**[Beispiele + API](#beispiel-applikation)**
 
 > [Beispiel Applikation](#beispiel-applikation)
 
@@ -2069,11 +2069,11 @@ Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe u
 
 # Beispiele + API
 
-## Beispiel Applikation + C# .Net API
+## Beispiel Applikation
 
 Eine Beispiel Applikation sowieso eine API für C# .Net auf denen die nachfolgenden Beispiele basieren finden Sie hier:
 
-[https://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip](https://greensolutions.blob.core.windows.net/uploads/Samples/REST%20API.zip)
+[Beispielapplikation](../GS_PflanzenCMS.net.Rest.Sample/README.md)
 
 ## Token abfragen zur Authentifizierung
 

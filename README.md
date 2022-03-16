@@ -13,3 +13,5 @@ Heute zählen wir zu den erfolgreichsten Softwareunternehmen in der grünen Bran
 
 
 [REST API Omni Channel System](GS_PflanzenCMS.net.Rest.SDK/README.md)
+
+[Beispielapplikation](GS_PflanzenCMS.net.Rest.Sample/README.md)
