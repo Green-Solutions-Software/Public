@@ -1,8 +1,7 @@
 
-# Schnittstelle Webservice
-## Omni Channel System (OCS)
+# Omni Channel System (OCS)
+## REST API
 
-Datum: 16.03.2022
 
 ## Inhaltsverzeichnis
 
@@ -2046,27 +2045,27 @@ Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe u
 
 ## Versenden
 
-![Dialog Versenden](images/versenden.png)
+![Versenden](images/versenden.png)
 
 ## Auftragsverwaltung
 
-![Dialog Versenden](images/auftragsverwaltung.png)
+![Auftragsverwaltung](images/auftragsverwaltung.png)
 
 ## Artikel bearbeiten
 
-![Dialog Versenden](images/artikel-bearbeiten.png)
+![Artikel bearbeiten](images/artikel-bearbeiten.png)
 
 ## Bestellung bestätigen
 
-![Dialog Versenden](images/bestellung-bestaetigen.png)
+![Bestellung bestätigen](images/bestellung-bestaetigen.png)
 
 ## Bestellung stornieren
 
-![Dialog Versenden](images/bestellung-stornieren.png)
+![Bestellung stornieren](images/bestellung-stornieren.png)
 
 ## Bestellung erledigen
 
-![Dialog Versenden](images/bestellung-erledigen.png)
+![Bestellung erledigen](images/bestellung-erledigen.png)
 
 # Beispiele + API
 
