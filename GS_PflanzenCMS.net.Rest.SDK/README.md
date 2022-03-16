@@ -572,27 +572,6 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
-# Nachrichten
-
-Es werden Daten zwischen dem Webshop und dem Lieferanten über Nachrichten ausgetauscht. 
-Jede Nachricht kann einen der **[MessageType](#messagetype)** definierten Typen haben. Es können ausgehende oder eingehende Nachrichten erzeugt werden (siehe **[MessageDirection](#messagedirection)**).
-Bei einer ausgehenden Nachricht setzen Sie bitte den "Receiver" und bei eingehenden den "Sender".
-
-> Bitte beachten Sie das manche Nachrichten als Antwort auf eine eingehende Nachricht gedacht Sind und daher per "Parent" miteinander verknüpft werden müssen.
-
-| Url | api/messages ||
-| --- | --- | --- |
-
-Siehe **[Message](#message)**
-
-## Nachricht erstellen
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
-
-Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
-
 ## Gutschein finden
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
@@ -625,6 +604,28 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 | api/vouchers/pay |paymentid| l **ong** | ID der Zahlung (siehe **[Payment](#payment)** ) |
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
+
+
+# Nachrichten
+
+Es werden Daten zwischen dem Webshop und dem Lieferanten über Nachrichten ausgetauscht. 
+Jede Nachricht kann einen der **[MessageType](#messagetype)** definierten Typen haben. Es können ausgehende oder eingehende Nachrichten erzeugt werden (siehe **[MessageDirection](#messagedirection)**).
+Bei einer ausgehenden Nachricht setzen Sie bitte den "Receiver" und bei eingehenden den "Sender".
+
+> Bitte beachten Sie das manche Nachrichten als Antwort auf eine eingehende Nachricht gedacht Sind und daher per "Parent" miteinander verknüpft werden müssen.
+
+| Url | api/messages ||
+| --- | --- | --- |
+
+Siehe **[Message](#message)**
+
+## Nachricht erstellen
+
+| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| --- | --- | --- | --- |
+| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
+
+Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
 
 # Aufträge
 
