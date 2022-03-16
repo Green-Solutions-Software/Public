@@ -2046,27 +2046,27 @@ Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe u
 
 ## Versenden
 
-![](RackMultipart20220316-4-1b19uaa_html_6033246c2359d7e7.png)
+![Dialog Versenden](images/versenden.png)
 
 ## Auftragsverwaltung
 
-![](RackMultipart20220316-4-1b19uaa_html_8aa30f124fe80c06.png)
+![Dialog Versenden](images/auftragsverwaltung.png)
 
 ## Artikel bearbeiten
 
-![](RackMultipart20220316-4-1b19uaa_html_c4730d08f1e2b93e.png)
+![Dialog Versenden](images/artikel-bearbeiten.png)
 
 ## Bestellung bestätigen
 
-![](RackMultipart20220316-4-1b19uaa_html_3d9d355a6c018a5d.png)
+![Dialog Versenden](images/bestellung-bestaetigen.png)
 
 ## Bestellung stornieren
 
-![](RackMultipart20220316-4-1b19uaa_html_c1a373ffd988a0a4.png)
+![Dialog Versenden](images/bestellung-stornieren.png)
 
 ## Bestellung erledigen
 
-![](RackMultipart20220316-4-1b19uaa_html_2a65965b4aff3ab9.png)
+![Dialog Versenden](images/bestellung-erledigen.png)
 
 # Beispiele + API
 
