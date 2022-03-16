@@ -144,7 +144,7 @@ Datum: 16.03.2022
 
 **[Datenstrukturen](#datenstrukturen)**
 
-> [Bestellungen](#bestellungen)
+> [Order](#order)
 
 > [Versandaufträge](#versandaufträge)
 
@@ -794,1127 +794,340 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 # Datenstrukturen
 
-## Bestellungen
+## Order
 
+```csharp
 {
-
-&quot;OrderID&quot;:174,
-
-&quot;Voucher&quot;:null,
-
-&quot;VoucherCode&quot;:null,
-
-&quot;InvoiceAddress&quot;:{
-
-&quot;ContactAddressID&quot;:6,
-
-&quot;Type&quot;:1,
-
-&quot;Address&quot;:{
-
-&quot;AddressID&quot;:7,
-
-&quot;Street&quot;:&quot;Bahnhofstraße&quot;,
-
-&quot;HouseNumber&quot;:&quot;62b&quot;,
-
-&quot;Zip&quot;:&quot;26835&quot;,
-
-&quot;City&quot;:&quot;Hesel&quot;,
-
-&quot;Postbox&quot;:null,
-
-&quot;Country&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#58#151&quot;
-
-},
-
-&quot;Type&quot;:1,
-
-&quot;Longitude&quot;:null,
-
-&quot;Latitude&quot;:null,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Contact&quot;:{
-
-&quot;ContactID&quot;:23,
-
-&quot;Picture&quot;:null,
-
-&quot;Apellation&quot;:1,
-
-&quot;FirstName&quot;:&quot;Kevin&quot;,
-
-&quot;LastName&quot;:&quot;Klaassen&quot;,
-
-&quot;Phone&quot;:&quot;1325513154712&quot;,
-
-&quot;Mobile&quot;:null,
-
-&quot;Fax&quot;:null,
-
-&quot;Position&quot;:null,
-
-&quot;Homepage&quot;:null,
-
-&quot;EMail&quot;:&quot;jhaghjs@bjkafgs.de&quot;,
-
-&quot;Company&quot;:null,
-
-&quot;Company2&quot;:null,
-
-&quot;Language&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#44#148&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Member&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#66#134&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;ShippingAddress&quot;:{
-
-&quot;ContactAddressID&quot;:9,
-
-&quot;Type&quot;:2,
-
-&quot;Address&quot;:{
-
-&quot;AddressID&quot;:10,
-
-&quot;Street&quot;:&quot;gdsshgdshd&quot;,
-
-&quot;HouseNumber&quot;:&quot;235253&quot;,
-
-&quot;Zip&quot;:&quot;23789&quot;,
-
-&quot;City&quot;:&quot;hsdshdshd&quot;,
-
-&quot;Postbox&quot;:&quot;23236263&quot;,
-
-&quot;Country&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#58#151&quot;
-
-},
-
-&quot;Type&quot;:2,
-
-&quot;Longitude&quot;:null,
-
-&quot;Latitude&quot;:null,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Contact&quot;:{
-
-&quot;ContactID&quot;:26,
-
-&quot;Picture&quot;:null,
-
-&quot;Apellation&quot;:0,
-
-&quot;FirstName&quot;:&quot;asgagsgas&quot;,
-
-&quot;LastName&quot;:&quot;asgagsga&quot;,
-
-&quot;Phone&quot;:&quot;23524362643&quot;,
-
-&quot;Mobile&quot;:null,
-
-&quot;Fax&quot;:null,
-
-&quot;Position&quot;:null,
-
-&quot;Homepage&quot;:null,
-
-&quot;EMail&quot;:&quot;gaf@bkjfas.de&quot;,
-
-&quot;Company&quot;:&quot;gasgas&quot;,
-
-&quot;Company2&quot;:null,
-
-&quot;Language&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#44#148&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Member&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#66#134&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Status&quot;:1,
-
-&quot;TotalCostsArticles&quot;:27.799999999999997,
-
-&quot;TotalTaxCosts1&quot;:1.24,
-
-&quot;TaxRate1&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#230#203&quot;
-
-},
-
-&quot;TotalTaxCosts2&quot;:1.42,
-
-&quot;TaxRate2&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#1#231#2&quot;
-
-},
-
-&quot;TotalCosts&quot;:44.789999999999992,
-
-&quot;TaxRateDeliver&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#230#203&quot;
-
-},
-
-&quot;TotalTaxCostsDeliver&quot;:1.11,
-
-&quot;TotalCostsDeliver&quot;:16.99,
-
-&quot;TotalDiscount&quot;:0,
-
-&quot;ApprovedBy&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#58#153&quot;
-
-},
-
-&quot;ApprovedOn&quot;:&quot;2017-01-30T15:56:59.677&quot;,
-
-&quot;Notes&quot;:null,
-
-&quot;File&quot;:null,
-
-&quot;Currency&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;Items&quot;:[
-
-{
-
-&quot;OrderItemID&quot;:199,
-
-&quot;ArticleGroups&quot;:null,
-
-&quot;Date&quot;:&quot;2017-01-30T15:56:59.533&quot;,
-
-&quot;DeliveryDate&quot;:&quot;2017-02-06T15:56:59.583&quot;,
-
-&quot;Info&quot;:&quot;Rhododendron &#39;Abendsonne&#39;&quot;,
-
-&quot;Info2&quot;:&quot;Rhododendron &#39;Abendsonne&#39;&quot;,
-
-&quot;Photo&quot;:null,
-
-&quot;ArticleKey&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#39#45&quot;
-
-},
-
-&quot;Vouchers&quot;:[{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#230#203&quot;
-
-}]
-
-&quot;Article&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#39#91&quot;
-
-},
-
-&quot;Notes&quot;:null,
-
-&quot;Type&quot;:0,
-
-&quot;Price&quot;:18.9,
-
-&quot;Stock&quot;:false,
-
-&quot;DropShip&quot;:false,
-
-&quot;Currency&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;Quantity&quot;:1,
-
-&quot;Rated&quot;:null,
-
-&quot;RatedBy&quot;:null,
-
-&quot;Position&quot;:0,
-
-&quot;TotalPrice&quot;:18.9,
-
-&quot;TotalCosts&quot;:18.9,
-
-&quot;TaxRate&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#230#203&quot;
-
-},
-
-&quot;Glyph&quot;:null,
-
-&quot;TransactionType&quot;:0,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-{
-
-&quot;OrderItemID&quot;:200,
-
-&quot;ArticleGroups&quot;:null,
-
-&quot;Date&quot;:&quot;2017-01-30T15:56:59.583&quot;,
-
-&quot;DeliveryDate&quot;:&quot;2017-02-06T15:56:59.63&quot;,
-
-&quot;Info&quot;:&quot;Frux Rhododendron- &amp; Moorbeeterde&quot;,
-
-&quot;Info2&quot;:&quot;&quot;,
-
-&quot;Photo&quot;:null,
-
-&quot;ArticleKey&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#15#80&quot;
-
-},
-
-&quot;Article&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#223#163&quot;
-
-},
-
-&quot;Notes&quot;:null,
-
-&quot;Type&quot;:0,
-
-&quot;Price&quot;:8.9,
-
-&quot;Stock&quot;:false,
-
-&quot;DropShip&quot;:false,
-
-&quot;Currency&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;Quantity&quot;:1,
-
-&quot;Rated&quot;:null,
-
-&quot;RatedBy&quot;:null,
-
-&quot;Position&quot;:1,
-
-&quot;TotalPrice&quot;:8.9,
-
-&quot;TotalCosts&quot;:8.9,
-
-&quot;TaxRate&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#1#231#2&quot;
-
-},
-
-&quot;Glyph&quot;:null,
-
-&quot;TransactionType&quot;:0,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-{
-
-&quot;OrderItemID&quot;:201,
-
-&quot;ArticleGroups&quot;:null,
-
-&quot;Date&quot;:&quot;2017-01-30T15:56:59.63&quot;,
-
-&quot;DeliveryDate&quot;:&quot;2017-02-06T15:56:59.677&quot;,
-
-&quot;Info&quot;:&quot;Floragard Rhodohum&quot;,
-
-&quot;Info2&quot;:&quot;&quot;,
-
-&quot;Photo&quot;:null,
-
-&quot;ArticleKey&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#15#76&quot;
-
-},
-
-&quot;Article&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#19#103&quot;
-
-},
-
-&quot;Notes&quot;:null,
-
-&quot;Type&quot;:0,
-
-&quot;Price&quot;:14.95,
-
-&quot;Stock&quot;:false,
-
-&quot;DropShip&quot;:false,
-
-&quot;Currency&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#77#11&quot;
-
-},
-
-&quot;Quantity&quot;:3,
-
-&quot;Rated&quot;:null,
-
-&quot;RatedBy&quot;:null,
-
-&quot;Position&quot;:2,
-
-&quot;TotalPrice&quot;:44.849999999999994,
-
-&quot;TotalCosts&quot;:44.849999999999994,
-
-&quot;TaxRate&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#1#231#2&quot;
-
-},
-
-&quot;Glyph&quot;:null,
-
-&quot;TransactionType&quot;:0,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
+  "OrderID": 174,
+  "Voucher": null,
+  "VoucherCode": null,
+  "InvoiceAddress": {
+    "ContactAddressID": 6,
+    "Type": 1,
+    "Address": {
+      "AddressID": 7,
+      "Street": "Bahnhofstraße",
+      "HouseNumber": "62b",
+      "Zip": "26835",
+      "City": "Hesel",
+      "Postbox": null,
+      "Country": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#58#151"
+      },
+      "Type": 1,
+      "Longitude": null,
+      "Latitude": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "Contact": {
+      "ContactID": 23,
+      "Picture": null,
+      "Apellation": 1,
+      "FirstName": "Kevin",
+      "LastName": "Klaassen",
+      "Phone": "1325513154712",
+      "Mobile": null,
+      "Fax": null,
+      "Position": null,
+      "Homepage": null,
+      "EMail": "jhaghjs@bjkafgs.de",
+      "Company": null,
+      "Company2": null,
+      "Language": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#44#148"
+      },
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "Member": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#2#66#134"
+    },
+    "External_Key": null,
+    "External_COR_ID": null
+  },
+  "ShippingAddress": {
+    "ContactAddressID": 9,
+    "Type": 2,
+    "Address": {
+      "AddressID": 10,
+      "Street": "gdsshgdshd",
+      "HouseNumber": "235253",
+      "Zip": "23789",
+      "City": "hsdshdshd",
+      "Postbox": "23236263",
+      "Country": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#58#151"
+      },
+      "Type": 2,
+      "Longitude": null,
+      "Latitude": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "Contact": {
+      "ContactID": 26,
+      "Picture": null,
+      "Apellation": 0,
+      "FirstName": "asgagsgas",
+      "LastName": "asgagsga",
+      "Phone": "23524362643",
+      "Mobile": null,
+      "Fax": null,
+      "Position": null,
+      "Homepage": null,
+      "EMail": "gaf@bkjfas.de",
+      "Company": "gasgas",
+      "Company2": null,
+      "Language": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#44#148"
+      },
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "Member": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#2#66#134"
+    },
+    "External_Key": null,
+    "External_COR_ID": null
+  },
+  "Status": 1,
+  "TotalCostsArticles": 27.799999999999997,
+  "TotalTaxCosts1": 1.24,
+  "TaxRate1": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#0#230#203"
+  },
+  "TotalTaxCosts2": 1.42,
+  "TaxRate2": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#1#231#2"
+  },
+  "TotalCosts": 44.789999999999992,
+  "TaxRateDeliver": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#0#230#203"
+  },
+  "TotalTaxCostsDeliver": 1.11,
+  "TotalCostsDeliver": 16.99,
+  "TotalDiscount": 0,
+  "ApprovedBy": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#2#58#153"
+  },
+  "ApprovedOn": "2017-01-30T15:56:59.677",
+  "Notes": null,
+  "File": null,
+  "Currency": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#0#77#11"
+  },
+  "Items": [{
+      "OrderItemID": 199,
+      "ArticleGroups": null,
+      "Date": "2017-01-30T15:56:59.533",
+      "DeliveryDate": "2017-02-06T15:56:59.583",
+      "Info": "Rhododendron 'Abendsonne'",
+      "Info2": "Rhododendron 'Abendsonne'",
+      "Photo": null,
+      "ArticleKey": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#39#45"
+      },
+      "Vouchers": [{
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#230#203"
+      }]
+      "Article": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#39#91"
+      },
+      "Notes": null,
+      "Type": 0,
+      "Price": 18.9,
+      "Stock": false,
+      "DropShip": false,
+      "Currency": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#77#11"
+      },
+      "Quantity": 1,
+      "Rated": null,
+      "RatedBy": null,
+      "Position": 0,
+      "TotalPrice": 18.9,
+      "TotalCosts": 18.9,
+      "TaxRate": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#230#203"
+      },
+      "Glyph": null,
+      "TransactionType": 0,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "OrderItemID": 200,
+      "ArticleGroups": null,
+      "Date": "2017-01-30T15:56:59.583",
+      "DeliveryDate": "2017-02-06T15:56:59.63",
+      "Info": "Frux Rhododendron- & Moorbeeterde",
+      "Info2": "",
+      "Photo": null,
+      "ArticleKey": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#15#80"
+      },
+      "Article": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#223#163"
+      },
+      "Notes": null,
+      "Type": 0,
+      "Price": 8.9,
+      "Stock": false,
+      "DropShip": false,
+      "Currency": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#77#11"
+      },
+      "Quantity": 1,
+      "Rated": null,
+      "RatedBy": null,
+      "Position": 1,
+      "TotalPrice": 8.9,
+      "TotalCosts": 8.9,
+      "TaxRate": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#1#231#2"
+      },
+      "Glyph": null,
+      "TransactionType": 0,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "OrderItemID": 201,
+      "ArticleGroups": null,
+      "Date": "2017-01-30T15:56:59.63",
+      "DeliveryDate": "2017-02-06T15:56:59.677",
+      "Info": "Floragard Rhodohum",
+      "Info2": "",
+      "Photo": null,
+      "ArticleKey": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#15#76"
+      },
+      "Article": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#19#103"
+      },
+      "Notes": null,
+      "Type": 0,
+      "Price": 14.95,
+      "Stock": false,
+      "DropShip": false,
+      "Currency": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#77#11"
+      },
+      "Quantity": 3,
+      "Rated": null,
+      "RatedBy": null,
+      "Position": 2,
+      "TotalPrice": 44.849999999999994,
+      "TotalCosts": 44.849999999999994,
+      "TaxRate": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#1#231#2"
+      },
+      "Glyph": null,
+      "TransactionType": 0,
+      "External_Key": null,
+      "External_COR_ID": null
+    }
+  ],
+  "Transactions": [{
+    "OrderTransactionID": 90,
+    "DeliveredTrackAndTraceID": null,
+    "DeliveredTrackAndTraceURL": null,
+    "Status": 0,
+    "StatusOn": null,
+    "Type": 0,
+    "ShippingAddress": {
+      "ContactAddressID": 9,
+      "Type": 2,
+      "Address": {
+        "AddressID": 10,
+        "Street": "gdsshgdshd",
+        "HouseNumber": "235253",
+        "Zip": "23789",
+        "City": "hsdshdshd",
+        "Postbox": "23236263",
+        "Country": {
+          "ID": 0,
+          "RowVersion": "#0#0#0#0#0#2#58#151"
+        },
+        "Type": 2,
+        "Longitude": null,
+        "Latitude": null,
+        "External_Key": null,
+        "External_COR_ID": null
+      },
+      "Contact": {
+        "ContactID": 26,
+        "Picture": null,
+        "Apellation": 0,
+        "FirstName": "asgagsgas",
+        "LastName": "asgagsga",
+        "Phone": "23524362643",
+        "Mobile": null,
+        "Fax": null,
+        "Position": null,
+        "Homepage": null,
+        "EMail": "gaf@bkjfas.de",
+        "Company": "gasgas",
+        "Company2": null,
+        "Language": {
+          "ID": 0,
+          "RowVersion": "#0#0#0#0#0#2#44#148"
+        },
+        "External_Key": null,
+        "External_COR_ID": null
+      },
+      "Member": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#66#134"
+      },
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "ShippingMethod": {
+      "ContactAddressID": 0,
+      "Type": 0,
+      "Address": null,
+      "Contact": null,
+      "Member": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    "External_Key": null,
+    "External_COR_ID": null
+  }],
+  "ShippingMethod": {
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#0#202#162"
+  },
+  "External_Key": null,
+  "External_COR_ID": null
 }
-
-],
-
-&quot;Transactions&quot;:[
-
-{
-
-&quot;OrderTransactionID&quot;:90,
-
-&quot;DeliveredTrackAndTraceID&quot;:null,
-
-&quot;DeliveredTrackAndTraceURL&quot;:null,
-
-&quot;Status&quot;:0,
-
-&quot;StatusOn&quot;:null,
-
-&quot;Type&quot;:0,
-
-&quot;ShippingAddress&quot;:{
-
-&quot;ContactAddressID&quot;:9,
-
-&quot;Type&quot;:2,
-
-&quot;Address&quot;:{
-
-&quot;AddressID&quot;:10,
-
-&quot;Street&quot;:&quot;gdsshgdshd&quot;,
-
-&quot;HouseNumber&quot;:&quot;235253&quot;,
-
-&quot;Zip&quot;:&quot;23789&quot;,
-
-&quot;City&quot;:&quot;hsdshdshd&quot;,
-
-&quot;Postbox&quot;:&quot;23236263&quot;,
-
-&quot;Country&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#58#151&quot;
-
-},
-
-&quot;Type&quot;:2,
-
-&quot;Longitude&quot;:null,
-
-&quot;Latitude&quot;:null,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Contact&quot;:{
-
-&quot;ContactID&quot;:26,
-
-&quot;Picture&quot;:null,
-
-&quot;Apellation&quot;:0,
-
-&quot;FirstName&quot;:&quot;asgagsgas&quot;,
-
-&quot;LastName&quot;:&quot;asgagsga&quot;,
-
-&quot;Phone&quot;:&quot;23524362643&quot;,
-
-&quot;Mobile&quot;:null,
-
-&quot;Fax&quot;:null,
-
-&quot;Position&quot;:null,
-
-&quot;Homepage&quot;:null,
-
-&quot;EMail&quot;:&quot;gaf@bkjfas.de&quot;,
-
-&quot;Company&quot;:&quot;gasgas&quot;,
-
-&quot;Company2&quot;:null,
-
-&quot;Language&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#44#148&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;Member&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#2#66#134&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;ShippingMethod&quot;:{
-
-&quot;ContactAddressID&quot;:0,
-
-&quot;Type&quot;:0,
-
-&quot;Address&quot;:null,
-
-&quot;Contact&quot;:null,
-
-&quot;Member&quot;:null,
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-}
-
-],
-
-&quot;ShippingMethod&quot;:{
-
-&quot;ID&quot;:0,
-
-&quot;RowVersion&quot;:&quot;#0#0#0#0#0#0#202#162&quot;
-
-},
-
-&quot;External\_Key&quot;:null,
-
-&quot;External\_COR\_ID&quot;:null
-
-}
-
-## Versandaufträge
-
-{
-
-&quot;ShipmentOrderID&quot;: 18,
-
-&quot;Name&quot;: &quot;Versand für 2018-241&quot;,
-
-&quot;Items&quot;: [
-
-{
-
-&quot;ShipmentOrderItemID&quot;: 16,
-
-&quot;Number&quot;: &quot;222201010028682105&quot;,
-
-&quot;Transaction&quot;: {
-
-&quot;ID&quot;: 145,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#2&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;ShipmentOrder&quot;: {
-
-&quot;ID&quot;: 18,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#3&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;WeightInKg&quot;: 10,
-
-&quot;LengthInCM&quot;: null,
-
-&quot;WidthInCM&quot;: null,
-
-&quot;HeightInCM&quot;: null,
-
-&quot;Data&quot;: &quot;{}&quot;,
-
-&quot;TakenOn&quot;: &quot;2018-04-23T08:52:48.913&quot;,
-
-&quot;CancelledOn&quot;: null,
-
-&quot;HasShipmentLabel&quot;: true,
-
-&quot;HasReturnLabel&quot;: false,
-
-&quot;HasExportLabel&quot;: false,
-
-&quot;HasCodeLabel&quot;: false,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#44#253&quot;,
-
-&quot;Deleted&quot;: false
-
-}
-
-],
-
-&quot;PaymentMethod&quot;: null,
-
-&quot;ShippingMethod&quot;: {
-
-&quot;ID&quot;: 3,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#44#222&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Member&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#9&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;AddressFrom&quot;: {
-
-&quot;ContactAddressID&quot;: 73,
-
-&quot;Type&quot;: 2,
-
-&quot;Address&quot;: {
-
-&quot;AddressID&quot;: 78,
-
-&quot;Street&quot;: &quot;Bahnhofstraße&quot;,
-
-&quot;HouseNumber&quot;: &quot;1&quot;,
-
-&quot;Zip&quot;: &quot;26129&quot;,
-
-&quot;City&quot;: &quot;Musterhausen&quot;,
-
-&quot;Postbox&quot;: null,
-
-&quot;Country&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#134#52&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: &quot;#0#0#0#0#0#0#7#211&quot;,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Type&quot;: 2,
-
-&quot;Longitude&quot;: null,
-
-&quot;Latitude&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#44#125&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;Contact&quot;: {
-
-&quot;ContactID&quot;: 216,
-
-&quot;Picture&quot;: null,
-
-&quot;Apellation&quot;: 1,
-
-&quot;FirstName&quot;: &quot;Max&quot;,
-
-&quot;LastName&quot;: &quot;Mustermann&quot;,
-
-&quot;Phone&quot;: &quot;0123456789&quot;,
-
-&quot;Mobile&quot;: null,
-
-&quot;Fax&quot;: null,
-
-&quot;Position&quot;: null,
-
-&quot;Homepage&quot;: null,
-
-&quot;EMail&quot;: &quot;tt@tt.de&quot;,
-
-&quot;Company&quot;: null,
-
-&quot;DisplayText&quot;: null,
-
-&quot;Language&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#100#222&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: 1
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#44#126&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;Member&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#9&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#44#127&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;AddressTo&quot;: {
-
-&quot;ContactAddressID&quot;: 9,
-
-&quot;Type&quot;: 2,
-
-&quot;Address&quot;: {
-
-&quot;AddressID&quot;: 10,
-
-&quot;Street&quot;: &quot;gdsshgdshd&quot;,
-
-&quot;HouseNumber&quot;: &quot;235253&quot;,
-
-&quot;Zip&quot;: &quot;23789&quot;,
-
-&quot;City&quot;: &quot;hsdshdshd&quot;,
-
-&quot;Postbox&quot;: &quot;23236263&quot;,
-
-&quot;Country&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#134#52&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: &quot;#0#0#0#0#0#0#7#211&quot;,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Type&quot;: 2,
-
-&quot;Longitude&quot;: null,
-
-&quot;Latitude&quot;: null,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#35#228&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;Contact&quot;: {
-
-&quot;ContactID&quot;: 26,
-
-&quot;Picture&quot;: null,
-
-&quot;Apellation&quot;: 0,
-
-&quot;FirstName&quot;: &quot;asgagsgas&quot;,
-
-&quot;LastName&quot;: &quot;asgagsga&quot;,
-
-&quot;Phone&quot;: &quot;23524362643&quot;,
-
-&quot;Mobile&quot;: null,
-
-&quot;Fax&quot;: null,
-
-&quot;Position&quot;: null,
-
-&quot;Homepage&quot;: null,
-
-&quot;EMail&quot;: &quot;gaf@bkjfas.de&quot;,
-
-&quot;Company&quot;: &quot;gasgas&quot;,
-
-&quot;DisplayText&quot;: null,
-
-&quot;Language&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#6#100#222&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: 1
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#0#76#25&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;Member&quot;: {
-
-&quot;ID&quot;: 1,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#9&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#2#35#231&quot;,
-
-&quot;Deleted&quot;: false
-
-},
-
-&quot;Order&quot;: {
-
-&quot;ID&quot;: 241,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#1&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Transaction&quot;: {
-
-&quot;ID&quot;: 145,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#2&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null
-
-},
-
-&quot;Date&quot;: &quot;2018-04-24T00:00:00&quot;,
-
-&quot;TakenOn&quot;: &quot;2018-04-23T08:52:48.913&quot;,
-
-&quot;CancelledOn&quot;: null,
-
-&quot;Data&quot;: &quot;{\&quot;Product\&quot;:0}&quot;,
-
-&quot;External\_Key&quot;: null,
-
-&quot;External\_RowVersion&quot;: null,
-
-&quot;External\_COR\_ID&quot;: null,
-
-&quot;External\_DM\_ID&quot;: null,
-
-&quot;External\_COR\_Owner&quot;: null,
-
-&quot;RowVersion&quot;: &quot;#0#0#0#0#0#9#45#3&quot;,
-
-&quot;Deleted&quot;: false
-
-}
+```
 
 ## Artikel
 
