@@ -31,7 +31,7 @@
 
 **[Berichte](#berichte)**
 
-> [Kundenkarten](#kundenkarten)
+**[Kundenkarten](#kundenkarten)**
 
 > [Neue Kundenkarten abfragen](#neue-kundenkarten-abfragen)
 
