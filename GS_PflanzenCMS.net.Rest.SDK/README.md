@@ -259,11 +259,11 @@ Alle Funktionen die Listen zurückgeben haben folgende Parameter:
 
 | **Parameter** | **Beschreibung** |
 | --- | --- |
-| _ **pageIndex** _ | Aktuelle Seite |
-| _ **pageSize** _ | Anzahl Einträge pro Seite |
-| _ **Search** _ | Suchstring |
-| _ **orderBy** _ | Sortierung (string) |
-| _ **filter** _ | Filterkriterien |
+| **pageIndex** | Aktuelle Seite |
+| **pageSize** | Anzahl Einträge pro Seite |
+| **Search** | Suchstring |
+| **orderBy** | Sortierung (string) |
+| **filter** | Filterkriterien |
 
 **WICHTIG: Nur ausgewählte Felder abfragen/aktualisieren**
 
@@ -285,9 +285,9 @@ Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der darau
 
 | **Funktion** | **Paramete** | **Beschreibung** |
 | --- | --- | --- |
-| api/account/validate | _user_ | Benutzername |
+| api/account/validate |user| Benutzername |
 |
- | _password_ | Passwort |
+ |password| Passwort |
 
 Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
 
@@ -329,7 +329,7 @@ Listet neue Kundenkarten ohne Validierung an den Anfang der Liste. Sie können d
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| **orderby** | _string_ | Sortierung | Listet die noch nicht zugeordneten Kundenkarten nach oben |
+| **orderby** |string| Sortierung | Listet die noch nicht zugeordneten Kundenkarten nach oben |
 
 ## Neue Kundenkarten validieren
 
@@ -339,10 +339,10 @@ Neue Kundenkarten müssen von der WaWi einmalig validiert werden das diese auch 
 
 | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- |
-| **id** | _long_ | ID der Kundenkarte |
-| **valid** | _Bool_ | Gültig oder nicht |
-| **Error** | _string_ | Falls nicht gültig kann hier der Grund angegeben werden. Dieser Text wird dann dem Kunden angezeigt, wenn er versucht mit der Karte zu kaufen. Ansonsten bitte leer mitgeben |
-| **Turnover** | _Double_ | Aktueller Umsatz auf der Kundenkarte |
+| **id** |long| ID der Kundenkarte |
+| **valid** |Bool| Gültig oder nicht |
+| **Error** |string| Falls nicht gültig kann hier der Grund angegeben werden. Dieser Text wird dann dem Kunden angezeigt, wenn er versucht mit der Karte zu kaufen. Ansonsten bitte leer mitgeben |
+| **Turnover** |Double| Aktueller Umsatz auf der Kundenkarte |
 
 ## Aktueller Umsatz
 
@@ -388,9 +388,9 @@ Mit dieser Funktion kann ein Artikel angelegt und direkt mit einem Green – Sol
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **importExternal** _ | _bool_ | Externe Daten hinzufügen? |
+| **importExternal** |bool| Externe Daten hinzufügen? |
  |
-| _ **compareNameSecondary** _ | _bool_ | Name 2 vergleichen? |
+| **compareNameSecondary** |bool| Name 2 vergleichen? |
  |
 
 ## Transaktionen
@@ -401,7 +401,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **BODY** _ | _ArticleTransactionArgs[]_ | Ein Array mit mehreren Transaktionen | Siehe **[Transaktionen](#transaktionen)** |
+| **BODY** |ArticleTransactionArgs[]| Ein Array mit mehreren Transaktionen | Siehe **[Transaktionen](#transaktionen)** |
 
 ## Varianten
 
@@ -412,7 +412,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/articles/dialog/{id} | _ID_ | **long** | ID des Artikels der bearbeitet werden soll |
+| api/articles/dialog/{id} |ID| **long** | ID des Artikels der bearbeitet werden soll |
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikelbearbeiten)** )
 
@@ -433,9 +433,9 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/transactions/status/{ID} | _ID_ | **long** | ID der Bestellung |
+| api/orders/transactions/status/{ID} |ID| **long** | ID der Bestellung |
 |
- | _BODY_ | **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
+ |BODY| **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
 
 Als Rückgabe wird die Bestellung zurückgegeben (siehe **[Order](#order)** )
 
@@ -443,7 +443,7 @@ Als Rückgabe wird die Bestellung zurückgegeben (siehe **[Order](#order)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/transactions/dialog/delivered/{id} | _ID_ | **long** | ID der Transaction der Bestellung (muss versenden sein) |
+| api/orders/transactions/dialog/delivered/{id} |ID| **long** | ID der Transaction der Bestellung (muss versenden sein) |
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Versenden](##versenden)** )
 
@@ -451,7 +451,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/dialog/confirm/{id} | _ID_ | **long** | ID der Bestellung |
+| api/orders/dialog/confirm/{id} |ID| **long** | ID der Bestellung |
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Bestellung bestätigen](#bestellung-bestätigen)**)
 
@@ -459,7 +459,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/dialog/finish/{id} | _ID_ | **long** | ID der Bestellung |
+| api/orders/dialog/finish/{id} |ID| **long** | ID der Bestellung |
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung erledigen](#bestellung-erledigen)** )
 
@@ -467,7 +467,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bes
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/dialog/cancel/{id} | _ID_ | **long** | ID der Bestellung |
+| api/orders/dialog/cancel/{id} |ID| **long** | ID der Bestellung |
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung stornieren](#bestellung-stornieren)** )
 
@@ -489,8 +489,8 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type} | _orderid_ | **long** | ID der Bestellung |
-|| _type_ | **string** | DeliverySlip |
+| api/documents/order/{orderid}/{type} |orderid| **long** | ID der Bestellung |
+||type| **string** | DeliverySlip |
 || output || DOCX, PDF |
 
 ## Lieferschein Teilbestellung
@@ -501,10 +501,10 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type}/{transactionid} | _orderid_ | **long** | ID der Bestellung ||
- | _type_ | **string** | DeliverySlip ||
- | _Transactionid_ | **long** | ID der Teilbestellung ||
- | _Output_ |**string**| DOCX, PDF |
+| api/documents/order/{orderid}/{type}/{transactionid} |orderid| **long** | ID der Bestellung ||
+ |type| **string** | DeliverySlip ||
+ |Transactionid| **long** | ID der Teilbestellung ||
+ |Output|**string**| DOCX, PDF |
 
 # Versandaufträge
 
@@ -521,7 +521,7 @@ Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/shipmentorders/items/label/{id} | _ID_ | **long** | ID der Sendung |
+| api/shipmentorders/items/label/{id} |ID| **long** | ID der Sendung |
 
 Als Rückgabe wird die Pdf zurückgegeben
 
@@ -534,7 +534,7 @@ Als Rückgabe wird die Pdf zurückgegeben
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/datafiles/upload | _BODY_ | **Upload** | Siehe **[Upload](#upload)** |
+| api/datafiles/upload |BODY| **Upload** | Siehe **[Upload](#upload)** |
 
 Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
@@ -542,7 +542,7 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/pictures/upload | _BODY_ | **Upload** | Siehe **[Upload](#upload)** |
+| api/pictures/upload |BODY| **Upload** | Siehe **[Upload](#upload)** |
 
 Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
@@ -555,15 +555,15 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/create | _name_ | **string** | Name für den neuen Gutschein |
+| api/vouchers/create |name| **string** | Name für den neuen Gutschein |
 |
- | _amount_ | **double** | Betrag |
+ |amount| **double** | Betrag |
 |
- | _currencyName_ | **string** | Währung (z.B. EUR) |
+ |currencyName| **string** | Währung (z.B. EUR) |
 |
- | _info_ | **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird |
+ |info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird |
 |
- | _deleted_ | **bool** | Gelöscht anlegen |
+ |deleted| **bool** | Gelöscht anlegen |
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
@@ -571,7 +571,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** )
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/find | _keyValue_ | **string** | Gutscheincode (ohne Leerzeichen) |
+| api/vouchers/find |keyValue| **string** | Gutscheincode (ohne Leerzeichen) |
 
 Rückgabe: Gutschein –Code (siehe **[FoundVoucher](#foundvoucher)** )
 
@@ -581,17 +581,17 @@ Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/reserve | _voucherID_ | **long** | Gutschein ID |
+| api/vouchers/reserve |voucherID| **long** | Gutschein ID |
 |
- | _voucherCodeID_ | **long** | Gutschein Code ID |
+ |voucherCodeID| **long** | Gutschein Code ID |
 |
- | _amount_ | **double** | Betrag der reserviert werden soll |
+ |amount| **double** | Betrag der reserviert werden soll |
 |
- | _currencyName_ | **string** | Währung (z.B. EUR) |
+ |currencyName| **string** | Währung (z.B. EUR) |
 |
- | _info_ | **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird |
+ |info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird |
 |
- | _minutes_ | **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
+ |minutes| **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
 
 Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
 
@@ -601,7 +601,7 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/pay | _paymentid_ | l **ong** | ID der Zahlung (siehe **[Payment](#payment)** ) |
+| api/vouchers/pay |paymentid| l **ong** | ID der Zahlung (siehe **[Payment](#payment)** ) |
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
@@ -631,9 +631,9 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** )
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | long | Artikel ID | Artikel für den das Piktogramm abgefragt werden soll |
-| _ **width** _ | int | Breite | px |
-| _ **height** _ | int | Höhe | px |
+| **id** | long | Artikel ID | Artikel für den das Piktogramm abgefragt werden soll |
+| **width** | int | Breite | px |
+| **height** | int | Höhe | px |
 
 **Rückgabe:**
 
@@ -655,22 +655,22 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **search** _ | _string_ | Suchbegriff |
+| **search** |string| Suchbegriff |
  |
-| _ **orderBy** _ | _string_ | Title, Title2 |
+| **orderBy** |string| Title, Title2 |
  |
-| _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
-| _ **BloomingTimeFrom** _ | _int_ | Blütezeit von | Monate |
-| _ **BloomingTimeTo** _ | _int_ | Blütezeit bis | Monate |
-| _ **WidthFrom** _ | _double_ | Breite von | cm |
-| _ **WidthTo** _ | _double_ | Breite bis | cm |
-| _ **HeightTo** _ | _double_ | Höhe von | cm |
-| _ **HeightFrom** _ | _double_ | Höhe bis | cm |
-| _ **WeightFrom** _ | _double_ | Gewicht von | kg |
-| _ **WeightTo** _ | _double_ | Gewicht bis | kg |
-| _ **GrowthFrom** _ | _double_ | Zuwachs von | cm |
-| _ **GrowthTo** _ | _double_ | Zuwachs bis | cm |
-| _ **FeatureIds** _ | _long[]_ | Merkmale | ID&#39;s der Merkmale (siehe Admin/Features) |
+| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **BloomingTimeFrom** |int| Blütezeit von | Monate |
+| **BloomingTimeTo** |int| Blütezeit bis | Monate |
+| **WidthFrom** |double| Breite von | cm |
+| **WidthTo** |double| Breite bis | cm |
+| **HeightTo** |double| Höhe von | cm |
+| **HeightFrom** |double| Höhe bis | cm |
+| **WeightFrom** |double| Gewicht von | kg |
+| **WeightTo** |double| Gewicht bis | kg |
+| **GrowthFrom** |double| Zuwachs von | cm |
+| **GrowthTo** |double| Zuwachs bis | cm |
+| **FeatureIds** |long[]| Merkmale | ID&#39;s der Merkmale (siehe Admin/Features) |
 
 # Verknüpfte Inhalte für Artikel
 
@@ -678,10 +678,10 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Artikel ||
-| _ **search** _ | _string_ | Suchbegriff ||
-| _ **orderBy** _ | _string_ | Title, Title2 ||
-| _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **id** |long| ID des Artikel ||
+| **search** |string| Suchbegriff ||
+| **orderBy** |string| Title, Title2 ||
+| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Verknüpfte Inhalte für Bericht
 
@@ -689,10 +689,10 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Berichts ||
-| _ **search** _ | _string_ | Suchbegriff ||
-| _ **orderBy** _ | _string_ | Title, Title2 ||
-| _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **id** |long| ID des Berichts ||
+| **search** |string| Suchbegriff ||
+| **orderBy** |string| Title, Title2 ||
+| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Verknüpfte Inhalte für Video
 
@@ -700,10 +700,10 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Video ||
-| _ **search** _ | _string_ | Suchbegriff ||
-| _ **orderBy** _ | _string_ | Title, Title2 ||
-| _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **id** |long| ID des Video ||
+| **search** |string| Suchbegriff ||
+| **orderBy** |string| Title, Title2 ||
+| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Extern hinzufügen
 
@@ -713,11 +713,11 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 **Funktion:** api/external/search
 
-| _pageIndex_ | Aktuelle Seite |
+|pageIndex| Aktuelle Seite |
 | --- | --- |
-| _pageSize_ | Anzahl Einträge pro Seite |
-| _search_ | Suchstring |
-| _orderBy_ | Sortierung (string) |
+|pageSize| Anzahl Einträge pro Seite |
+|search| Suchstring |
+|orderBy| Sortierung (string) |
 
 **Rückgabe:**
 
@@ -727,7 +727,7 @@ Eine Liste aller externen Suchergebnisse
 
 **Funktion:** api/external/search/article
 
-| _name_ | Name des Artikels (z.B. Acer Palmatum Bloodgood) |
+|name| Name des Artikels (z.B. Acer Palmatum Bloodgood) |
 | --- | --- |
 
 **Rückgabe:**
@@ -737,36 +737,36 @@ Den am besten passenden Artikel
 
 **Funktion:** api/external/import/plants/{id}
 
-| _id_ | Externe ID der Pflanze die importiert werden soll |
+|id| Externe ID der Pflanze die importiert werden soll |
 | --- | --- |
-| _to_ | _ID des Artikels in den importiert werden soll (optional)_ |
+|to|ID des Artikels in den importiert werden soll (optional)|
 
 ## Videos importieren
 
 **Funktion:** api/external/import/videos/{id}
 
-| _id_ | Externe ID des Videos das importiert werden soll |
+|id| Externe ID des Videos das importiert werden soll |
 | --- | --- |
 
 ## Berichte importieren
 
 **Funktion:** api/external/import/reports/{id}
 
-| _id_ | Externe ID des Berichts der importiert werden soll |
+|id| Externe ID des Berichts der importiert werden soll |
 | --- | --- |
 
 ## Bilder importieren
 
 **Funktion:** api/external/import/pictures/{id}
 
-| _id_ | Externe ID des Bildes das importiert werden soll |
+|id| Externe ID des Bildes das importiert werden soll |
 | --- | --- |
 
 ## Pflanzenfotos importieren
 
 **Funktion:** api/external/import/plantpictures/{id}
 
-| _id_ | Externe ID des Pflanzenfotos das importiert werden soll |
+|id| Externe ID des Pflanzenfotos das importiert werden soll |
 | --- | --- |
 
 # Zwischenspeicher (Cache)
