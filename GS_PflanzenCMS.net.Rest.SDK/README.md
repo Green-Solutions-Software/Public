@@ -453,18 +453,19 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)**)
 
 # Preislisten
 
-Preislisten / Listungen mit kundenspezifischen Preisen (siehe 35.20)
+Preislisten / Listungen mit kundenspezifischen Preisen (siehe **[Pricelist](#pricelist)**)
 
 | Url | api/pricelists |
 | --- | --- |
 
 # Preislisten-Einträge
 
-Die Einträge entsprechen den Artikeln in der Preisliste (siehe 35.21). Die Keys den Varianten der
-Artikel mit den indivduellen Preisen
+Die Einträge entsprechen den Artikeln in der Preisliste (siehe **[PricelistItem](#pricelistitem)**). 
+Die Keys den Varianten der Artikel mit den indivduellen Preisen
 
 | Url | api/pricelistitems |
 | --- | --- |
+| Filter | pricelistid |
 
 # Bestellungen
 
