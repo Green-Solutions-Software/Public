@@ -323,7 +323,7 @@ Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mit
 
 Listet neue Kundenkarten ohne Validierung an den Anfang der Liste. Sie können dann pageweise immer weitergehen bis ein Datensatz erscheint der bereits validiert wurde.
 
-**Siehe**  **34.16**
+**Siehe [DebitCard](#debitcard)**
 
 **Funktion: GET** /api/debitcards?orderby=ValidatedOn
 
@@ -401,7 +401,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **BODY** _ | _ArticleTransactionArgs[]_ | Ein Array mit mehreren Transaktionen | Siehe **34.14** |
+| _ **BODY** _ | _ArticleTransactionArgs[]_ | Ein Array mit mehreren Transaktionen | Siehe **[Transaktionen](#transaktionen)** |
 
 ## Varianten
 
@@ -414,7 +414,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 | --- | --- | --- | --- |
 | api/articles/dialog/{id} | _ID_ | **long** | ID des Artikels der bearbeitet werden soll |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.3** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikelbearbeiten)** )
 
 # Bestellungen
 
@@ -435,9 +435,9 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.3** )
 | --- | --- | --- | --- |
 | api/orders/transactions/status/{ID} | _ID_ | **long** | ID der Bestellung |
 |
- | _BODY_ | **Statusmeldung** | Siehe **34.15** |
+ | _BODY_ | **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
 
-Als Rückgabe wird die Bestellung zurückgegeben (siehe **34.6** )
+Als Rückgabe wird die Bestellung zurückgegeben (siehe **[Order](#order)** )
 
 ## Dialog „Versenden&quot;
 
@@ -445,7 +445,7 @@ Als Rückgabe wird die Bestellung zurückgegeben (siehe **34.6** )
 | --- | --- | --- | --- |
 | api/orders/transactions/dialog/delivered/{id} | _ID_ | **long** | ID der Transaction der Bestellung (muss versenden sein) |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.1** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Versenden](##versenden)** )
 
 ## Dialog „Bestätigen&quot;
 
@@ -453,7 +453,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.1** )
 | --- | --- | --- | --- |
 | api/orders/dialog/confirm/{id} | _ID_ | **long** | ID der Bestellung |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.4** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Bestellung bestätigen](#bestellung-bestätigen)**)
 
 ## Dialog „Erledigen&quot;
 
@@ -461,7 +461,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.4** )
 | --- | --- | --- | --- |
 | api/orders/dialog/finish/{id} | _ID_ | **long** | ID der Bestellung |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.6** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung erledigen](#bestellung-erledigen)** )
 
 ## Dialog „Stornieren&quot;
 
@@ -469,7 +469,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.6** )
 | --- | --- | --- | --- |
 | api/orders/dialog/cancel/{id} | _ID_ | **long** | ID der Bestellung |
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.5** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung stornieren](#bestellung-stornieren)** )
 
 ## Dialog „Auftragsverwaltung&quot;
 
@@ -477,7 +477,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.5** )
 | --- | --- | --- | --- |
 | api/orders/dialog ||||
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.2** )
+Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Auftragsverwaltung](#auftragsverwaltung)** )
 
 # Dokumente
 
@@ -513,11 +513,11 @@ Enthält eine Liste aller Versandaufträge im System. Jeder Versandauftrag kann 
 | Url | api/shipmentorders |
 | --- | --- |
 
-Siehe 34.2
+Siehe **[ShipmentOrder](#shipmentorder)**
 
 ## Packetaufkleber abfragen
 
-Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür eine der ShipmentOrderID des Versandauftrags (siehe **20** )
+Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür eine der ShipmentOrderID des Versandauftrags (siehe **[ShipmentOrder](#shipmentorder)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
@@ -534,17 +534,17 @@ Als Rückgabe wird die Pdf zurückgegeben
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/datafiles/upload | _BODY_ | **Upload** | Siehe 34.19 |
+| api/datafiles/upload | _BODY_ | **Upload** | Siehe **[Upload](#upload)** |
 
-Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
+Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 ## Bilder hochladen
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/pictures/upload | _BODY_ | **Upload** | Siehe 34.19 |
+| api/pictures/upload | _BODY_ | **Upload** | Siehe **[Upload](#upload)** |
 
-Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
+Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
 
 # Gutscheine
 
@@ -565,7 +565,7 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 |
  | _deleted_ | **bool** | Gelöscht anlegen |
 
-Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
+Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
 ## Gutschein finden
 
@@ -573,7 +573,7 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 | --- | --- | --- | --- |
 | api/vouchers/find | _keyValue_ | **string** | Gutscheincode (ohne Leerzeichen) |
 
-Rückgabe: Gutschein –Code (siehe **34.8** )
+Rückgabe: Gutschein –Code (siehe **[FoundVoucher](#foundvoucher)** )
 
 ## Zahlung reservieren
 
@@ -593,7 +593,7 @@ Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz
 |
  | _minutes_ | **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
 
-Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **34.5** ).
+Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
 
 ## Zahlung durchführen
 
@@ -601,9 +601,9 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/pay | _paymentid_ | l **ong** | ID der Zahlung (siehe **23.3** ) |
+| api/vouchers/pay | _paymentid_ | l **ong** | ID der Zahlung (siehe **[Payment](#payment)** ) |
 
-Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
+Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
 # Aufträge
 
@@ -1926,11 +1926,11 @@ public enum TransactionStatus : short
  ```csharp
 {
 
-"OrderStatus" : 1, // Siehe 34.9
+"OrderStatus" : 1, 
 
 "OrderTransactionID" : 10, // ID der Abwicklung
 
-"Status": 1, // Siehe 34.10
+"Status": 1,
 
 "StatusOn": "2018-04-03T14:30:05.037", // Wann wurde z.B. ausgeliefert
 
@@ -2055,7 +2055,7 @@ public enum TransactionStatus : short
 
 # Dialoge
 
-Ausgesuchte Dialog können extern „aufgerufen werden&quot;. Dazu bekommen Sie von den entsprechenden API Funktionen einen Dialog (siehe **34.18** ).
+Ausgesuchte Dialog können extern „aufgerufen werden&quot;. Dazu bekommen Sie von den entsprechenden API Funktionen einen Dialog (siehe [Dialog](#dialog) ).
 
 Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe und mit dem Titel. Danach navigieren Sie in dem Fenster zu der übergebenen Url!
 
