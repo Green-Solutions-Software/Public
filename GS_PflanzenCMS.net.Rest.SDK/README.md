@@ -22,59 +22,59 @@ Datum: 16.03.2022
 
 **[Postman](#postman)**
 
-**[Authorisierung](#_Toc8988929)**
+**[Authorisierung](#authorisierung)**
 
-**[Währungen](#_Toc8988930)**
+**[Währungen](#währungen)**
 
-**[Länder (inkl. MwSt. Sätze)](#_Toc8988931)**
+**[Länder](#länder)**
 
-**[Kategorien](#_Toc8988932)**
+**[Kategorien](#kategorien)**
 
-**[Berichte](#_Toc8988933)**
+**[Berichte](#berichte)**
 
-> [Kundenkarten](#_Toc8988934)
+> [Kundenkarten](#kundenkarten)
 
-> [Neue Kundenkarten abfragen](#_Toc8988935)
+> [Neue Kundenkarten abfragen](#neue-kundenkarten-abfragen)
 
-> [Neue Kundenkarten validieren](#_Toc8988936)
+> [Neue Kundenkarten validieren](#neue-kundenkarten-validieren)
 
-> [Aktueller Umsatz](#_Toc8988937)
+> [Aktueller Umsatz](#aktueller-umsatz)
 
-**[Webshop Bestellungen](#_Toc8988938)**
+**[Webshop Bestellungen](#webshop-bestellungen)**
 
-**[Auftragsdaten](#_Toc8988939)**
+**[Auftragsdaten](#auftragsdaten)**
 
-**[Videos](#_Toc8988940)**
+**[Videos](#videos)**
 
-**[Filialen](#_Toc8988941)**
+**[Filialen](#filialen)**
 
-**[Kunden](#_Toc8988942)**
+**[Kunden](#kunden)**
 
-**[Artikel](#_Toc8988943)**
+**[Artikel](#artikel)**
 
-> [Erweiterte Anlage](#_Toc8988944)
+> [Erweiterte Anlage](#erweiterte-anlage)
 
-> [Transaktionen](#_Toc8988945)
+> [Transaktionen](#transaktionen)
 
-> [Varianten](#_Toc8988946)
+> [Varianten](#Varianten)
 
-> [Dialog „Bearbeiten&quot;](#_Toc8988947)
+> [Dialog Bearbeiten](#dialog-bearbeiten)
 
-**[Bestellungen](#_Toc8988948)**
+**[Bestellungen](#bestellungen)**
 
-> [Alle Shop Bestellungen](#_Toc8988949)
+> [Alle Shop Bestellungen](#alle-shop-bestellungen)
 
-> [Status anpassen](#_Toc8988950)
+> [Status anpassen](#status-anpassen)
 
-> [Dialog „Versenden&quot;](#_Toc8988951)
+> [Dialog Versenden](#dialog-versenden)
 
-> [Dialog „Bestätigen&quot;](#_Toc8988952)
+> [Dialog Bestätigen](#dialog-bestätigen)
 
-> [Dialog „Erledigen&quot;](#_Toc8988953)
+> [Dialog Erledigen](#dialog-erledigen)
 
-> [Dialog „Stornieren&quot;](#_Toc8988954)
+> [Dialog Stornieren](#dialog-stornieren)
 
-> [Dialog „Auftragsverwaltung&quot;](#_Toc8988955)
+> [Dialog Auftragsverwaltung](#dialog-auftragsverwaltung)
 
 **[Dokumente](#_Toc8988956)**
 
@@ -296,7 +296,7 @@ Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mit
 | Url | api/currencies |
 | --- | --- |
 
-# Länder (inkl. MwSt. Sätze)
+# Länder
 
 | Url | api/countries |
 | --- | --- |
@@ -408,7 +408,7 @@ Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und
 | Url | api/articlekeys |
 | --- | --- |
 
-## Dialog „Bearbeiten&quot;
+## Dialog Bearbeiten
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
