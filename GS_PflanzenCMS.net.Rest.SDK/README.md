@@ -475,10 +475,7 @@ Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.5** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/orders/dialog |
- |
- |
- |
+| api/orders/dialog ||||
 
 Als Rückgabe wird der Dialog zurückgegeben (siehe **34.18** und **35.2** )
 
@@ -493,11 +490,8 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
 | api/documents/order/{orderid}/{type} | _orderid_ | **long** | ID der Bestellung |
-|
- | _type_ | **string** | DeliverySlip |
-|
- | output |
- | DOCX, PDF |
+|| _type_ | **string** | DeliverySlip |
+|| output || DOCX, PDF |
 
 ## Lieferschein Teilbestellung
 
@@ -507,14 +501,10 @@ Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher
 
 | **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type}/{transactionid} | _orderid_ | **long** | ID der Bestellung |
-|
- | _type_ | **string** | DeliverySlip |
-|
- | _Transactionid_ | **long** | ID der Teilbestellung |
-|
- | _Output_ |
- | DOCX, PDF |
+| api/documents/order/{orderid}/{type}/{transactionid} | _orderid_ | **long** | ID der Bestellung ||
+ | _type_ | **string** | DeliverySlip ||
+ | _Transactionid_ | **long** | ID der Teilbestellung ||
+ | _Output_ |**string**| DOCX, PDF |
 
 # Versandaufträge
 
@@ -558,8 +548,7 @@ Als Rückgabe wird die Datei zurückgegeben (siehe **34.13** )
 
 # Gutscheine
 
-| Url | api/vouchers |
- |
+| Url | api/vouchers ||
 | --- | --- | --- |
 
 ## Gutschein erstellen
@@ -623,16 +612,14 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **34.6** ).
 
 # Container
 
-| Url | api/containers |
- |
+| Url | api/containers ||
 | --- | --- | --- |
 | Schlüssel | api/containers/key/{key} | Container mit Schlüssel suchen |
 | Items | Api/containers/items/{id} | Alle Einträge eines Containers (inkl. Paging) |
 
 # Jahresplanungen
 
-| Url | api/timelines |
- |
+| Url | api/timelines ||
 | --- | --- | --- |
 | Schlüssel | api/timelines/key/{key} | Planung mit Schlüssel suchen |
 | Items | api/timelines/items/{id} | Alle Einträge einer Planung (inkl. Paging) |
@@ -691,12 +678,9 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Artikel |
- |
-| _ **search** _ | _string_ | Suchbegriff |
- |
-| _ **orderBy** _ | _string_ | Title, Title2 |
- |
+| _ **id** _ | _long_ | ID des Artikel ||
+| _ **search** _ | _string_ | Suchbegriff ||
+| _ **orderBy** _ | _string_ | Title, Title2 ||
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Verknüpfte Inhalte für Bericht
@@ -705,12 +689,9 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Berichts |
- |
-| _ **search** _ | _string_ | Suchbegriff |
- |
-| _ **orderBy** _ | _string_ | Title, Title2 |
- |
+| _ **id** _ | _long_ | ID des Berichts ||
+| _ **search** _ | _string_ | Suchbegriff ||
+| _ **orderBy** _ | _string_ | Title, Title2 ||
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Verknüpfte Inhalte für Video
@@ -719,12 +700,9 @@ Eine Liste aller gültigen Piktogramme für den gewählten Artikel
 
 | **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
 | --- | --- | --- | --- |
-| _ **id** _ | _long_ | ID des Video |
- |
-| _ **search** _ | _string_ | Suchbegriff |
- |
-| _ **orderBy** _ | _string_ | Title, Title2 |
- |
+| _ **id** _ | _long_ | ID des Video ||
+| _ **search** _ | _string_ | Suchbegriff ||
+| _ **orderBy** _ | _string_ | Title, Title2 ||
 | _ **Types** _ | _string_ | Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
 
 # Extern hinzufügen
