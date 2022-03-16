@@ -185,6 +185,8 @@
 
 > [Upload](#upload)
 
+> [Message](#message)
+
 **[Dialoge](#dialoge)**
 
 > [Versenden](##versenden)
@@ -571,13 +573,9 @@ Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** )
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/create |name| **string** | Name für den neuen Gutschein ||
-|amount| **double** | Betrag ||
-|currencyName| **string** | Währung (z.B. EUR) ||
-|info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird ||
-|deleted| **bool** | Gelöscht anlegen |
+| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
 
-Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
+Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ).
 
 ## Gutschein finden
 
@@ -2056,6 +2054,83 @@ public enum TransactionStatus : short
     "Rotation": 0 // Nur bei api/pictures/upload, Rotation im Uhrzeigersinn (1=90 Grad, 2=180 Grad usw.)
 }
 
+```
+
+## Message
+```csharp
+{
+  "MessageID": 145,
+  "Key": null,
+  "Number": "2022-145",
+  "Guid": "674116e3-815b-439d-a44e-ee46c13f6bef",
+  "Type": 21,
+  "Direction": 1,
+  "ProcessedOn": "2022-03-14T15:19:48.817",
+  "DoneOn": null,
+  "SenderConfirm": false,
+  "SenderConfirmedOn": null,
+  "HasReadBy": null,
+  "Succeeded": null,
+  "HasReadOn": null,
+  "AcknowledgedOn": "2022-03-14T15:19:53.77",
+  "CreatedOn": "2022-03-14T15:19:09.93",
+  "DoneBy": null,
+  "Editor": null,
+  "Subject": "Storno vom Lieferanten gemeldet (56)",
+  "Body": null,
+  "Html": null,
+  "External_Data": "UNA:+.? '\nUNB+UNOC:3+{Message.Sender.GLN}:14+{Message.Receiver.GLN}:14+220314:1619+{Message.Number}+++++EANCOM+0'\r\nUNH+{Message.Number}+OSTRPT:D:01B:UN:EAN008'\r\nBGM+348+{Message.Number}+9'\r\nDTM+137:20220314:102'\r\nNAD+SU+{Message.Sender.SupplierNumber}::92'\r\nDOC+227+21357682'\r\nDTM+137:20220314:102'\r\nLIN+1++4251628174130:SRV'\r\nPIA+1+29013960:IN'\r\nRFF+ON:1033161696'\r\nDTM+171:20220314:102'\r\nRFF+ABO:1'\r\nSTS+1+56'\r\nDTM+334:20220314:102'\r\nQTY+46:1:PCE'\r\nUNT+15+{Message.Number}'\r\nUNZ+1+{Message.Number}'",
+  "External_Data2": null,
+  "External_CMS_Number": "21357682",
+  "External_CMS_ID": null,
+  "External_CMS_CAPS": null,
+  "ExternalID": null,
+  "Refund": false,
+  "Replacement": false,
+  "SupplierNumber": null,
+  "GLN": "4024506000001",
+  "Channel": null,
+  "Order": {
+    "ID": 898,
+    "RowVersion": "#0#0#0#0#0#12#71#131",
+    "External_Key": "Bauhaus#$1033161696",
+    "External_RowVersion": "9491c979cb9d11d9878021cd2dee133a",
+    "External_COR_ID": null
+  },
+  "Parent": {
+    "Guid": "4b4d48c3-fe9f-421c-8f65-accaf272730c",
+    "ID": 143,
+    "RowVersion": "#0#0#0#0#0#12#71#80",
+    "External_Key": "Bauhaus#404",
+    "External_RowVersion": "#0#0#0#0#0#3#18#211",
+    "External_COR_ID": null
+  },
+  "Sender": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#12#83#161",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "SendedBy": null,
+  "Receiver": {
+    "ID": 5,
+    "RowVersion": "#0#0#0#0#0#12#84#94",
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null
+  },
+  "Children": [],
+  "Positions": [],
+  "Results": [],
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#12#71#157",
+  "Deleted": false
+}
 ```
 
 # Dialoge
