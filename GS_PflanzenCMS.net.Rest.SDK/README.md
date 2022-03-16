@@ -2236,7 +2236,7 @@ Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe u
 
 Eine Beispiel Applikation sowieso eine API für C# .Net auf denen die nachfolgenden Beispiele basieren finden Sie hier:
 
-[Beispielapplikation](../GS_PflanzenCMS.net.Rest.Sample/README.md)
+[Beispielapplikation](../GS_PflanzenCMS.net.Rest.Sample)
 
 ## Token abfragen zur Authentifizierung
 
