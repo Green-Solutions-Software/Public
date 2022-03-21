@@ -181,6 +181,8 @@
 
 > [Payment](#payment)
 
+> [EntityReference](#entityreference)
+
 > [Voucher](#voucher)
 
 > [VoucherCode](#vouchercode)
@@ -720,7 +722,17 @@ Siehe **[Message](#message)**
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
+| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll |
+
+Folgende Felder müssen bei der Nachricht gesetzt werden:
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | | Ausgehend oder eingehend | 
+|Type| **short** | | (siehe **[MessageType](#messagetype)**) |
+|Key| **string** | | Schlüssel als Referenz |
+|Sender| **EntityReference** |  | Sender |
+|Receiver| **EntityReference** |  | Empfänger |
+|SenderConfirm| **bool** |  | Bestätigung per Mail versenden nach Versand |
 
 Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)**). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
 
@@ -1808,6 +1820,16 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#5#130#114",
   "Deleted": true
+}
+```
+
+## EntityReference
+
+```csharp
+{
+    "ID": 1, // ID des Datensatz
+    "RowVersion": "#0#0#0#0#0#3#93#115", // Timestamp
+    "External_Key": null // Externer Schlüssel
 }
 ```
 
