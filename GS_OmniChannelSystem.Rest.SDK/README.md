@@ -121,6 +121,13 @@
 **[Nachrichten](#nachrichten)**
 
 > [Nachricht erstellen](#nachricht-erstellen)
+  - [Retourenlieferung ist eingegangen](#retourenlieferung-ist-eingegangen)
+  - [Retourenprüfung bestanden](#retourenprüfung-bestanden)
+  - [Retourenprüfung nicht bestanden](#retourenprüfung-nicht-bestanden)
+  - [Bestellung zugestellt](#bestellung-zugestellt)
+  - [Abholauftrag erhalten](#abholauftrag-erhalten)
+  - [Stornoanfrage des Kunden bestätigt](#stornoanfrage-des-kunden-bestätigt)
+  - [Storno nicht mehr möglich](#Storno-nicht-mehr-möglich)
 
 **[Aufträge](#aufträge)**
 
@@ -715,7 +722,77 @@ Siehe **[Message](#message)**
 | --- | --- | --- | --- |
 | api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll ||
 
-Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)** ). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
+Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)**). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
+
+# Retourenlieferung ist eingegangen
+Die Retoure ist eingegangen im Lager
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 16 |Retourenlieferung ist eingegangen (82) |
+|Order| **EntityReference** |  | ID der Bestellung |
+|Replacement| **bool** |  | Ware ersetzen (ja/nein) |
+|Refund| **bool** |  | Ware erstatten (ja/nein) |
+|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+
+# Retourenprüfung bestanden
+Die Retoure wurde geprüft und hat den Test bestanden
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 17 |Retouren-Prüfung bestanden (80) |
+|Order| **EntityReference** |  | ID der Bestellung |
+|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+
+# Retourenprüfung nicht bestanden
+Die Retoure wurde geprüft und hat den Test nicht bestanden
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 18 |Retouren-Prüfung nicht bestanden (81) |
+|Order| **EntityReference** |  | ID der Bestellung |
+|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+
+# Bestellung zugestellt
+Die Bestellung wurde zugestellt
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 5 |Lieferung durchgeführt (21) |
+|Order| **EntityReference** |  | ID der Bestellung |
+
+# Abholauftrag erhalten
+Der Abholauftrag wurde empfangen
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 14 |Abholauftrag erhalten (64) |
+|Order| **EntityReference** |  | ID der Bestellung |
+
+# Stornoanfrage des Kunden bestätigt
+Die Stornoanfrage des Kunden wird bestätigt
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 19 |Stornoanfrage des Kunden bestätigt (275) |
+|Order| **EntityReference** |  | ID der Bestellung |
+
+# Storno nicht mehr möglich
+Die Stornoanfrage des Kunden wird abgelehnt da Storno nicht mehr möglich ist
+
+| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| --- | --- | --- | --- |
+|Direction| **short** | 1 |Ausgehende Nachricht |
+|Type| **short** | 20 |Storno nicht mehr möglich (71)|
+|Order| **EntityReference** |  | ID der Bestellung |
+
+
 
 # Aufträge
 
