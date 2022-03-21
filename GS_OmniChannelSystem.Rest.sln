@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS_OmniChannelSystem.Rest.SDK", "GS_OmniChannelSystem.Rest.SDK\GS_OmniChannelSystem.Rest.SDK.csproj", "{EDC8653F-FF52-48D2-B67B-7386A7D7066F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS_OmniChannelSystem.Rest.Sample", "GS_OmniChannelSystem.Rest.Sample\GS_OmniChannelSystem.Rest.Sample.csproj", "{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDC8653F-FF52-48D2-B67B-7386A7D7066F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC8653F-FF52-48D2-B67B-7386A7D7066F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC8653F-FF52-48D2-B67B-7386A7D7066F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC8653F-FF52-48D2-B67B-7386A7D7066F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19C2D276-873D-4439-A15B-6ED5D7B06990}
+	EndGlobalSection
+EndGlobal
