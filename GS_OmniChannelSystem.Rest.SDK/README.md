@@ -195,6 +195,8 @@
 
 > [TransactionStatus](#transactionstatus)
 
+> [BasketType](#baskettype)
+
 > [MessageType](#messagetype)
 
 > [MessageDirection](#messagedirection)
@@ -2074,7 +2076,19 @@ public enum TransactionStatus : short
 	Delivered, // Ausgeliefert
 	Ready // Steht Bereit
 }
+```
 
+## BasketType
+
+```csharp
+public enum BasketType: short {
+  Checkout, // Warenkorb
+  WatchList, // Merkliste
+  RequestList, // Preisanfrage
+  ImageDeliveryList, // Bildermappe
+  Projects, // Projekt
+  DirectOrderForm // Direktbestellschein
+}
 ```
 ## MessageType
 ```csharp
