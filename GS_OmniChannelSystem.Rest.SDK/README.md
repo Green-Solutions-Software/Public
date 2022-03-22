@@ -730,8 +730,9 @@ Folgende Felder müssen bei der Nachricht gesetzt werden:
 |Direction| **short** | | Ausgehend oder eingehend | 
 |Type| **short** | | (siehe **[MessageType](#messagetype)**) |
 |Key| **string** | | Schlüssel als Referenz |
-|Sender| **EntityReference** |  | Sender |
-|Receiver| **EntityReference** |  | Empfänger |
+|Sender| **[EntityReference](#entityreference)**|  | Sender |
+|Receiver| **[EntityReference](#entityreference)**|  | Empfänger |
+|Parent| **[EntityReference](#entityreference)**|  | Übergeordnete Nachricht |
 |SenderConfirm| **bool** |  | Bestätigung per Mail versenden nach Versand |
 
 Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)**). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
@@ -743,7 +744,7 @@ Die Retoure ist eingegangen im Lager
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 16 |Retourenlieferung ist eingegangen (82) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 |Replacement| **bool** |  | Ware ersetzen (ja/nein) |
 |Refund| **bool** |  | Ware erstatten (ja/nein) |
 |Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
@@ -755,7 +756,7 @@ Die Retoure wurde geprüft und hat den Test bestanden
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 17 |Retouren-Prüfung bestanden (80) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 |Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
 
 # Retourenprüfung nicht bestanden
@@ -765,7 +766,7 @@ Die Retoure wurde geprüft und hat den Test nicht bestanden
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 18 |Retouren-Prüfung nicht bestanden (81) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 |Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
 
 # Bestellung zugestellt
@@ -775,7 +776,7 @@ Die Bestellung wurde zugestellt
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 5 |Lieferung durchgeführt (21) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 
 # Abholauftrag erhalten
 Der Abholauftrag wurde empfangen
@@ -784,7 +785,7 @@ Der Abholauftrag wurde empfangen
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 14 |Abholauftrag erhalten (64) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 
 # Stornoanfrage des Kunden bestätigt
 Die Stornoanfrage des Kunden wird bestätigt
@@ -793,7 +794,7 @@ Die Stornoanfrage des Kunden wird bestätigt
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 19 |Stornoanfrage des Kunden bestätigt (275) |
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 
 # Storno nicht mehr möglich
 Die Stornoanfrage des Kunden wird abgelehnt da Storno nicht mehr möglich ist
@@ -802,7 +803,7 @@ Die Stornoanfrage des Kunden wird abgelehnt da Storno nicht mehr möglich ist
 | --- | --- | --- | --- |
 |Direction| **short** | 1 |Ausgehende Nachricht |
 |Type| **short** | 20 |Storno nicht mehr möglich (71)|
-|Order| **EntityReference** |  | ID der Bestellung |
+|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 
 
 
