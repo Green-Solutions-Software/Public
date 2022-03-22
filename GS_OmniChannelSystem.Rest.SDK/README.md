@@ -129,6 +129,8 @@
   - [Stornoanfrage des Kunden bestätigt](#stornoanfrage-des-kunden-bestätigt)
   - [Storno nicht mehr möglich](#Storno-nicht-mehr-möglich)
 
+**[Warenkörbe](#warenkörbe)**
+
 **[Aufträge](#aufträge)**
 
 **[Container](#container)**
@@ -805,6 +807,23 @@ Die Stornoanfrage des Kunden wird abgelehnt da Storno nicht mehr möglich ist
 |Type| **short** | 20 |Storno nicht mehr möglich (71)|
 |Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
 
+# Warenkörbe
+
+| Url | api/baskets ||
+| --- | --- | --- |
+
+## Filter
+
+| Name | Typ | Wert | Beschreibung |
+| --- | --- | --- | --- |
+| type | **BasketType** | | siehe **[BasketType](#baskettype)** |
+| memberid | **long** | | MemberID nach der gefiltert werden soll |
+| my | **bool** | true/false | Nur eigene Datensätze |
+
+## Sortierung
+| Name |Beschreibung |
+| --- | --- |
+| BasketID | Nach ID sortieren |
 
 
 # Aufträge
