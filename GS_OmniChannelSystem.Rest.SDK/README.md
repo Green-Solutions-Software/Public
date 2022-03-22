@@ -247,7 +247,7 @@
 
 # Übersicht
 
-Mit dem Webservice können kann das System ausgelesen werden
+Mit dem Webservice kann das System ausgelesen werden
 
 # Hinweise
 
@@ -269,7 +269,7 @@ Man benötigt ein Benutzerkonto auf dem CMS System mit ausreichender Berechtigun
 
 Die Anfragen werden über die folgende URL aufgerufen:
 
-http://{domain}/api/
+https://{domain}/api/
 
 # Abfragen
 
@@ -655,7 +655,7 @@ Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt w
 
 | **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
 | --- | --- | --- | --- |
-| api/vouchers/pay |paymentid| l **ong** | ID der Zahlung (siehe **[Payment](#payment)** ) |
+| api/vouchers/pay |paymentid| **long** | ID der Zahlung (siehe **[Payment](#payment)** ) |
 
 Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
 
@@ -982,15 +982,15 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 ## Alle caches löschen
 
-**Funktion:** POSTapi/cache/clear
+**Funktion:** POST api/cache/clear
 
 ## Datenbank- Cache löschen
 
-**Funktion:** POSTapi/cache/clear/efcache
+**Funktion:** POST api/cache/clear/efcache
 
 ## Caches aufräumen
 
-**Funktion:** POSTapi/cache/purge
+**Funktion:** POST api/cache/purge
 
 # Datenstrukturen
 
