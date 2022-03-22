@@ -1017,7 +1017,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 ## Order
 
-```csharp
+```json
 {
   "OrderID": 174,
   "Voucher": null,
@@ -1351,7 +1351,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 ```
 
 ## ShipmentOrder
-```csharp
+```json
 {
   "ShipmentOrderID": 18,
   "Name": "Versand für 2018-241",
@@ -1579,7 +1579,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 ```
 
 ## Article
-```csharp
+```json
 {
   "ArticleID": 1375,
   "Name": "Abies koreana 'Veredelung'",
@@ -1808,7 +1808,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 ## Job
 
-```csharp
+```json
 {
   "JobID": 5,
   "Name": "Sortimentsaktualisierung",
@@ -1825,7 +1825,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 ```
 ## Payment
 
-```csharp
+```json
 {
   "PaymentID": 1,
   "ReservedUntil": null,
@@ -1847,7 +1847,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 ## EntityReference
 
-```csharp
+```json
 {
     "ID": 1, // ID des Datensatz
     "RowVersion": "#0#0#0#0#0#3#93#115", // Timestamp
@@ -1855,9 +1855,9 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-## Voucher
+```json
 
-```csharp
+```json
 {
   "VoucherID": 28,
   "Name": "Auftrag 2017-184, Firma Blumen Cordes",
@@ -2018,7 +2018,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 
 ## VoucherCode
 
-```csharp
+```json
 {
   "VoucherCodeID": 1781,
   "UsedOn": null,
@@ -2039,7 +2039,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 ```
 
 ## FoundVoucher
-```csharp
+```json
 {
     "VoucherID": 28,
     "VoucherCodeID": 1781,
@@ -2137,11 +2137,11 @@ public enum MessageDirection {
 
 
 ## Documentation
-```csharp
+```json
 {
   "DocumentationID": 28,
   "Thumbnail": null,
-  "DataFile": ":{  
+  "DataFile": {  
   "ID": 10,
   "RowVersion": "#0#0#0#0#0#0#77#11"
 },
@@ -2153,9 +2153,9 @@ public enum MessageDirection {
 
 ## Artikelstatus
 
-```csharp
+```json
 {
-    "External_Key":"abcdef"
+    "External_Key":"abcdef",
     "Confirmed": true,
     "QuantityConfirmed": null, // oder die Anzahl bei Teillieferungen
 }
@@ -2163,7 +2163,7 @@ public enum MessageDirection {
 ```
 
 ## File
-```csharp
+```json
 {
   "FileID": 8965,
   "Revision": 2,
@@ -2195,7 +2195,7 @@ public enum MessageDirection {
 ```
 
 ## Transaktion
-```csharp
+```json
 {
     "External_Key": "4711",
     "StockQuantity": 100,
@@ -2211,7 +2211,7 @@ public enum MessageDirection {
 ```
 
 ## OrderStatus
- ```csharp
+ ```json
 {
 
 "OrderStatus" : 1, 
@@ -2240,7 +2240,7 @@ public enum MessageDirection {
 ```
 
 ## DebitCard
-```csharp
+```json
 {
   "DebitCardID": 1,
   "KeyValue": "test",
@@ -2308,7 +2308,7 @@ public enum MessageDirection {
 ```
 
 ## Result
-```csharp
+```json
 {
     "ResultID": 43576,
     "Text": "Kundenkarte nicht korrekt",
@@ -2319,7 +2319,7 @@ public enum MessageDirection {
 
 ## Dialog
 
-```csharp
+```json
 {
   "Url": "http://localhost:61235/Plugin/OrderTransactions/Delivered/145",
   "Title": "Auftrag versenden",
@@ -2330,7 +2330,7 @@ public enum MessageDirection {
 
 
 ## Upload
-```csharp
+```json
 {
     "Filename" : "Test.png",
     "Data" : "iVBORwjsjhb67gjh…5ErkJggg==", // Dateiinhalt als Data URI https://de.wikipedia.org/wiki/Data-URL
@@ -2342,7 +2342,7 @@ public enum MessageDirection {
 ```
 
 ## Message
-```csharp
+```json
 {
   "MessageID": 145,
   "Key": null, // Schlüssel der Nachricht
@@ -2425,7 +2425,7 @@ public enum MessageDirection {
 
 # Pricelist
 
-```csharp
+```json
 {
   "PricelistID": 2,
   "Name": "Großkunden",
@@ -2450,7 +2450,7 @@ public enum MessageDirection {
 
 # PricelistItem
 
-```csharp
+```json
 {
   "PricelistItemID": 13,
   "Article": {
@@ -2464,7 +2464,7 @@ public enum MessageDirection {
     "ID": 2,
     "RowVersion": "#0#0#0#0#0#11#195#46",
     "External_Key": null,
-    Seite 55 "External_RowVersion": null,
+    "External_RowVersion": null,
     "External_COR_ID": null
   },
   "Keys": [{
