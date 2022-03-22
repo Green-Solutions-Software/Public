@@ -2512,7 +2512,7 @@ public enum MessageDirection {
       "External_DM_ID": null,
       "External_COR_Owner": null,
       "RowVersion": "#0#0#0#0#0#2#54#179",
-      Seite 56 "Deleted": false
+      "Deleted": false
     }],
     "External_Key": null,
     "External_RowVersion": null,
