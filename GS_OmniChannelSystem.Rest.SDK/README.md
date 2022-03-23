@@ -1855,7 +1855,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-```json
+## Voucher
 
 ```json
 {
