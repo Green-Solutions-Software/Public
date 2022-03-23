@@ -329,10 +329,10 @@ Damit können Sie alles Abfragen ausprobieren ohne die Schnittstelle implementie
 
 Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der daraus entstehende Token kann dann dauerhaft für den Zugriff verwendet werden ohne dass das Benutzername/Passwort erneut übertragen werden muss:
 
-| **Funktion** | **Paramete** | **Beschreibung** |
+| **Funktion** | **Parameter** | **Beschreibung** |
 | --- | --- | --- |
 | api/account/validate |user| Benutzername ||
-|password| Passwort |
+||password| Passwort |
 
 Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
 
@@ -340,10 +340,10 @@ Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mit
 
 Um sich per App als Benutzer einzuloggen muss diese Methode verwendet werden. Diese liefert dann nicht nur ein Token sondern auch Infos über den eingeloggten Benutzer.
 
-| **Funktion** | **Paramete** | **Beschreibung** |
+| **Funktion** | **Parameter** | **Beschreibung** |
 | --- | --- | --- |
 | api/account/login |user| Benutzername ||
-|password| Passwort |
+||password| Passwort |
 
 Als Rückgabe wird eine AccountInfo zurückgegeben mit allen Informationen über den eingeloggten Benutzer (Siehe **[AccountInfo](#accountinfo)**).
 
