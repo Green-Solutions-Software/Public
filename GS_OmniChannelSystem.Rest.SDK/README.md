@@ -347,6 +347,8 @@ Um sich per App als Benutzer einzuloggen muss diese Methode verwendet werden. Di
 
 Als Rückgabe wird eine AccountInfo zurückgegeben mit allen Informationen über den eingeloggten Benutzer (Siehe **[AccountInfo](#accountinfo)**).
 
+> Im Fehlerfall steht im Feld Error warum das Login nicht durchgeführt wurde. Bitte die Meldung dann dem Benutzert darstellen.
+
 # Währungen
 
 | Url | api/currencies |
