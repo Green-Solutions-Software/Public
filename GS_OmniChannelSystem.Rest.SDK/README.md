@@ -22,6 +22,7 @@
 **[Postman](#postman)**
 
 **[Authorisierung](#authorisierung)**
+> [Login](#login)
 
 **[Währungen](#währungen)**
 
@@ -225,6 +226,8 @@
 
 > [PricelistItem](#pricelistitem)
 
+> [AccountInfo](#accountinfo)
+
 **[Dialoge](#dialoge)**
 
 > [Versenden](##versenden)
@@ -332,6 +335,17 @@ Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der darau
 |password| Passwort |
 
 Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
+
+# Login
+
+Um sich per App als Benutzer einzuloggen muss diese Methode verwendet werden. Diese liefert dann nicht nur ein Token sondern auch Infos über den eingeloggten Benutzer.
+
+| **Funktion** | **Paramete** | **Beschreibung** |
+| --- | --- | --- |
+| api/account/login |user| Benutzername ||
+|password| Passwort |
+
+Als Rückgabe wird eine AccountInfo zurückgegeben mit allen Informationen über den eingeloggten Benutzer (Siehe **[AccountInfo](#accountinfo)**).
 
 # Währungen
 
@@ -2445,6 +2459,58 @@ public enum MessageDirection {
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#11#195#46",
   "Deleted": false
+}
+```
+
+
+# AccountInfo
+
+```json
+{
+    "MemberID": 1,
+    "LanguageID": 0,
+    "UserID": 1,
+    "Member": "Gartencenter Mustermann", // Kunde
+    "User": "Herr Max Mustermann", // Benutzer
+    "Login": "admin", // Benutzername
+    "Token": "8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplT2+cSNTEX2O4R5BYEUEagHu+15wJPteTQ==", // Zugriffstoken
+    "Error": null,
+    "Version": "2.0.0.228",
+    "PublishDate": "28.02.2022 14:10",
+    "Info": null,
+    "AutomaticPassword": false,
+    // Rollen    
+    "Roles": [
+        "admin",
+        "superuser",
+        "user",
+        "website.admin",
+        "social.media",
+        "website.user",
+        "webshop.admin",
+        "webshop.user",
+        "member",
+        "module.api"
+    ],
+    // Rechte
+    "Rights": [
+        "users.update",
+        "users.create",
+        "users.delete"        
+    ],
+    "PricelistIDs": null,
+    // Logo
+    "Logo": {
+        "Url": "https://gartencentermustermann.gswebapps.net/files?id=179",
+        "Name": "GartencenterMustermann_Logo_mit-Schatten_20-03-20.png",
+        "Revision": 4,
+        "CreatedOn": "2020-03-20T10:23:04.123",
+        "ID": 179,
+        "RowVersion": "#0#0#0#0#0#26#152#41",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    }
 }
 ```
 
