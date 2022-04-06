@@ -1459,9 +1459,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var member = new Member();
             
 
-            string connectionString = "vendor=Test,token=8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplS70KURnyjuUT2iVgfaxWqTjmZ72owjsBYZfAd79WYirvSrDyUwKAgU=,endpoint=http://localhost:61235/";
-
-            using (var unitOfWork = new ContextUOW(connectionString))
+            using (var unitOfWork = new ContextUOW("Test", "<token>", "<endpunkt>"))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {

@@ -529,6 +529,11 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             createContext(connectionString, language);
         }
 
+        public ContextUOW(string vendor, string endpoint, string token, string language = null)
+        {
+            createContext(string.Format("vendor={0},token={1},endpoint={2}", vendor, token, endpoint), language);
+        }
+
         public ContextUOW(ContextUOW other, string language = null)
         {
             createContext(other, language);
