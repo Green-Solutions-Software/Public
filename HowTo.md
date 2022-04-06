@@ -42,19 +42,6 @@ Alle Entitäten haben ein Feld External_Key in das die eigene ID der Warenwirtsc
 
 Artikel Stammdaten und Bewegungsdaten (Preise + Beständ) müssen übertragen werden
 
-```csharp
-var transactions = new List<ArticleTransactionArgs>();
-var transaction = new ArticleTransactionArgs();
-transaction.External_Key = "abc";
-transaction.StockQuantity = 100; // Bestand
-transaction.Prices = new List<ArticleTransactionPrice>();
-transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
-transactions.Add(transaction);
-
-unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
-```
-
-
 ## Übertrag Stammdaten
 
 Als erstes werden die Artikeldaten an die Middleware übertragen
@@ -238,7 +225,20 @@ Kanalspezifische Artikelnummern hinterlegen
 
 ## Übertrag Bewegungsdaten
 
-TODO
+Bestände und Preise aktualisieren
+
+```csharp
+var transactions = new List<ArticleTransactionArgs>();
+var transaction = new ArticleTransactionArgs();
+transaction.External_Key = "abc";
+transaction.StockQuantity = 100; // Bestand
+transaction.Prices = new List<ArticleTransactionPrice>();
+transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
+transactions.Add(transaction);
+
+unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
+```
+
 
 # Bestellungen
 
