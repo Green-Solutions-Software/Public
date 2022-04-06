@@ -49,165 +49,165 @@ Als erstes werden die Artikeldaten an die Middleware übertragen
 ```csharp
 var article = new Article();
 
-    article.Name = "Acer Palmatum Bloodgood";
-    article.Name2 = "Fächerahorn Bloodgood";
-    article.Description = "Dies ist eine lange Beschreibung";
-    article.ShortDescription = "Dies ist eine kurze Beschreibung";
+article.Name = "Acer Palmatum Bloodgood";
+article.Name2 = "Fächerahorn Bloodgood";
+article.Description = "Dies ist eine lange Beschreibung";
+article.ShortDescription = "Dies ist eine kurze Beschreibung";
 
-    // Warengruppe setzen (evtl. Hierachie beachten)
-    var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
-    article.ArticleGroups = new List<EntityReference>();
-    article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
+// Warengruppe setzen (evtl. Hierachie beachten)
+var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
+article.ArticleGroups = new List<EntityReference>();
+article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
 
-    // Kategorie setzen (evtl. Hierachie beachten)
-    var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
-    article.Categories = new List<EntityReference>();
-    article.Categories.Add(new EntityReference() { ID = category.CategoryID });
+// Kategorie setzen (evtl. Hierachie beachten)
+var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
+article.Categories = new List<EntityReference>();
+article.Categories.Add(new EntityReference() { ID = category.CategoryID });
 
-    // Texte hinzufügen
-    var text = new ArticleText();
-    article.Texts = new List<ArticleText>();
-    article.Texts.Add(text);
-    text.Type = TextType.BulletPoints;
-    text.Title = "Kaufargumente";
-    text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
+// Texte hinzufügen
+var text = new ArticleText();
+article.Texts = new List<ArticleText>();
+article.Texts.Add(text);
+text.Type = TextType.BulletPoints;
+text.Title = "Kaufargumente";
+text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
 
-    // Verfügbarkeiten
-    var timePeriod = new TimePeriod();
-    article.Available = new List<TimePeriod>();
-    article.Available.Add(timePeriod);
-    timePeriod.FromCW = 10; // Kalendarwoche (von)
-    timePeriod.ToCW = 20; // Kalendarwoche (bis)
-    timePeriod.StockQuantity = 100; // Lagerbestand
+// Verfügbarkeiten
+var timePeriod = new TimePeriod();
+article.Available = new List<TimePeriod>();
+article.Available.Add(timePeriod);
+timePeriod.FromCW = 10; // Kalendarwoche (von)
+timePeriod.ToCW = 20; // Kalendarwoche (bis)
+timePeriod.StockQuantity = 100; // Lagerbestand
 
-    // Varianten (Artikelnummern) hinzufügen
-    var articleKey = new ArticleKey();
-    article.Keys = new List<ArticleKey>();
-    article.Keys.Add(articleKey);
+// Varianten (Artikelnummern) hinzufügen
+var articleKey = new ArticleKey();
+article.Keys = new List<ArticleKey>();
+article.Keys.Add(articleKey);
 
-    articleKey.Value = "47811"; // Artikelnummer
-    articleKey.Info = "C/  50 - 60";
-    articleKey.AvailableForClickAndCollect = true; // Click & Collect
-    articleKey.AvailableForRadiusDelivery = true; // Liefern
-    articleKey.AvailableForShipping = true; // Versenden
-    articleKey.PackingSize = 20; // VE
-    articleKey.StockQuantity = 10; // Bestand
-    articleKey.Available.Add(timePeriod);
+articleKey.Value = "47811"; // Artikelnummer
+articleKey.Info = "C/  50 - 60";
+articleKey.AvailableForClickAndCollect = true; // Click & Collect
+articleKey.AvailableForRadiusDelivery = true; // Liefern
+articleKey.AvailableForShipping = true; // Versenden
+articleKey.PackingSize = 20; // VE
+articleKey.StockQuantity = 10; // Bestand
+articleKey.Available.Add(timePeriod);
 
-    // Steuersatz
-    var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
-    var germanySummary = countries.Items.Single(m => m.ISO == "DE");
-    var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
+// Steuersatz
+var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
+var germanySummary = countries.Items.Single(m => m.ISO == "DE");
+var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
 
-    var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countries
-    articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
-
-
-    // Preise
-    var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
-    var euro = currencies.Items.Single(m => m.NameShort == "EUR");
-
-    var articleKeyPrice = new ArticleKeyPrice();
-    articleKey.Prices = new List<ArticleKeyPrice>();
-    articleKey.Prices.Add(articleKeyPrice);
-    articleKeyPrice.Price = 17; // Preis
-    articleKeyPrice.PriceOld = 25; // Streichpreis
-    articleKeyPrice.PriceUnitAmount = 10; // pro 10
-    articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
-    articleKeyPrice.Quantity = 1; // Ab Stückzahl
-    articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
-    articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
-    articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
-
-    var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
-    articleKey.Photos = new List<ArticleKeyPhoto>();
-    articleKey.Photos.Add(new ArticleKeyPhoto()
-    {
-        Picture = new PictureEntityReference(picture.FileID)
-    });
-
-    var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
-    Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);var article = new Article();
-
-    article.Name = "Acer Palmatum Bloodgood";
-    article.Name2 = "Fächerahorn Bloodgood";
-    article.Description = "Dies ist eine lange Beschreibung";
-    article.ShortDescription = "Dies ist eine kurze Beschreibung";
-
-    // Warengruppe setzen (evtl. Hierachie beachten)
-    var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
-    article.ArticleGroups = new List<EntityReference>();
-    article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
-
-    // Kategorie setzen (evtl. Hierachie beachten)
-    var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
-    article.Categories = new List<EntityReference>();
-    article.Categories.Add(new EntityReference() { ID = category.CategoryID });
-
-    // Texte hinzufügen
-    var text = new ArticleText();
-    article.Texts = new List<ArticleText>();
-    article.Texts.Add(text);
-    text.Type = TextType.BulletPoints;
-    text.Title = "Kaufargumente";
-    text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
-
-    // Verfügbarkeiten
-    var timePeriod = new TimePeriod();
-    article.Available = new List<TimePeriod>();
-    article.Available.Add(timePeriod);
-    timePeriod.FromCW = 10; // Kalendarwoche (von)
-    timePeriod.ToCW = 20; // Kalendarwoche (bis)
-    timePeriod.StockQuantity = 100; // Lagerbestand
-
-    // Varianten (Artikelnummern) hinzufügen
-    var articleKey = new ArticleKey();
-    article.Keys = new List<ArticleKey>();
-    article.Keys.Add(articleKey);
-
-    articleKey.Value = "47811"; // Artikelnummer
-    articleKey.Info = "C/  50 - 60";
-    articleKey.AvailableForClickAndCollect = true; // Click & Collect
-    articleKey.AvailableForRadiusDelivery = true; // Liefern
-    articleKey.AvailableForShipping = true; // Versenden
-    articleKey.PackingSize = 20; // VE
-    articleKey.StockQuantity = 10; // Bestand
-    articleKey.Available.Add(timePeriod);
-
-    // Steuersatz
-    var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
-    var germanySummary = countries.Items.Single(m => m.ISO == "DE");
-    var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
-
-    var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countries
-    articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
+var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countries
+articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
 
 
-    // Preise
-    var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
-    var euro = currencies.Items.Single(m => m.NameShort == "EUR");
+// Preise
+var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
+var euro = currencies.Items.Single(m => m.NameShort == "EUR");
 
-    var articleKeyPrice = new ArticleKeyPrice();
-    articleKey.Prices = new List<ArticleKeyPrice>();
-    articleKey.Prices.Add(articleKeyPrice);
-    articleKeyPrice.Price = 17; // Preis
-    articleKeyPrice.PriceOld = 25; // Streichpreis
-    articleKeyPrice.PriceUnitAmount = 10; // pro 10
-    articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
-    articleKeyPrice.Quantity = 1; // Ab Stückzahl
-    articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
-    articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
-    articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
+var articleKeyPrice = new ArticleKeyPrice();
+articleKey.Prices = new List<ArticleKeyPrice>();
+articleKey.Prices.Add(articleKeyPrice);
+articleKeyPrice.Price = 17; // Preis
+articleKeyPrice.PriceOld = 25; // Streichpreis
+articleKeyPrice.PriceUnitAmount = 10; // pro 10
+articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
+articleKeyPrice.Quantity = 1; // Ab Stückzahl
+articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
+articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
+articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
 
-    var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
-    articleKey.Photos = new List<ArticleKeyPhoto>();
-    articleKey.Photos.Add(new ArticleKeyPhoto()
-    {
-        Picture = new PictureEntityReference(picture.FileID)
-    });
+var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
+articleKey.Photos = new List<ArticleKeyPhoto>();
+articleKey.Photos.Add(new ArticleKeyPhoto()
+{
+    Picture = new PictureEntityReference(picture.FileID)
+});
 
-    var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
-    Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
+var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
+Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);var article = new Article();
+
+article.Name = "Acer Palmatum Bloodgood";
+article.Name2 = "Fächerahorn Bloodgood";
+article.Description = "Dies ist eine lange Beschreibung";
+article.ShortDescription = "Dies ist eine kurze Beschreibung";
+
+// Warengruppe setzen (evtl. Hierachie beachten)
+var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
+article.ArticleGroups = new List<EntityReference>();
+article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
+
+// Kategorie setzen (evtl. Hierachie beachten)
+var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
+article.Categories = new List<EntityReference>();
+article.Categories.Add(new EntityReference() { ID = category.CategoryID });
+
+// Texte hinzufügen
+var text = new ArticleText();
+article.Texts = new List<ArticleText>();
+article.Texts.Add(text);
+text.Type = TextType.BulletPoints;
+text.Title = "Kaufargumente";
+text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
+
+// Verfügbarkeiten
+var timePeriod = new TimePeriod();
+article.Available = new List<TimePeriod>();
+article.Available.Add(timePeriod);
+timePeriod.FromCW = 10; // Kalendarwoche (von)
+timePeriod.ToCW = 20; // Kalendarwoche (bis)
+timePeriod.StockQuantity = 100; // Lagerbestand
+
+// Varianten (Artikelnummern) hinzufügen
+var articleKey = new ArticleKey();
+article.Keys = new List<ArticleKey>();
+article.Keys.Add(articleKey);
+
+articleKey.Value = "47811"; // Artikelnummer
+articleKey.Info = "C/  50 - 60";
+articleKey.AvailableForClickAndCollect = true; // Click & Collect
+articleKey.AvailableForRadiusDelivery = true; // Liefern
+articleKey.AvailableForShipping = true; // Versenden
+articleKey.PackingSize = 20; // VE
+articleKey.StockQuantity = 10; // Bestand
+articleKey.Available.Add(timePeriod);
+
+// Steuersatz
+var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
+var germanySummary = countries.Items.Single(m => m.ISO == "DE");
+var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
+
+var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countries
+articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
+
+
+// Preise
+var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
+var euro = currencies.Items.Single(m => m.NameShort == "EUR");
+
+var articleKeyPrice = new ArticleKeyPrice();
+articleKey.Prices = new List<ArticleKeyPrice>();
+articleKey.Prices.Add(articleKeyPrice);
+articleKeyPrice.Price = 17; // Preis
+articleKeyPrice.PriceOld = 25; // Streichpreis
+articleKeyPrice.PriceUnitAmount = 10; // pro 10
+articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
+articleKeyPrice.Quantity = 1; // Ab Stückzahl
+articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
+articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
+articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
+
+var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
+articleKey.Photos = new List<ArticleKeyPhoto>();
+articleKey.Photos.Add(new ArticleKeyPhoto()
+{
+    Picture = new PictureEntityReference(picture.FileID)
+});
+
+var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
+Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 ```
 
 ## Kanal Artikelnummern
