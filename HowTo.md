@@ -371,6 +371,22 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 ```
 
 ## Versandetiketten anlegen (optional)
+```csharp
+var model = new CreateShipmentOrderArgs();
+model.Quantity = 2;
+model.WeightsInKg = new double[] { 3, 6 };
+
+var newShipmentOrderSummary = unitOfWork.ShipmentOrders.CreateFastForOrder(order.OrderID, transaction.OrderTransactionID, model);
+var shipmentOrder = unitOfWork.ShipmentOrders.Get(newShipmentOrderSummary.ShipmentOrderID);
+if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
+{
+    foreach (var item in shipmentOrder.Items.Where(m => m.HasShipmentLabel))
+    {
+        var pdf = unitOfWork.ShipmentOrders.GetLabel(item.ShipmentOrderItemID, ShipmentLabelType.Shipment);
+        Process.Start(pdf);
+    }
+}
+```
 
 ## Versenden
 
@@ -427,3 +443,29 @@ if (Console.ReadLine() == "j")
     Process.Start(dialog.Url);
 
 ```
+
+# Meldungen (TODO)
+
+## Abfrage Meldungen
+
+## Verarbeitung Meldungen
+
+## Erzeugen Meldung
+
+### Retourenlieferung ist eingegangen
+
+### Retourenprüfung bestanden
+
+### Retourenprüfung nicht bestanden
+
+### Bestellung zugestellt 
+
+### Abholauftrag erhalten
+
+### Bestätigung Liefertermin
+
+### Änderung Liefertermin
+
+### Kunden nicht erreicht
+
+### Kunden nicht angetroffen

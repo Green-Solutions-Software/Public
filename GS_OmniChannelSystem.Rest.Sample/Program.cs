@@ -1048,6 +1048,22 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             var transaction = order.Transactions.First();
 
+            // Versandetikett anlegen
+            var model = new CreateShipmentOrderArgs();
+            model.Quantity = 1;
+            model.WeightsInKg = new double[] { 3 };
+            var newShipmentOrderSummary = unitOfWork.ShipmentOrders.CreateFastForOrder(order.OrderID, transaction.OrderTransactionID, model);
+            var shipmentOrder = unitOfWork.ShipmentOrders.Get(newShipmentOrderSummary.ShipmentOrderID);
+            if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
+            {
+                foreach (var item in shipmentOrder.Items.Where(m => m.HasShipmentLabel))
+                {
+                    var pdf = unitOfWork.ShipmentOrders.GetLabel(item.ShipmentOrderItemID, ShipmentLabelType.Shipment);
+                    Process.Start(pdf);
+                }
+            }
+
+
             Console.WriteLine("Auftrag wird versendet: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
