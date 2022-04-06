@@ -3,6 +3,7 @@ using GS.OmniChannelSystem.Rest.SDK.Api.Args;
 using GS.OmniChannelSystem.Rest.SDK.Client;
 using GS.OmniChannelSystem.Rest.SDK.Extensions;
 using GS.OmniChannelSystem.Rest.SDK.Models;
+using GS.PflanzenCMS.Rest.SDK.Args;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -153,6 +154,19 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
             Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 
+        }
+
+        static void createArticleTransaction(ContextUOW unitOfWork)
+        {
+            var transactions = new List<ArticleTransactionArgs>();
+            var transaction = new ArticleTransactionArgs();
+            transaction.External_Key = "abc";
+            transaction.StockQuantity = 100; // Bestand
+            transaction.Prices = new List<ArticleTransactionPrice>();
+            transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
+            transactions.Add(transaction);
+
+            unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
         }
 
         static void createOrder(ContextUOW unitOfWork)

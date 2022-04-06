@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GS.OmniChannelSystem.Rest.SDK.Interfaces;
+using GS.PflanzenCMS.Rest.SDK.Args;
 
 namespace GS.OmniChannelSystem.Rest.SDK.Client
 {
@@ -27,6 +28,12 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             dict.Add("importExternal", importExternal);
             dict.Add("compareNameSecondary", compareNameSecondary);
             return this.context.Post<Article, Article.Summary>(this.resource+"/create", entity, null, dict);
+        }
+
+        public bool Transactions(ArticleTransactionArgs[] transactions, bool immediateIndex = true)
+        {
+            this.context.Post<List<ArticleTransactionArgs>, object>(this.resource + "/transaction", transactions.ToList());
+            return true;
         }
 
         public Job CreatePatches(ArticleKey.Patch[] value, string external_key, string mode = "available", bool dontRemove = true)
