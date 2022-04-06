@@ -401,6 +401,16 @@ if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
 }
 ```
 
+## Lieferschein abfragen
+
+Der Lieferschein fürs Paket muss abgefragt werden
+
+```csharp
+var transaction = order.Transactions.First();
+var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTransactionID, DocumentationType.DeliverySlip);
+Process.Start(pdf);
+```
+
 ## Versenden
 
 Teilbestellung wurde versendet

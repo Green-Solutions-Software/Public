@@ -169,6 +169,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
         }
 
+        static void getDeliverySlip(ContextUOW unitOfWork, Order order)
+        {
+            var transaction = order.Transactions.First();
+            var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTransactionID, DocumentationType.DeliverySlip);
+            Process.Start(pdf);
+        }
+
         static void createOrder(ContextUOW unitOfWork)
         {
             var args = new CreateOrderArgs();
