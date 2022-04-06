@@ -12,9 +12,30 @@ Die Verbindung zur Middleware wird über einen Vendor (frei vergeben), ein Token
 
 
 ```csharp
-var var unitOfWork = new ContextUOW("Test", "<token>", "<endpunkt>");
+var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
 // GET api/account/info
 var token = unitOfWork.Account.Info(); 
+```
+
+
+# Externer Primärschlüssel
+
+Alle Entitäten haben ein Feld External_Key in das die eigene ID der Warenwirtschaft hinterlegt werden keann. auf Basis dieses External_Keys kann dann zugegriffen werden
+
+# Externen Primärschlüssel setzen
+
+```csharp
+    unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "External_Key" } /* optional */);
+    Console.WriteLine("Artikel wurde aktualisiert: " + newArticle.External_Key); 
+```
+
+
+# Über Externen Primärschlüssel abfragen
+
+```csharp
+    var article = unitOfWork.Articles.Get(external_key);
+    if (article == null)
+        Console.WriteLine("Kein Artikel gefunden!");
 ```
 
 # Artikel
