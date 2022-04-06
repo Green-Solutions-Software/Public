@@ -15,3 +15,5 @@ Heute zählen wir zu den erfolgreichsten Softwareunternehmen in der grünen Bran
 [REST API Omni Channel System](GS_OmniChannelSystem.Rest.SDK)
 
 [Beispielapplikation](GS_OmniChannelSystem.Rest.Sample)
+
+[Schritt für Schritt Anleitung zur Anbindung externer Systeme](HowTo.md)
