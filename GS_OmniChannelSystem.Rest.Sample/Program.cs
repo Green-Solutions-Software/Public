@@ -143,6 +143,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Picture = new PictureEntityReference(picture.FileID)
             });
 
+            // Kanal Artiklenummern
+            var channel = unitOfWork.Channels.Get(1);
+            var articleKeyChannel = new ArticleKeyChannel();
+            articleKeyChannel.Channel = new EntityReference(channel.ChannelID);
+            articleKeyChannel.Number = "abc";
+            articleKey.Channels.Add(articleKeyChannel);
+
             var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
             Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 
@@ -935,14 +942,11 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void confirmOrder(ContextUOW unitOfWork, Order order)
         {
-            var transaction = order.Transactions.First();
-
             Console.WriteLine("Auftrag wird bestätigt: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Status = OrderTransactionStatusType.Confirmed;
             args.StatusOn = DateTime.Now;
-            args.OrderTransactionID = transaction.OrderTransactionID;
             args.Message = "Nachricht zur Bestätigung";
 
             var articles = new List<OrderTransactionArticle>();
