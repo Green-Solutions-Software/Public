@@ -2,14 +2,15 @@
 
 # Übersicht
 
-Mit dem Webservice kann das System ausgelesen werden
+Mit der Green Solutions REST API können auf alle Funktionen und Daten des Omni-Channel-Systems zugegriffen werden.
+
+In der Dokumentation wird für das Green Solutions Omni-Channel-System das Synonym "Middleware" und für das externe Software-System wie z.B. das ERP, Warenwirtschaft oder Webshop das Synonym "Externes Software-System" verwendet.
 
 Als innovatives Softwareunternehmen haben wir uns zu 100% auf die Gartenbau Branche spezialisiert. Mit unserer cloud-basierten Omni-Channel-Lösung können alle relevanten Kanäle im Online und Offline Bereich wie z.B. Webshop, Website, Beschilderungen, Newsletter, Apps, Social Media, Printmedien usw. zentral aus einem System verwaltet werden. Darüber hinaus kann der Kunde für alle Kanäle auf die riesige Green Solutions Datenbank zugreifen – mit tausenden Fotos, Videos, redaktionellen Berichten, Pflanzen- und Produktdaten.
 
 # Authorisierung
 
-Die Verbindung zur Middleware wird über einen Vendor (frei vergeben), ein Token und den Endpunkt definiert.
-
+Dieses Beispiel zeigt, wie man eine Verbindung zur Middleware wird über einen Vendor, ein Token und den Endpunkt definiert.
 
 ```csharp
 var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
@@ -17,12 +18,13 @@ var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
 var token = unitOfWork.Account.Info(); 
 ```
 
-
 # Externer Primärschlüssel
 
-Alle Entitäten haben ein Feld External_Key in das die eigene ID der Warenwirtschaft hinterlegt werden keann. auf Basis dieses External_Keys kann dann zugegriffen werden
+Alle Entitäten haben ein Feld External_Key, in der eigene Primärschlüssel wie z.B. die ID des externen Software-Systems hinterlegt werden kann. Auf Basis dieses External_Keys kann dann auf die Entität zugegriffen werden.
 
 # Externen Primärschlüssel setzen
+
+Dieses Beispiel zeigt, wie man bei der Entität den Primärschlüssel setzen kann.
 
 ```csharp
     unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "External_Key" } /* optional */);
@@ -30,7 +32,9 @@ Alle Entitäten haben ein Feld External_Key in das die eigene ID der Warenwirtsc
 ```
 
 
-# Über Externen Primärschlüssel abfragen
+# Entität über Externen Primärschlüssel abfragen
+
+Dieses Beispiel zeigt, wie man eine Entität über einen Primärschlüssel abfragen kann.
 
 ```csharp
     var article = unitOfWork.Articles.Get(external_key);
@@ -42,9 +46,9 @@ Alle Entitäten haben ein Feld External_Key in das die eigene ID der Warenwirtsc
 
 Artikel Stammdaten und Bewegungsdaten (Preise + Beständ) müssen übertragen werden
 
-## Übertrag Stammdaten
+## Artikel-Stammdaten übertragen
 
-Als erstes werden die Artikeldaten an die Middleware übertragen
+Dieses Beispiel zeigt, wie die Artikel-Stammdaten übertragen werden.
 
 ```csharp
 var article = new Article();
@@ -210,9 +214,9 @@ var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/c
 Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 ```
 
-## Kanal Artikelnummern
+## Kanalspezifische Artikelnummern hinzufügen
 
-Kanalspezifische Artikelnummern hinterlegen
+Dieses Beispiel zeigt, wie die kanalspezifischen Artikelnummern als Teil der Artikel-Stammdaten beim Artikel hinzugefügt werden.
 
 ```csharp
     var channel = unitOfWork.Channels.Get(1);
@@ -222,10 +226,9 @@ Kanalspezifische Artikelnummern hinterlegen
     articleKey.Channels.Add(articleKeyChannel);
 ```
 
+## Artikel-Bewegungsdaten übertragen
 
-## Übertrag Bewegungsdaten
-
-Bestände und Preise aktualisieren
+Dieses Beispiel zeigt, wie die Artikel-Bewegungsdaten übertragen werden.
 
 ```csharp
 var transactions = new List<ArticleTransactionArgs>();
@@ -239,14 +242,13 @@ transactions.Add(transaction);
 unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
 ```
 
-
 # Bestellungen
 
-Neue Bestellungen müssen abgefragt werden. 
+In diesem Bereich wird beschrieben, wie man neue Bestellungen abfragen kann. 
 
-## Abfrage Bestellungen
+## Bestellungen abfragen
 
-Hier wird nur eine Summary mit den wichtigsten Daten geliefert.
+Dieses Beispiel zeigt, wie man Bestellungen abgefragen kann. Als Ergebnis wird eine Zusammenfassung der Bestellungen mit den relevanstesten Daten zurückgeliefert.
 
 ```csharp
     // Wir holen die Bestellungen nach OrderID absteigend sortiert
@@ -258,9 +260,9 @@ Hier wird nur eine Summary mit den wichtigsten Daten geliefert.
 
 ```
 
-## Bestellung holen
+## Bestellung abfragen
 
-Die komplette Bestellung holt man so:
+Dieses Beispiel zeigt, wie man eine konkrete Bestellung abgefragen kann. Als Ergebnis wird eine vollständige Bestellung mit allen verfügbaren Daten zurückgeliefert.
 
 ```csharp
     var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
@@ -334,13 +336,13 @@ Die komplette Bestellung holt man so:
 
 ```
 
-## Setzen Bestell-Status
+## Bestell-Status aktualisieren
 
-Wenn ein Bestellstatus sich ändert muss dieser an die Middleware übertragen werden
+Dieses Beispiel zeigt, wie man den Bestell-Status aktualisieren kann.
 
-## Bestätigen
+## Bestellung bestätigen
 
-Auftrag bestätigen (auch Teile)
+Dieses Beispiel zeigt, wie man den Bestell-Status als bestätigt markieren kann. Über diese Funktion können auch Teil der Bestellung bestätigt werden.
 
 ```csharp
 Console.WriteLine("Auftrag wird bestätigt: " + order.OrderID);
@@ -367,9 +369,9 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## Stornieren
+## Bestellung stornieren
 
-Kompletten Auftrag stornieren
+Dieses Beispiel zeigt, wie man die gesamte Bestellung storniert.
 
 ```csharp
 Console.WriteLine("Auftrag wird storniert: " + order.OrderID);
@@ -383,7 +385,10 @@ var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
 Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 ```
 
-## Versandetiketten anlegen (optional)
+## Versandetiketten erstellen (optional)
+
+Dieses Beispiel zeigt, wie man Versandetiketten erstellen kann.
+
 ```csharp
 var model = new CreateShipmentOrderArgs();
 model.Quantity = 2;
@@ -401,9 +406,9 @@ if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
 }
 ```
 
-## Lieferschein abfragen
+## Lieferschein erstellen
 
-Der Lieferschein fürs Paket muss abgefragt werden
+Dieses Beispiel zeigt, wie man Lieferschein erstellen kann.
 
 ```csharp
 var transaction = order.Transactions.First();
@@ -411,9 +416,9 @@ var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTrans
 Process.Start(pdf);
 ```
 
-## Versenden
+## Bestellung versenden
 
-Teilbestellung wurde versendet
+Dieses Beispiel zeigt, wie man den Bestell-Status einer Teil-Bestellung als versendet markieren kann.
 
 ```csharp
 var transaction = order.Transactions.First();
@@ -430,9 +435,9 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## Erledigen
+## Bestellung erledigen
 
-Auftrag komplett erledigen
+Dieses Beispiel zeigt, wie man die Bestellung als erledigt markieren kann.
 
 ```csharp
  Console.WriteLine("Auftrag wird erledigt: " + order.OrderID);
@@ -451,7 +456,7 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ## Auftragsverwaltung einbetten (optional)
 
-Die Auftragverwaltung direkt aufrufen
+Dieses Beispiel zeigt, wie man die Auftragverwaltung aufrufen kann.
 
 ```csharp
 var dialog = unitOfWork.Articles.Dialog(article.ArticleID);
