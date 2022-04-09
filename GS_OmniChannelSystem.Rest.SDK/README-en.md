@@ -1,200 +1,200 @@
 
-# Omni Channel System (OCS)
+# omni-channel system(OCS)
 ## REST API
 
 
-## Inhaltsverzeichnis
+## contents
 
-**[Übersicht](#übersicht)**
+**[overview](#overview)**
 
-**[Hinweise](#hinweise)**
+**[Hints](#hints)**
 
-**[Funktionsweise](#funktionsweise)**
+**[functionality](#functionality)**
 
-**[Fehlerbehandlung](#fehlerbehandlung)**
+**[error handling](#error handling)**
 
-**[Voraussetzungen](#voraussetzungen)**
+**[requirements](#requirements)**
 
-**[Server](#Server)**
+**[server](#server)**
 
-**[Abfragen](#abfragen)**
+**[Interrogate](#Interrogate)**
 
 **[Postman](#postman)**
 
-**[Authorisierung](#authorisierung)**
-> [Login](#login)
+**[Authorization](#authorization)**
+> [Log in](#Log in)
 
-**[Währungen](#währungen)**
+**[currencies](#currencies)**
 
-**[Länder](#länder)**
+**[countries](#countries)**
 
-**[Kategorien](#kategorien)**
+**[categories](#categories)**
 
-**[Berichte](#berichte)**
+**[reports](#reports)**
 
-**[Kundenkarten](#kundenkarten)**
+**[loyalty cards](#loyalty cards)**
 
-> [Neue Kundenkarten abfragen](#neue-kundenkarten-abfragen)
+> [Request new customer cards](#new-loyalty-card-requests)
 
-> [Neue Kundenkarten validieren](#neue-kundenkarten-validieren)
+> [Validate new loyalty cards](#validate-new-loyalty-cards)
 
-> [Aktueller Umsatz](#aktueller-umsatz)
+> [Current sales](#current-sales)
 
-> [Webshop Bestellungen](#webshop-bestellungen)
+> [Web shop orders](#webshop orders)
 
-> [Auftragsdaten](#auftragsdaten)
+> [order data](#order data)
 
-**[Videos](#videos)**
+**[videos](#videos)**
 
-**[Filialen](#filialen)**
+**[branches](#branches)**
 
-**[Kunden](#kunden)**
+**[customers](#Customers)**
 
-**[Artikel](#artikel)**
+**[article](#items)**
 
-> [Erweiterte Anlage](#erweiterte-anlage)
+> [Extended facility](#extended-plant)
 
-> [Transaktionen](#transaktionen)
+> [transactions](#transactions)
 
-> [Varianten](#Varianten)
+> [variants](#variants)
 
-> [Dialog Bearbeiten](#dialog-bearbeiten)
-> [Dialog Variante Bearbeiten](#dialog-variante-bearbeiten)
+> [Edit dialog](#dialog-edit)
+>[Edit variant dialog](#dialog-variant-edit)
 
-**[Preislisten](#preislisten)**
-> [Preislisten - Einträge](#preislisten-einträge)
+**[price lists](#price lists)**
+> [Price Lists - Entries](#price list entries)
 
-**[Bestellungen](#bestellungen)**
+**[orders](#orders)**
 
-> [Alle Shop Bestellungen](#alle-shop-bestellungen)
+> [All store orders](#all shop orders)
 
-> [Status anpassen](#status-anpassen)
+> [Adjust Status](#status-adjust)
 
-> [Dialog Versenden](#dialog-versenden)
+> [Send dialog](#dialog-send)
 
-> [Dialog Bestätigen](#dialog-bestätigen)
+> [Confirm dialog](#dialog-confirm)
 
-> [Dialog Erledigen](#dialog-erledigen)
+> [Complete dialogue](#dialog-do)
 
-> [Dialog Stornieren](#dialog-stornieren)
+> [Cancel dialog](#dialog-cancel)
 
-> [Dialog Auftragsverwaltung](#dialog-auftragsverwaltung)
+> [Order management dialog](#dialog order management)
 
-**[Dokumente](#dokumente)**
+**[Documents](#Documents)**
 
-> [Lieferschein Bestellung](#lieferschein-bestellung)
+> [Delivery note order](#delivery note order)
 
-> [Lieferschein Teilbestellung](#lieferschein-teilbestellung)
+> [Delivery note partial order](#delivery note partial order)
 
-**[Versandaufträge](#versandaufträge)**
+**[shipping orders](#shipping orders)**
 
-> [Packetaufkleber abfragen](#packetaufkleber-abfragen)
+> [Query package label](#query packet stickers)
 
-**[Dateien](#dateien)**
+**[files](#files)**
 
-> [Dateien Hochladen](#dateien-hochladen)
+> [Upload files](#files-upload)
 
-> [Bilder hochladen](#bilder-hochladen)
+> [Upload pictures](#Upload pictures)
 
-**[Gutscheine](#gutscheine)**
+**[coupons](#coupons)**
 
-> [Gutschein erstellen](#gutschein-erstellen)
+> [Create Voucher](#create voucher)
 
-> [Gutschein finden](#gutschein-finden)
+> [find coupon](#coupon-find)
 
-> [Zahlung reservieren](#zahlung-reservieren)
+> [reserve payment](#payment-reserve)
 
-> [Zahlung durchführen](#zahlung-durchführen)
+> [to execute payment](#to execute payment)
 
-> [Zahlung stornieren](#zahlung-stornieren)
+> [cancel a payment](#cancel a payment)
 
-> [Neue Codes erzeugen](#neue-codes-erzeugen)
+> [Generate new codes](#generate-new-codes)
 
-> [Gutschein kaufen am POS](#gutschein-kaufen-am-pos)
+> [Buy a voucher at the POS](#voucher-buy-at-pos)
 
-> [Bezahlen per Gutschein am POS](#bezahlen-per-gutschein-am-pos)
+> [Pay with a voucher at the POS](#pay-by-voucher-at-pos)
 
-> [Stornieren per Gutschein am POS](#stornieren-per-gutschein-am-pos)
+> [Cancellation by voucher at the POS](#cancel-by-voucher-am-pos)
 
-> [Barcodes](#barcodes)
+> [barcodes](#barcodes)
 
 
-**[Nachrichten](#nachrichten)**
+**[news](#Messages)**
 
-> [Nachricht erstellen](#nachricht-erstellen)
-  - [Retourenlieferung ist eingegangen](#retourenlieferung-ist-eingegangen)
-  - [Retourenprüfung bestanden](#retourenprüfung-bestanden)
-  - [Retourenprüfung nicht bestanden](#retourenprüfung-nicht-bestanden)
-  - [Bestellung zugestellt](#bestellung-zugestellt)
-  - [Abholauftrag erhalten](#abholauftrag-erhalten)
-  - [Stornoanfrage des Kunden bestätigt](#stornoanfrage-des-kunden-bestätigt)
-  - [Storno nicht mehr möglich](#Storno-nicht-mehr-möglich)
+> [create a message](#create a message)
+  - [Return delivery has been received](#return-delivery-is-received)
+  - [Returns inspection passed](#returns inspection passed)
+  - [Returns inspection failed](#returns inspection-failed)
+  - [order delivered](#order-delivered)
+  - [received pick-up order](#pick-up order-received)
+  - [Customer cancellation request confirmed](#cancellation-request-of-the-customer-confirmed)
+  - [Cancellation is no longer possible](#Cancellation-no longer possible)
 
-**[Warenkörbe](#warenkörbe)**
+**[shopping carts](#shopping carts)**
 
-**[Aufträge](#aufträge)**
+**[assignments](#assignments)**
 
-**[Container](#container)**
+**[Container](#Container)**
 
-**[Jahresplanungen](#jahresplanungen)**
+**[annual planning](#annual planning)**
 
-**[Piktogramme](#piktogramme)**
+**[pictograms](#pictograms)**
 
-**[Suche](#suche)**
+**[seek](#seek)**
 
-**[Verknüpfte Inhalte für Artikel](#verknüpfte-inhalte-für-artikel)**
+**[Linked content for articles](#linked-content-for-articles)**
 
-**[Verknüpfte Inhalte für Bericht](#verknüpfte-inhalte-für-bericht)**
+**[Linked content for report](#linked-content-for-report)**
 
-**[Verknüpfte Inhalte für Video](#verknüpfte-inhalte-für-video)**
+**[Linked content for video](#linked-content-for-video)**
 
-**[Extern hinzufügen](#extern-hinzufügen)**
+**[Add External](#external-add)**
 
-> [Suchen](#Suchen)
+> [Seek](#Seek)
 
-> [Nach einem Artikel suchen](#nach-einem-artikel-suchen)
+> [Search for an item](#search-for-an-item)
 
-> [Pflanzen importieren](#pflanzen-importieren)
+> [import plants](#plant-import)
 
-> [Videos importieren](#videos-importieren)
+> [import videos](#import-videos)
 
-> [Berichte importieren](#berichte-importieren)
+> [Import reports](#reports-import)
 
-> [Bilder importieren](#bilder-importieren)
+> [Import images](#import-images)
 
-> [Pflanzenfotos importieren](#pflanzenfotos-importieren)
+> [Import plant photos](#import-plant-photos)
 
-**[Zwischenspeicher](#zwischenspeicher)**
+**[cache](#cache)**
 
-> [Alle caches löschen](#alle-caches-löschen)
+> [Clear all caches](#clear-all-caches)
 
-> [Datenbank- Cache löschen](#datenbank-cache-löschen)
+> [Clear database cache](#clear-database-cache)
 
-> [Caches aufräumen](#caches-aufräumen)
+> [Clean up caches](#caches-clean up)
 
-**[Datenstrukturen](#datenstrukturen)**
+**[data structures](#data structures)**
 
-> [Order](#order)
+> [order](#order)
 
 > [ShipmentOrder](#shipmentorder)
 
 > [Article](#article)
 
-> [Job](#job)
+> [job](#job)
 
-> [Payment](#payment)
+> [payments](#payment)
 
 > [EntityReference](#entityreference)
 
-> [Voucher](#voucher)
+> [vouchers](#voucher)
 
-> [VoucherCode](#vouchercode)
+> [voucher code](#voucher code)
 
 > [FoundVoucher](#foundvoucher)
 
 > [OrderStatusType](#orderstatustype)
 
-> [TransactionStatus](#transactionstatus)
+> [TransactionStatus](#transaction status)
 
 > [BasketType](#baskettype)
 
@@ -204,829 +204,829 @@
 
 > [Documentation](#documentation)
 
-> [Artikelstatus](#artikelstatus)
+> [item status](#article status)
 
-> [File](#file)
+> [Files](#file)
 
-> [Transaktion](#transaktion)
+> [transaction](#transaction)
 
-> [OrderStatus](#orderstatus)
+> [OrderStatus](#order status)
 
-> [DebitCard](#debitcard)
+> [debit card](#debit card)
 
-> [Result](#result)
+> [result](#result)
 
-> [Dialog](#dialog)
+> [dialog](#dialog)
 
 > [Upload](#upload)
 
-> [Message](#message)
+> [messages](#message)
 
-> [Pricelist](#pricelist)
+> [pricelist](#pricelist)
 
 > [PricelistItem](#pricelistitem)
 
-> [AccountInfo](#accountinfo)
+> [account info](#account info)
 
-**[Dialoge](#dialoge)**
+**[dialogues](#dialogues)**
 
-> [Versenden](##versenden)
+> [To ship](##to ship)
 
-> [Auftragsverwaltung](#auftragsverwaltung)
+> [order management](#order management)
 
-> [Artikel bearbeiten](#artikel-bearbeiten)
+> [Edit article](#Edit article)
 
-> [Bestellung bestätigen](#bestellung-bestätigen)
+> [confirm order](#confirm order)
 
-> [Bestellung stornieren](#bestellung-stornieren)
+> [cancel order](#cancel order)
 
-> [Bestellung erledigen](#bestellung-erledigen)
+> [complete order](#order-complete)
 
-**[Beispiele + API](#beispiel-applikation)**
+**[Examples API](#sample application)**
 
-> [Beispiel Applikation](#beispiel-applikation)
+> [Example application](#sample application)
 
-> [Token abfragen zur Authentifizierung](#token-abfragen-zur-authentifizierung)
+> [Request token for authentication](#token-request-for-authentication)
 
-> [Artikel anlegen](#artikel-anlegen)
+> [to write an article](#to write an article)
 
-> [Bestellungen abfragen](#bestellungen-abfragen)
+> [Query orders](#orders-query)
 
-# Übersicht
+# overview
 
-Mit dem Webservice kann das System ausgelesen werden
+The system can be read out with the web service
 
-# Hinweise
+# Hints
 
-Eine Sitzung ist unbegrenzt gültig.
+A session is valid indefinitely.
 
-# Funktionsweise
+# functionality
 
-Die API-Aufrufe werden als REST-Request durchgeführt, authentifiziert mit einem Zugriffstoken.
+The API calls are made as a REST request, authenticated with an access token.
 
-# Fehlerbehandlung
+# error handling
 
-Im Fehlerfall eines Aufrufes wird ein Json Objekt mit den Fehlerinformationen zurückgegeben
+If a call fails, a Json object with the error information is returned
 
-# Voraussetzungen
+# requirements
 
-Man benötigt ein Benutzerkonto auf dem CMS System mit ausreichender Berechtigung.
+You need a user account on the CMS system with sufficient authorization.
 
-# Server
+# server
 
-Die Anfragen werden über die folgende URL aufgerufen:
+The requests are accessed via the following URL:
 
 https://{domain}/api/
 
-# Abfragen
+# Interrogate
 
-Es gibt 6 Arten von Anfragen die für alle Entitäten gleich sind:
+There are 6 types of requests common to all entities:
 
-| **URL** | **Methode** | **Beschreibung** |
+| **URL** | **method** | **description** |
 | --- | --- | --- |
-| api/{entities} | GET | Liste von Entitäten abfragen |
-| api/{entities}/{id} | GET | Entität abfragen |
-| api/{entities}/?ext={external\_key} | GET | Entität auf Basis des External\_key abfragen |
-| api/{entities}/{id} | PUT | Entität updaten |
-| api/{entities} | PUT | Mehrere Entitäten updaten/anlegen wenn ein Array übertragen wird |
-| api/{entities}/{id} | DELETE | Entität löschen |
-| api/{entities} | POST | Eine neue Entität anlegen |
+| api/{entities}| GET| Query list of entities|
+| api/{entities}/{id}| GET| query entity|
+| api/{entities}/?ext={external\_key}| GET| Query entity based on External\_key|
+| api/{entities}/{id}| PUT| update entity|
+| api/{entities}| PUT| Update/create multiple entities when transferring an array|
+| api/{entities}/{id}| DELETE| delete entity|
+| api/{entities}| POST OFFICE| Create a new entity|
 
-Alle Funktionen erwarten 3 Hostheader:
+All functions expect 3 host headers:
 
-| **Header** | **Beschreibung** |
+| **headers** | **description** |
 | --- | --- |
-| **token** | Authorisierung |
-| **language** | Sprache (z.B. de-DE) |
-| **version** | 1.0 (default) |
-| **vendor** | Beliebiger Name |
+| **tokens** | Authorization|
+| **language** | language(e.g. de-DE) |
+| **version** | 1.0(default) |
+| **vendor** | Any name|
 
-Alle Funktionen die Listen zurückgeben haben folgende Parameter:
+All functions that return lists have the following parameters:
 
-| **Parameter** | **Beschreibung** |
+| **parameter** | **description** |
 | --- | --- |
-| **pageIndex** | Aktuelle Seite |
-| **pageSize** | Anzahl Einträge pro Seite |
-| **Search** | Suchstring |
-| **orderBy** | Sortierung (string) |
-| **filter** | Filterkriterien |
+| **pageIndex** | Current page|
+| **pageSize** | Number of entries per page|
+| **Search** | search string|
+| **orderBy** | Sorting(string) |
+| **filter** | filter criteria|
 
-> **Nur ausgewählte Felder abfragen/aktualisieren**
+> **Query/update selected fields only**
 
-Bei dem GET und PUT zu einer Entität (Abfragen/Updaten) kann noch ein Parameter „properties&quot; mitgegeben werden um zu definieren welche Felder aus dem Model überhaupt verwendet/gefüllt werden sollen. Für z.B. Artikel sähe sowas wie folgt aus:
+When GET and PUT to an entity(Queries/Updates) a parameter "properties
 
 api/articles/4687?properties=Name,Name2,Photos,Keys,Keys.Info,Keys.Value,Keys.EAN,Keys.Photos
 
 # Postman
 
-Ein gutes Tool um die Schnittstelle zu testen vor der Implementation finden Sie hier:
+A good tool to test the interface before implementation can be found here:
 
 [https://www.getpostman.com/](https://www.getpostman.com/)
 
-Damit können Sie alles Abfragen ausprobieren ohne die Schnittstelle implementiert zu haben.
+This allows you to try out all queries without having implemented the interface.
 
-# Authorisierung
+# Authorization
 
-Die Authorisierung muss nur 1-mal durchgeführt werden vom Entwickler. Der daraus entstehende Token kann dann dauerhaft für den Zugriff verwendet werden ohne dass das Benutzername/Passwort erneut übertragen werden muss:
+The authorization only has to be carried out once by the developer. The resulting token can then be used permanently for access without the username/password having to be transmitted again:
 
-| **Funktion** | **Parameter** | **Beschreibung** |
+| **function** | **parameter** | **description** |
 | --- | --- | --- |
-| api/account/validate |user| Benutzername | |
-| |password| Passwort |
+| api/account/validate|user| User name| |
+| |password| password|
 
-Als Rückgabe wird ein Token zurückgegeben der bei allen folgenden Abfragen mitgegeben werden muss.
+A token is returned as a return, which must be given in all subsequent queries.
 
-# Login
+# Log in
 
-Um sich per App als Benutzer einzuloggen muss diese Methode verwendet werden. Diese liefert dann nicht nur ein Token sondern auch Infos über den eingeloggten Benutzer.
+This method must be used to log in as a user via the app. This then provides not only a token but also information about the logged-in user.
 
-| **Funktion** | **Parameter** | **Beschreibung** |
+| **function** | **parameter** | **description** |
 | --- | --- | --- |
-| api/account/login |user| Benutzername | |
-| |password| Passwort |
+| api/account/login|user| User name| |
+| |password| password|
 
-Als Rückgabe wird eine AccountInfo zurückgegeben mit allen Informationen über den eingeloggten Benutzer (Siehe **[AccountInfo](#accountinfo)**).
+As a return, an AccountInfo is returned with all information about the logged-in user(Please refer**[account info](#account info)**).
 
-# Währungen
+# currencies
 
-| Url | api/currencies |
+| url| api/currencies|
 | --- | --- |
 
-# Länder
+# countries
 
-| Url | api/countries |
+| url| api/countries|
 | --- | --- |
 
-# Kategorien
+# categories
 
-| Url | api/categories |
+| url| api/categories|
 | --- | --- |
 
-# Berichte
+# reports
 
-| Url | api/reports |
+| url| api/reports|
 | --- | --- |
 
-# Kundenkarten
+# loyalty cards
 
-| Url | api/debitcards |
+| url| api/debit cards|
 | --- | --- |
 
-## Neue Kundenkarten abfragen
+## Request new customer cards
 
-Listet neue Kundenkarten ohne Validierung an den Anfang der Liste. Sie können dann pageweise immer weitergehen bis ein Datensatz erscheint der bereits validiert wurde.
+Lists new loyalty cards without validation at the top of the list. You can then continue page by page until a record appears that has already been validated.
 
-**Siehe [DebitCard](#debitcard)**
+**Please refer[debit card](#debit card)**
 
-**Funktion: GET** /api/debitcards?orderby=ValidatedOn
+**Function: GET** /api/debitcards?orderby=ValidatedOn
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **orderby** |string| Sortierung | Listet die noch nicht zugeordneten Kundenkarten nach oben |
+| **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
-## Neue Kundenkarten validieren
+## Validate new loyalty cards
 
-Neue Kundenkarten müssen von der WaWi einmalig validiert werden das diese auch von dem eingeloggten Benutzer verwendet werden dürfen. Hierzu laden Sie sich bitte den Kunden, der der Karte zugeordnet ist und vergleichen z.B. Adressdaten
+New customer cards must be validated once by WaWi so that they can also be used by the logged-in user. To do this, please load the customer who is assigned to the card and compare e.g. address data
 
-**Funktion: POST** /api/debitcards/validate/{id}
+**Function: POST** /api/debitcards/validate/{id}
 
-| **Parameter** | **Typ** | **Beschreibung** |
+| **parameter** | **Type** | **description** |
 | --- | --- | --- |
-| **id** |long| ID der Kundenkarte |
-| **valid** |Bool| Gültig oder nicht |
-| **Error** |string| Falls nicht gültig kann hier der Grund angegeben werden. Dieser Text wird dann dem Kunden angezeigt, wenn er versucht mit der Karte zu kaufen. Ansonsten bitte leer mitgeben |
-| **Turnover** |Double| Aktueller Umsatz auf der Kundenkarte |
+| **i.e** |long| Customer card ID|
+| **valid** |boolean| Valid or not|
+| **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
+| **turnover** |doubles| Current turnover on the customer card|
 
-## Aktueller Umsatz
+## Current sales
 
-In festen Intervallen müssen der aktuelle Umsatz sowie die einzelnen Auftragsdaten übertragen werden.
+The current turnover and the individual order data must be transmitted at fixed intervals.
 
-Setzen Sie hierfür das Turnover Feld auf den aktuell gebuchten Umsatz.
+To do this, set the turnover field to the currently booked turnover.
 
-## Webshop Bestellungen
+## Web shop orders
 
-Webshop Aufträge haben nun eine Verknüpfung „DebitCard&quot; zu der Kundenkarte, der sie zugeordnet werden sollen.
+Webshop orders now have a link "DebitCard
 
-## Auftragsdaten
+## order data
 
-Die Aufträge können als api/orders mit dem Status „Ready&quot; im System angelegt und dann über das DebitCard Feld mit der Kundenkarte verknüpft werden. Bitte verwenden Sie bei der Transaction den Type Cashdesc (4) damit das System weiß, das der Auftrag über die Kasse gelaufen ist.
+The orders can be saved as api/orders with the status "Ready(4) so that the system knows that the order has gone through the checkout.
 
-> Bitte achten Sie darauf uns nur Bestellungen zu übermitteln die Sie nicht von uns bekommen haben!
+> Please make sure that you only send us orders that you have not received from us!
 
-# Videos
+# videos
 
-| Url | api/videos |
+| url| api/videos|
 | --- | --- |
 
-# Filialen
+# branches
 
-| Url | api/chainstores |
+| url| api/chainstores|
 | --- | --- |
 
-# Kunden
+# customers
 
-| Url | api/members |
+| url| api/members|
 | --- | --- |
 
-# Artikel
+# article
 
-| Url | api/articles |
+| url| api/articles|
 | --- | --- |
 
-## Erweiterte Anlage
+## Extended facility
 
-Mit dieser Funktion kann ein Artikel angelegt und direkt mit einem Green – Solutions Artikel um Informationen angereichert werden
+With this function, an article can be created and enriched with information directly with a Green – Solutions article
 
-**Funktion: POST** api/articles/create
+**Function: POST** api/articles/create
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **importExternal** |bool| Externe Daten hinzufügen? | |
-| **compareNameSecondary** |bool| Name 2 vergleichen? | |
+| **importExternal** |boolean| Add external data?| |
+| **compareNameSecondary** |boolean| compare name 2?| |
 
-## Transaktionen
+## transactions
 
-Mit dieser Funktion können bei größeren Mengen von Artikeln die Bestände und die Preise aktualisiert werden
+With this function, stocks and prices can be updated for larger quantities of items
 
-**Funktion: POST** api/articles/ transaction
+**Function: POST** api/articles/transaction
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **BODY** |ArticleTransactionArgs[]| Ein Array mit mehreren Transaktionen | Siehe **[Transaktionen](#transaktionen)** |
+| **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer**[transactions](#transactions)** |
 
-## Varianten
+## variants
 
-| Url | api/articlekeys |
+| url| api/articlekeys|
 | --- | --- |
 
-## Dialog Bearbeiten
+## Edit dialog
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/articles/dialog/{id} |ID| **long** | ID des Artikels der bearbeitet werden soll |
+| api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Artikel bearbeiten](#artikel-bearbeiten)** )
+As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[Edit article](#Edit article)** )
 
-## Dialog Variante Bearbeiten
+## Edit variant dialog
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/articles/dialog/key/{id} |ID| **long** | ID der Veriante die bearbeitet werden soll |
+| api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
 
-Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)**)
+As a return, the dialog is returned(please refer**[dialog](#dialog)**)
 
-# Preislisten
+# price lists
 
-Preislisten / Listungen mit kundenspezifischen Preisen (siehe **[Pricelist](#pricelist)**)
+Price lists / listings with customer-specific prices(please refer**[pricelist](#pricelist)**)
 
-| Url | api/pricelists |
+| url| api/pricelists|
 | --- | --- |
 
-# Preislisten-Einträge
+# Price List Entries
 
-Die Einträge entsprechen den Artikeln in der Preisliste (siehe **[PricelistItem](#pricelistitem)**). 
-Die Keys den Varianten der Artikel mit den indivduellen Preisen
+The entries correspond to the articles in the price list(please refer**[PricelistItem](#pricelistitem)**).
+The keys of the variants of the articles with the individual prices
 
-| Url | api/pricelistitems |
+| url| api/pricelistitems|
 | --- | --- |
-| Filter | pricelistid |
+| filter| pricelistid|
 
-# Bestellungen
+# orders
 
-| **Url** | **api/orders** |
+| **url** | **api/orders** |
 | --- | --- |
-| Filter | ownermemberid |
+| filter| ownermemberid|
 
-## Alle Shop Bestellungen
-
-
-> Diese Funktion ist nur zulässig von Benutzern innerhalb des Hauptaccount des Shops! Andernfalls wird ein entsprechender Fehler ausgelöst.
+## All store orders
 
 
-| Url | api/orders/all |
-| --- | --- |
+> This function is only allowed by users within the main account of the shop! Otherwise, a corresponding error is raised.
 
 
-
-## Status anpassen
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/transactions/status/{ID} |ID| **long** | ID der Bestellung | |
-|BODY| **Statusmeldung** | Siehe **[OrderStatus](#orderstatus)** |
-
-Als Rückgabe wird die Bestellung zurückgegeben (siehe **[Order](#order)** )
-
-## Dialog „Versenden&quot;
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/transactions/dialog/delivered/{id} |ID| **long** | ID der Transaction der Bestellung (muss versenden sein) |
-
-Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Versenden](##versenden)** )
-
-## Dialog „Bestätigen&quot;
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/dialog/confirm/{id} |ID| **long** | ID der Bestellung |
-
-Als Rückgabe wird der Dialog zurückgegeben (siehe **[Dialog](#dialog)** und **[Bestellung bestätigen](#bestellung-bestätigen)**)
-
-## Dialog „Erledigen&quot;
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/dialog/finish/{id} |ID| **long** | ID der Bestellung |
-
-Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung erledigen](#bestellung-erledigen)** )
-
-## Dialog „Stornieren&quot;
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/dialog/cancel/{id} |ID| **long** | ID der Bestellung |
-
-Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Bestellung stornieren](#bestellung-stornieren)** )
-
-## Dialog „Auftragsverwaltung&quot;
-
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/orders/dialog | | | |
-
-Als Rückgabe wird der Dialog zurückgegeben (siehe [Dialog](#dialog) und **[Auftragsverwaltung](#auftragsverwaltung)** )
-
-# Dokumente
-
-## Lieferschein Bestellung
-
-Liefert den Lieferschein zu einer Bestellung.
-
-Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher darf diese Funktion nur nach erfolgter Auftragsbestätigung aufgerufen werden.
-
-| **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type} |orderid| **long** | ID der Bestellung |
-| |type| **string** | DeliverySlip |
-| | output | | DOCX, PDF |
-
-## Lieferschein Teilbestellung
-
-Liefert den Lieferschein zu einer Teilbestellung.
-
-Bitte beachten Sie das sie nur die Positionen bekommen die bestätigt sind daher darf diese Funktion nur nach erfolgter Auftragsbestätigung aufgerufen werden.
-
-| **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
-| --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type}/{transactionid} |orderid| **long** | ID der Bestellung | |
-|type| **string** | DeliverySlip | |
-|Transactionid| **long** | ID der Teilbestellung | |
-|Output|**string**| DOCX, PDF |
-
-# Versandaufträge
-
-Enthält eine Liste aller Versandaufträge im System. Jeder Versandauftrag kann mehrere Items enthalten (Sendungen)
-
-| Url | api/shipmentorders |
+| url| api/orders/all|
 | --- | --- |
 
-Siehe **[ShipmentOrder](#shipmentorder)**
 
-## Packetaufkleber abfragen
 
-Mit dieser Funktion kann der Paketschein abgefragt werden. Übergeben Sie dafür eine der ShipmentOrderID des Versandauftrags (siehe **[ShipmentOrder](#shipmentorder)** )
+## Adjust Status
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/shipmentorders/items/label/{id} |ID| **long** | ID der Sendung |
+| api/orders/transactions/status/{ID}|ID| **long** | ID of the order| |
+|BODY| **status message** | Please refer**[OrderStatus](#order status)** |
 
-Als Rückgabe wird die Pdf zurückgegeben
+As a return, the order will be returned(please refer**[order](#order)** )
 
-# Dateien
+## "Send" dialog
 
-| Url | api/datafiles |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
+
+As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[To ship](##to ship)** )
+
+## "Confirm" dialog
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/orders/dialog/confirm/{id}|ID| **long** | ID of the order|
+
+As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[confirm order](#confirm order)**)
+
+## Dialog "Done
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
+
+As a return, the dialog is returned(please refer[dialog](#dialog) and**[complete order](#order-complete)** )
+
+## "Cancel" dialog
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
+
+As a return, the dialog is returned(please refer[dialog](#dialog) and**[cancel order](#cancel order)** )
+
+## Order management dialog
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/orders/dialog| | | |
+
+As a return, the dialog is returned(please refer[dialog](#dialog) and**[order management](#order management)** )
+
+# Documents
+
+## Delivery note order
+
+Delivers the delivery note for an order.
+
+Please note that you will only receive the items that have been confirmed, so this function may only be called up after the order has been confirmed.
+
+| **function(GET)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/documents/order/{orderid}/{type}|orderid| **long** | ID of the order|
+| |type| **string** | DeliverySlip|
+| | output| | DOCX, PDF|
+
+## Delivery note partial order
+
+Delivers the delivery note for a partial order.
+
+Please note that you will only receive the items that have been confirmed, so this function may only be called up after the order has been confirmed.
+
+| **function(GET)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/documents/order/{orderid}/{type}/{transactionid}|orderid| **long** | ID of the order| |
+|type| **string** | DeliverySlip| |
+|transactionid| **long** | ID of the partial order| |
+|output|**string**| DOCX, PDF|
+
+# shipping orders
+
+Contains a list of all shipping orders in the system. Each shipping order can contain several items(broadcasts)
+
+| url| api/shipment orders|
 | --- | --- |
 
-## Dateien Hochladen
+Please refer**[ShipmentOrder](#shipmentorder)**
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+## Query package label
+
+The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer**[ShipmentOrder](#shipmentorder)** )
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/datafiles/upload |BODY| **Upload** | Siehe **[Upload](#upload)** |
+| api/shipmentorders/items/label/{id}|ID| **long** | Shipment ID|
 
-Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
+The pdf is returned as a return
 
-## Bilder hochladen
+# files
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| url| api/datafiles|
+| --- | --- |
+
+## Upload files
+
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/pictures/upload |BODY| **Upload** | Siehe **[Upload](#upload)** |
+| api/datafiles/upload|BODY| **Upload** | Please refer**[Upload](#upload)** |
 
-Als Rückgabe wird die Datei zurückgegeben (siehe **[File](#file)** )
+The file is returned as a return(please refer**[Files](#file)** )
 
-# Gutscheine
+## Upload pictures
 
-| Url | api/vouchers | |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| --- | --- | --- | --- |
+| api/pictures/upload|BODY| **Upload** | Please refer**[Upload](#upload)** |
+
+The file is returned as a return(please refer**[Files](#file)** )
+
+# coupons
+
+| url| api/vouchers| |
 | --- | --- | --- |
 
-## Gutschein erstellen
+## Create Voucher
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/create |name| **string** | Name für den neuen Gutschein | |
-|amount| **double** | Betrag | |
-|currencyName| **string** | Währung (z.B. EUR) | |
-|info| **string** | Eine Info die beim Gutschein sichtbar hinterlegt wird | |
-|deleted| **bool** | Gelöscht anlegen |
+| api/vouchers/create|Surname| **string** | Name for the new voucher| |
+|amount| **double** | amount| |
+|name| **string** | currency(e.g. EUR) | |
+|info| **string** | An information that is visibly stored with the voucher| |
+|deleted| **boolean** | Create deleted|
 
-Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
+The voucher will be returned as a return(please refer**[vouchers](#voucher)** ).
 
-## Gutschein finden
+## find coupon
 
-| **Funktion(GET)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(GET)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/find |keyValue| **string** | Gutscheincode (ohne Leerzeichen) |
+| api/vouchers/find|keyValue| **string** | Coupon Code(without space) |
 
-Rückgabe: Gutschein –Code (siehe **[FoundVoucher](#foundvoucher)** )
+Return: voucher code(please refer**[FoundVoucher](#foundvoucher)** )
 
-## Zahlung reservieren
+## reserve payment
 
-Eine Zahlung für einen Gutschein reservieren. Während der Zeit gilt der Umsatz als verbraucht bis die Zeit abläuft und kann nicht an anderer Stelle verbraucht werden.
+Reserve a payment for a voucher. During the time, the revenue is considered consumed until the time expires and cannot be used elsewhere.
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/reserve |voucherID| **long** | Gutschein ID | |
-|voucherCodeID| **long** | Gutschein Code ID | |
-|amount| **double** | Betrag der reserviert werden soll | |
-|currencyName| **string** | Währung (z.B. EUR) | |
-|info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird | |
-|minutes| **int** | Anzahl der Minuten für die die Zahlung reserviert werden soll |
+| api/vouchers/reserve|voucherID| **long** | Voucher ID| |
+|voucherCodeID| **long** | Voucher Code ID| |
+|amount| **double** | Amount to be reserved| |
+|name| **string** | currency(e.g. EUR) | |
+|info| **string** | An information that is visible when paying| |
+|minutes| **internal** | Number of minutes for which the payment should be reserved|
 
-Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
+As a return, the created payment is returned(please refer**[payments](#payment)** ).
 
-## Zahlung durchführen
+## to execute payment
 
-Nachdem eine Zahlung reserviert worden ist kann die Zahlung dann durchgeführt werden (während der Zeit der Reservierung)
+After a payment has been reserved, the payment can then be made(during the time of reservation)
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/pay |paymentid| **long** | ID der Zahlung (siehe **[Payment](#payment)** ) |
+| api/vouchers/pay|paymentid| **long** | Payment ID(please refer**[payments](#payment)** ) |
 
-Als Rückgabe wird der Gutschein zurückgegeben (siehe **[Voucher](#voucher)** ).
+The voucher will be returned as a return(please refer**[vouchers](#voucher)** ).
 
-## Zahlung stornieren
+## cancel a payment
 
-Eine Zahlung für einen Gutschein stornieren
+Cancel a payment for a voucher
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/cancel |voucherID| **long** | Gutschein ID | |
-|voucherCodeID| **long** | Gutschein Code ID | |
-|amount| **double** | Betrag der reserviert werden soll | |
-|currencyName| **string** | Währung (z.B. EUR) | |
-|info| **string** | Eine Info die bei der Zahlung sichtbar hinterlegt wird | |
+| api/vouchers/cancel|voucherID| **long** | Voucher ID| |
+|voucherCodeID| **long** | Voucher Code ID| |
+|amount| **double** | Amount to be reserved| |
+|name| **string** | currency(e.g. EUR) | |
+|info| **string** | An information that is visible when paying| |
 
-Als Rückgabe wird die erstellte Zahlung zurückgegeben (siehe **[Payment](#payment)** ).
+As a return, the created payment is returned(please refer**[payments](#payment)** ).
 
-## Neue Codes erzeugen
+## Generate new codes
 
-Erzeugt neue Codes ohne diese in der Datenbank anzulegen (für eigene gedruckte Gutscheine)
+Generates new codes without creating them in the database(for your own printed vouchers)
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/generate/codes |count| **int** | Anzahl der Codes | |
+| api/vouchers/generate/codes|count| **internal** | number of codes| |
 
-Rückgabe: Eine Liste von Gutschein – Codes (siehe **[VoucherCode](#vouchercode)**)
+Returns: A list of voucher codes(please refer**[voucher code](#voucher code)**)
 
-## Gutschein kaufen am POS
+## Buy a voucher at the POS
 
-Der Kunde kauft einen Gutschein offline und dieser wird dann per **[Gutschein erstellen](#gutschein-erstellen)** online erstellt.
+The customer buys a voucher offline and this is then sent by**[Create Voucher](#create voucher)** created online.
 
-## Bezahlen per Gutschein am POS
+## Pay with a voucher at the POS
 
-Der Kunde kauf offline und bezahlt per online Gutschein. Dazu wird erst der Gutschein gesucht (**[Gutschein finden](#gutschein-finden)**).
-Wird keiner gefunden ist der Gutschein kein gültiger Online Gutschein. Wird einer gefunden muss die
-gewünschte Zahlung reserviert werden (**[Zahlung reservieren](#zahlung-reservieren)**). Sollte der Saldo nicht mehr ausreichen wird ein
-entsprechender Fehler zurückgegeben. Nach Abschluss der Bezahlung wird dann die Zahlung
-durchgeführt (**[Zahlung durchführen](#zahlung-durchführen)**). Der Gutschein steht nun Online zu Verfügung
+The customer buys offline and pays with an online voucher. First the voucher is searched for(**[find coupon](#coupon-find)**).
+If none is found, the voucher is not a valid online voucher. If one is found, the
+desired payment can be reserved(**[reserve payment](#payment-reserve)**). If the balance is no longer sufficient, a
+appropriate error returned. After completing the payment then the payment
+accomplished(**[to execute payment](#to execute payment)**). The voucher is now available online
 
-## Stornieren per Gutschein am POS
+## Cancellation by voucher at the POS
 
-Der Kunde storniert offline eine Ware, die per Gutschein bezahlt wurde. Nun wird diese Zahlung auch online storniert (**[Zahlung stornieren](#zahlung-stornieren)**).
+The customer cancels a product offline that was paid for with a voucher. Now this payment is also canceled online(**[cancel a payment](#cancel a payment)**).
 
-## Barcodes
+## barcodes
 
-Aktuell stehen folgende Barcode - Typen zum Druck zur Verfügung:
-- Code 128
+The following barcode types are currently available for printing:
+- code 128
 - EAN 13
 
-# Nachrichten
+# news
 
-Es werden Daten zwischen dem Webshop und dem Lieferanten über Nachrichten ausgetauscht. 
-Jede Nachricht kann einen der **[MessageType](#messagetype)** definierten Typen haben. Es können ausgehende oder eingehende Nachrichten erzeugt werden (siehe **[MessageDirection](#messagedirection)**).
-Bei einer ausgehenden Nachricht setzen Sie bitte den "Receiver" und bei eingehenden den "Sender".
+Data is exchanged between the web shop and the supplier via messages.
+Each message can have one of the**[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer**[MessageDirection](#messagedirection)**).
+For an outgoing message, please set the "receiver" and for incoming messages the "sender".
 
-> Bitte beachten Sie das manche Nachrichten als Antwort auf eine eingehende Nachricht gedacht Sind und daher per "Parent" miteinander verknüpft werden müssen.
+> Please note that some messages are intended as an answer to an incoming message and therefore have to be linked with each other via "Parent".
 
-| Url | api/messages | |
+| url| api/messages| |
 | --- | --- | --- |
 
-Siehe **[Message](#message)**
+Please refer**[messages](#message)**
 
-## Nachricht erstellen
+## create a message
 
-| **Funktion(POST)** | **Parameter** | **Typ** | **Beschreibung** |
+| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/messages/create |BODY| **[Message](#message)** | Nachricht die erstellt werden soll |
+| api/messages/create|BODY| **[messages](#message)** | Message to be created|
 
-Folgende Felder müssen bei der Nachricht gesetzt werden:
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+The following fields must be set in the message:
+|**Surname** |**Type** |**value** |**description** |
 | --- | --- | --- | --- |
-|Direction| **short** | | Ausgehend oder eingehend | 
-|Type| **short** | | (siehe **[MessageType](#messagetype)**) |
-|Key| **string** | | Schlüssel als Referenz |
-|Sender| **[EntityReference](#entityreference)**|  | Sender |
-|Receiver| **[EntityReference](#entityreference)**|  | Empfänger |
-|Parent| **[EntityReference](#entityreference)**|  | Übergeordnete Nachricht |
-|SenderConfirm| **bool** |  | Bestätigung per Mail versenden nach Versand |
+|Direction|**short** | | Outgoing or incoming |
+|Type|**short** | |(please refer**[MessageType](#messagetype)**) |
+|Keys|**string** | | key for reference |
+|transmitter|**[EntityReference](#entityreference)**| | Sender |
+|receivers|**[EntityReference](#entityreference)**| | Receiver |
+|Parent|**[EntityReference](#entityreference)**| | Parent Message |
+|SenderConfirm|**boolean** | | Send confirmation by mail after dispatch |
 
-Als Rückgabe wird die erstellte Nachricht zurückgegeben (siehe **[Message](#message)**). Diese wird dann bei dem nächsten Job der die Nachrichten verarbeitet an den Empfänger versendet.
+The created message is returned as a return(please refer**[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
 
-# Retourenlieferung ist eingegangen
-Die Retoure ist eingegangen im Lager
+# Return delivery has been received
+The return has been received at the warehouse
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 16 |Retourenlieferung ist eingegangen (82) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
-|Replacement| **bool** |  | Ware ersetzen (ja/nein) |
-|Refund| **bool** |  | Ware erstatten (ja/nein) |
-|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 16|Return delivery has been received(82) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
+|replacement| **boolean** |  | replace goods(Yes No) |
+|refund| **boolean** |  | refund goods(Yes No) |
+|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
 
-# Retourenprüfung bestanden
-Die Retoure wurde geprüft und hat den Test bestanden
+# Returns inspection passed
+The return has been checked and passed the test
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 17 |Retouren-Prüfung bestanden (80) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
-|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 17|Returns check passed(80) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
+|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
 
-# Retourenprüfung nicht bestanden
-Die Retoure wurde geprüft und hat den Test nicht bestanden
+# Returns inspection failed
+The return was checked and did not pass the test
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 18 |Retouren-Prüfung nicht bestanden (81) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
-|Positions| **MessagePosition[]** |  | Auflistung der Positionen (siehe **[MessagePosition](#MessagePosition)**)  |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 18|Returns check failed(81) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
+|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
 
-# Bestellung zugestellt
-Die Bestellung wurde zugestellt
+# order delivered
+The order has been delivered
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 5 |Lieferung durchgeführt (21) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 5|delivery done(21) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# Abholauftrag erhalten
-Der Abholauftrag wurde empfangen
+# received pick-up order
+The pickup request has been received
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 14 |Abholauftrag erhalten (64) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 14|received pick-up order(64) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# Stornoanfrage des Kunden bestätigt
-Die Stornoanfrage des Kunden wird bestätigt
+# Customer cancellation request confirmed
+The customer's cancellation request is confirmed
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 19 |Stornoanfrage des Kunden bestätigt (275) |
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 19|Customer cancellation request confirmed(275) |
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# Storno nicht mehr möglich
-Die Stornoanfrage des Kunden wird abgelehnt da Storno nicht mehr möglich ist
+# Cancellation is no longer possible
+The customer's cancellation request is rejected because cancellation is no longer possible
 
-| **Name** | **Typ** | **Wert** | **Beschreibung** |
+| **Surname** | **Type** | **value** | **description** |
 | --- | --- | --- | --- |
-|Direction| **short** | 1 |Ausgehende Nachricht |
-|Type| **short** | 20 |Storno nicht mehr möglich (71)|
-|Order| **[EntityReference](#entityreference)**|  | ID der Bestellung |
+|directions| **short** | 1|Outgoing message|
+|Type| **short** | 20|Cancellation is no longer possible(71)|
+|order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# Warenkörbe
+# shopping carts
 
-| Url | api/baskets | |
+| url| api/baskets| |
 | --- | --- | --- |
 
-## Filter
+## filter
 
-| Name | Typ | Wert | Beschreibung |
+| Surname| Type| value| description|
 | --- | --- | --- | --- |
-| type | **BasketType** | | siehe **[BasketType](#baskettype)** |
-| memberid | **long** | | MemberID nach der gefiltert werden soll |
-| my | **bool** | true/false | Nur eigene Datensätze |
+| type| **BasketType** | | please refer**[BasketType](#baskettype)** |
+| memberid| **long** | | MemberID to filter by|
+| my| **boolean** | true/false| Own records only|
 
-## Sortierung
-| Name |Beschreibung |
+## Sorting
+| Surname|description|
 | --- | --- |
-| BasketID | Nach ID sortieren |
+| BasketID| Sort by ID|
 
 
-# Aufträge
+# assignments
 
-| Url | api/jobs |
+| url| api/jobs|
 | --- | --- |
 
 # Container
 
-| Url | api/containers | |
+| url| api/containers| |
 | --- | --- | --- |
-| Schlüssel | api/containers/key/{key} | Container mit Schlüssel suchen |
-| Items | Api/containers/items/{id} | Alle Einträge eines Containers (inkl. Paging) |
+| key| api/containers/key/{key}| Find container with key|
+| items| API/containers/items/{id}| All entries of a container(including paging) |
 
-# Jahresplanungen
+# annual planning
 
-| Url | api/timelines | |
+| url| api/timelines| |
 | --- | --- | --- |
-| Schlüssel | api/timelines/key/{key} | Planung mit Schlüssel suchen |
-| Items | api/timelines/items/{id} | Alle Einträge einer Planung (inkl. Paging) |
-| Current | api/timelines/current/{id} | Alle aktuellen Einträge einer Planung (inkl. Paging) |
+| key| api/timelines/key/{key}| Search planning with key|
+| items| api/timelines/items/{id}| All entries of a plan(including paging) |
+| Current| api/timelines/current/{id}| All current entries of a plan(including paging) |
 
-# Piktogramme
+# pictograms
 
-**Funktion:** api/pictos/{id}
+**Function:** api/pictos/{id}
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **id** | long | Artikel ID | Artikel für den das Piktogramm abgefragt werden soll |
-| **width** | int | Breite | px |
-| **height** | int | Höhe | px |
+| **i.e** | long| Article ID| Article for which the pictogram is to be queried|
+| **width** | internal| Broad| px|
+| **height** | internal| Height| px|
 
-**Rückgabe:**
+**Return:**
 
-Eine Liste aller gültigen Piktogramme für den gewählten Artikel
+A list of all valid pictograms for the selected item
 
 **Definition:**
 
-| **Feld** | **Typ** | **Beschreibung** |
+| **Field** | **Type** | **description** |
 | --- | --- | --- |
-| Name | string | Name des Piktogramms (darzustellen in fett unter/neben dem Piktogramm)z.B. „Standort&quot; |
-| Text | string | Text des Piktogramms (darzustellen unter/neben dem Namen)z.B. „Sonnig&quot; |
-| Key | string | Eindeutiger Schlüssel |
-| Url | string | URL für die Grafik |
-| PictoID | long | Primärschlüssel |
+| Surname| string| Pictogram name(shown in bold below/next to the pictogram)e.g. "Location|
+| text| string| Text of the pictogram(displayed below/next to the name)e.g. "Sunny|
+| key| string| Unique Key|
+| url| string| URL for the graphic|
+| PictoID| long| primary key|
 
-# Suche
+# seek
 
-**Funktion:** api/search
+**Function:** api/search
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **search** |string| Suchbegriff | |
-| **orderBy** |string| Title, Title2 | |
-| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
-| **BloomingTimeFrom** |int| Blütezeit von | Monate |
-| **BloomingTimeTo** |int| Blütezeit bis | Monate |
-| **WidthFrom** |double| Breite von | cm |
-| **WidthTo** |double| Breite bis | cm |
-| **HeightTo** |double| Höhe von | cm |
-| **HeightFrom** |double| Höhe bis | cm |
-| **WeightFrom** |double| Gewicht von | kg |
-| **WeightTo** |double| Gewicht bis | kg |
-| **GrowthFrom** |double| Zuwachs von | cm |
-| **GrowthTo** |double| Zuwachs bis | cm |
-| **FeatureIds** |long[]| Merkmale | ID&#39;s der Merkmale (siehe Admin/Features) |
+| **search** |string| search term| |
+| **orderBy** |string| Title, Title2| |
+| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
+| **BloomingTimeFrom** |internal| heyday of| months|
+| **BloomingTimeTo** |internal| heyday to| months|
+| **WidthFrom** |double| width of| cm|
+| **WidthTo** |double| width to| cm|
+| **HeightTo** |double| Height of| cm|
+| **HeightFrom** |double| height up to| cm|
+| **WeightFrom** |double| weight of| kg|
+| **WeightTo** |double| weight up| kg|
+| **GrowthFrom** |double| growth of| cm|
+| **GrowthTo** |double| increase up to| cm|
+| **FeatureIds** |long[]| features| ID#39;s of the characteristics(see Admin/Features) |
 
-# Verknüpfte Inhalte für Artikel
+# Linked content for articles
 
-**Funktion:** api/cross/articles{id}
+**Function:** api/cross/articles{id}
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **id** |long| ID des Artikel | |
-| **search** |string| Suchbegriff | |
-| **orderBy** |string| Title, Title2 | |
-| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **i.e** |long| Article ID| |
+| **search** |string| search term| |
+| **orderBy** |string| Title, Title2| |
+| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
 
-# Verknüpfte Inhalte für Bericht
+# Linked content for report
 
-**Funktion:** api/cross/reports/{id}
+**Function:** api/cross/reports/{id}
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **id** |long| ID des Berichts | |
-| **search** |string| Suchbegriff | |
-| **orderBy** |string| Title, Title2 | |
-| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **i.e** |long| ID of the report| |
+| **search** |string| search term| |
+| **orderBy** |string| Title, Title2| |
+| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
 
-# Verknüpfte Inhalte für Video
+# Linked content for video
 
-**Funktion:** api/cross/videos/{id}
+**Function:** api/cross/videos/{id}
 
-| **Parameter** | **Typ** | **Beschreibung** | **Bemerkung** |
+| **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **id** |long| ID des Video | |
-| **search** |string| Suchbegriff | |
-| **orderBy** |string| Title, Title2 | |
-| **Types** |string| Article, Report, Video | Kann auch mehrfach angegeben werden z.B. Types=Article&amp;Types=Video |
+| **i.e** |long| ID of the video| |
+| **search** |string| search term| |
+| **orderBy** |string| Title, Title2| |
+| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
 
-# Extern hinzufügen
+# Add External
 
-Über diese Funktion können Inhalte aus der Green-Solutions Datenbank gesucht und in die lokale CMS Datenbank importiert werden. Siehe „Extern Hinzufügen&quot; im CMS Backend!
+This function can be used to search for content from the Green Solutions database and import it into the local CMS database. See Add External
 
-## Suchen
+## Seek
 
-**Funktion:** api/external/search
+**Function:** api/external/search
 
-|pageIndex| Aktuelle Seite |
+|pageIndex| Current page|
 | --- | --- |
-|pageSize| Anzahl Einträge pro Seite |
-|search| Suchstring |
-|orderBy| Sortierung (string) |
+|pageSize| Number of entries per page|
+|search| search string|
+|orderBy| Sorting(string) |
 
-**Rückgabe:**
+**Return:**
 
-Eine Liste aller externen Suchergebnisse
+A list of all external search results
 
-## Nach einem Artikel suchen
+## Search for an item
 
-**Funktion:** api/external/search/article
+**Function:** api/external/search/article
 
-|name| Name des Artikels (z.B. Acer Palmatum Bloodgood) |
-| --- | --- |
-
-**Rückgabe:**
-Den am besten passenden Artikel
-
-## Pflanzen importieren
-
-**Funktion:** api/external/import/plants/{id}
-
-|id| Externe ID der Pflanze die importiert werden soll |
-| --- | --- |
-|to|ID des Artikels in den importiert werden soll (optional)|
-
-## Videos importieren
-
-**Funktion:** api/external/import/videos/{id}
-
-|id| Externe ID des Videos das importiert werden soll |
+|Surname| Article name(e.g. Acer Palmatum Bloodgood) |
 | --- | --- |
 
-## Berichte importieren
+**Return:**
+The most suitable item
 
-**Funktion:** api/external/import/reports/{id}
+## import plants
 
-|id| Externe ID des Berichts der importiert werden soll |
+**Function:** api/external/import/plants/{id}
+
+|i.e| External ID of the plant to be imported|
+| --- | --- |
+|to|ID of the article to be imported into(optional)|
+
+## import videos
+
+**Function:** api/external/import/videos/{id}
+
+|i.e| External ID of the video to be imported|
 | --- | --- |
 
-## Bilder importieren
+## Import reports
 
-**Funktion:** api/external/import/pictures/{id}
+**Function:** api/external/import/reports/{id}
 
-|id| Externe ID des Bildes das importiert werden soll |
+|i.e| External ID of the report to be imported|
 | --- | --- |
 
-## Pflanzenfotos importieren
+## Import images
 
-**Funktion:** api/external/import/plantpictures/{id}
+**Function:** api/external/import/pictures/{id}
 
-|id| Externe ID des Pflanzenfotos das importiert werden soll |
+|i.e| External ID of the image to be imported|
 | --- | --- |
 
-# Zwischenspeicher (Cache)
+## Import plant photos
 
-Zur Verbesserung der Performance arbeitet das System mit einigen Caches die bei Bedarf gelöscht werden müssen. Momentan gibt es die folgenden Caches:
+**Function:** api/external/import/plantpictures/{id}
 
-- Datenbank
-- Sessions
-- Suchindex
-- Sitemaps
+|i.e| External ID of the plant photo to be imported|
+| --- | --- |
 
-Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespondierende Cache gelöscht werden damit die Änderung direkt sichtbar wird.
+# cache(cache)
 
-## Alle caches löschen
+To improve performance, the system works with some caches that must be deleted if necessary. Currently there are the following caches:
 
-**Funktion:** POST api/cache/clear
+- Database
+- session
+- search index
+- sitemaps
 
-## Datenbank- Cache löschen
+As soon as cached content has been changed in the database, the corresponding cache should be deleted so that the change is immediately visible.
 
-**Funktion:** POST api/cache/clear/efcache
+## Clear all caches
 
-## Caches aufräumen
+**Function:** POST api/cache/clear
 
-**Funktion:** POST api/cache/purge
+## Clear database cache
 
-# Datenstrukturen
+**Function:** POST api/cache/clear/efcache
 
-## Order
+## Clean up caches
+
+**Function:** POST api/cache/purge
+
+# data structures
+
+## order
 
 ```json
 {
@@ -1817,7 +1817,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 ```
 
 
-## Job
+## job
 
 ```json
 {
@@ -1834,7 +1834,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
   "External_COR_ID": null
 }
 ```
-## Payment
+## payments
 
 ```json
 {
@@ -1866,7 +1866,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-## Voucher
+## vouchers
 
 ```json
 {
@@ -2027,7 +2027,7 @@ Sobald gecachte Inhalte in der Datenbank verändert wurden sollte der korrespond
 }
 ```
 
-## VoucherCode
+## voucher code
 
 ```json
 {
@@ -2162,7 +2162,7 @@ public enum MessageDirection {
 }
 ```
 
-## Artikelstatus
+## item status
 
 ```json
 {
@@ -2173,7 +2173,7 @@ public enum MessageDirection {
 
 ```
 
-## File
+## Files
 ```json
 {
   "FileID": 8965,
@@ -2205,7 +2205,7 @@ public enum MessageDirection {
 }
 ```
 
-## Transaktion
+## transaction
 ```json
 {
     "External_Key": "4711",
@@ -2250,7 +2250,7 @@ public enum MessageDirection {
 }
 ```
 
-## DebitCard
+## debit card
 ```json
 {
   "DebitCardID": 1,
@@ -2318,7 +2318,7 @@ public enum MessageDirection {
 }
 ```
 
-## Result
+## result
 ```json
 {
     "ResultID": 43576,
@@ -2328,7 +2328,7 @@ public enum MessageDirection {
 
 ```
 
-## Dialog
+## dialog
 
 ```json
 {
@@ -2352,7 +2352,7 @@ public enum MessageDirection {
 
 ```
 
-## Message
+## messages
 ```json
 {
   "MessageID": 145,
@@ -2434,7 +2434,7 @@ public enum MessageDirection {
 }
 ```
 
-# Pricelist
+# pricelist
 
 ```json
 {
@@ -2460,7 +2460,7 @@ public enum MessageDirection {
 ```
 
 
-# AccountInfo
+# account info
 
 ```json
 {
@@ -2595,53 +2595,53 @@ public enum MessageDirection {
 }
 ```
 
-# Dialoge
+# dialogues
 
-Ausgesuchte Dialog können extern „aufgerufen werden&quot;. Dazu bekommen Sie von den entsprechenden API Funktionen einen Dialog (siehe [Dialog](#dialog) ).
+Selected dialog can be called externally(please refer[dialog](#dialog) ).
 
-Bitte öffnen Sie daraufhin ein Browser – Fenster in der angegebenen Größe und mit dem Titel. Danach navigieren Sie in dem Fenster zu der übergebenen Url!
+Please then open a browser window in the specified size and with the title. Then navigate in the window to the transferred url!
 
-## Versenden
+## To ship
 
-![Versenden](images/versenden.png)
+![To ship](images/send.png)
 
-## Auftragsverwaltung
+## order management
 
-![Auftragsverwaltung](images/auftragsverwaltung.png)
+![order management](images/order management.png)
 
-## Artikel bearbeiten
+## Edit article
 
-![Artikel bearbeiten](images/artikel-bearbeiten.png)
+![Edit article](images/article-edit.png)
 
-## Bestellung bestätigen
+## confirm order
 
-![Bestellung bestätigen](images/bestellung-bestaetigen.png)
+![confirm order](images/order-confirm.png)
 
-## Bestellung stornieren
+## cancel order
 
-![Bestellung stornieren](images/bestellung-stornieren.png)
+![cancel order](images/cancel-order.png)
 
-## Bestellung erledigen
+## complete order
 
-![Bestellung erledigen](images/bestellung-erledigen.png)
+![complete order](images/order-complete.png)
 
-# Beispiele + API
+# Examples API
 
-## Beispiel Applikation
+## Example application
 
-Eine Beispiel Applikation sowieso eine API für C# .Net auf denen die nachfolgenden Beispiele basieren finden Sie hier:
+An example application anyway an API for C# .Net on which the following examples are based can be found here:
 
-[Beispielapplikation](../GS_PflanzenCMS.net.Rest.Sample)
+[sample application](../GS_PflanzenCMS.net.Rest.Sample)
 
-## Token abfragen zur Authentifizierung
+## Request token for authentication
 
 ```csharp
 var unitOfWork = new Api.Client.ContextUOW(null, "");
 var token = unitOfWork.Account.Validate("Benutzer", "Passwort"); // POST api/account/validate?user={benutzer}&password={passwort}
 ```
-Das Token kann nun bei allen folgenden Posts als Header „token&quot; mitgesendet werden!
+The token can now be used in all subsequent posts as a header "token
 
-## Artikel anlegen
+## to write an article
 ```csharp
 var unitOfWork = new Api.Client.ContextUOW(null, "");
 
@@ -2715,7 +2715,7 @@ unitOfWork.Articles.Create(article); // POST api/articles/create?importExternal=
 // PUT api/articles/{id} zum updaten
 ```
 
-## Bestellungen abfragen
+## Query orders
 
 ```csharp
 var unitOfWork = new Api.Client.ContextUOW(null, "");
