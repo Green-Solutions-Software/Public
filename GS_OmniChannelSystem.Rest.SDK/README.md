@@ -37,7 +37,7 @@
 
 > [Request new debit cards](#Request-new-debit-cards)
 
-> [Validate new loyalty cards](#validate-new-loyalty-cards)
+> [Validate new debit cards](#validate-new-debit-cards)
 
 > [Current sales](#current-sales)
 
@@ -255,7 +255,7 @@
 
 > [Query orders](#orders-query)
 
-# overview
+# Overview
 
 The system can be read out with the web service
 
@@ -263,19 +263,19 @@ The system can be read out with the web service
 
 A session is valid indefinitely.
 
-# functionality
+# Functionality
 
 The API calls are made as a REST request, authenticated with an access token.
 
-# error handling
+# Error handling
 
 If a call fails, a Json object with the error information is returned
 
-# requirements
+# Requirements
 
 You need a user account on the CMS system with sufficient authorization.
 
-# server
+# Server
 
 The requests are accessed via the following URL:
 
@@ -350,22 +350,22 @@ This method must be used to log in as a user via the app. This then provides not
 
 As a return, an AccountInfo is returned with all information about the logged-in user (Please refer **[Account info](#accountinfo)**).
 
-# currencies
+# Currencies
 
 | url| api/currencies|
 | --- | --- |
 
-# countries
+# Countries
 
 | url| api/countries|
 | --- | --- |
 
-# categories
+# Categories
 
 | url| api/categories|
 | --- | --- |
 
-# reports
+# Reports
 
 | url| api/reports|
 | --- | --- |
@@ -387,7 +387,7 @@ Please refer **[Debit card](#debitcard)**
 | --- | --- | --- | --- |
 | **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
-## Validate new loyalty cards
+## Validate new debit cards
 
 New customer cards must be validated once by WaWi so that they can also be used by the logged-in user. To do this, please load the customer who is assigned to the card and compare e.g. address data
 
@@ -410,28 +410,28 @@ To do this, set the turnover field to the currently booked turnover.
 
 Webshop orders now have a link "DebitCard
 
-## order data
+## Order data
 
 The orders can be saved as api/orders with the status "Ready(4) so that the system knows that the order has gone through the checkout.
 
 > Please make sure that you only send us orders that you have not received from us!
 
-# videos
+# Videos
 
 | url| api/videos|
 | --- | --- |
 
-# branches
+# Branches
 
 | url| api/chainstores|
 | --- | --- |
 
-# customers
+# Customers
 
 | url| api/members|
 | --- | --- |
 
-# article
+# Article
 
 | url| api/articles|
 | --- | --- |
@@ -447,7 +447,7 @@ With this function, an article can be created and enriched with information dire
 | **importExternal** |boolean| Add external data?| |
 | **compareNameSecondary** |boolean| compare name 2?| |
 
-## transactions
+## Transactions
 
 With this function, stocks and prices can be updated for larger quantities of items
 
@@ -457,7 +457,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 | --- | --- | --- | --- |
 | **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
 
-## variants
+## Variants
 
 | url| api/articlekeys|
 | --- | --- |
@@ -468,7 +468,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 | --- | --- | --- | --- |
 | api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
 
-As a return, the dialog is returned(please refer **[dialog](#dialog)** and **[Edit article](#Edit-article)** )
+As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[Edit article](#Edit-article)** )
 
 ## Edit variant dialog
 
@@ -476,9 +476,9 @@ As a return, the dialog is returned(please refer **[dialog](#dialog)** and **[Ed
 | --- | --- | --- | --- |
 | api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
 
-As a return, the dialog is returned(please refer **[dialog](#dialog)**)
+As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
-# price lists
+# Price lists
 
 Price lists / listings with customer-specific prices(please refer **[pricelist](#pricelist)**)
 
@@ -494,7 +494,7 @@ The keys of the variants of the articles with the individual prices
 | --- | --- |
 | filter| pricelistid|
 
-# orders
+# Orders
 
 | **url** | **api/orders** |
 | --- | --- |
@@ -518,7 +518,7 @@ The keys of the variants of the articles with the individual prices
 | api/orders/transactions/status/{ID}|ID| **long** | ID of the order| |
 |BODY| **status message** | please refer **[OrderStatus](#orderstatus)** |
 
-As a return, the order will be returned(please refer **[order](#order)** )
+As a return, the order will be returned (please refer **[order](#order)** )
 
 ## "Send" dialog
 
@@ -526,7 +526,7 @@ As a return, the order will be returned(please refer **[order](#order)** )
 | --- | --- | --- | --- |
 | api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
 
-As a return, the dialog is returned(please refer **[dialog](#dialog)** and**[To ship](##to ship)** )
+As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To ship](##to ship)** )
 
 ## "Confirm" dialog
 
@@ -542,7 +542,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[c
 | --- | --- | --- | --- |
 | api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
 
-As a return, the dialog is returned(please refer **[dialog](#dialog) and **[complete order](#order-complete)** )
+As a return, the dialog is returned (please refer **[dialog](#dialog) and **[complete order](#order-complete)** )
 
 ## "Cancel" dialog
 
@@ -550,7 +550,7 @@ As a return, the dialog is returned(please refer **[dialog](#dialog) and **[comp
 | --- | --- | --- | --- |
 | api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
 
-As a return, the dialog is returned(please refer **[dialog](#dialog) and**[cancel order](#cancel-order)** )
+As a return, the dialog is returned (please refer **[dialog](#dialog) and**[cancel order](#cancel-order)** )
 
 ## Order management dialog
 
@@ -558,7 +558,7 @@ As a return, the dialog is returned(please refer **[dialog](#dialog) and**[cance
 | --- | --- | --- | --- |
 | api/orders/dialog| | | |
 
-As a return, the dialog is returned(please refer **[dialog](#dialog) and **[order management](#order-management)** )
+As a return, the dialog is returned (please refer **[dialog](#dialog) and **[order management](#order-management)** )
 
 # Documents
 
@@ -587,7 +587,7 @@ Please note that you will only receive the items that have been confirmed, so th
 |transactionid| **long** | ID of the partial order| |
 |output|**string**| DOCX, PDF|
 
-# shipping orders
+# Shipping orders
 
 Contains a list of all shipping orders in the system. Each shipping order can contain several items(broadcasts)
 
@@ -606,7 +606,7 @@ The parcel label can be queried with this function. To do this, pass one of the 
 
 The pdf is returned as a return
 
-# files
+# Files
 
 | url| api/datafiles|
 | --- | --- |
@@ -627,7 +627,7 @@ The file is returned as a return(please refer **[File](#file)** )
 
 The file is returned as a return(please refer **[Files](#file)** )
 
-# coupons
+# Coupons
 
 | url| api/vouchers| |
 | --- | --- | --- |
@@ -644,7 +644,7 @@ The file is returned as a return(please refer **[Files](#file)** )
 
 The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
-## find coupon
+## Find coupon
 
 | **function(GET)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -652,7 +652,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
 
-## reserve payment
+## Reserve payment
 
 Reserve a payment for a voucher. During the time, the revenue is considered consumed until the time expires and cannot be used elsewhere.
 
@@ -665,7 +665,7 @@ Reserve a payment for a voucher. During the time, the revenue is considered cons
 |info| **string** | An information that is visible when paying| |
 |minutes| **internal** | Number of minutes for which the payment should be reserved|
 
-As a return, the created payment is returned(please refer **[payments](#payment)** ).
+As a return, the created payment is returned (please refer **[payments](#payment)** ).
 
 ## Execute payment
 
@@ -677,7 +677,7 @@ After a payment has been reserved, the payment can then be made(during the time 
 
 The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
-## cancel payment
+## Cancel payment
 
 Cancel a payment for a voucher
 
@@ -689,7 +689,7 @@ Cancel a payment for a voucher
 |name| **string** | currency(e.g. EUR) | |
 |info| **string** | An information that is visible when paying| |
 
-As a return, the created payment is returned(please refer **[payments](#payment)** ).
+As a return, the created payment is returned (please refer **[payments](#payment)** ).
 
 ## Generate new codes
 
@@ -717,13 +717,13 @@ accomplished (**[Execute payment](#Execute-payment)**). The voucher is now avail
 
 The customer cancels a product offline that was paid for with a voucher. Now this payment is also canceled online(**[Cancel payment](#cancel-payment)**).
 
-## barcodes
+## Barcodes
 
 The following barcode types are currently available for printing:
 - code 128
 - EAN 13
 
-# news
+# News
 
 Data is exchanged between the web shop and the supplier via messages.
 Each message can have one of the **[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer **[MessageDirection](#messagedirection)**).
@@ -736,7 +736,7 @@ For an outgoing message, please set the "receiver" and for incoming messages the
 
 please refer **[messages](#message)**
 
-## create a message
+## Create a message
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -787,7 +787,7 @@ The return was checked and did not pass the test
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 |positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
-# order delivered
+# Order delivered
 The order has been delivered
 
 | **Surname** | **Type** | **value** | **description** |
@@ -796,7 +796,7 @@ The order has been delivered
 |Type| **short** | 5|delivery done(21) |
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# received pick-up order
+# Received pick-up order
 The pickup request has been received
 
 | **Surname** | **Type** | **value** | **description** |
@@ -823,12 +823,12 @@ The customer's cancellation request is rejected because cancellation is no longe
 |Type| **short** | 20|Cancellation is no longer possible(71)|
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# shopping carts
+# Shopping carts
 
 | url| api/baskets| |
 | --- | --- | --- |
 
-## filter
+## Filter
 
 | Surname| Type| value| description|
 | --- | --- | --- | --- |
@@ -842,7 +842,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 | BasketID| Sort by ID|
 
 
-# jobs
+# Jobs
 
 | url| api/jobs|
 | --- | --- |
@@ -854,7 +854,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 | key| api/containers/key/{key}| Find container with key|
 | items| API/containers/items/{id}| All entries of a container(including paging) |
 
-# annual planning
+# Annual planning
 
 | url| api/timelines| |
 | --- | --- | --- |
@@ -862,7 +862,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 | items| api/timelines/items/{id}| All entries of a plan(including paging) |
 | Current| api/timelines/current/{id}| All current entries of a plan(including paging) |
 
-# pictograms
+# Pictograms
 
 **Function:** api/pictos/{id}
 
@@ -968,7 +968,7 @@ A list of all external search results
 **Return:**
 The most suitable item
 
-## import plants
+## Import plants
 
 **Function:** api/external/import/plants/{id}
 
@@ -976,7 +976,7 @@ The most suitable item
 | --- | --- |
 |to|ID of the article to be imported into(optional)|
 
-## import videos
+## Import videos
 
 **Function:** api/external/import/videos/{id}
 
