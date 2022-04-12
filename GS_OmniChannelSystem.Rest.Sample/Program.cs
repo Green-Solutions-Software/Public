@@ -72,17 +72,17 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             article.Description = "Dies ist eine lange Beschreibung";
             article.ShortDescription = "Dies ist eine kurze Beschreibung";
 
-            // Warengruppe setzen (evtl. Hierachie beachten)
+            // Set ArticleGroup
             var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
             article.ArticleGroups = new List<EntityReference>();
             article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
 
-            // Kategorie setzen (evtl. Hierachie beachten)
+            // Set Category
             var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
             article.Categories = new List<EntityReference>();
             article.Categories.Add(new EntityReference() { ID = category.CategoryID });
 
-            // Texte hinzufügen
+            // Add Texts
             var text = new ArticleText();
             article.Texts = new List<ArticleText>();
             article.Texts.Add(text);
@@ -90,29 +90,29 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             text.Title = "Kaufargumente";
             text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
 
-            // Verfügbarkeiten
+            // Availabilities
             var timePeriod = new TimePeriod();
             article.Available = new List<TimePeriod>();
             article.Available.Add(timePeriod);
-            timePeriod.FromCW = 10; // Kalendarwoche (von)
-            timePeriod.ToCW = 20; // Kalendarwoche (bis)
-            timePeriod.StockQuantity = 100; // Lagerbestand
+            timePeriod.FromCW = 10; // Calendarweek (from)
+            timePeriod.ToCW = 20; // Calendarweek (to)
+            timePeriod.StockQuantity = 100; // Stock Quantity
 
-            // Varianten (Artikelnummern) hinzufügen
+            // Add variants (Articlenumbers)
             var articleKey = new ArticleKey();
             article.Keys = new List<ArticleKey>();
             article.Keys.Add(articleKey);
 
-            articleKey.Value = "47811"; // Artikelnummer
+            articleKey.Value = "47811"; // Articlenumber
             articleKey.Info = "C/  50 - 60";
             articleKey.AvailableForClickAndCollect = true; // Click & Collect
-            articleKey.AvailableForRadiusDelivery = true; // Liefern
-            articleKey.AvailableForShipping = true; // Versenden
-            articleKey.PackingSize = 20; // VE
-            articleKey.StockQuantity = 10; // Bestand
+            articleKey.AvailableForRadiusDelivery = true; // Send
+            articleKey.AvailableForShipping = true; // Deliver
+            articleKey.PackingSize = 20; // Payking Unit
+            articleKey.StockQuantity = 10; // Stock Quantity
             articleKey.Available.Add(timePeriod);
 
-            // Steuersatz
+            // Tax
             var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
             var germanySummary = countries.Items.Single(m => m.ISO == "DE");
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
@@ -121,7 +121,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
 
 
-            // Preise
+            // Prices
             var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
             var euro = currencies.Items.Single(m => m.NameShort == "EUR");
 
@@ -144,7 +144,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Picture = new PictureEntityReference(picture.FileID)
             });
 
-            // Kanal Artiklenummern
+            // Channel Articlenumber
             var channel = unitOfWork.Channels.Get(1);
             var articleKeyChannel = new ArticleKeyChannel();
             articleKeyChannel.Channel = new EntityReference(channel.ChannelID);
@@ -188,7 +188,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
             var taxRate7 = germany.TaxRates.Single(m => m.Percent == 7); 
 
-            // Rechnungsadresse - Adresse
+            // Invoiceaddress - Address
             args.InvoiceAddress = new CreateOrderArgs.ContactAddress();
             args.InvoiceAddress.Type = AddressType.Main;
             args.InvoiceAddress.Address = new CreateOrderArgs.Address();
@@ -201,7 +201,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.InvoiceAddress.Address.Type = AddressType.Main;
             args.InvoiceAddress.Address.Info = "Oberste Etage";
 
-            // Rechnungsadresse - Kontakt
+            // Invoiceaddress - Contact
             args.InvoiceAddress.Contact = new CreateOrderArgs.Contact();
             args.InvoiceAddress.Contact.Apellation = Apellation.Mr;
             args.InvoiceAddress.Contact.FirstName = "Max";
@@ -214,31 +214,27 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.InvoiceAddress.Contact.Company = "Musterfirma";
             args.InvoiceAddress.Contact.Language = "de-DE";
 
-            // Lieferadresse = Rechnungsadresse 
-            // Könnte aber auch wie oben getrennt sein
+            // Shippingaddress = Invoiceaddress
+            // Could be separeted as well like to definition before but for args.ShippingAddress
             args.ShippingAddress = args.InvoiceAddress;
             args.Notes = "Dies ist eine Bemerkung";
 
-            // Bezahlart
+            // Payment method
             var paymentMethod = unitOfWork.PaymentMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/paymentmethods
             args.PaymentMethodID = paymentMethod.PaymentMethodID;
 
-            // Versandart
+            // Shipping method
             var shippingMethod = unitOfWork.ShippingMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/shippingmethods
             args.ShippingMethodID = shippingMethod.ShippingMethodID;
 
-            // Minimum Alter (nur für Alkohol)
+            // Minimum age (for alcohol)
             args.MinimumAge = null; // 18 / 16
 
-            // Währung
+            // Currency
             args.Currency = "EUR";
 
-            // Gewünschtes Lieferdatum
+            // Wanted Delivery Date
             args.WantedShippingDate = DateTime.Now;
-
-            // Status auf erledigt setzen (z.B. bei alten Bestellungen)
-            // dadurch würde die Bestellung direkt als erledigt markiert
-            // args.OrderStatus = OrderStatusType.Ready;
 
             var items = new List<OrderItem>();
             var item = new OrderItem();
@@ -305,12 +301,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir holen die Bestellungen nach OrderID absteigend sortiert
-                // damit wir die neueste zuerst und danach die anderen bekommen
+                // We query the orders sorted by orderID descending to get the newest first
+                // and then the rest
                 var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
-
-                // Geänderte Bestellungen (inkl. neu angelegte abfragen)
-                // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
 
                 Console.WriteLine("Seite: " + (pageIndex + 1));
                 Console.WriteLine("(+) - Nächste Seite");
@@ -359,12 +352,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir holen die Bestellungen nach OrderID absteigend sortiert
-                // damit wir die neueste zuerst und danach die anderen bekommen
+                // We query the orders sorted by orderID descending to get the newest first
+                // and then the rest
                 var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
-
-                // Geänderte Bestellungen (inkl. neu angelegte abfragen)
-                // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
 
                 Console.WriteLine("Seite: " + (pageIndex + 1));
                 Console.WriteLine("(+) - Nächste Seite");
@@ -462,8 +452,8 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir fragen die Kunden absteigend sortiert nach der MemberID ab
-                // dadurch bekommen wir den zuletzt angelegten zuerst
+                // We query the Members sorted by MemberID descending to get the newest first
+                // and then the rest
                 var members = unitOfWork.Members.FindAll(null, pageIndex, 10, "MemberID desc").Items; // GET api/orders/all
 
                 Console.WriteLine("Seite: " + (pageIndex + 1));
@@ -533,7 +523,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("Versandart:" + shippingMethod.Name);
             }
 
-            // Positionen
+            // Positions
             foreach (var position in order.Items)
             {
                 var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
@@ -541,13 +531,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
                 Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
                 Console.WriteLine("Artikelnummer:" + articleKey.Value);
-                Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
+                Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Send u.s.w.
                 Console.WriteLine("Menge:" + position.Quantity);
                 Console.WriteLine("Einzelpreis:" + position.Price);
                 Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
                 Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
 
-                // Gutscheine gekauft ?
+                // Vouchers bought ?
                 if(position.Vouchers!=null && position.Vouchers.Any())
                 {
                     foreach (var voucherReference in position.Vouchers)
@@ -567,7 +557,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("* Info: " + payment.Info);
                 Console.WriteLine("* Zahlart: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
 
-                // Mit Gutschein gezahlt?
+                // Payd with voucher?
                 if (payment.VoucherCode != null)
                 {
                     var voucher = unitOfWork.Vouchers.Get(payment.VoucherCode.Voucher.ID);
@@ -643,7 +633,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -651,7 +641,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -670,7 +660,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -678,7 +668,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -700,7 +690,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var quantity = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -708,7 +698,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -727,7 +717,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -735,7 +725,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order-Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -757,7 +747,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var days = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -765,7 +755,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn.Value.AddDays(Convert.ToInt16(days));
@@ -806,7 +796,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 sb.Append("Intern", 60);
                 Console.WriteLine(sb.ToString());
 
-                // Positionen
+                // Positions
                 foreach (var position in order.Items)
                 {
                     var transaction = order.Transactions.Single(m => m.OrderTransactionID == position.Transaction.ID);
@@ -896,8 +886,8 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             unitOfWork.Articles.Delete(article.ArticleID, permanent);
 
-            // Permanentes löschen (Standard ist logisch)
-            // Wird nur für bestimmte Entitäten unterstützt
+            // Permanent delety (Standard ist logical)
+            // Is only supported by few entity types like Member or User
             // unitOfWork.Articles.Delete(article.ArticleID, true);
 
             Console.WriteLine("Artikel wurde gelöscht");
@@ -974,10 +964,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             var article = new OrderTransactionArticle();
             article.OrderItemID = order.Items.First().OrderItemID;
-            // false = nicht bestätigt
+            // false = not confirmed
             article.Confirmed = true; 
-            // Minderstückzahl bestätigen ?
-            // null = nein ansonsten wieviel Stück bestätigt werden sollen
+            // Confirm less quantity?
+            // null = no otherwise the quantity to confirm
             article.QuantityConfirmed = null; // St
             articles.Add(article);
 
@@ -991,34 +981,34 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Auftrag wird auf Positionsebene aktualisiert");
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
             // Tracking URL
             orderTransaction.TrackAndTraceURL = "http://dpd.com/?code=";
             orderTransaction.TrackAndTraceID = new string[] { "abc", "def"};
-            // Rechnung
+            // Invoice
             orderTransaction.InvoiceFilename = "Rechung.pdf";
             orderTransaction.InvoiceMimeType = "application/pdf";
-            // Base 64 encodierte Data URI mit dem Pdf
+            // Base 64 encoded Data URI with the Pdf
             orderTransaction.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
-            // Auftragsposition
+            // Order - Position
             var positionTransaction = new OrderTransactionPosition();
-            // Positionsnummer
+            // Number
             positionTransaction.OrderItemID = 123;
-            // Artikel
+            // Article
             positionTransaction.External_Key = "abcdef";
-            // Menge
+            // Quantity
             positionTransaction.Quantity = 10;
-            // Lieferdatum
+            // Deliver Date
             positionTransaction.AvailableOn = new DateTime(2020, 12, 24);
-            // Geliefert
+            // Delivered
             positionTransaction.Status = OrderTransactionStatusType.Delivered;
-            // Bestätigt
+            // Confirmed
             positionTransaction.Status = OrderTransactionStatusType.Confirmed;
-            // Storniert
+            // Cancelled
             positionTransaction.Status = OrderTransactionStatusType.Cancelled;
             orderTransaction.Positions.Add(positionTransaction);
 
@@ -1036,7 +1026,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.Action = OrderTransactionActionType.Split;
             args.OrderTransactionID = transaction.OrderTransactionID;
 
-            // Neuer Termin
+            // New Date
             args.EarliestShippingDate = DateTime.Now.AddDays(14);
 
             var articles = new List<OrderTransactionArticle>();
@@ -1069,7 +1059,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             var transaction = order.Transactions.First();
 
-            // Versandetikett anlegen
+            // Create shipment label
             var model = new CreateShipmentOrderArgs();
             model.Quantity = 1;
             model.WeightsInKg = new double[] { 3 };
@@ -1161,7 +1151,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.Status = OrderTransactionStatusType.Ready;
             args.InvoiceFilename = "Rechung.pdf";
             args.InvoiceMimeType = "application/pdf";
-            // Base 64 encodierte Data URI mit dem Pdf
+            // Base 64 encoded Data URI with the pdf
             args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
@@ -1218,7 +1208,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void createAvailabilities(ContextUOW unitOfWork)
         {
-            // Erstes Paket für das Update
+            // First package for the update
             var availabilities1 = new Availability[]
             {
                 new Availability()
@@ -1232,13 +1222,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
             };
             var job = unitOfWork.Articles.CreateAvailabilities(
-                availabilities1, // Verfügbarkeiten
-                true,            // Komplettupdate (vorher löschen)
-                false            // Update ist vollständig?
+                availabilities1, // Availabilities
+                true,            // Complete (delete first)
+                false            // Update is necessary?
             );
             Console.WriteLine("Patchupdate gestartet: " + job.Name + ", " + job.JobID);
 
-            // Zweites Paket
+            // Second package
             var availabilities2 = new Availability[]
             {
                 new Availability()
@@ -1253,9 +1243,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             };
             unitOfWork.Articles.CreateAvailabilities(
                 job.JobID,
-                availabilities1, // Verfügbarkeiten
-                true,            // Komplettupdate (vorher löschen)
-                true            // Update ist vollständig?
+                availabilities1, // Availabilities
+                true,            // Complete (delete first)
+                true            // Update is necessary?
             );
             Console.ReadLine();
         }
@@ -1270,13 +1260,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var external_key = Console.ReadLine();
 
             Console.Clear();
-            // Nur die ArticleID abfragen damit die Abfrage schneller geht
+            // Only retreive the ArticleID for a faster result
             var article = unitOfWork.Articles.Get(external_key, new string[]{"ArticleID"});
             if (article == null)
                 Console.WriteLine("Kein Artikel gefunden!");
             else
             {
-                // danach kann mit der ArticleID weitergearbeitet werden
+                // the we can work with the ArticleID
                 getArticle(unitOfWork, new Article.Summary() { ArticleID = article.ArticleID });
             }
             
