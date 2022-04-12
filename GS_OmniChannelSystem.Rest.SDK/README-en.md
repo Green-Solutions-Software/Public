@@ -11,7 +11,7 @@
 
 **[Functionality](#functionality)**
 
-**[Error handling](#error handling)**
+**[Error handling](#error-handling)**
 
 **[Requirements](#requirements)**
 
@@ -33,9 +33,9 @@
 
 **[Reports](#reports)**
 
-**[loyalty cards](#loyalty cards)**
+**[Debit cards](#Debit-cards)**
 
-> [Request new customer cards](#new-loyalty-card-requests)
+> [Request new debit cards](#Request-new-debit-cards)
 
 > [Validate new loyalty cards](#validate-new-loyalty-cards)
 
@@ -51,7 +51,7 @@
 
 **[Customers](#Customers)**
 
-**[Article](#items)**
+**[Article](#article)**
 
 > [Extended facility](#extended-plant)
 
@@ -89,7 +89,7 @@
 
 > [Delivery note partial order](#delivery-note-partial-order)
 
-**[shipping orders](#shipping orders)**
+**[shipping orders](#shipping-orders)**
 
 > [Query package label](#query-packet-label)
 
@@ -107,9 +107,9 @@
 
 > [Reserve payment](#payment-reserve)
 
-> [To execute payment](#to-execute-payment)
+> [Execute payment](#execute-payment)
 
-> [Cancel a payment](#cancel-a-payment)
+> [Cancel payment](#cancel-payment)
 
 > [Generate new codes](#generate-new-codes)
 
@@ -133,17 +133,17 @@
   - [Customer cancellation request confirmed](#cancellation-request-of-the-customer-confirmed)
   - [Cancellation is no longer possible](#Cancellation-no-longer-possible)
 
-**[Shopping carts](#shopping carts)**
+**[Shopping carts](#shopping-carts)**
 
-**[Assignments](#assignments)**
+**[Jobs](#Jobs)**
 
 **[Container](#Container)**
 
-**[Annual planning](#annual planning)**
+**[Annual planning](#annual-planning)**
 
 **[Pictograms](#pictograms)**
 
-**[Seek](#seek)**
+**[Search](#search)**
 
 **[Linked content for articles](#linked-content-for-articles)**
 
@@ -151,9 +151,9 @@
 
 **[Linked content for video](#linked-content-for-video)**
 
-**[Add External](#external-add)**
+**[Add External](#Add-External)**
 
-> [Seek](#Seek)
+> [Search external](#Search-external)
 
 > [Search for an item](#search-for-an-item)
 
@@ -175,7 +175,7 @@
 
 > [Clean up caches](#caches-clean-up)
 
-**[data structures](#data-structures)**
+**[Data structures](#data-structures)**
 
 > [order](#order)
 
@@ -231,7 +231,7 @@
 
 > [Account info](#accountinfo)
 
-**[dialogues](#dialogues)**
+**[Dialogs](#dialogs)**
 
 > [To ship](#toship)
 
@@ -245,7 +245,7 @@
 
 > [Complete order](#order-complete)
 
-**[Examples API](#sample-application)**
+**[Examples API](#Examples-API)**
 
 > [Example application](#Example-application)
 
@@ -348,7 +348,7 @@ This method must be used to log in as a user via the app. This then provides not
 | api/account/login|user| User name| |
 | |password| password|
 
-As a return, an AccountInfo is returned with all information about the logged-in user(Please refer **[Account info](#account-info)**).
+As a return, an AccountInfo is returned with all information about the logged-in user (Please refer **[Account info](#accountinfo)**).
 
 # currencies
 
@@ -370,12 +370,12 @@ As a return, an AccountInfo is returned with all information about the logged-in
 | url| api/reports|
 | --- | --- |
 
-# loyalty cards
+# Debit cards
 
 | url| api/debit cards|
 | --- | --- |
 
-## Request new customer cards
+## Request new debit cards
 
 Lists new loyalty cards without validation at the top of the list. You can then continue page by page until a record appears that has already been validated.
 
@@ -455,7 +455,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 | **parameter** | **Type** | **description** | **remark** |
 | --- | --- | --- | --- |
-| **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer**[transactions](#transactions)** |
+| **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
 
 ## variants
 
@@ -468,7 +468,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 | --- | --- | --- | --- |
 | api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
 
-As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[Edit article](#Edit article)** )
+As a return, the dialog is returned(please refer **[dialog](#dialog)** and **[Edit article](#Edit-article)** )
 
 ## Edit variant dialog
 
@@ -476,18 +476,18 @@ As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[Edit
 | --- | --- | --- | --- |
 | api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
 
-As a return, the dialog is returned(please refer**[dialog](#dialog)**)
+As a return, the dialog is returned(please refer **[dialog](#dialog)**)
 
 # price lists
 
-Price lists / listings with customer-specific prices(please refer**[pricelist](#pricelist)**)
+Price lists / listings with customer-specific prices(please refer **[pricelist](#pricelist)**)
 
 | url| api/pricelists|
 | --- | --- |
 
 # Price List Entries
 
-The entries correspond to the articles in the price list(please refer**[PricelistItem](#pricelistitem)**).
+The entries correspond to the articles in the price list(please refer **[PricelistItem](#pricelistitem)**).
 The keys of the variants of the articles with the individual prices
 
 | url| api/pricelistitems|
@@ -516,9 +516,9 @@ The keys of the variants of the articles with the individual prices
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/transactions/status/{ID}|ID| **long** | ID of the order| |
-|BODY| **status message** | Please refer**[OrderStatus](#order status)** |
+|BODY| **status message** | please refer **[OrderStatus](#orderstatus)** |
 
-As a return, the order will be returned(please refer**[order](#order)** )
+As a return, the order will be returned(please refer **[order](#order)** )
 
 ## "Send" dialog
 
@@ -526,7 +526,7 @@ As a return, the order will be returned(please refer**[order](#order)** )
 | --- | --- | --- | --- |
 | api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
 
-As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[To ship](##to ship)** )
+As a return, the dialog is returned(please refer **[dialog](#dialog)** and**[To ship](##to ship)** )
 
 ## "Confirm" dialog
 
@@ -534,7 +534,7 @@ As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[To s
 | --- | --- | --- | --- |
 | api/orders/dialog/confirm/{id}|ID| **long** | ID of the order|
 
-As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[confirm order](#confirm order)**)
+As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[confirm order](#confirm-order)**)
 
 ## Dialog "Done
 
@@ -542,7 +542,7 @@ As a return, the dialog is returned(please refer**[dialog](#dialog)** and**[conf
 | --- | --- | --- | --- |
 | api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
 
-As a return, the dialog is returned(please refer[dialog](#dialog) and**[complete order](#order-complete)** )
+As a return, the dialog is returned(please refer **[dialog](#dialog) and **[complete order](#order-complete)** )
 
 ## "Cancel" dialog
 
@@ -550,7 +550,7 @@ As a return, the dialog is returned(please refer[dialog](#dialog) and**[complete
 | --- | --- | --- | --- |
 | api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
 
-As a return, the dialog is returned(please refer[dialog](#dialog) and**[cancel order](#cancel order)** )
+As a return, the dialog is returned(please refer **[dialog](#dialog) and**[cancel order](#cancel-order)** )
 
 ## Order management dialog
 
@@ -558,7 +558,7 @@ As a return, the dialog is returned(please refer[dialog](#dialog) and**[cancel o
 | --- | --- | --- | --- |
 | api/orders/dialog| | | |
 
-As a return, the dialog is returned(please refer[dialog](#dialog) and**[order management](#order management)** )
+As a return, the dialog is returned(please refer **[dialog](#dialog) and **[order management](#order-management)** )
 
 # Documents
 
@@ -594,11 +594,11 @@ Contains a list of all shipping orders in the system. Each shipping order can co
 | url| api/shipment orders|
 | --- | --- |
 
-Please refer**[ShipmentOrder](#shipmentorder)**
+please refer **[ShipmentOrder](#shipmentorder)**
 
 ## Query package label
 
-The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer**[ShipmentOrder](#shipmentorder)** )
+The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer **[ShipmentOrder](#shipmentorder)** )
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -615,17 +615,17 @@ The pdf is returned as a return
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/datafiles/upload|BODY| **Upload** | Please refer**[Upload](#upload)** |
+| api/datafiles/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
-The file is returned as a return(please refer**[Files](#file)** )
+The file is returned as a return(please refer **[File](#file)** )
 
 ## Upload pictures
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/pictures/upload|BODY| **Upload** | Please refer**[Upload](#upload)** |
+| api/pictures/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
-The file is returned as a return(please refer**[Files](#file)** )
+The file is returned as a return(please refer **[Files](#file)** )
 
 # coupons
 
@@ -642,7 +642,7 @@ The file is returned as a return(please refer**[Files](#file)** )
 |info| **string** | An information that is visibly stored with the voucher| |
 |deleted| **boolean** | Create deleted|
 
-The voucher will be returned as a return(please refer**[vouchers](#voucher)** ).
+The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
 ## find coupon
 
@@ -650,7 +650,7 @@ The voucher will be returned as a return(please refer**[vouchers](#voucher)** ).
 | --- | --- | --- | --- |
 | api/vouchers/find|keyValue| **string** | Coupon Code(without space) |
 
-Return: voucher code(please refer**[FoundVoucher](#foundvoucher)** )
+Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
 
 ## reserve payment
 
@@ -665,19 +665,19 @@ Reserve a payment for a voucher. During the time, the revenue is considered cons
 |info| **string** | An information that is visible when paying| |
 |minutes| **internal** | Number of minutes for which the payment should be reserved|
 
-As a return, the created payment is returned(please refer**[payments](#payment)** ).
+As a return, the created payment is returned(please refer **[payments](#payment)** ).
 
-## to execute payment
+## Execute payment
 
 After a payment has been reserved, the payment can then be made(during the time of reservation)
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
-| api/vouchers/pay|paymentid| **long** | Payment ID(please refer**[payments](#payment)** ) |
+| api/vouchers/pay|paymentid| **long** | Payment ID(please refer **[payments](#payment)** ) |
 
-The voucher will be returned as a return(please refer**[vouchers](#voucher)** ).
+The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
-## cancel a payment
+## cancel payment
 
 Cancel a payment for a voucher
 
@@ -689,7 +689,7 @@ Cancel a payment for a voucher
 |name| **string** | currency(e.g. EUR) | |
 |info| **string** | An information that is visible when paying| |
 
-As a return, the created payment is returned(please refer**[payments](#payment)** ).
+As a return, the created payment is returned(please refer **[payments](#payment)** ).
 
 ## Generate new codes
 
@@ -699,23 +699,23 @@ Generates new codes without creating them in the database(for your own printed v
 | --- | --- | --- | --- |
 | api/vouchers/generate/codes|count| **internal** | number of codes| |
 
-Returns: A list of voucher codes(please refer**[voucher code](#voucher code)**)
+Returns: A list of voucher codes(please refer **[voucher code](#voucher code)**)
 
 ## Buy a voucher at the POS
 
-The customer buys a voucher offline and this is then sent by**[Create Voucher](#create voucher)** created online.
+The customer buys a voucher offline and this is then sent by **[Create Voucher](#create voucher)** created online.
 
 ## Pay with a voucher at the POS
 
 The customer buys offline and pays with an online voucher. First the voucher is searched for(**[find coupon](#coupon-find)**).
 If none is found, the voucher is not a valid online voucher. If one is found, the
-desired payment can be reserved(**[reserve payment](#payment-reserve)**). If the balance is no longer sufficient, a
+desired payment can be reserved (**[Reserve payment](#Reserve-payment)**). If the balance is no longer sufficient, a
 appropriate error returned. After completing the payment then the payment
-accomplished(**[to execute payment](#to execute payment)**). The voucher is now available online
+accomplished (**[Execute payment](#Execute-payment)**). The voucher is now available online
 
 ## Cancellation by voucher at the POS
 
-The customer cancels a product offline that was paid for with a voucher. Now this payment is also canceled online(**[cancel a payment](#cancel a payment)**).
+The customer cancels a product offline that was paid for with a voucher. Now this payment is also canceled online(**[Cancel payment](#cancel-payment)**).
 
 ## barcodes
 
@@ -726,7 +726,7 @@ The following barcode types are currently available for printing:
 # news
 
 Data is exchanged between the web shop and the supplier via messages.
-Each message can have one of the**[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer**[MessageDirection](#messagedirection)**).
+Each message can have one of the **[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer **[MessageDirection](#messagedirection)**).
 For an outgoing message, please set the "receiver" and for incoming messages the "sender".
 
 > Please note that some messages are intended as an answer to an incoming message and therefore have to be linked with each other via "Parent".
@@ -734,7 +734,7 @@ For an outgoing message, please set the "receiver" and for incoming messages the
 | url| api/messages| |
 | --- | --- | --- |
 
-Please refer**[messages](#message)**
+please refer **[messages](#message)**
 
 ## create a message
 
@@ -746,14 +746,14 @@ The following fields must be set in the message:
 |**Surname** |**Type** |**value** |**description** |
 | --- | --- | --- | --- |
 |Direction|**short** | | Outgoing or incoming |
-|Type|**short** | |(please refer**[MessageType](#messagetype)**) |
+|Type|**short** | |(please refer **[MessageType](#messagetype)**) |
 |Keys|**string** | | key for reference |
 |transmitter|**[EntityReference](#entityreference)**| | Sender |
 |receivers|**[EntityReference](#entityreference)**| | Receiver |
 |Parent|**[EntityReference](#entityreference)**| | Parent Message |
 |SenderConfirm|**boolean** | | Send confirmation by mail after dispatch |
 
-The created message is returned as a return(please refer**[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
+The created message is returned as a return (please refer **[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
 
 # Return delivery has been received
 The return has been received at the warehouse
@@ -765,7 +765,7 @@ The return has been received at the warehouse
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 |replacement| **boolean** |  | replace goods(Yes No) |
 |refund| **boolean** |  | refund goods(Yes No) |
-|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
+|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
 # Returns inspection passed
 The return has been checked and passed the test
@@ -775,7 +775,7 @@ The return has been checked and passed the test
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 17|Returns check passed(80) |
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
+|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
 # Returns inspection failed
 The return was checked and did not pass the test
@@ -785,7 +785,7 @@ The return was checked and did not pass the test
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 18|Returns check failed(81) |
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer**[MessagePosition](#MessagePosition)**)  |
+|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
 # order delivered
 The order has been delivered
@@ -832,7 +832,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 
 | Surname| Type| value| description|
 | --- | --- | --- | --- |
-| type| **BasketType** | | please refer**[BasketType](#baskettype)** |
+| type| **BasketType** | | please refer **[BasketType](#baskettype)** |
 | memberid| **long** | | MemberID to filter by|
 | my| **boolean** | true/false| Own records only|
 
@@ -842,7 +842,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 | BasketID| Sort by ID|
 
 
-# assignments
+# jobs
 
 | url| api/jobs|
 | --- | --- |
@@ -886,7 +886,7 @@ A list of all valid pictograms for the selected item
 | url| string| URL for the graphic|
 | PictoID| long| primary key|
 
-# seek
+# Search
 
 **Function:** api/search
 
@@ -944,7 +944,7 @@ A list of all valid pictograms for the selected item
 
 This function can be used to search for content from the Green Solutions database and import it into the local CMS database. See Add External
 
-## Seek
+## Search external
 
 **Function:** api/external/search
 
@@ -1004,7 +1004,7 @@ The most suitable item
 |i.e| External ID of the plant photo to be imported|
 | --- | --- |
 
-# cache(cache)
+# Cache
 
 To improve performance, the system works with some caches that must be deleted if necessary. Currently there are the following caches:
 
@@ -1029,7 +1029,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 
 # data structures
 
-## order
+## Order
 
 ```json
 {
@@ -1820,7 +1820,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 ```
 
 
-## job
+## Job
 
 ```json
 {
@@ -1837,7 +1837,8 @@ As soon as cached content has been changed in the database, the corresponding ca
   "External_COR_ID": null
 }
 ```
-## payments
+
+## Payment
 
 ```json
 {
@@ -1869,7 +1870,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 }
 ```
 
-## vouchers
+## Voucher
 
 ```json
 {
@@ -2030,7 +2031,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 }
 ```
 
-## voucher code
+## Voucher Code
 
 ```json
 {
@@ -2081,6 +2082,7 @@ public enum OrderStatusType : short
 }
 
 ```
+
 ## TransactionStatus
 
 ```csharp
@@ -2104,7 +2106,9 @@ public enum BasketType: short {
   DirectOrderForm // Direktbestellschein
 }
 ```
+
 ## MessageType
+
 ```csharp
 public enum MessageType {
   CancellationRequested, //Anfrage Stornierung
@@ -2142,6 +2146,7 @@ public enum MessageType {
 ```
 
 ## MessageDirection
+
 ```csharp
 public enum MessageDirection {
   Inbound, // Eingehend
@@ -2165,7 +2170,7 @@ public enum MessageDirection {
 }
 ```
 
-## item status
+## Item status
 
 ```json
 {
@@ -2176,7 +2181,7 @@ public enum MessageDirection {
 
 ```
 
-## Files
+## File
 ```json
 {
   "FileID": 8965,
@@ -2208,7 +2213,7 @@ public enum MessageDirection {
 }
 ```
 
-## transaction
+## Transaction
 ```json
 {
     "External_Key": "4711",
@@ -2253,7 +2258,7 @@ public enum MessageDirection {
 }
 ```
 
-## debitcard
+## DebitCard
 ```json
 {
   "DebitCardID": 1,
@@ -2321,7 +2326,7 @@ public enum MessageDirection {
 }
 ```
 
-## result
+## Result
 ```json
 {
     "ResultID": 43576,
@@ -2331,7 +2336,7 @@ public enum MessageDirection {
 
 ```
 
-## dialog
+## Dialog
 
 ```json
 {
@@ -2355,7 +2360,7 @@ public enum MessageDirection {
 
 ```
 
-## messages
+## Message
 ```json
 {
   "MessageID": 145,
@@ -2437,7 +2442,21 @@ public enum MessageDirection {
 }
 ```
 
-# pricelist
+## MessagePosition
+```json
+{
+  "MessagePosition": 145,
+  "External_Key": null,
+  "External_RowVersion": null,
+  "External_COR_ID": null,
+  "External_DM_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#12#71#157",
+  "Deleted": false
+}
+```
+
+# PriceList
 
 ```json
 {
@@ -2463,7 +2482,7 @@ public enum MessageDirection {
 ```
 
 
-# account info
+# AccountInfo
 
 ```json
 {
@@ -2598,7 +2617,7 @@ public enum MessageDirection {
 }
 ```
 
-# dialogues
+# Dialogs
 
 Selected dialog can be called externally(please refer[dialog](#dialog) ).
 
@@ -2608,7 +2627,7 @@ Please then open a browser window in the specified size and with the title. Then
 
 ![To ship](images/send.png)
 
-## order management
+## Order management
 
 ![order management](images/order management.png)
 
@@ -2616,15 +2635,15 @@ Please then open a browser window in the specified size and with the title. Then
 
 ![Edit article](images/article-edit.png)
 
-## confirm order
+## Confirm order
 
 ![confirm order](images/order-confirm.png)
 
-## cancel order
+## Cancel order
 
 ![cancel order](images/cancel-order.png)
 
-## complete order
+## Complete order
 
 ![complete order](images/order-complete.png)
 
@@ -2644,7 +2663,7 @@ var token = unitOfWork.Account.Validate("Benutzer", "Passwort"); // POST api/acc
 ```
 The token can now be used in all subsequent posts as a header "token
 
-## to write an article
+## Update an article
 ```csharp
 var unitOfWork = new Api.Client.ContextUOW(null, "");
 
