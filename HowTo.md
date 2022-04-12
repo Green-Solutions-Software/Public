@@ -26,7 +26,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Transfer article movement data](#Transfer-article-movement-data)**
 
-**[orders](#orders)**
+**[Orders](#orders)**
 
 > **[Query orders](#Query-orders)**
 
@@ -34,45 +34,45 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 > **[Update order status](#Update-order-status)**
 
-> **[confirm order](#confirm-order)**
+> **[Confirm order](#confirm-order)**
 
-> **[cancel order](#cancel-order)**
+> **[Cancel order](#cancel-order)**
 
 > **[Create shipping labels](#Create-shipping-labels)**
 
 > **[Create delivery note](#Create-delivery-note)**
 
-> **[send order](#send-order)**
+> **[Send order](#send-order)**
 
-> **[complete order](#complete-order)**
+> **[Complete order](#complete-order)**
 
 > **[Embed order management](#Embed-order-management)**
 
 **[Messages](#Messages)**
 
-> **[query messages](#query-messages)**
+> **[Query messages](#query-messages)**
 
-> **[Processing notifications](#Processing-notifications)**
+> **[Processing messages](#Processing-messages)**
 
 > **[Generate message](#Generate-message)**
 
-> **[Return delivery has been received](#Return-delivery-has-been-received)**
+- **[Return delivery has been received](#Return-delivery-has-been-received)**
 
-> **[Returns inspection passed](#Returns-inspection-passed)**
+- **[Returns inspection passed](#Returns-inspection-passed)**
 
-> **[Returns inspection failed](#Returns-inspection-failed)**
+- **[Returns inspection failed](#Returns-inspection-failed)**
 
-> **[order delivered](#order-delivered)**
+- **[Order delivered](#order-delivered)**
 
-> **[received pick-up order](#received-pick-up-order)**
+- **[Received pick-up order](#received-pick-up-order)**
 
-> **[Confirmation of delivery date](#Confirmation-of-delivery-date)**
+- **[Confirmation of delivery date](#Confirmation-of-delivery-date)**
 
-> **[Change of delivery date](#Change-of-delivery-date)**
+-  **[Change of delivery date](#Change-of-delivery-date)**
 
-> **[customers not reached](#customers-not-reached)**
+-  **[Customers not reached](#customers-not-reached)**
 
-> **[customers not found](#customers-not-found)**
+-  **[Customers not found](#customers-not-found)**
 
 
 # Authorization
@@ -109,7 +109,7 @@ This example shows how to query an entity using a primary key.
         Console.WriteLine("Kein Artikel gefunden!");
 ```
 
-# items
+# Items
 
 Article master data and movement data (price inventory) must be transferred
 
@@ -309,7 +309,7 @@ transactions.Add(transaction);
 unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
 ```
 
-# orders
+# Orders
 
 This area describes how to query new orders. 
 
@@ -407,7 +407,7 @@ This example shows how to query a specific order. As a result, a complete order 
 
 This example shows how to update the order status.
 
-## confirm order
+## Confirm order
 
 This example shows how to mark the order status as confirmed. This function can also be used to confirm part of the order.
 
@@ -436,7 +436,7 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## cancel order
+## Cancel order
 
 This example shows how to cancel the entire order.
 
@@ -483,7 +483,7 @@ var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTrans
 Process.Start(pdf);
 ```
 
-## send order
+## Send order
 
 This example shows how to mark the order status of a partial order as shipped.
 
@@ -502,7 +502,7 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## complete order
+## Complete order
 
 This example shows how to mark the order as completed.
 
@@ -545,7 +545,7 @@ Messages are work in Progress and will be defined later
 
 ## query messages
 
-## Processing notifications
+## Processing messages
 
 ## Generate message
 
@@ -555,14 +555,14 @@ Messages are work in Progress and will be defined later
 
 ### Returns inspection failed
 
-### order delivered 
+### Order delivered 
 
-### received pick-up order
+### Received pick-up order
 
 ### Confirmation of delivery date
 
 ### Change of delivery date
 
-### customers not reached
+### Customers not reached
 
-### customers not found
+### Customers not found
