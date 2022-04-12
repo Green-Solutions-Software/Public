@@ -2746,33 +2746,33 @@ var orders = unitOfWork.Orders.FindAll(null, 0, 100, "OrderID desc").Items; // G
 foreach(var orderSummary in orders) {
   var order = unitOfWork.Orders.Get(orderSummary.OrderID); // GET api/orders/{id}
 
-  Console.WriteLine("Auftragsnummer:" + order.OrderID);
-  Console.WriteLine("Datum:" + order.CreatedOn.ToShortDateString());
+  Console.WriteLine("Ordernumber:" + order.OrderID);
+  Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
 
   var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
-  Console.WriteLine("Kunde:" + owner.MainContact.Company);
+  Console.WriteLine("Customer:" + owner.MainContact.Company);
 
-  Console.WriteLine("Rechnungsadresse:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
-  Console.WriteLine("Lieferadresse:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
+  Console.WriteLine("Invoiceaddress:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+  Console.WriteLine("Shippingaddress:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
   var paymentMethod = unitOfWork.PaymentMethods.Get(order.PaymentMethod.ID); // GET api/paymentmethods/{id}
-  Console.WriteLine("Bezahlart:" + paymentMethod.Name);
+  Console.WriteLine("Payment method:" + paymentMethod.Name);
 
   var shippingMethod = unitOfWork.ShippingMethods.Get(order.ShippingMethod.ID); // GET api/shippingmethods/{id}
-  Console.WriteLine("Versandart:" + shippingMethod.Name);
+  Console.WriteLine("Shipping method:" + shippingMethod.Name);
 
   // Positionen
   foreach(var position in order.Items) {
     var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
     var articleKey = article.Keys.SingleOrDefault(m => m.ArticleKeyID == position.ArticleKey.ID);
 
-    Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
-    Console.WriteLine("Artikelnummer:" + articleKey.Value);
-    Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
-    Console.WriteLine("Menge:" + position.Quantity);
-    Console.WriteLine("Einzelpreis:" + position.Price);
-    Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
-    Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
+    Console.WriteLine("Article:" + article.Name + " / " + article.Name2);
+    Console.WriteLine("Articlenumber:" + articleKey.Value);
+    Console.WriteLine("Transaction:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
+    Console.WriteLine("Quantity:" + position.Quantity);
+    Console.WriteLine("Price:" + position.Price);
+    Console.WriteLine("Totalprice:" + position.TotalCosts);
+    Console.WriteLine("Confirmed:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
   }
 
 }
