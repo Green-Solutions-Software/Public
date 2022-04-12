@@ -5,32 +5,33 @@
 
 ## Contents
 
-**[overview](#overview)**
+**[Overview](#overview)**
 
 **[Hints](#hints)**
 
-**[functionality](#functionality)**
+**[Functionality](#functionality)**
 
-**[error handling](#error handling)**
+**[Error handling](#error handling)**
 
-**[requirements](#requirements)**
+**[Requirements](#requirements)**
 
-**[server](#server)**
+**[Server](#server)**
 
 **[Interrogate](#Interrogate)**
 
 **[Postman](#postman)**
 
 **[Authorization](#authorization)**
-> [Log in](#Log in)
 
-**[currencies](#currencies)**
+> [Log in](#Log-in)
 
-**[countries](#countries)**
+**[Currencies](#currencies)**
 
-**[categories](#categories)**
+**[Countries](#countries)**
 
-**[reports](#reports)**
+**[Categories](#categories)**
+
+**[Reports](#reports)**
 
 **[loyalty cards](#loyalty cards)**
 
@@ -40,33 +41,35 @@
 
 > [Current sales](#current-sales)
 
-> [Web shop orders](#webshop orders)
+> [Web shop orders](#webshop-orders)
 
-> [order data](#order data)
+> [Order data](#order-data)
 
-**[videos](#videos)**
+**[Videos](#videos)**
 
-**[branches](#branches)**
+**[Branches](#branches)**
 
-**[customers](#Customers)**
+**[Customers](#Customers)**
 
-**[article](#items)**
+**[Article](#items)**
 
 > [Extended facility](#extended-plant)
 
-> [transactions](#transactions)
+> [Transactions](#transactions)
 
-> [variants](#variants)
+> [Variants](#variants)
 
 > [Edit dialog](#dialog-edit)
+
 >[Edit variant dialog](#dialog-variant-edit)
 
-**[price lists](#price lists)**
-> [Price Lists - Entries](#price list entries)
+**[Price lists](#price-lists)**
 
-**[orders](#orders)**
+> [Price Lists - Entries](#price-list-entries)
 
-> [All store orders](#all shop orders)
+**[Orders](#orders)**
+
+> [All store orders](#all-shop-orders)
 
 > [Adjust Status](#status-adjust)
 
@@ -78,35 +81,35 @@
 
 > [Cancel dialog](#dialog-cancel)
 
-> [Order management dialog](#dialog order management)
+> [Order management dialog](#dialog-order-management)
 
 **[Documents](#Documents)**
 
-> [Delivery note order](#delivery note order)
+> [Delivery note order](#delivery-note-order)
 
-> [Delivery note partial order](#delivery note partial order)
+> [Delivery note partial order](#delivery-note-partial-order)
 
 **[shipping orders](#shipping orders)**
 
-> [Query package label](#query packet stickers)
+> [Query package label](#query-packet-label)
 
 **[files](#files)**
 
 > [Upload files](#files-upload)
 
-> [Upload pictures](#Upload pictures)
+> [Upload pictures](#Upload-pictures)
 
-**[coupons](#coupons)**
+**[Coupons](#coupons)**
 
-> [Create Voucher](#create voucher)
+> [Create Voucher](#create-voucher)
 
-> [find coupon](#coupon-find)
+> [Find coupon](#coupon-find)
 
-> [reserve payment](#payment-reserve)
+> [Reserve payment](#payment-reserve)
 
-> [to execute payment](#to execute payment)
+> [To execute payment](#to-execute-payment)
 
-> [cancel a payment](#cancel a payment)
+> [Cancel a payment](#cancel-a-payment)
 
 > [Generate new codes](#generate-new-codes)
 
@@ -116,31 +119,31 @@
 
 > [Cancellation by voucher at the POS](#cancel-by-voucher-am-pos)
 
-> [barcodes](#barcodes)
+> [Barcodes](#barcodes)
 
 
-**[news](#Messages)**
+**[Messages](#Messages)**
 
-> [create a message](#create a message)
+> [Create a message](#create-a-message)
   - [Return delivery has been received](#return-delivery-is-received)
-  - [Returns inspection passed](#returns inspection passed)
-  - [Returns inspection failed](#returns inspection-failed)
-  - [order delivered](#order-delivered)
-  - [received pick-up order](#pick-up order-received)
+  - [Returns inspection passed](#returns-inspection-passed)
+  - [Returns inspection failed](#returns-inspection-failed)
+  - [Order delivered](#order-delivered)
+  - [Received pick-up order](#pick-up-order-received)
   - [Customer cancellation request confirmed](#cancellation-request-of-the-customer-confirmed)
-  - [Cancellation is no longer possible](#Cancellation-no longer possible)
+  - [Cancellation is no longer possible](#Cancellation-no-longer-possible)
 
-**[shopping carts](#shopping carts)**
+**[Shopping carts](#shopping carts)**
 
-**[assignments](#assignments)**
+**[Assignments](#assignments)**
 
 **[Container](#Container)**
 
-**[annual planning](#annual planning)**
+**[Annual planning](#annual planning)**
 
-**[pictograms](#pictograms)**
+**[Pictograms](#pictograms)**
 
-**[seek](#seek)**
+**[Seek](#seek)**
 
 **[Linked content for articles](#linked-content-for-articles)**
 
@@ -154,9 +157,9 @@
 
 > [Search for an item](#search-for-an-item)
 
-> [import plants](#plant-import)
+> [Import plants](#plant-import)
 
-> [import videos](#import-videos)
+> [Import videos](#import-videos)
 
 > [Import reports](#reports-import)
 
@@ -164,15 +167,15 @@
 
 > [Import plant photos](#import-plant-photos)
 
-**[cache](#cache)**
+**[Cache](#cache)**
 
 > [Clear all caches](#clear-all-caches)
 
 > [Clear database cache](#clear-database-cache)
 
-> [Clean up caches](#caches-clean up)
+> [Clean up caches](#caches-clean-up)
 
-**[data structures](#data structures)**
+**[data structures](#data-structures)**
 
 > [order](#order)
 
@@ -188,13 +191,13 @@
 
 > [vouchers](#voucher)
 
-> [voucher code](#voucher code)
+> [voucher code](#vouchercode)
 
 > [FoundVoucher](#foundvoucher)
 
 > [OrderStatusType](#orderstatustype)
 
-> [TransactionStatus](#transaction status)
+> [TransactionStatus](#transactionstatus)
 
 > [BasketType](#baskettype)
 
@@ -204,15 +207,15 @@
 
 > [Documentation](#documentation)
 
-> [item status](#article status)
+> [Item status](#item-status)
 
 > [Files](#file)
 
 > [transaction](#transaction)
 
-> [OrderStatus](#order status)
+> [OrderStatus](#orderstatus)
 
-> [debit card](#debit card)
+> [debit card](#debitcard)
 
 > [result](#result)
 
@@ -226,29 +229,29 @@
 
 > [PricelistItem](#pricelistitem)
 
-> [account info](#account info)
+> [Account info](#accountinfo)
 
 **[dialogues](#dialogues)**
 
-> [To ship](##to ship)
+> [To ship](#toship)
 
-> [order management](#order management)
+> [Order management](#order-management)
 
-> [Edit article](#Edit article)
+> [Edit article](#Edit-article)
 
-> [confirm order](#confirm order)
+> [Confirm order](#confirm-order)
 
-> [cancel order](#cancel order)
+> [Cancel-order](#cancel-order)
 
-> [complete order](#order-complete)
+> [Complete order](#order-complete)
 
-**[Examples API](#sample application)**
+**[Examples API](#sample-application)**
 
-> [Example application](#sample application)
+> [Example application](#Example-application)
 
 > [Request token for authentication](#token-request-for-authentication)
 
-> [to write an article](#to write an article)
+> [to write an article](#to-write-an-article)
 
 > [Query orders](#orders-query)
 
@@ -345,7 +348,7 @@ This method must be used to log in as a user via the app. This then provides not
 | api/account/login|user| User name| |
 | |password| password|
 
-As a return, an AccountInfo is returned with all information about the logged-in user(Please refer**[account info](#account info)**).
+As a return, an AccountInfo is returned with all information about the logged-in user(Please refer **[Account info](#account-info)**).
 
 # currencies
 
@@ -376,7 +379,7 @@ As a return, an AccountInfo is returned with all information about the logged-in
 
 Lists new loyalty cards without validation at the top of the list. You can then continue page by page until a record appears that has already been validated.
 
-**Please refer[debit card](#debit card)**
+Please refer **[Debit card](#debitcard)**
 
 **Function: GET** /api/debitcards?orderby=ValidatedOn
 
@@ -2250,7 +2253,7 @@ public enum MessageDirection {
 }
 ```
 
-## debit card
+## debitcard
 ```json
 {
   "DebitCardID": 1,
