@@ -1,9 +1,9 @@
 
-# omni-channel system(OCS)
+# Omni-Channel System(OCS)
 ## REST API
 
 
-## contents
+## Contents
 
 **[overview](#overview)**
 

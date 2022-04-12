@@ -1,16 +1,83 @@
 # Green Solutions Software GmbH
 
-# Übersicht
+# Overview
 
-Mit der Green Solutions REST API können auf alle Funktionen und Daten des Omni-Channel-Systems zugegriffen werden.
+With the Green Solutions REST API, all functions and data of the omni-channel system can be accessed.
 
-In der Dokumentation wird für das Green Solutions Omni-Channel-System das Synonym "Middleware" und für das externe Software-System wie z.B. das ERP, Warenwirtschaft oder Webshop das Synonym "Externes Software-System" verwendet.
+In the documentation, the synonym "middleware" is used for the Green Solutions omni-channel system and the synonym "external software system" for the external software system such as ERP, merchandise management or web shop.
 
-Als innovatives Softwareunternehmen haben wir uns zu 100% auf die Gartenbau Branche spezialisiert. Mit unserer cloud-basierten Omni-Channel-Lösung können alle relevanten Kanäle im Online und Offline Bereich wie z.B. Webshop, Website, Beschilderungen, Newsletter, Apps, Social Media, Printmedien usw. zentral aus einem System verwaltet werden. Darüber hinaus kann der Kunde für alle Kanäle auf die riesige Green Solutions Datenbank zugreifen – mit tausenden Fotos, Videos, redaktionellen Berichten, Pflanzen- und Produktdaten.
+As an innovative software company, we have specialized 100% in the horticultural industry. With our cloud-based omni-channel solution, all relevant online and offline channels such as web shop, website, signage, newsletters, apps, social media, print media, etc. can be managed centrally from one system. In addition, the customer can access the huge Green Solutions database for all channels - with thousands of photos, videos, editorial reports, plant and product data.
 
-# Authorisierung
+## Contents
 
-Dieses Beispiel zeigt, wie man eine Verbindung zur Middleware wird über einen Vendor, ein Token und den Endpunkt definiert.
+**[Authorization](#Authorization)**
+
+**[External primary key](#External-primary-key)**
+
+**[Set external primary key](#Set-external-primary-key)**
+
+**[Query entity via external primary key](#Query-entity-via-external-primary-key)**
+
+**[Items](#items)**
+
+**[Transfer article master data](#Transfer-article-master-data)**
+
+**[Add channel specific article numbers](#Add-channel-specific-article-numbers)**
+
+**[Transfer article movement data](#Transfer-article-movement-data)**
+
+**[orders](#orders)**
+
+> **[Query orders](#Query-orders)**
+
+> **[Query order](#Query-order)**
+
+> **[Update order status](#Update-order-status)**
+
+> **[confirm order](#confirm-order)**
+
+> **[cancel order](#cancel-order)**
+
+> **[Create shipping labels](#Create-shipping-labels)**
+
+> **[Create delivery note](#Create-delivery-note)**
+
+> **[send order](#send-order)**
+
+> **[complete order](#complete-order)**
+
+> **[Embed order management](#Embed-order-management)**
+
+**[Messages](#Messages)**
+
+> **[query messages](#query-messages)**
+
+> **[Processing notifications](#Processing-notifications)**
+
+> **[Generate message](#Generate-message)**
+
+> **[Return delivery has been received](#Return-delivery-has-been-received)**
+
+> **[Returns inspection passed](#Returns-inspection-passed)**
+
+> **[Returns inspection failed](#Returns-inspection-failed)**
+
+> **[order delivered](#order-delivered)**
+
+> **[received pick-up order](#received-pick-up-order)**
+
+> **[Confirmation of delivery date](#Confirmation-of-delivery-date)**
+
+> **[Change of delivery date](#Change-of-delivery-date)**
+
+> **[customers not reached](#customers-not-reached)**
+
+> **[customers not found](#customers-not-found)**
+
+
+# Authorization
+
+This example shows how a connection to the middleware is defined via a vendor, a token and the endpoint.
 
 ```csharp
 var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
@@ -18,13 +85,13 @@ var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
 var token = unitOfWork.Account.Info(); 
 ```
 
-# Externer Primärschlüssel
+# External primary key
 
-Alle Entitäten haben ein Feld External_Key, in der eigene Primärschlüssel wie z.B. die ID des externen Software-Systems hinterlegt werden kann. Auf Basis dieses External_Keys kann dann auf die Entität zugegriffen werden.
+All entities have an External_Key field in which their own primary key, such as the ID of the external software system, can be stored. The entity can then be accessed on the basis of this External_Key.
 
-# Externen Primärschlüssel setzen
+# Set external primary key
 
-Dieses Beispiel zeigt, wie man bei der Entität den Primärschlüssel setzen kann.
+This example shows how to set the primary key for the entity.
 
 ```csharp
     unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "External_Key" } /* optional */);
@@ -32,9 +99,9 @@ Dieses Beispiel zeigt, wie man bei der Entität den Primärschlüssel setzen kan
 ```
 
 
-# Entität über Externen Primärschlüssel abfragen
+# Query entity via external primary key
 
-Dieses Beispiel zeigt, wie man eine Entität über einen Primärschlüssel abfragen kann.
+This example shows how to query an entity using a primary key.
 
 ```csharp
     var article = unitOfWork.Articles.Get(external_key);
@@ -42,13 +109,13 @@ Dieses Beispiel zeigt, wie man eine Entität über einen Primärschlüssel abfra
         Console.WriteLine("Kein Artikel gefunden!");
 ```
 
-# Artikel
+# items
 
-Artikel Stammdaten und Bewegungsdaten (Preise + Beständ) müssen übertragen werden
+Article master data and movement data (price inventory) must be transferred
 
-## Artikel-Stammdaten übertragen
+## Transfer article master data
 
-Dieses Beispiel zeigt, wie die Artikel-Stammdaten übertragen werden.
+This example shows how the item master data is transferred.
 
 ```csharp
 var article = new Article();
@@ -214,9 +281,9 @@ var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/c
 Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 ```
 
-## Kanalspezifische Artikelnummern hinzufügen
+## Add channel specific article numbers
 
-Dieses Beispiel zeigt, wie die kanalspezifischen Artikelnummern als Teil der Artikel-Stammdaten beim Artikel hinzugefügt werden.
+This example shows how the channel-specific article numbers are added to the article as part of the article master data.
 
 ```csharp
     var channel = unitOfWork.Channels.Get(1);
@@ -226,9 +293,9 @@ Dieses Beispiel zeigt, wie die kanalspezifischen Artikelnummern als Teil der Art
     articleKey.Channels.Add(articleKeyChannel);
 ```
 
-## Artikel-Bewegungsdaten übertragen
+## Transfer article movement data
 
-Dieses Beispiel zeigt, wie die Artikel-Bewegungsdaten übertragen werden.
+This example shows how the item movement data is transferred.
 
 ```csharp
 var transactions = new List<ArticleTransactionArgs>();
@@ -242,13 +309,13 @@ transactions.Add(transaction);
 unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
 ```
 
-# Bestellungen
+# orders
 
-In diesem Bereich wird beschrieben, wie man neue Bestellungen abfragen kann. 
+This area describes how to query new orders. 
 
-## Bestellungen abfragen
+## Query orders
 
-Dieses Beispiel zeigt, wie man Bestellungen abgefragen kann. Als Ergebnis wird eine Zusammenfassung der Bestellungen mit den relevanstesten Daten zurückgeliefert.
+This example shows how to query orders. As a result, a summary of the orders with the most relevant data is returned.
 
 ```csharp
     // Wir holen die Bestellungen nach OrderID absteigend sortiert
@@ -260,9 +327,9 @@ Dieses Beispiel zeigt, wie man Bestellungen abgefragen kann. Als Ergebnis wird e
 
 ```
 
-## Bestellung abfragen
+## Query order
 
-Dieses Beispiel zeigt, wie man eine konkrete Bestellung abgefragen kann. Als Ergebnis wird eine vollständige Bestellung mit allen verfügbaren Daten zurückgeliefert.
+This example shows how to query a specific order. As a result, a complete order with all available data is returned.
 
 ```csharp
     var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
@@ -336,13 +403,13 @@ Dieses Beispiel zeigt, wie man eine konkrete Bestellung abgefragen kann. Als Erg
 
 ```
 
-## Bestell-Status aktualisieren
+## Update order status
 
-Dieses Beispiel zeigt, wie man den Bestell-Status aktualisieren kann.
+This example shows how to update the order status.
 
-## Bestellung bestätigen
+## confirm order
 
-Dieses Beispiel zeigt, wie man den Bestell-Status als bestätigt markieren kann. Über diese Funktion können auch Teil der Bestellung bestätigt werden.
+This example shows how to mark the order status as confirmed. This function can also be used to confirm part of the order.
 
 ```csharp
 Console.WriteLine("Auftrag wird bestätigt: " + order.OrderID);
@@ -369,9 +436,9 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## Bestellung stornieren
+## cancel order
 
-Dieses Beispiel zeigt, wie man die gesamte Bestellung storniert.
+This example shows how to cancel the entire order.
 
 ```csharp
 Console.WriteLine("Auftrag wird storniert: " + order.OrderID);
@@ -385,9 +452,9 @@ var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
 Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 ```
 
-## Versandetiketten erstellen (optional)
+## Create shipping labels
 
-Dieses Beispiel zeigt, wie man Versandetiketten erstellen kann.
+This example shows how to create shipping labels.
 
 ```csharp
 var model = new CreateShipmentOrderArgs();
@@ -406,9 +473,9 @@ if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
 }
 ```
 
-## Lieferschein erstellen
+## Create delivery note
 
-Dieses Beispiel zeigt, wie man Lieferschein erstellen kann.
+This example shows how to create a delivery note.
 
 ```csharp
 var transaction = order.Transactions.First();
@@ -416,9 +483,9 @@ var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTrans
 Process.Start(pdf);
 ```
 
-## Bestellung versenden
+## send order
 
-Dieses Beispiel zeigt, wie man den Bestell-Status einer Teil-Bestellung als versendet markieren kann.
+This example shows how to mark the order status of a partial order as shipped.
 
 ```csharp
 var transaction = order.Transactions.First();
@@ -435,9 +502,9 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## Bestellung erledigen
+## complete order
 
-Dieses Beispiel zeigt, wie man die Bestellung als erledigt markieren kann.
+This example shows how to mark the order as completed.
 
 ```csharp
  Console.WriteLine("Auftrag wird erledigt: " + order.OrderID);
@@ -454,9 +521,9 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 
 ```
 
-## Auftragsverwaltung einbetten (optional)
+## Embed order management
 
-Dieses Beispiel zeigt, wie man die Auftragverwaltung aufrufen kann.
+This example shows how to call up the order management.
 
 ```csharp
 var dialog = unitOfWork.Articles.Dialog(article.ArticleID);
@@ -472,28 +539,30 @@ if (Console.ReadLine() == "j")
 
 ```
 
-# Meldungen (TODO)
+# Messages 
 
-## Abfrage Meldungen
+Messages are work in Progress and will be defined later
 
-## Verarbeitung Meldungen
+## query messages
 
-## Erzeugen Meldung
+## Processing notifications
 
-### Retourenlieferung ist eingegangen
+## Generate message
 
-### Retourenprüfung bestanden
+### Return delivery has been received
 
-### Retourenprüfung nicht bestanden
+### Returns inspection passed
 
-### Bestellung zugestellt 
+### Returns inspection failed
 
-### Abholauftrag erhalten
+### order delivered 
 
-### Bestätigung Liefertermin
+### received pick-up order
 
-### Änderung Liefertermin
+### Confirmation of delivery date
 
-### Kunden nicht erreicht
+### Change of delivery date
 
-### Kunden nicht angetroffen
+### customers not reached
+
+### customers not found
