@@ -267,14 +267,14 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
             var taxRate7 = germany.TaxRates.Single(m => m.Percent == 7);
 
-            // Bezahlart
+            // Payment method
             var paymentMethod = unitOfWork.PaymentMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/paymentmethods
             args.PaymentMethodID = paymentMethod.PaymentMethodID;
 
-            // Währung
+            // Currency
             args.Currency = "EUR";
 
-            // Kunde
+            // Customer
             args.OwnerMemberID = 1;
 
             var items = new List<CreateCashdeskArgs.OrderItem>();
@@ -282,7 +282,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             item.Date = DateTime.Now;
             item.Info = "Acer Palmatum Bloodgood";
             item.ArticleKey = "4711";
-            item.Notes = "Bemerkungen zum Artikel";
+            item.Notes = "Notes for the article";
             item.Type = ItemType.ArticleKey;
             item.Currency = "EUR";
             item.Quantity = 1;
