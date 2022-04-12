@@ -125,17 +125,17 @@ article.Name2 = "Fächerahorn Bloodgood";
 article.Description = "Dies ist eine lange Beschreibung";
 article.ShortDescription = "Dies ist eine kurze Beschreibung";
 
-// Warengruppe setzen (evtl. Hierachie beachten)
+// Set Article Group
 var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
 article.ArticleGroups = new List<EntityReference>();
 article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
 
-// Kategorie setzen (evtl. Hierachie beachten)
+// Set Category
 var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
 article.Categories = new List<EntityReference>();
 article.Categories.Add(new EntityReference() { ID = category.CategoryID });
 
-// Texte hinzufügen
+// Add Texts
 var text = new ArticleText();
 article.Texts = new List<ArticleText>();
 article.Texts.Add(text);
@@ -143,29 +143,29 @@ text.Type = TextType.BulletPoints;
 text.Title = "Kaufargumente";
 text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
 
-// Verfügbarkeiten
+// Availabilities
 var timePeriod = new TimePeriod();
 article.Available = new List<TimePeriod>();
 article.Available.Add(timePeriod);
-timePeriod.FromCW = 10; // Kalendarwoche (von)
-timePeriod.ToCW = 20; // Kalendarwoche (bis)
-timePeriod.StockQuantity = 100; // Lagerbestand
+timePeriod.FromCW = 10; // Calendarweek (from)
+timePeriod.ToCW = 20; // Calendarweek (to)
+timePeriod.StockQuantity = 100; // Stock-Quantity
 
-// Varianten (Artikelnummern) hinzufügen
+// Add Variants (Articlenumbers)
 var articleKey = new ArticleKey();
 article.Keys = new List<ArticleKey>();
 article.Keys.Add(articleKey);
 
-articleKey.Value = "47811"; // Artikelnummer
+articleKey.Value = "47811"; // Articlenumber
 articleKey.Info = "C/  50 - 60";
 articleKey.AvailableForClickAndCollect = true; // Click & Collect
-articleKey.AvailableForRadiusDelivery = true; // Liefern
-articleKey.AvailableForShipping = true; // Versenden
-articleKey.PackingSize = 20; // VE
-articleKey.StockQuantity = 10; // Bestand
+articleKey.AvailableForRadiusDelivery = true; // Send
+articleKey.AvailableForShipping = true; // Deliver
+articleKey.PackingSize = 20; // Packing Unit
+articleKey.StockQuantity = 10; // Stock Quantity
 articleKey.Available.Add(timePeriod);
 
-// Steuersatz
+// Tax
 var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
 var germanySummary = countries.Items.Single(m => m.ISO == "DE");
 var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
@@ -174,21 +174,21 @@ var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countrie
 articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
 
 
-// Preise
+// Prices
 var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
 var euro = currencies.Items.Single(m => m.NameShort == "EUR");
 
 var articleKeyPrice = new ArticleKeyPrice();
 articleKey.Prices = new List<ArticleKeyPrice>();
 articleKey.Prices.Add(articleKeyPrice);
-articleKeyPrice.Price = 17; // Preis
-articleKeyPrice.PriceOld = 25; // Streichpreis
-articleKeyPrice.PriceUnitAmount = 10; // pro 10
-articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
-articleKeyPrice.Quantity = 1; // Ab Stückzahl
+articleKeyPrice.Price = 17; // Price
+articleKeyPrice.PriceOld = 25; // Old - Price (strikeout)
+articleKeyPrice.PriceUnitAmount = 10; // per 10
+articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Litres
+articleKeyPrice.Quantity = 1; // From Quantity
 articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
-articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
-articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
+articleKeyPrice.TaxIncluded = true; // Tax inclusive?
+articleKeyPrice.PriceNet = true; // Netto - Price (no discount)
 
 var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
 articleKey.Photos = new List<ArticleKeyPhoto>();
@@ -199,86 +199,6 @@ articleKey.Photos.Add(new ArticleKeyPhoto()
 
 var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
 Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);var article = new Article();
-
-article.Name = "Acer Palmatum Bloodgood";
-article.Name2 = "Fächerahorn Bloodgood";
-article.Description = "Dies ist eine lange Beschreibung";
-article.ShortDescription = "Dies ist eine kurze Beschreibung";
-
-// Warengruppe setzen (evtl. Hierachie beachten)
-var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
-article.ArticleGroups = new List<EntityReference>();
-article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
-
-// Kategorie setzen (evtl. Hierachie beachten)
-var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
-article.Categories = new List<EntityReference>();
-article.Categories.Add(new EntityReference() { ID = category.CategoryID });
-
-// Texte hinzufügen
-var text = new ArticleText();
-article.Texts = new List<ArticleText>();
-article.Texts.Add(text);
-text.Type = TextType.BulletPoints;
-text.Title = "Kaufargumente";
-text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
-
-// Verfügbarkeiten
-var timePeriod = new TimePeriod();
-article.Available = new List<TimePeriod>();
-article.Available.Add(timePeriod);
-timePeriod.FromCW = 10; // Kalendarwoche (von)
-timePeriod.ToCW = 20; // Kalendarwoche (bis)
-timePeriod.StockQuantity = 100; // Lagerbestand
-
-// Varianten (Artikelnummern) hinzufügen
-var articleKey = new ArticleKey();
-article.Keys = new List<ArticleKey>();
-article.Keys.Add(articleKey);
-
-articleKey.Value = "47811"; // Artikelnummer
-articleKey.Info = "C/  50 - 60";
-articleKey.AvailableForClickAndCollect = true; // Click & Collect
-articleKey.AvailableForRadiusDelivery = true; // Liefern
-articleKey.AvailableForShipping = true; // Versenden
-articleKey.PackingSize = 20; // VE
-articleKey.StockQuantity = 10; // Bestand
-articleKey.Available.Add(timePeriod);
-
-// Steuersatz
-var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
-var germanySummary = countries.Items.Single(m => m.ISO == "DE");
-var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
-
-var taxRate = germany.TaxRates.Single(m => m.Percent == 19); // GET api/countries
-articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
-
-
-// Preise
-var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
-var euro = currencies.Items.Single(m => m.NameShort == "EUR");
-
-var articleKeyPrice = new ArticleKeyPrice();
-articleKey.Prices = new List<ArticleKeyPrice>();
-articleKey.Prices.Add(articleKeyPrice);
-articleKeyPrice.Price = 17; // Preis
-articleKeyPrice.PriceOld = 25; // Streichpreis
-articleKeyPrice.PriceUnitAmount = 10; // pro 10
-articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
-articleKeyPrice.Quantity = 1; // Ab Stückzahl
-articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
-articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
-articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
-
-var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
-articleKey.Photos = new List<ArticleKeyPhoto>();
-articleKey.Photos.Add(new ArticleKeyPhoto()
-{
-    Picture = new PictureEntityReference(picture.FileID)
-});
-
-var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
-Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
 ```
 
 ## Add channel specific article numbers
@@ -301,7 +221,7 @@ This example shows how the item movement data is transferred.
 var transactions = new List<ArticleTransactionArgs>();
 var transaction = new ArticleTransactionArgs();
 transaction.External_Key = "abc";
-transaction.StockQuantity = 100; // Bestand
+transaction.StockQuantity = 100; // Stock Quantity
 transaction.Prices = new List<ArticleTransactionPrice>();
 transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
 transactions.Add(transaction);
@@ -318,13 +238,9 @@ This area describes how to query new orders.
 This example shows how to query orders. As a result, a summary of the orders with the most relevant data is returned.
 
 ```csharp
-    // Wir holen die Bestellungen nach OrderID absteigend sortiert
-    // damit wir die neueste zuerst und danach die anderen bekommen
+    // We query the orders in descencding order by OrderID sorted
+    // to get first the newest and the rest at the end
     var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
-
-    // Geänderte Bestellungen (inkl. neu angelegte abfragen)
-    // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
-
 ```
 
 ## Query order
@@ -356,7 +272,7 @@ This example shows how to query a specific order. As a result, a complete order 
         Console.WriteLine("Versandart:" + shippingMethod.Name);
     }
 
-    // Positionen
+    // Positions
     foreach (var position in order.Items)
     {
         var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
@@ -364,13 +280,13 @@ This example shows how to query a specific order. As a result, a complete order 
 
         Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
         Console.WriteLine("Artikelnummer:" + articleKey.Value);
-        Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
+        Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Send u.s.w.
         Console.WriteLine("Menge:" + position.Quantity);
         Console.WriteLine("Einzelpreis:" + position.Price);
         Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
         Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
 
-        // Gutscheine gekauft ?
+        // Vouchers bought?
         if(position.Vouchers!=null && position.Vouchers.Any())
         {
             foreach (var voucherReference in position.Vouchers)
@@ -390,7 +306,7 @@ This example shows how to query a specific order. As a result, a complete order 
         Console.WriteLine("* Info: " + payment.Info);
         Console.WriteLine("* Zahlart: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
 
-        // Mit Gutschein gezahlt?
+        // Payd with voucher?
         if (payment.VoucherCode != null)
         {
             var voucher = unitOfWork.Vouchers.Get(payment.VoucherCode.Voucher.ID);
@@ -423,10 +339,10 @@ var articles = new List<OrderTransactionArticle>();
 
 var article = new OrderTransactionArticle();
 article.OrderItemID = order.Items.First().OrderItemID;
-// false = nicht bestätigt
+// false = not confirmed
 article.Confirmed = true; 
-// Minderstückzahl bestätigen ?
-// null = nein ansonsten wieviel Stück bestätigt werden sollen
+// Less Quentity confirmed ?
+// null = no otherwise the quantity to be confirmed
 article.QuantityConfirmed = null; // St
 articles.Add(article);
 
@@ -513,7 +429,7 @@ var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Ready;
 args.InvoiceFilename = "Rechung.pdf";
 args.InvoiceMimeType = "application/pdf";
-// Base 64 encodierte Data URI mit dem Pdf
+// Base 64 enocded Data URI with the Pdf
 args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
