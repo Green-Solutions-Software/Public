@@ -95,7 +95,7 @@ This example shows how to set the primary key for the entity.
 
 ```csharp
     unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "External_Key" } /* optional */);
-    Console.WriteLine("Artikel wurde aktualisiert: " + newArticle.External_Key); 
+    Console.WriteLine("Article was updated: " + newArticle.External_Key); 
 ```
 
 
@@ -106,7 +106,7 @@ This example shows how to query an entity using a primary key.
 ```csharp
     var article = unitOfWork.Articles.Get(external_key);
     if (article == null)
-        Console.WriteLine("Kein Artikel gefunden!");
+        Console.WriteLine("No article found!");
 ```
 
 # Items
@@ -198,7 +198,7 @@ articleKey.Photos.Add(new ArticleKeyPhoto()
 });
 
 var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
-Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);var article = new Article();
+Console.WriteLine("Article was created. ID = " + summary.ArticleID);var article = new Article();
 ```
 
 ## Add channel specific article numbers
@@ -250,26 +250,26 @@ This example shows how to query a specific order. As a result, a complete order 
 ```csharp
     var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
 
-    Console.WriteLine("Auftragsnummer:" + order.OrderID);
-    Console.WriteLine("Datum:" + order.CreatedOn.ToShortDateString());
+    Console.WriteLine("Ordernumber:" + order.OrderID);
+    Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
 
     var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
-    Console.WriteLine("Kunde:" + owner.MainContact.Company);
+    Console.WriteLine("Customer:" + owner.MainContact.Company);
 
-    Console.WriteLine("Rechnungsadresse:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+    Console.WriteLine("Invoiceaddress:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
     if (order.ShippingAddress != null)
-        Console.WriteLine("Lieferadresse:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
+        Console.WriteLine("Shippingaddress:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
     if (order.PaymentMethod != null)
     {
         var paymentMethod = unitOfWork.PaymentMethods.Get(order.PaymentMethod.ID); // GET api/paymentmethods/{id}
-        Console.WriteLine("Bezahlart:" + paymentMethod.Name);
+        Console.WriteLine("Payment method:" + paymentMethod.Name);
     }
 
     if (order.ShippingMethod != null)
     {
         var shippingMethod = unitOfWork.ShippingMethods.Get(order.ShippingMethod.ID); // GET api/shippingmethods/{id}
-        Console.WriteLine("Versandart:" + shippingMethod.Name);
+        Console.WriteLine("Shipping method:" + shippingMethod.Name);
     }
 
     // Positions
@@ -278,13 +278,13 @@ This example shows how to query a specific order. As a result, a complete order 
         var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
         var articleKey = article.Keys.SingleOrDefault(m => m.ArticleKeyID == position.ArticleKey.ID);
 
-        Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
-        Console.WriteLine("Artikelnummer:" + articleKey.Value);
-        Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Send u.s.w.
-        Console.WriteLine("Menge:" + position.Quantity);
-        Console.WriteLine("Einzelpreis:" + position.Price);
-        Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
-        Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
+        Console.WriteLine("Article:" + article.Name + " / " + article.Name2);
+        Console.WriteLine("Articleno:" + articleKey.Value);
+        Console.WriteLine("Transaction:" + position.TransactionType); // CLick&Collect, Send u.s.w.
+        Console.WriteLine("Quantity:" + position.Quantity);
+        Console.WriteLine("Price:" + position.Price);
+        Console.WriteLine("Total price:" + position.TotalCosts);
+        Console.WriteLine("Confirmed:" + (position.IsConfirmed == true ? "Yes" : "No"));
 
         // Vouchers bought?
         if(position.Vouchers!=null && position.Vouchers.Any())
@@ -292,28 +292,28 @@ This example shows how to query a specific order. As a result, a complete order 
             foreach (var voucherReference in position.Vouchers)
             {
                 var voucher = unitOfWork.Vouchers.Get(voucherReference.ID);
-                Console.WriteLine("Gutschein: " + voucher.Name);
-                Console.WriteLine("Betrag: " + voucher.Price);
-                Console.WriteLine("Guthaben: " + voucher.Remaining);
+                Console.WriteLine("Voucher: " + voucher.Name);
+                Console.WriteLine("Amount: " + voucher.Price);
+                Console.WriteLine("Balance: " + voucher.Remaining);
             }
         }
     }
 
-    Console.WriteLine("Zahlungen:");
+    Console.WriteLine("Payments:");
     foreach (var payment in order.Payments)
     {
-        Console.WriteLine("* Preis: " + payment.Price);
+        Console.WriteLine("* Price: " + payment.Price);
         Console.WriteLine("* Info: " + payment.Info);
-        Console.WriteLine("* Zahlart: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
+        Console.WriteLine("* Payment method: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
 
         // Payd with voucher?
         if (payment.VoucherCode != null)
         {
             var voucher = unitOfWork.Vouchers.Get(payment.VoucherCode.Voucher.ID);
-            Console.WriteLine("Gutschein: " + voucher.Name);
-            Console.WriteLine("Betrag: " + voucher.Price);
-            Console.WriteLine("Guthaben: " + voucher.Remaining);
-            Console.WriteLine("* Gutschein: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
+            Console.WriteLine("Voucher: " + voucher.Name);
+            Console.WriteLine("Amount: " + voucher.Price);
+            Console.WriteLine("Balance: " + voucher.Remaining);
+            Console.WriteLine("* Voucher: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
         }
     }
 
@@ -328,12 +328,12 @@ This example shows how to update the order status.
 This example shows how to mark the order status as confirmed. This function can also be used to confirm part of the order.
 
 ```csharp
-Console.WriteLine("Auftrag wird bestätigt: " + order.OrderID);
+Console.WriteLine("Confirm order: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Confirmed;
 args.StatusOn = DateTime.Now;
-args.Message = "Nachricht zur Bestätigung";
+args.Message = "Message for the confirmation";
 
 var articles = new List<OrderTransactionArticle>();
 
@@ -348,7 +348,7 @@ articles.Add(article);
 
 args.Articles = articles.ToArray();
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+Console.WriteLine("Order was updated: " + order.Notes);
 
 ```
 
@@ -357,15 +357,15 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 This example shows how to cancel the entire order.
 
 ```csharp
-Console.WriteLine("Auftrag wird storniert: " + order.OrderID);
+Console.WriteLine("Cancel order: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Cancelled;
 args.StatusOn = DateTime.Now;
-args.Message = "Nachricht zur Stornierung";
+args.Message = "Cancellation Message";
 
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+Console.WriteLine("Order was updated: " + order.Notes);
 ```
 
 ## Create shipping labels
@@ -405,7 +405,7 @@ This example shows how to mark the order status of a partial order as shipped.
 
 ```csharp
 var transaction = order.Transactions.First();
-Console.WriteLine("Auftrag wird versendet: " + order.OrderID);
+Console.WriteLine("Sent orfder: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Delivered;
@@ -414,7 +414,7 @@ args.TrackAndTraceID = new string[] {"123456","789012" };
 args.TrackAndTraceURL = "https://dhl.tracking.de/?piececode=";
 args.OrderTransactionID = transaction.OrderTransactionID;
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+Console.WriteLine("Order was updated: " + order.Notes);
 
 ```
 
@@ -423,7 +423,7 @@ Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
 This example shows how to mark the order as completed.
 
 ```csharp
- Console.WriteLine("Auftrag wird erledigt: " + order.OrderID);
+ Console.WriteLine("Finish Ordewr: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Ready;
@@ -433,7 +433,7 @@ args.InvoiceMimeType = "application/pdf";
 args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+Console.WriteLine("Order was finished: " + order.Notes);
 
 ```
 
@@ -443,14 +443,14 @@ This example shows how to call up the order management.
 
 ```csharp
 var dialog = unitOfWork.Articles.Dialog(article.ArticleID);
-Console.WriteLine("Titel: " + dialog.Title);
+Console.WriteLine("Ttitle: " + dialog.Title);
 Console.WriteLine("Url: " + dialog.Url);
-Console.WriteLine("Breite: " + dialog.Width);
+Console.WriteLine("Width: " + dialog.Width);
 Console.WriteLine("Height: " + dialog.Height);
 
 Console.WriteLine();
-Console.Write("Broswer jetzt aufrufen (j/n)? ");
-if (Console.ReadLine() == "j")
+Console.Write("Open browser (y/n)? ");
+if (Console.ReadLine() == "y")
     Process.Start(dialog.Url);
 
 ```
