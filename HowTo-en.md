@@ -472,7 +472,9 @@ if (Console.ReadLine() == "j")
 
 ```
 
-# Messages (TODO)
+# Messages 
+
+Messages are work in Progress and will be defined later
 
 ## query messages
 
