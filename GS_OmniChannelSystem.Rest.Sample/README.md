@@ -1,17 +1,17 @@
 
 # Sample application
 
-This application illustrates some of the possible functions that can be performed using the REST API.
+This application illustrates the main functions that can be performed using the REST API.
 These include:
 
 - Authorization
-- Query Items
+- Query articles
 - Query orders
-- Update an article
-- Query article by External_Key
-- Clearing the Cache(OutputCache, EF Cache etc.)
+- Update article
+- Query article
+- Clearing the cache
 - Query branches
 - Query customers
-- Call up order management
+- Embedd order management
 - Create order
-- Query Vouchers
+- Query vouchers

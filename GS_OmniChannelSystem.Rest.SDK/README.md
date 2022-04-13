@@ -1,263 +1,267 @@
 
-# Omni-Channel System(OCS)
+# Omni Channel System (OCS)
 ## REST API
 
 
 ## Contents
 
-**[Overview](#overview)**
+**[Overview](#Overview)**
 
-**[Hints](#hints)**
+**[Hints](#Hints)**
 
-**[Functionality](#functionality)**
+**[Functionality](#Functionality)**
 
-**[Error handling](#error-handling)**
+**[Error handling](#Error-handling)**
 
-**[Requirements](#requirements)**
+**[Requirements](#Requirements)**
 
-**[Server](#server)**
+**[Server](#Server)**
 
 **[Interrogate](#Interrogate)**
 
-**[Postman](#postman)**
+**[Postman](#Postman)**
 
-**[Authorization](#authorization)**
+**[Authorization](#Authorization)**
 
 > [Log in](#Log-in)
 
-**[Currencies](#currencies)**
+**[Currencies](#Currencies)**
 
-**[Countries](#countries)**
+**[Countries](#Countries)**
 
-**[Categories](#categories)**
+**[Categories](#Categories)**
 
-**[Reports](#reports)**
+**[Reports](#Reports)**
 
-**[Debit cards](#Debit-cards)**
+**[Loyalty cards](#Loyaltycards)**
 
-> [Request new debit cards](#Request-new-debit-cards)
+> [Request new loyalty cards](#Request-new-loyalty-cards)
 
+<<<<<<< Updated upstream
 > [Validate new debit cards](#validate-new-debit-cards)
+=======
+> [Validate new loyalty cards](#Validate-new-loyalty-cards)
+>>>>>>> Stashed changes
 
-> [Current sales](#current-sales)
+> [Current sales](#Current-sales)
 
-> [Web shop orders](#webshop-orders)
+> [Orders](#Orders)
 
-> [Order data](#order-data)
+> [Order](#Order)
 
-**[Videos](#videos)**
+**[Videos](#Videos)**
 
-**[Branches](#branches)**
+**[Chainstores](#Chainstores)**
 
 **[Customers](#Customers)**
 
-**[Article](#article)**
+**[Article](#Article)**
 
-> [Extended facility](#extended-plant)
+> [Extended facility](#Extended-facility)
 
-> [Transactions](#transactions)
+> [Transactions](#Transactions)
 
-> [Variants](#variants)
+> [Variants](#Variants)
 
-> [Edit dialog](#dialog-edit)
+> [Edit dialog](#Dialog-edit)
 
->[Edit variant dialog](#dialog-variant-edit)
+> [Edit variant dialog](#Dialog-variant-edit)
 
-**[Price lists](#price-lists)**
+**[Price lists](#Price-lists)**
 
-> [Price Lists - Entries](#price-list-entries)
+> [Price lists - Entries](#price-list-entries)
 
 **[Orders](#orders)**
 
-> [All store orders](#all-shop-orders)
+> [All orders](#All-orders)
 
-> [Adjust Status](#status-adjust)
+> [Update status](#Update-status)
 
-> [Send dialog](#dialog-send)
+> [Ship dialog](#Dialog-ship)
 
-> [Confirm dialog](#dialog-confirm)
+> [Confirm dialog](#Dialog-confirm)
 
-> [Complete dialogue](#dialog-do)
+> [Complete dialog](#Dialog-complete)
 
-> [Cancel dialog](#dialog-cancel)
+> [Cancel dialog](#Dialog-cancel)
 
 > [Order management dialog](#dialog-order-management)
 
 **[Documents](#Documents)**
 
-> [Delivery note order](#delivery-note-order)
+> [Delivery note order](#Delivery-note-order)
 
-> [Delivery note partial order](#delivery-note-partial-order)
+> [Delivery note partial order](#Delivery-note-partial-order)
 
-**[shipping orders](#shipping-orders)**
+**[Shipping orders](#shipping-orders)**
 
-> [Query package label](#query-packet-label)
+> [Query shipment label](#query-shipment-label)
 
-**[files](#files)**
+**[Files](#Files)**
 
-> [Upload files](#files-upload)
+> [Upload files](#Upload-files)
 
-> [Upload pictures](#Upload-pictures)
+> [Upload images](#Upload-images)
 
-**[Coupons](#coupons)**
+**[Voucher](#Voucher)**
 
-> [Create Voucher](#create-voucher)
+> [Create Voucher](#Create-voucher)
 
-> [Find coupon](#coupon-find)
+> [Find coupon](#Coupon-find)
 
-> [Reserve payment](#payment-reserve)
+> [Reserve payment](#Payment-reserve)
 
-> [Execute payment](#execute-payment)
+> [Execute payment](#Payment-execute)
 
-> [Cancel payment](#cancel-payment)
+> [Cancel payment](#Payment-cancel)
 
-> [Generate new codes](#generate-new-codes)
+> [Generate new codes](#Generate-new-codes)
 
-> [Buy a voucher at the POS](#voucher-buy-at-pos)
+> [Purchase a voucher at the POS](#Voucher-buy-at-pos)
 
-> [Pay with a voucher at the POS](#pay-by-voucher-at-pos)
+> [Pay with a voucher at the POS](#Pay-by-voucher-at-pos)
 
-> [Cancellation by voucher at the POS](#cancel-by-voucher-am-pos)
+> [Cancel voucher at the POS](#Cancel-by-voucher-am-pos)
 
-> [Barcodes](#barcodes)
+> [Barcodes](#Barcodes)
 
 
 **[Messages](#Messages)**
 
-> [Create a message](#create-a-message)
-  - [Return delivery has been received](#return-delivery-is-received)
-  - [Returns inspection passed](#returns-inspection-passed)
-  - [Returns inspection failed](#returns-inspection-failed)
-  - [Order delivered](#order-delivered)
-  - [Received pick-up order](#pick-up-order-received)
-  - [Customer cancellation request confirmed](#cancellation-request-of-the-customer-confirmed)
-  - [Cancellation is no longer possible](#Cancellation-no-longer-possible)
+> [Create a message](#Create-a-message)
+  - [Return delivery has been received](#Return-delivery-is-received)
+  - [Returns quality check passed](#Returns-quality-check-passed)
+  - [Returns quality check failed](#Returns-quality-check-failed)
+  - [Order delivered](#Order-delivered)
+  - [Received pick-up order](#Pick-up-order-received)
+  - [Customer cancellation request confirmed](#Cancellation-request-of-the-customer-confirmed)
+  - [Cancellation not possible](#Cancellation-not-possible)
 
-**[Shopping carts](#shopping-carts)**
+**[Shopping carts](#Shopping-carts)**
 
 **[Jobs](#Jobs)**
 
 **[Container](#Container)**
 
-**[Annual planning](#annual-planning)**
+**[Annual planning](#Annual-planning)**
 
-**[Pictograms](#pictograms)**
+**[Pictograms](#Pictograms)**
 
-**[Search](#search)**
+**[Search](#Search)**
 
-**[Linked content for articles](#linked-content-for-articles)**
+**[Linked content for articles](#Linked-content-for-articles)**
 
-**[Linked content for report](#linked-content-for-report)**
+**[Linked content for report](#Linked-content-for-report)**
 
-**[Linked content for video](#linked-content-for-video)**
+**[Linked content for video](#Linked-content-for-video)**
 
 **[Add External](#Add-External)**
 
 > [Search external](#Search-external)
 
-> [Search for an item](#search-for-an-item)
+> [Search for an item](#Search-for-an-item)
 
-> [Import plants](#plant-import)
+> [Import plants](#Import-plant)
 
-> [Import videos](#import-videos)
+> [Import videos](#Import-videos)
 
-> [Import reports](#reports-import)
+> [Import reports](#Import-reports)
 
-> [Import images](#import-images)
+> [Import images](#Import-images)
 
-> [Import plant photos](#import-plant-photos)
+> [Import plant photos](#Import-plant-photos)
 
 **[Cache](#cache)**
 
-> [Clear all caches](#clear-all-caches)
+> [Clear all caches](#Clear-all-caches)
 
-> [Clear database cache](#clear-database-cache)
+> [Clear database cache](#Clear-database-cache)
 
-> [Clean up caches](#caches-clean-up)
+> [Clean up caches](#Caches-clean-up)
 
-**[Data structures](#data-structures)**
+**[Data structures](#Data-structures)**
 
-> [order](#order)
+> [Order](#Order)
 
-> [ShipmentOrder](#shipmentorder)
+> [ShipmentOrder](#Shipmentorder)
 
-> [Article](#article)
+> [Article](#Article)
 
-> [job](#job)
+> [Job](#Job)
 
-> [payments](#payment)
+> [Payments](#Payment)
 
-> [EntityReference](#entityreference)
+> [EntityReference](#Entityreference)
 
-> [vouchers](#voucher)
+> [Vouchers](#Voucher)
 
-> [voucher code](#vouchercode)
+> [Voucher code](#Vouchercode)
 
-> [FoundVoucher](#foundvoucher)
+> [FoundVoucher](#Foundvoucher)
 
-> [OrderStatusType](#orderstatustype)
+> [OrderStatusType](#Orderstatustype)
 
-> [TransactionStatus](#transactionstatus)
+> [TransactionStatus](#Transactionstatus)
 
-> [BasketType](#baskettype)
+> [BasketType](#Baskettype)
 
-> [MessageType](#messagetype)
+> [MessageType](#Messagetype)
 
-> [MessageDirection](#messagedirection)
+> [MessageDirection](#Messagedirection)
 
-> [Documentation](#documentation)
+> [Documentation](#Documentation)
 
-> [Item status](#item-status)
+> [Item status](#Item-status)
 
-> [Files](#file)
+> [Files](#File)
 
-> [transaction](#transaction)
+> [Transaction](#Transaction)
 
-> [OrderStatus](#orderstatus)
+> [OrderStatus](#Orderstatus)
 
-> [debit card](#debitcard)
+> [loyalty card](#Loyaltycard)
 
-> [result](#result)
+> [Result](#Result)
 
-> [dialog](#dialog)
+> [Dialog](#Dialog)
 
-> [Upload](#upload)
+> [Upload](#Upload)
 
-> [messages](#message)
+> [Messages](#Message)
 
-> [pricelist](#pricelist)
+> [Pricelist](#Pricelist)
 
-> [PricelistItem](#pricelistitem)
+> [PricelistItem](#Pricelistitem)
 
-> [Account info](#accountinfo)
+> [Account info](#Accountinfo)
 
 **[Dialogs](#dialogs)**
 
-> [To ship](#toship)
+> [To ship](#Toship)
 
-> [Order management](#order-management)
+> [Order management](#Order-management)
 
 > [Edit article](#Edit-article)
 
-> [Confirm order](#confirm-order)
+> [Confirm order](#Confirm-order)
 
-> [Cancel-order](#cancel-order)
+> [Cancel-order](#Cancel-order)
 
-> [Complete order](#order-complete)
+> [Complete order](#Complete-order)
 
 **[Examples API](#Examples-API)**
 
 > [Example application](#Example-application)
 
-> [Request token for authentication](#token-request-for-authentication)
+> [Request token for authentication](#Token-request-for-authentication)
 
-> [to write an article](#to-write-an-article)
+> [To write an article](#To-write-an-article)
 
-> [Query orders](#orders-query)
+> [Query orders](#Orders-query)
 
 # Overview
 
-The system can be read out with the web service
+The omni channel system can be accessed via a rest api / web service.
 
 # Hints
 
@@ -267,17 +271,21 @@ A session is valid indefinitely.
 
 The API calls are made as a REST request, authenticated with an access token.
 
+<<<<<<< Updated upstream
 # Error handling
+=======
+# Rrror handling
+>>>>>>> Stashed changes
 
-If a call fails, a Json object with the error information is returned
+If a call fails, a json object with the error information is returned.
 
 # Requirements
 
-You need a user account on the CMS system with sufficient authorization.
+You need a user account for the omni channel system with corresponding rights to access the api.
 
 # Server
 
-The requests are accessed via the following URL:
+The requests can be performed via the following URL:
 
 https://{domain}/api/
 
@@ -316,7 +324,7 @@ All functions that return lists have the following parameters:
 
 > **Query/update selected fields only**
 
-When GET and PUT to an entity(Queries/Updates) a parameter "properties
+When GET and PUT to an entity(Queries/Updates) a parameter "properties"
 
 api/articles/4687?properties=Name,Name2,Photos,Keys,Keys.Info,Keys.Value,Keys.EAN,Keys.Photos
 
@@ -370,16 +378,16 @@ As a return, an AccountInfo is returned with all information about the logged-in
 | url| api/reports|
 | --- | --- |
 
-# Debit cards
+# Loyalty cards
 
 | url| api/debit cards|
 | --- | --- |
 
-## Request new debit cards
+## Request new loyalty cards
 
 Lists new loyalty cards without validation at the top of the list. You can then continue page by page until a record appears that has already been validated.
 
-Please refer **[Debit card](#debitcard)**
+Please refer **[Loyalty card](#loyaltycard)**
 
 **Function: GET** /api/debitcards?orderby=ValidatedOn
 
@@ -406,9 +414,9 @@ The current turnover and the individual order data must be transmitted at fixed 
 
 To do this, set the turnover field to the currently booked turnover.
 
-## Web shop orders
+## Orders
 
-Webshop orders now have a link "DebitCard
+Orders now have a link "Loyalty Card"
 
 ## Order data
 
@@ -421,7 +429,11 @@ The orders can be saved as api/orders with the status "Ready(4) so that the syst
 | url| api/videos|
 | --- | --- |
 
+<<<<<<< Updated upstream
 # Branches
+=======
+# Chainstores
+>>>>>>> Stashed changes
 
 | url| api/chainstores|
 | --- | --- |
@@ -431,14 +443,18 @@ The orders can be saved as api/orders with the status "Ready(4) so that the syst
 | url| api/members|
 | --- | --- |
 
+<<<<<<< Updated upstream
 # Article
+=======
+# Articles
+>>>>>>> Stashed changes
 
 | url| api/articles|
 | --- | --- |
 
 ## Extended facility
 
-With this function, an article can be created and enriched with information directly with a Green – Solutions article
+With this function, an article can be created and automatically enriched with data from the Green Solutions database.
 
 **Function: POST** api/articles/create
 
@@ -500,7 +516,7 @@ The keys of the variants of the articles with the individual prices
 | --- | --- |
 | filter| ownermemberid|
 
-## All store orders
+## All orders
 
 
 > This function is only allowed by users within the main account of the shop! Otherwise, a corresponding error is raised.
@@ -511,7 +527,7 @@ The keys of the variants of the articles with the individual prices
 
 
 
-## Adjust Status
+## Update Status
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -520,7 +536,7 @@ The keys of the variants of the articles with the individual prices
 
 As a return, the order will be returned (please refer **[order](#order)** )
 
-## "Send" dialog
+## Ship dialog
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -528,7 +544,7 @@ As a return, the order will be returned (please refer **[order](#order)** )
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To ship](##to ship)** )
 
-## "Confirm" dialog
+## Confirm dialog
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -536,7 +552,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[confirm order](#confirm-order)**)
 
-## Dialog "Done
+## Complete dialog
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -544,7 +560,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[c
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and **[complete order](#order-complete)** )
 
-## "Cancel" dialog
+## Cancel dialog
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -619,7 +635,7 @@ The pdf is returned as a return
 
 The file is returned as a return(please refer **[File](#file)** )
 
-## Upload pictures
+## Upload images
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -627,12 +643,16 @@ The file is returned as a return(please refer **[File](#file)** )
 
 The file is returned as a return(please refer **[Files](#file)** )
 
+<<<<<<< Updated upstream
 # Coupons
+=======
+# Voucher
+>>>>>>> Stashed changes
 
 | url| api/vouchers| |
 | --- | --- | --- |
 
-## Create Voucher
+## Create voucher
 
 | **function(POST OFFICE)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -644,7 +664,11 @@ The file is returned as a return(please refer **[Files](#file)** )
 
 The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
+<<<<<<< Updated upstream
 ## Find coupon
+=======
+## Find voucher
+>>>>>>> Stashed changes
 
 | **function(GET)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
@@ -701,7 +725,7 @@ Generates new codes without creating them in the database(for your own printed v
 
 Returns: A list of voucher codes(please refer **[voucher code](#voucher code)**)
 
-## Buy a voucher at the POS
+## Purchase a voucher at the POS
 
 The customer buys a voucher offline and this is then sent by **[Create Voucher](#create voucher)** created online.
 
@@ -713,7 +737,7 @@ desired payment can be reserved (**[Reserve payment](#Reserve-payment)**). If th
 appropriate error returned. After completing the payment then the payment
 accomplished (**[Execute payment](#Execute-payment)**). The voucher is now available online
 
-## Cancellation by voucher at the POS
+## Cancel voucher at the POS
 
 The customer cancels a product offline that was paid for with a voucher. Now this payment is also canceled online(**[Cancel payment](#cancel-payment)**).
 
@@ -767,7 +791,7 @@ The return has been received at the warehouse
 |refund| **boolean** |  | refund goods(Yes No) |
 |positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
-# Returns inspection passed
+# Returns quality check passed
 The return has been checked and passed the test
 
 | **Surname** | **Type** | **value** | **description** |
@@ -777,7 +801,7 @@ The return has been checked and passed the test
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 |positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
 
-# Returns inspection failed
+# Returns quality check failed
 The return was checked and did not pass the test
 
 | **Surname** | **Type** | **value** | **description** |
@@ -814,7 +838,7 @@ The customer's cancellation request is confirmed
 |Type| **short** | 19|Customer cancellation request confirmed(275) |
 |order| **[EntityReference](#entityreference)**|  | ID of the order|
 
-# Cancellation is no longer possible
+# Cancellation not possible
 The customer's cancellation request is rejected because cancellation is no longer possible
 
 | **Surname** | **Type** | **value** | **description** |
@@ -918,7 +942,7 @@ A list of all valid pictograms for the selected item
 | **orderBy** |string| Title, Title2| |
 | **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
 
-# Linked content for report
+# Linked content for reports
 
 **Function:** api/cross/reports/{id}
 
@@ -929,7 +953,7 @@ A list of all valid pictograms for the selected item
 | **orderBy** |string| Title, Title2| |
 | **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
 
-# Linked content for video
+# Linked content for videos
 
 **Function:** api/cross/videos/{id}
 
@@ -958,7 +982,7 @@ This function can be used to search for content from the Green Solutions databas
 
 A list of all external search results
 
-## Search for an item
+## Search for an article
 
 **Function:** api/external/search/article
 
@@ -1027,7 +1051,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 
 **Function:** POST api/cache/purge
 
-# data structures
+# Data structures
 
 ## Order
 
@@ -2258,7 +2282,7 @@ public enum MessageDirection {
 }
 ```
 
-## DebitCard
+## LoyaltyCard
 ```json
 {
   "DebitCardID": 1,
@@ -2649,9 +2673,9 @@ Please then open a browser window in the specified size and with the title. Then
 
 # Examples API
 
-## Example application
+## Sample application
 
-An example application anyway an API for C# .Net on which the following examples are based can be found here:
+A sample application for the API developed in C# .NET can be found here:
 
 [sample application](../GS_PflanzenCMS.net.Rest.Sample)
 
@@ -2663,7 +2687,7 @@ var token = unitOfWork.Account.Validate("Benutzer", "Passwort"); // POST api/acc
 ```
 The token can now be used in all subsequent posts as a header "token
 
-## Update an article
+## Update article
 ```csharp
 var unitOfWork = new Api.Client.ContextUOW(null, "");
 

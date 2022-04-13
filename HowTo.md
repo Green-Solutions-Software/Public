@@ -4,7 +4,7 @@
 
 With the Green Solutions REST API, all functions and data of the omni-channel system can be accessed.
 
-In the documentation, the synonym "middleware" is used for the Green Solutions omni-channel system and the synonym "external software system" for the external software system such as ERP, merchandise management or web shop.
+In the documentation, the synonym "middleware" is used for the Green Solutions omni-channel system and the synonym "external software system" is used for the external software system such as ERP, merchandise management or web shop.
 
 As an innovative software company, we have specialized 100% in the horticultural industry. With our cloud-based omni-channel solution, all relevant online and offline channels such as web shop, website, signage, newsletters, apps, social media, print media, etc. can be managed centrally from one system. In addition, the customer can access the huge Green Solutions database for all channels - with thousands of photos, videos, editorial reports, plant and product data.
 
@@ -18,7 +18,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Query entity via external primary key](#Query-entity-via-external-primary-key)**
 
-**[Items](#items)**
+**[Articles](#articles)**
 
 **[Transfer article master data](#Transfer-article-master-data)**
 
@@ -42,7 +42,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 > **[Create delivery note](#Create-delivery-note)**
 
-> **[Send order](#send-order)**
+> **[Ship order](#ship-order)**
 
 > **[Complete order](#complete-order)**
 
@@ -52,27 +52,27 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 > **[Query messages](#query-messages)**
 
-> **[Processing messages](#Processing-messages)**
+> **[Process messages](#Process-messages)**
 
 > **[Generate message](#Generate-message)**
 
 - **[Return delivery has been received](#Return-delivery-has-been-received)**
 
-- **[Returns inspection passed](#Returns-inspection-passed)**
+- **[Return quality check passed](#Returns-quality-check-passed)**
 
-- **[Returns inspection failed](#Returns-inspection-failed)**
+- **[Return quality check failed](#Returns-quality-check-failed)**
 
 - **[Order delivered](#order-delivered)**
 
 - **[Received pick-up order](#received-pick-up-order)**
 
-- **[Confirmation of delivery date](#Confirmation-of-delivery-date)**
+- **[Confirm delivery date](#Confirm-delivery-date)**
 
--  **[Change of delivery date](#Change-of-delivery-date)**
+-  **[Change delivery date](#Change-delivery-date)**
 
--  **[Customers not reached](#customers-not-reached)**
+-  **[Customer not reached](#customers-not-reached)**
 
--  **[Customers not found](#customers-not-found)**
+-  **[Customer not found](#customers-not-found)**
 
 
 # Authorization
@@ -80,7 +80,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 This example shows how a connection to the middleware is defined via a vendor, a token and the endpoint.
 
 ```csharp
-var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpunkt>");
+var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpoint>");
 // GET api/account/info
 var token = unitOfWork.Account.Info(); 
 ```
@@ -109,29 +109,29 @@ This example shows how to query an entity using a primary key.
         Console.WriteLine("No article found!");
 ```
 
-# Items
+# Articles
 
-Article master data and movement data (price inventory) must be transferred
+Article master data and movement data (price inventory) must be transferred.
 
 ## Transfer article master data
 
-This example shows how the item master data is transferred.
+This example shows how the article master data is transferred.
 
 ```csharp
 var article = new Article();
 
 article.Name = "Acer Palmatum Bloodgood";
-article.Name2 = "Fächerahorn Bloodgood";
-article.Description = "Dies ist eine lange Beschreibung";
-article.ShortDescription = "Dies ist eine kurze Beschreibung";
+article.Name2 = "Japanese Maple Bloodgood";
+article.Description = "This is a long description";
+article.ShortDescription = "This is a short description";
 
 // Set Article Group
-var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
+var articleGroup = unitOfWork.ArticleGroups.FindAll("Plants", 0, 100, null).Items.First(); // GET api/articlegroups
 article.ArticleGroups = new List<EntityReference>();
 article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
 
 // Set Category
-var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
+var category = unitOfWork.Categories.FindAll("Accesories", 0, 100, null).Items.First(); // GET api/categories
 article.Categories = new List<EntityReference>();
 article.Categories.Add(new EntityReference() { ID = category.CategoryID });
 
@@ -140,8 +140,8 @@ var text = new ArticleText();
 article.Texts = new List<ArticleText>();
 article.Texts.Add(text);
 text.Type = TextType.BulletPoints;
-text.Title = "Kaufargumente";
-text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
+text.Title = "Bulletpoints";
+text.Value = "*frost hardy *fragrant *winter green *suitable for tubs";
 
 // Availabilities
 var timePeriod = new TimePeriod();
@@ -151,16 +151,16 @@ timePeriod.FromCW = 10; // Calendarweek (from)
 timePeriod.ToCW = 20; // Calendarweek (to)
 timePeriod.StockQuantity = 100; // Stock-Quantity
 
-// Add Variants (Articlenumbers)
+// Add Variants (Article numbers)
 var articleKey = new ArticleKey();
 article.Keys = new List<ArticleKey>();
 article.Keys.Add(articleKey);
 
 articleKey.Value = "47811"; // Articlenumber
-articleKey.Info = "C/  50 - 60";
+articleKey.Info = "Pot size 10l, 125 - 150cm";
 articleKey.AvailableForClickAndCollect = true; // Click & Collect
-articleKey.AvailableForRadiusDelivery = true; // Send
-articleKey.AvailableForShipping = true; // Deliver
+articleKey.AvailableForRadiusDelivery = true; // Radius delivery
+articleKey.AvailableForShipping = true; // Shipping
 articleKey.PackingSize = 20; // Packing Unit
 articleKey.StockQuantity = 10; // Stock Quantity
 articleKey.Available.Add(timePeriod);
@@ -182,13 +182,13 @@ var articleKeyPrice = new ArticleKeyPrice();
 articleKey.Prices = new List<ArticleKeyPrice>();
 articleKey.Prices.Add(articleKeyPrice);
 articleKeyPrice.Price = 17; // Price
-articleKeyPrice.PriceOld = 25; // Old - Price (strikeout)
+articleKeyPrice.PriceOld = 25; // Old price, strikeout price
 articleKeyPrice.PriceUnitAmount = 10; // per 10
-articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Litres
-articleKeyPrice.Quantity = 1; // From Quantity
+articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // liter
+articleKeyPrice.Quantity = 1; // From quantity
 articleKeyPrice.Currency = new EntityReference() { ID = euro.CurrencyID };
 articleKeyPrice.TaxIncluded = true; // Tax inclusive?
-articleKeyPrice.PriceNet = true; // Netto - Price (no discount)
+articleKeyPrice.PriceNet = true; // Net price
 
 var picture = unitOfWork.Pictures.Upload(@"c:\temp\ATT00001.png");
 articleKey.Photos = new List<ArticleKeyPhoto>();
@@ -209,7 +209,7 @@ This example shows how the channel-specific article numbers are added to the art
     var channel = unitOfWork.Channels.Get(1);
     var articleKeyChannel = new ArticleKeyChannel();
     articleKeyChannel.Channel = new EntityReference(channel.ChannelID);
-    articleKeyChannel.Number = "abc";
+    articleKeyChannel.Number = "AB12345";
     articleKey.Channels.Add(articleKeyChannel);
 ```
 
@@ -221,7 +221,7 @@ This example shows how the item movement data is transferred.
 var transactions = new List<ArticleTransactionArgs>();
 var transaction = new ArticleTransactionArgs();
 transaction.External_Key = "abc";
-transaction.StockQuantity = 100; // Stock Quantity
+transaction.StockQuantity = 100; // Stock quantity
 transaction.Prices = new List<ArticleTransactionPrice>();
 transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
 transactions.Add(transaction);
@@ -231,15 +231,14 @@ unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/
 
 # Orders
 
-This area describes how to query new orders. 
+This area describes how to handle orders. 
 
 ## Query orders
 
 This example shows how to query orders. As a result, a summary of the orders with the most relevant data is returned.
 
 ```csharp
-    // We query the orders in descencding order by OrderID sorted
-    // to get first the newest and the rest at the end
+    // We query the orders by OrderID sorted in descencding order
     var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
 ```
 
@@ -250,13 +249,13 @@ This example shows how to query a specific order. As a result, a complete order 
 ```csharp
     var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
 
-    Console.WriteLine("Ordernumber:" + order.OrderID);
+    Console.WriteLine("Order number:" + order.OrderID);
     Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
 
     var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
     Console.WriteLine("Customer:" + owner.MainContact.Company);
 
-    Console.WriteLine("Invoiceaddress:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+    Console.WriteLine("Invoice address:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
     if (order.ShippingAddress != null)
         Console.WriteLine("Shippingaddress:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
@@ -279,14 +278,14 @@ This example shows how to query a specific order. As a result, a complete order 
         var articleKey = article.Keys.SingleOrDefault(m => m.ArticleKeyID == position.ArticleKey.ID);
 
         Console.WriteLine("Article:" + article.Name + " / " + article.Name2);
-        Console.WriteLine("Articleno:" + articleKey.Value);
-        Console.WriteLine("Transaction:" + position.TransactionType); // CLick&Collect, Send u.s.w.
+        Console.WriteLine("Article no:" + articleKey.Value);
+        Console.WriteLine("Transaction:" + position.TransactionType); // Click&Collect, Send u.s.w.
         Console.WriteLine("Quantity:" + position.Quantity);
         Console.WriteLine("Price:" + position.Price);
         Console.WriteLine("Total price:" + position.TotalCosts);
         Console.WriteLine("Confirmed:" + (position.IsConfirmed == true ? "Yes" : "No"));
 
-        // Vouchers bought?
+        // Vouchers purchased?
         if(position.Vouchers!=null && position.Vouchers.Any())
         {
             foreach (var voucherReference in position.Vouchers)
@@ -325,7 +324,7 @@ This example shows how to update the order status.
 
 ## Confirm order
 
-This example shows how to mark the order status as confirmed. This function can also be used to confirm part of the order.
+This example shows how to update the order status as confirmed. This function can also be used to confirm only parts of the order.
 
 ```csharp
 Console.WriteLine("Confirm order: " + order.OrderID);
@@ -341,7 +340,7 @@ var article = new OrderTransactionArticle();
 article.OrderItemID = order.Items.First().OrderItemID;
 // false = not confirmed
 article.Confirmed = true; 
-// Less Quentity confirmed ?
+// Less quantity confirmed ?
 // null = no otherwise the quantity to be confirmed
 article.QuantityConfirmed = null; // St
 articles.Add(article);
@@ -399,9 +398,9 @@ var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTrans
 Process.Start(pdf);
 ```
 
-## Send order
+## Ship order
 
-This example shows how to mark the order status of a partial order as shipped.
+This example shows how to update the order status of a partial order as shipped.
 
 ```csharp
 var transaction = order.Transactions.First();
@@ -420,14 +419,14 @@ Console.WriteLine("Order was updated: " + order.Notes);
 
 ## Complete order
 
-This example shows how to mark the order as completed.
+This example shows how to update the order as completed.
 
 ```csharp
  Console.WriteLine("Finish Ordewr: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
 args.Status = OrderTransactionStatusType.Ready;
-args.InvoiceFilename = "Rechung.pdf";
+args.InvoiceFilename = "invoice.pdf";
 args.InvoiceMimeType = "application/pdf";
 // Base 64 enocded Data URI with the Pdf
 args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
@@ -439,7 +438,7 @@ Console.WriteLine("Order was finished: " + order.Notes);
 
 ## Embed order management
 
-This example shows how to call up the order management.
+This example shows how to embedd the order management as an integrated dialog.
 
 ```csharp
 var dialog = unitOfWork.Articles.Dialog(article.ArticleID);
@@ -457,28 +456,28 @@ if (Console.ReadLine() == "y")
 
 # Messages 
 
-Messages are work in Progress and will be defined later
+The handling of the messages are still work in progress and will be defined soon.
 
-## query messages
+## Query messages
 
-## Processing messages
+## Process messages
 
 ## Generate message
 
 ### Return delivery has been received
 
-### Returns inspection passed
+### Returns quality check passed
 
-### Returns inspection failed
+### Returns quality check failed
 
-### Order delivered 
+### Order delivered
 
 ### Received pick-up order
 
-### Confirmation of delivery date
+### Confirm delivery date
 
 ### Change of delivery date
 
-### Customers not reached
+### Customer not reached
 
-### Customers not found
+### Customer not found
