@@ -464,7 +464,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 ## Edit dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
 
@@ -472,7 +472,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[E
 
 ## Edit variant dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
 
@@ -513,7 +513,7 @@ The keys of the variants of the articles with the individual prices
 
 ## Update Status
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/transactions/status/{ID}|ID| **long** | ID of the order| |
 |BODY| **status message** | please refer **[OrderStatus](#orderstatus)** |
@@ -522,7 +522,7 @@ As a return, the order will be returned (please refer **[order](#order)** )
 
 ## Ship dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
 
@@ -530,7 +530,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To
 
 ## Confirm dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/confirm/{id}|ID| **long** | ID of the order|
 
@@ -538,7 +538,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[c
 
 ## Complete dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
 
@@ -546,7 +546,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and **[com
 
 ## Cancel dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
 
@@ -554,7 +554,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and**[canc
 
 ## Order management dialog
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/orders/dialog| | | |
 
@@ -600,7 +600,7 @@ please refer **[ShipmentOrder](#shipmentorder)**
 
 The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer **[ShipmentOrder](#shipmentorder)** )
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/shipmentorders/items/label/{id}|ID| **long** | Shipment ID|
 
@@ -613,7 +613,7 @@ The pdf is returned as a return
 
 ## Upload files
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/datafiles/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
@@ -621,7 +621,7 @@ The file is returned as a return(please refer **[File](#file)** )
 
 ## Upload images
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/pictures/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
@@ -634,7 +634,7 @@ The file is returned as a return(please refer **[Files](#file)** )
 
 ## Create voucher
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/vouchers/create|Surname| **string** | Name for the new voucher| |
 |amount| **double** | amount| |
@@ -656,7 +656,7 @@ Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
 
 Reserve a payment for a voucher. During the time, the revenue is considered consumed until the time expires and cannot be used elsewhere.
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/vouchers/reserve|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
@@ -671,7 +671,7 @@ As a return, the created payment is returned (please refer **[payments](#payment
 
 After a payment has been reserved, the payment can then be made(during the time of reservation)
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/vouchers/pay|paymentid| **long** | Payment ID(please refer **[payments](#payment)** ) |
 
@@ -681,7 +681,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 Cancel a payment for a voucher
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/vouchers/cancel|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
@@ -695,7 +695,7 @@ As a return, the created payment is returned (please refer **[payments](#payment
 
 Generates new codes without creating them in the database(for your own printed vouchers)
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/vouchers/generate/codes|count| **internal** | number of codes| |
 
@@ -738,7 +738,7 @@ please refer **[messages](#message)**
 
 ## Create a message
 
-| **function(POST OFFICE)** | **parameter** | **Type** | **description** |
+| **function(POST)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
 | api/messages/create|BODY| **[messages](#message)** | Message to be created|
 
