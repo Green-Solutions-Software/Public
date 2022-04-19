@@ -1,20 +1,17 @@
 
-# Beispielapplikation
+# Sample application
 
-Diese Applikation veranschaulicht einige der möglichen Funktionen die mit der REST API durchgeführt werden können.
-Dazu zählen:
+This application illustrates the main functions that can be performed using the REST API.
+These include:
 
-- Authorisieren
-- Artikel auflisten
-- Bestellungen auflisten
-- Artikel anlegen
-- Artikel per External_Key abfragen
-- Cache löschen (OutputCache, EF Cache u.s.w.)
-- Filialen auflisten
-- Kunden auflisten
-- Auftragsverwaltung aufrufen
-- Verfügbarkeiten
-- Bestellung anlegen
-- Gutscheine auflisten
-- Verfügbarkeiten
-- Positionsupdates
+- Authorization
+- Query articles
+- Query orders
+- Update article
+- Query article
+- Clearing the cache
+- Query branches
+- Query customers
+- Embedd order management
+- Create order
+- Query vouchers

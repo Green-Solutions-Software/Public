@@ -3,6 +3,7 @@ using GS.OmniChannelSystem.Rest.SDK.Api.Args;
 using GS.OmniChannelSystem.Rest.SDK.Client;
 using GS.OmniChannelSystem.Rest.SDK.Extensions;
 using GS.OmniChannelSystem.Rest.SDK.Models;
+using GS.PflanzenCMS.Rest.SDK.Args;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -71,17 +72,17 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             article.Description = "Dies ist eine lange Beschreibung";
             article.ShortDescription = "Dies ist eine kurze Beschreibung";
 
-            // Warengruppe setzen (evtl. Hierachie beachten)
+            // Set ArticleGroup
             var articleGroup = unitOfWork.ArticleGroups.FindAll("Pflanzen", 0, 100, null).Items.First(); // GET api/articlegroups
             article.ArticleGroups = new List<EntityReference>();
             article.ArticleGroups.Add(new EntityReference() { ID = articleGroup.ArticleGroupID });
 
-            // Kategorie setzen (evtl. Hierachie beachten)
+            // Set Category
             var category = unitOfWork.Categories.FindAll("Zubehör", 0, 100, null).Items.First(); // GET api/categories
             article.Categories = new List<EntityReference>();
             article.Categories.Add(new EntityReference() { ID = category.CategoryID });
 
-            // Texte hinzufügen
+            // Add Texts
             var text = new ArticleText();
             article.Texts = new List<ArticleText>();
             article.Texts.Add(text);
@@ -89,29 +90,29 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             text.Title = "Kaufargumente";
             text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
 
-            // Verfügbarkeiten
+            // Availabilities
             var timePeriod = new TimePeriod();
             article.Available = new List<TimePeriod>();
             article.Available.Add(timePeriod);
-            timePeriod.FromCW = 10; // Kalendarwoche (von)
-            timePeriod.ToCW = 20; // Kalendarwoche (bis)
-            timePeriod.StockQuantity = 100; // Lagerbestand
+            timePeriod.FromCW = 10; // Calendarweek (from)
+            timePeriod.ToCW = 20; // Calendarweek (to)
+            timePeriod.StockQuantity = 100; // Stock Quantity
 
-            // Varianten (Artikelnummern) hinzufügen
+            // Add variants (Articlenumbers)
             var articleKey = new ArticleKey();
             article.Keys = new List<ArticleKey>();
             article.Keys.Add(articleKey);
 
-            articleKey.Value = "47811"; // Artikelnummer
+            articleKey.Value = "47811"; // Articlenumber
             articleKey.Info = "C/  50 - 60";
             articleKey.AvailableForClickAndCollect = true; // Click & Collect
-            articleKey.AvailableForRadiusDelivery = true; // Liefern
-            articleKey.AvailableForShipping = true; // Versenden
-            articleKey.PackingSize = 20; // VE
-            articleKey.StockQuantity = 10; // Bestand
+            articleKey.AvailableForRadiusDelivery = true; // Send
+            articleKey.AvailableForShipping = true; // Deliver
+            articleKey.PackingSize = 20; // Payking Unit
+            articleKey.StockQuantity = 10; // Stock Quantity
             articleKey.Available.Add(timePeriod);
 
-            // Steuersatz
+            // Tax
             var countries = unitOfWork.Countries.FindAll(null, 0, 100, null);
             var germanySummary = countries.Items.Single(m => m.ISO == "DE");
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
@@ -120,7 +121,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             articleKey.TaxRate = new EntityReference() { ID = taxRate.TaxRateID };
 
 
-            // Preise
+            // Prices
             var currencies = unitOfWork.Currencies.FindAll(null, 0, 100, null);
             var euro = currencies.Items.Single(m => m.NameShort == "EUR");
 
@@ -143,9 +144,36 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Picture = new PictureEntityReference(picture.FileID)
             });
 
-            var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
-            Console.WriteLine("Artikel wurde angelegt. ID = " + summary.ArticleID);
+            // Channel Articlenumber
+            var channel = unitOfWork.Channels.Get(1);
+            var articleKeyChannel = new ArticleKeyChannel();
+            articleKeyChannel.Channel = new EntityReference(channel.ChannelID);
+            articleKeyChannel.Number = "abc";
+            articleKey.Channels.Add(articleKeyChannel);
 
+            var summary = unitOfWork.Articles.Create(article, true);  // POST api/articles/create
+            Console.WriteLine("Article was created. ID = " + summary.ArticleID);
+
+        }
+
+        static void createArticleTransaction(ContextUOW unitOfWork)
+        {
+            var transactions = new List<ArticleTransactionArgs>();
+            var transaction = new ArticleTransactionArgs();
+            transaction.External_Key = "abc";
+            transaction.StockQuantity = 100; // Bestand
+            transaction.Prices = new List<ArticleTransactionPrice>();
+            transaction.Prices.Add(new ArticleTransactionPrice() { Quantity = 1, Price = 9.99 });
+            transactions.Add(transaction);
+
+            unitOfWork.Articles.Transactions(transactions.ToArray());  // POST api/articles/transaction
+        }
+
+        static void getDeliverySlip(ContextUOW unitOfWork, Order order)
+        {
+            var transaction = order.Transactions.First();
+            var pdf = unitOfWork.Documents.GetForOrder(order.OrderID, transaction.OrderTransactionID, DocumentationType.DeliverySlip);
+            Process.Start(pdf);
         }
 
         static void createOrder(ContextUOW unitOfWork)
@@ -160,7 +188,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
             var taxRate7 = germany.TaxRates.Single(m => m.Percent == 7); 
 
-            // Rechnungsadresse - Adresse
+            // Invoiceaddress - Address
             args.InvoiceAddress = new CreateOrderArgs.ContactAddress();
             args.InvoiceAddress.Type = AddressType.Main;
             args.InvoiceAddress.Address = new CreateOrderArgs.Address();
@@ -173,7 +201,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.InvoiceAddress.Address.Type = AddressType.Main;
             args.InvoiceAddress.Address.Info = "Oberste Etage";
 
-            // Rechnungsadresse - Kontakt
+            // Invoiceaddress - Contact
             args.InvoiceAddress.Contact = new CreateOrderArgs.Contact();
             args.InvoiceAddress.Contact.Apellation = Apellation.Mr;
             args.InvoiceAddress.Contact.FirstName = "Max";
@@ -186,31 +214,27 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.InvoiceAddress.Contact.Company = "Musterfirma";
             args.InvoiceAddress.Contact.Language = "de-DE";
 
-            // Lieferadresse = Rechnungsadresse 
-            // Könnte aber auch wie oben getrennt sein
+            // Shippingaddress = Invoiceaddress
+            // Could be separeted as well like to definition before but for args.ShippingAddress
             args.ShippingAddress = args.InvoiceAddress;
             args.Notes = "Dies ist eine Bemerkung";
 
-            // Bezahlart
+            // Payment method
             var paymentMethod = unitOfWork.PaymentMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/paymentmethods
             args.PaymentMethodID = paymentMethod.PaymentMethodID;
 
-            // Versandart
+            // Shipping method
             var shippingMethod = unitOfWork.ShippingMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/shippingmethods
             args.ShippingMethodID = shippingMethod.ShippingMethodID;
 
-            // Minimum Alter (nur für Alkohol)
+            // Minimum age (for alcohol)
             args.MinimumAge = null; // 18 / 16
 
-            // Währung
+            // Currency
             args.Currency = "EUR";
 
-            // Gewünschtes Lieferdatum
+            // Wanted Delivery Date
             args.WantedShippingDate = DateTime.Now;
-
-            // Status auf erledigt setzen (z.B. bei alten Bestellungen)
-            // dadurch würde die Bestellung direkt als erledigt markiert
-            // args.OrderStatus = OrderStatusType.Ready;
 
             var items = new List<OrderItem>();
             var item = new OrderItem();
@@ -228,7 +252,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             item.TaxRate = new TaxRateEntityReference(taxRate7.TaxRateID);
 
             var summary = unitOfWork.Orders.Create(args);  // POST api/orders/create
-            Console.WriteLine("Bestellung wurde angelegt. ID = " + summary.OrderID);
+            Console.WriteLine("Order was created. ID = " + summary.OrderID);
         }
 
         static void createCashDesk(ContextUOW unitOfWork)
@@ -243,14 +267,14 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var germany = unitOfWork.Countries.Get(germanySummary.CountryID);
             var taxRate7 = germany.TaxRates.Single(m => m.Percent == 7);
 
-            // Bezahlart
+            // Payment method
             var paymentMethod = unitOfWork.PaymentMethods.FindAll(null, 0, 1, null).Items.First(); // GET api/paymentmethods
             args.PaymentMethodID = paymentMethod.PaymentMethodID;
 
-            // Währung
+            // Currency
             args.Currency = "EUR";
 
-            // Kunde
+            // Customer
             args.OwnerMemberID = 1;
 
             var items = new List<CreateCashdeskArgs.OrderItem>();
@@ -258,7 +282,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             item.Date = DateTime.Now;
             item.Info = "Acer Palmatum Bloodgood";
             item.ArticleKey = "4711";
-            item.Notes = "Bemerkungen zum Artikel";
+            item.Notes = "Notes for the article";
             item.Type = ItemType.ArticleKey;
             item.Currency = "EUR";
             item.Quantity = 1;
@@ -268,7 +292,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             args.Items = items;
             var summary = unitOfWork.Orders.CreateCashDesk(args);  // POST api/orders/create
-            Console.WriteLine("Bestellung wurde angelegt. ID = " + summary.OrderID);
+            Console.WriteLine("Order was created. ID = " + summary.OrderID);
         }
 
         static void getOrders(ContextUOW unitOfWork)
@@ -277,29 +301,26 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir holen die Bestellungen nach OrderID absteigend sortiert
-                // damit wir die neueste zuerst und danach die anderen bekommen
+                // We query the orders sorted by orderID descending to get the newest first
+                // and then the rest
                 var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
 
-                // Geänderte Bestellungen (inkl. neu angelegte abfragen)
-                // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
-
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Pev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
                 int i = 0;
                 foreach (var orderSummary in orders)
                 {
-                    Console.WriteLine("(" + i + ") - Auftragsnummer " + orderSummary.OrderID + " vom " + orderSummary.CreatedOn.ToShortDateString());
+                    Console.WriteLine("(" + i + ") - Ordernumber " + orderSummary.OrderID + " from " + orderSummary.CreatedOn.ToShortDateString());
 
                     i++;
                 }
 
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -331,29 +352,26 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir holen die Bestellungen nach OrderID absteigend sortiert
-                // damit wir die neueste zuerst und danach die anderen bekommen
+                // We query the orders sorted by orderID descending to get the newest first
+                // and then the rest
                 var orders = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "OrderID desc", new GS.OmniChannelSystem.Rest.SDK.Filters.Orders()).Items; // GET api/orders/all
 
-                // Geänderte Bestellungen (inkl. neu angelegte abfragen)
-                // var ordersByModified = unitOfWork.Orders.FindAllForShop(null, pageIndex, 10, "ModifiedOrCreatedOn").Items; // GET api/orders/all
-
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
                 int i = 0;
                 foreach (var orderSummary in orders)
                 {
-                    Console.WriteLine("(" + i + ") - Auftragsnummer " + orderSummary.OrderID + " vom " + orderSummary.CreatedOn.ToShortDateString());
+                    Console.WriteLine("(" + i + ") - Ordernumber " + orderSummary.OrderID + " from " + orderSummary.CreatedOn.ToShortDateString());
 
                     i++;
                 }
 
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -387,9 +405,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var chainStores = unitOfWork.ChainStores.FindAll(null, pageIndex, 10, null).Items; // GET api/orders/all
 
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
@@ -402,7 +420,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
 
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -434,13 +452,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             string selection = null;
             do
             {
-                // Wir fragen die Kunden absteigend sortiert nach der MemberID ab
-                // dadurch bekommen wir den zuletzt angelegten zuerst
+                // We query the Members sorted by MemberID descending to get the newest first
+                // and then the rest
                 var members = unitOfWork.Members.FindAll(null, pageIndex, 10, "MemberID desc").Items; // GET api/orders/all
 
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
@@ -453,7 +471,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
 
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -483,86 +501,86 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
 
-            Console.WriteLine("Auftragsnummer:" + order.OrderID);
-            Console.WriteLine("Datum:" + order.CreatedOn.ToShortDateString());
+            Console.WriteLine("Ordernumber:" + order.OrderID);
+            Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
 
             var owner = unitOfWork.Members.Get(order.Owner.ID); // GET api/members/{id}
-            Console.WriteLine("Kunde:" + owner.MainContact.Company);
+            Console.WriteLine("Customer:" + owner.MainContact.Company);
 
-            Console.WriteLine("Rechnungsadresse:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+            Console.WriteLine("Invoice address:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
             if (order.ShippingAddress != null)
-                Console.WriteLine("Lieferadresse:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
+                Console.WriteLine("Shipping address:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
             if (order.PaymentMethod != null)
             {
                 var paymentMethod = unitOfWork.PaymentMethods.Get(order.PaymentMethod.ID); // GET api/paymentmethods/{id}
-                Console.WriteLine("Bezahlart:" + paymentMethod.Name);
+                Console.WriteLine("Payment method:" + paymentMethod.Name);
             }
 
             if (order.ShippingMethod != null)
             {
                 var shippingMethod = unitOfWork.ShippingMethods.Get(order.ShippingMethod.ID); // GET api/shippingmethods/{id}
-                Console.WriteLine("Versandart:" + shippingMethod.Name);
+                Console.WriteLine("Shipping method:" + shippingMethod.Name);
             }
 
-            // Positionen
+            // Positions
             foreach (var position in order.Items)
             {
                 var article = unitOfWork.Articles.Get(position.Article.ID); // GET api/articles/{id}
                 var articleKey = article.Keys.SingleOrDefault(m => m.ArticleKeyID == position.ArticleKey.ID);
 
-                Console.WriteLine("Artikel:" + article.Name + " / " + article.Name2);
-                Console.WriteLine("Artikelnummer:" + articleKey.Value);
-                Console.WriteLine("Abwicklung:" + position.TransactionType); // CLick&Collect, Versenden u.s.w.
+                Console.WriteLine("Article:" + article.Name + " / " + article.Name2);
+                Console.WriteLine("Articlenumber:" + articleKey.Value);
+                Console.WriteLine("Transaction:" + position.TransactionType); // CLick&Collect, Send u.s.w.
                 Console.WriteLine("Menge:" + position.Quantity);
-                Console.WriteLine("Einzelpreis:" + position.Price);
-                Console.WriteLine("Gesamtpreis:" + position.TotalCosts);
-                Console.WriteLine("Bestätigt:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
+                Console.WriteLine("Price:" + position.Price);
+                Console.WriteLine("Total price:" + position.TotalCosts);
+                Console.WriteLine("Confirmed:" + (position.IsConfirmed == true ? "Ja" : "Nein"));
 
-                // Gutscheine gekauft ?
+                // Vouchers bought ?
                 if(position.Vouchers!=null && position.Vouchers.Any())
                 {
                     foreach (var voucherReference in position.Vouchers)
                     {
                         var voucher = unitOfWork.Vouchers.Get(voucherReference.ID);
-                        Console.WriteLine("Gutschein: " + voucher.Name);
-                        Console.WriteLine("Betrag: " + voucher.Price);
-                        Console.WriteLine("Guthaben: " + voucher.Remaining);
+                        Console.WriteLine("Voucher: " + voucher.Name);
+                        Console.WriteLine("Amount: " + voucher.Price);
+                        Console.WriteLine("Balance: " + voucher.Remaining);
                     }
                 }
             }
 
-            Console.WriteLine("Zahlungen:");
+            Console.WriteLine("Payments:");
             foreach (var payment in order.Payments)
             {
-                Console.WriteLine("* Preis: " + payment.Price);
+                Console.WriteLine("* Price: " + payment.Price);
                 Console.WriteLine("* Info: " + payment.Info);
-                Console.WriteLine("* Zahlart: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
+                Console.WriteLine("* Payment method: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
 
-                // Mit Gutschein gezahlt?
+                // Payd with voucher?
                 if (payment.VoucherCode != null)
                 {
                     var voucher = unitOfWork.Vouchers.Get(payment.VoucherCode.Voucher.ID);
-                    Console.WriteLine("Gutschein: " + voucher.Name);
-                    Console.WriteLine("Betrag: " + voucher.Price);
-                    Console.WriteLine("Guthaben: " + voucher.Remaining);
-                    Console.WriteLine("* Gutschein: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
+                    Console.WriteLine("Voucher: " + voucher.Name);
+                    Console.WriteLine("Price: " + voucher.Price);
+                    Console.WriteLine("Balance: " + voucher.Remaining);
+                    Console.WriteLine("* Code: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
                 }
             }
 
-            Console.WriteLine("Bitte wählen Sie eine Funktion:");
-            Console.WriteLine("(1) - Aktualisieren");
-            Console.WriteLine("(2) - Auftrag bestätigen");
-            Console.WriteLine("(3) - Ersatzlieferung");
-            Console.WriteLine("(4) - Auftrag stornieren");
-            Console.WriteLine("(5) - Versandbestätigung");
-            Console.WriteLine("(6) - Auftrag ist verspätet");
-            Console.WriteLine("(7) - Auftrag erledigen");
-            Console.WriteLine("(8) - Auftrag erstatten");
-            Console.WriteLine("(9) - Auftrag splitten");
-            Console.WriteLine("(A) - Auftragstatus auf Positionsebene aktualisieren");
+            Console.WriteLine("Please select:");
+            Console.WriteLine("(1) - Update");
+            Console.WriteLine("(2) - Confirm order");
+            Console.WriteLine("(3) - Replacement");
+            Console.WriteLine("(4) - Cancel order");
+            Console.WriteLine("(5) - Sent order");
+            Console.WriteLine("(6) - Order is delayed");
+            Console.WriteLine("(7) - Finish order");
+            Console.WriteLine("(8) - Refund order");
+            Console.WriteLine("(9) - Split order");
+            Console.WriteLine("(A) - Update order on position status");
             Console.WriteLine();
-            Console.Write("Auswahl: ");
+            Console.Write("Choice: ");
             switch (Console.ReadLine())
             {
                 case "1":
@@ -611,11 +629,11 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void updateOrderPositionStatusConfirm(ContextUOW unitOfWork, Order order)
         {
-            Console.Write("Positionen:");            
+            Console.Write("Positions:");            
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -623,7 +641,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -633,16 +651,16 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             }
 
             var result = unitOfWork.Orders.UpdatePositions(order.OrderID, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length + " Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length + " Updates");
         }
 
         static void updateOrderPositionStatusCancel(ContextUOW unitOfWork, Order order)
         {
-            Console.Write("Positionen:");
+            Console.Write("Positions:");
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -650,7 +668,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -660,19 +678,19 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             }
 
             var result = unitOfWork.Orders.UpdatePositions(order.OrderID, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length + " Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length + " Updates");
         }
 
         static void updateOrderPositionReduceQuantity(ContextUOW unitOfWork, Order order)
         {
-            Console.Write("Positionen:");
+            Console.Write("Positions:");
             var positions = Console.ReadLine();
             Console.WriteLine();
-            Console.Write("Anzahl:");
+            Console.Write("Quantity:");
             var quantity = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -680,7 +698,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -690,16 +708,16 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             }
 
             var result = unitOfWork.Orders.UpdatePositions(order.OrderID, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length + " Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length + " Updates");
         }
 
         static void updateOrderPositionStatusDeliver(ContextUOW unitOfWork, Order order)
         {
-            Console.Write("Positionen:");
+            Console.Write("Positions:");
             var positions = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -707,7 +725,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order-Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn;
@@ -717,19 +735,19 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             }
 
             var result = unitOfWork.Orders.UpdatePositions(order.OrderID, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length + " Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length + " Updates");
         }
 
         static void updateOrderPositionStatusSplit(ContextUOW unitOfWork, Order order)
         {
-            Console.Write("Positionen:");
+            Console.Write("Positions:");
             var positions = Console.ReadLine();
             Console.WriteLine();
-            Console.Write("Tage:");
+            Console.Write("Days:");
             var days = Console.ReadLine();
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
@@ -737,7 +755,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var item = order.Items.ElementAt(Convert.ToInt16(position));
 
-                // Auftragsposition
+                // Order - Positions
                 var positionTransaction = new OrderTransactionPosition();
                 positionTransaction.OrderItemID = item.OrderItemID;
                 positionTransaction.AvailableOn = item.AvailableOn.Value.AddDays(Convert.ToInt16(days));
@@ -747,7 +765,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             }
 
             var result = unitOfWork.Orders.UpdatePositions(order.OrderID, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length + " Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length + " Updates");
         }
 
         static void updateOrderStatus(ContextUOW unitOfWork, Order.Summary summary)
@@ -758,34 +776,34 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 var order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
 
                 Console.Clear();
-                Console.WriteLine("Auftragsnummer:" + order.OrderID);
-                Console.WriteLine("Datum:" + order.CreatedOn.ToShortDateString());
+                Console.WriteLine("Ordernumber:" + order.OrderID);
+                Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
                 Console.WriteLine("Status: " + order.Status);
-                Console.WriteLine("Rechnungsadresse:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
+                Console.WriteLine("Invoice address:" + order.InvoiceAddress.Contact.Company + " " + order.InvoiceAddress.Address.Street + " " + order.InvoiceAddress.Address.HouseNumber);
                 if (order.ShippingAddress != null)
-                    Console.WriteLine("Lieferadresse:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
+                    Console.WriteLine("Shipping address:" + order.ShippingAddress.Contact.Company + " " + order.ShippingAddress.Address.Street + " " + order.ShippingAddress.Address.HouseNumber);
 
                 order = unitOfWork.Orders.Get(summary.OrderID); // GET api/orders/{id}
 
                 Console.WriteLine();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("Nr", 5);
-                sb.Append("Artikel", 30);
-                sb.Append("Best.", 5);
-                sb.Append("Menge", 8);
-                sb.Append("Preis", 8);
-                sb.Append("Gesamt", 8);
+                sb.Append("No", 5);
+                sb.Append("Article", 30);
+                sb.Append("Confirmed", 5);
+                sb.Append("Quantity", 8);
+                sb.Append("Price", 8);
+                sb.Append("Total", 8);
                 sb.Append("Intern", 60);
                 Console.WriteLine(sb.ToString());
 
-                // Positionen
+                // Positions
                 foreach (var position in order.Items)
                 {
                     var transaction = order.Transactions.Single(m => m.OrderTransactionID == position.Transaction.ID);
                     sb.Clear();
                     sb.Append(position.Position.ToString(), 5);
                     sb.Append(position.Info, 30);
-                    sb.Append(position.IsConfirmed == true ? "Ja" : position.Confirmed == null ? "??" : "Nein", 5);
+                    sb.Append(position.IsConfirmed == true ? "Yes" : position.Confirmed == null ? "??" : "No", 5);
                     sb.Append((position.QuantityConfirmed != null ? position.QuantityConfirmed+" statt " : "") + position.Quantity.ToString(), 8);
                     sb.Append(Math.Round(position.Price, 2).ToString(), 8);
                     sb.Append(Math.Round(position.TotalCosts, 2).ToString(), 8);
@@ -800,15 +818,15 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("Bitte wählen Sie eine Funktion:");
-                Console.WriteLine("(0) - Stückzahl verringern");
-                Console.WriteLine("(1) - Splitten");
-                Console.WriteLine("(2) - Bestätigen");
-                Console.WriteLine("(3) - Liefern");
-                Console.WriteLine("(4) - Stornieren");
-                Console.WriteLine("(X) - Beenden");
+                Console.WriteLine("Please select:");
+                Console.WriteLine("(0) - Decrease quantity");
+                Console.WriteLine("(1) - Split");
+                Console.WriteLine("(2) - Confirm");
+                Console.WriteLine("(3) - Sent");
+                Console.WriteLine("(4) - Cancel");
+                Console.WriteLine("(X) - Quit");
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 switch (Console.ReadLine())
                 {
                     case "2":
@@ -841,20 +859,20 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Name 2:" + chainStore.Name2);
             
 
-            Console.WriteLine("Adresse:" + (chainStore.Contact!=null ? chainStore.Contact.Company : "") + " " + chainStore.Address.Street + " " + chainStore.Address.HouseNumber);
+            Console.WriteLine("Address:" + (chainStore.Contact!=null ? chainStore.Contact.Company : "") + " " + chainStore.Address.Street + " " + chainStore.Address.HouseNumber);
         }
 
         static void getMember(ContextUOW unitOfWork, Member.Summary summary)
         {
             var member = unitOfWork.Members.Get(summary.MemberID); // GET api/chainstores/{id}
 
-            Console.WriteLine("Firma:" + member.MainContact.Company);
-            Console.WriteLine("Kundennummer:" + member.Number);
+            Console.WriteLine("Company:" + member.MainContact.Company);
+            Console.WriteLine("Customer number:" + member.Number);
 
-            Console.WriteLine("Bitte wählen Sie eine Funktion:");
-            Console.WriteLine("(1) - Aktualisieren");
+            Console.WriteLine("Please select:");
+            Console.WriteLine("(1) - Update");
             Console.WriteLine();
-            Console.Write("Auswahl: ");
+            Console.Write("Choice: ");
             switch (Console.ReadLine())
             {
                 case "1":
@@ -868,23 +886,22 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             unitOfWork.Articles.Delete(article.ArticleID, permanent);
 
-            // Permanentes löschen (Standard ist logisch)
-            // Wird nur für bestimmte Entitäten unterstützt
+            // Permanent delety (Standard ist logical)
+            // Is only supported by few entity types like Member or User
             // unitOfWork.Articles.Delete(article.ArticleID, true);
 
-            Console.WriteLine("Artikel wurde gelöscht");
+            Console.WriteLine("Article was deleted");
         }
 
         static void setExternal_Key(ContextUOW unitOfWork, Article article)
         {
-            Console.WriteLine("Alle Entitäten haben ein Feld External_Key in das die eigene ID");
-            Console.WriteLine("der Warenwirtschaft hinterlegt werden keann.");
-            Console.WriteLine("auf Basis dieses External_Keys kann dann zugegriffen werden:");
+            Console.WriteLine("All entities have an External_Key field in which their own primary key, such as the ID of the external");
+            Console.WriteLine("software system, can be stored. The entity can then be accessed on the basis of this External_Key.");
             Console.WriteLine();
             Console.Write("External_Key: ");
             article.External_Key = Console.ReadLine();
             var newArticle = unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "External_Key" } /* optional */);
-            Console.WriteLine("Artikel wurde aktualisiert: " + newArticle.External_Key);
+            Console.WriteLine("Article was updated: " + newArticle.External_Key);
         }
 
         static void updateArticle_enUS(ContextUOW unitOfWork, Article article)
@@ -895,11 +912,11 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
                 Console.WriteLine("Name: " + enUsArticle.Name);
                 Console.WriteLine();
-                Console.Write("Neuer Name: ");
+                Console.Write("New Name: ");
                 
                 enUsArticle.Name = Console.ReadLine();
                 unitOfWork_enUS.Articles.Update(enUsArticle.ArticleID, enUsArticle, new string[] { "Name" } /* optional */);
-                Console.WriteLine("Artikel wurde aktualisiert: " + enUsArticle.Name);
+                Console.WriteLine("Article was updated: " + enUsArticle.Name);
             }
         }
 
@@ -907,111 +924,108 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             Console.WriteLine("Name 2: " + article.Name2);
             Console.WriteLine();
-            Console.Write("Neuer Name 2: ");
+            Console.Write("New Name 2: ");
             article.Name2 = Console.ReadLine();
             var newArticle = unitOfWork.Articles.Update(article.ArticleID, article, new string[] { "Name2" } /* optional */);
-            Console.WriteLine("Artikel wurde aktualisiert: " + newArticle.Name2);
+            Console.WriteLine("Article was updated: " + newArticle.Name2);
         }
 
         static void updateMember(ContextUOW unitOfWork, Member member)
         {
-            Console.WriteLine("Kundennummer: " + member.Number);
+            Console.WriteLine("Customernumber: " + member.Number);
             Console.WriteLine();
-            Console.Write("Neue Nummer: ");
+            Console.Write("New  Nummer: ");
             member.Number = Console.ReadLine();
             var newMember = unitOfWork.Members.Update(member.MemberID, member); // PUT api/members
-            Console.WriteLine("Kunde wurde aktualisiert: " + newMember.Number);
+            Console.WriteLine("Customer was updated: " + newMember.Number);
         }
 
         static void updateOrder(ContextUOW unitOfWork, Order order)
         {
-            Console.WriteLine("Notiz: " + order.Notes);
+            Console.WriteLine("Note: " + order.Notes);
             Console.WriteLine();
-            Console.Write("Neue Notiz: ");
+            Console.Write("New Note: ");
             order.Notes = Console.ReadLine();
             var newOrder = unitOfWork.Orders.Update(order.OrderID, order, new string[] { "Notes" } /* optional */);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void confirmOrder(ContextUOW unitOfWork, Order order)
         {
-            var transaction = order.Transactions.First();
-
-            Console.WriteLine("Auftrag wird bestätigt: " + order.OrderID);
+            Console.WriteLine("Confirm order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Status = OrderTransactionStatusType.Confirmed;
             args.StatusOn = DateTime.Now;
-            args.OrderTransactionID = transaction.OrderTransactionID;
-            args.Message = "Nachricht zur Bestätigung";
+            args.Message = "Confirmation message";
 
             var articles = new List<OrderTransactionArticle>();
 
             var article = new OrderTransactionArticle();
             article.OrderItemID = order.Items.First().OrderItemID;
-            // false = nicht bestätigt
+            // false = not confirmed
             article.Confirmed = true; 
-            // Minderstückzahl bestätigen ?
-            // null = nein ansonsten wieviel Stück bestätigt werden sollen
+            // Confirm less quantity?
+            // null = no otherwise the quantity to confirm
             article.QuantityConfirmed = null; // St
             articles.Add(article);
 
             args.Articles = articles.ToArray();
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void updateOrderPositionStatus(ContextUOW unitOfWork)
         {
-            Console.WriteLine("Auftrag wird auf Positionsebene aktualisiert");
+            Console.WriteLine("Order is updated on positions");
             Console.WriteLine();
 
-            // Auftragskopf
+            // Order - Head
             var orderTransaction = new OrderTransactionPositions();
             orderTransaction.Positions = new List<OrderTransactionPosition>();
 
             // Tracking URL
             orderTransaction.TrackAndTraceURL = "http://dpd.com/?code=";
             orderTransaction.TrackAndTraceID = new string[] { "abc", "def"};
-            // Rechnung
+            // Invoice
             orderTransaction.InvoiceFilename = "Rechung.pdf";
             orderTransaction.InvoiceMimeType = "application/pdf";
-            // Base 64 encodierte Data URI mit dem Pdf
+            // Base 64 encoded Data URI with the Pdf
             orderTransaction.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
-            // Auftragsposition
+            // Order - Position
             var positionTransaction = new OrderTransactionPosition();
-            // Positionsnummer
+            // Number
             positionTransaction.OrderItemID = 123;
-            // Artikel
+            // Article
             positionTransaction.External_Key = "abcdef";
-            // Menge
+            // Quantity
             positionTransaction.Quantity = 10;
-            // Lieferdatum
+            // Deliver Date
             positionTransaction.AvailableOn = new DateTime(2020, 12, 24);
-            // Geliefert
+            // Delivered
             positionTransaction.Status = OrderTransactionStatusType.Delivered;
-            // Bestätigt
+            // Confirmed
             positionTransaction.Status = OrderTransactionStatusType.Confirmed;
-            // Storniert
+            // Cancelled
             positionTransaction.Status = OrderTransactionStatusType.Cancelled;
             orderTransaction.Positions.Add(positionTransaction);
 
             var result = unitOfWork.Orders.UpdatePositions(44, orderTransaction);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + result.Length+" Aktalisierungen");
+            Console.WriteLine("Order was updated: " + result.Length+" updates");
         }
 
         static void splitOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird gesplittet: " + order.OrderID);
+            Console.WriteLine("Split order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Action = OrderTransactionActionType.Split;
             args.OrderTransactionID = transaction.OrderTransactionID;
 
-            // Neuer Termin
+            // New Date
             args.EarliestShippingDate = DateTime.Now.AddDays(14);
 
             var articles = new List<OrderTransactionArticle>();
@@ -1021,30 +1035,46 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             args.Articles = articles.ToArray();
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde gesplittet: " + order.Notes);
+            Console.WriteLine("Order was updated: " + result.Length+" updates");
         }
 
         static void cancelOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird storniert: " + order.OrderID);
+            Console.WriteLine("Cancel order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Status = OrderTransactionStatusType.Cancelled;
             args.StatusOn = DateTime.Now;
             args.OrderTransactionID = transaction.OrderTransactionID;
-            args.Message = "Nachricht zur Stornierung";
+            args.Message = "Cancellation message";
 
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void shipOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird versendet: " + order.OrderID);
+            // Create shipment label
+            var model = new CreateShipmentOrderArgs();
+            model.Quantity = 1;
+            model.WeightsInKg = new double[] { 3 };
+            var newShipmentOrderSummary = unitOfWork.ShipmentOrders.CreateFastForOrder(order.OrderID, transaction.OrderTransactionID, model);
+            var shipmentOrder = unitOfWork.ShipmentOrders.Get(newShipmentOrderSummary.ShipmentOrderID);
+            if(shipmentOrder.Items.Any(m => m.HasShipmentLabel))
+            {
+                foreach (var item in shipmentOrder.Items.Where(m => m.HasShipmentLabel))
+                {
+                    var pdf = unitOfWork.ShipmentOrders.GetLabel(item.ShipmentOrderItemID, ShipmentLabelType.Shipment);
+                    Process.Start(pdf);
+                }
+            }
+
+
+            Console.WriteLine("Sent order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Status = OrderTransactionStatusType.Delivered;
@@ -1053,14 +1083,14 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             args.TrackAndTraceURL = "https://dhl.tracking.de/?piececode=";
             args.OrderTransactionID = transaction.OrderTransactionID;
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void replaceOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird ersetzt: " + order.OrderID);
+            Console.WriteLine("Replace order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Action = OrderTransactionActionType.Replace;
@@ -1074,14 +1104,14 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             args.Articles = replacements.ToArray();
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void refundOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird erstattet: " + order.OrderID);
+            Console.WriteLine("Refund order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Action = OrderTransactionActionType.Refund;
@@ -1094,64 +1124,64 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             args.Articles = replacements.ToArray();
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void delayOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird verspätet: " + order.OrderID);
+            Console.WriteLine("Delay order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Action = OrderTransactionActionType.Delay;
             args.EarliestShippingDate = DateTime.Now.AddDays(7);
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void finishOrder(ContextUOW unitOfWork, Order order)
         {
             var transaction = order.Transactions.First();
 
-            Console.WriteLine("Auftrag wird erledigt: " + order.OrderID);
+            Console.WriteLine("Finish order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
             args.Status = OrderTransactionStatusType.Ready;
             args.InvoiceFilename = "Rechung.pdf";
             args.InvoiceMimeType = "application/pdf";
-            // Base 64 encodierte Data URI mit dem Pdf
+            // Base 64 encoded Data URI with the pdf
             args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Auftrag wurde aktualisiert: " + order.Notes);
+            Console.WriteLine("Order was updated: " + order.Notes);
         }
 
         static void startArticleDialog(ContextUOW unitOfWork, Article article)
         {
             var dialog = unitOfWork.Articles.Dialog(article.ArticleID);
-            Console.WriteLine("Titel: " + dialog.Title);
+            Console.WriteLine("Title: " + dialog.Title);
             Console.WriteLine("Url: " + dialog.Url);
-            Console.WriteLine("Breite: " + dialog.Width);
+            Console.WriteLine("Width: " + dialog.Width);
             Console.WriteLine("Height: " + dialog.Height);
 
             Console.WriteLine();
-            Console.Write("Broswer jetzt aufrufen (j/n)? ");
-            if (Console.ReadLine() == "j")
+            Console.Write("Open browser (y/n)? ");
+            if (Console.ReadLine() == "y")
                 Process.Start(dialog.Url);
         }
 
         static void startOrdersDialog(ContextUOW unitOfWork)
         {
             var dialog = unitOfWork.Orders.Dialog();
-            Console.WriteLine("Titel: " + dialog.Title);
+            Console.WriteLine("Title: " + dialog.Title);
             Console.WriteLine("Url: " + dialog.Url);
-            Console.WriteLine("Breite: " + dialog.Width);
+            Console.WriteLine("Width: " + dialog.Width);
             Console.WriteLine("Height: " + dialog.Height);
 
             Console.WriteLine();
-            Console.Write("Broswer jetzt aufrufen (j/n)? ");
-            if (Console.ReadLine() == "j")
+            Console.Write("Open Broswer (y/n)? ");
+            if (Console.ReadLine() == "y")
                 Process.Start(dialog.Url);
         }
 
@@ -1171,13 +1201,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
             };
             var job = unitOfWork.Articles.CreatePatches(patches, "PAT", "available", true);
-            Console.WriteLine("Patchupdate gestartet: " + job.Name+", "+job.JobID);
+            Console.WriteLine("Start Patchupdate: " + job.Name+", "+job.JobID);
             Console.ReadLine();
         }
 
         static void createAvailabilities(ContextUOW unitOfWork)
         {
-            // Erstes Paket für das Update
+            // First package for the update
             var availabilities1 = new Availability[]
             {
                 new Availability()
@@ -1191,13 +1221,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 }
             };
             var job = unitOfWork.Articles.CreateAvailabilities(
-                availabilities1, // Verfügbarkeiten
-                true,            // Komplettupdate (vorher löschen)
-                false            // Update ist vollständig?
+                availabilities1, // Availabilities
+                true,            // Complete (delete first)
+                false            // Update is necessary?
             );
-            Console.WriteLine("Patchupdate gestartet: " + job.Name + ", " + job.JobID);
+            Console.WriteLine("Start Patchupdate: " + job.Name+", "+job.JobID);
 
-            // Zweites Paket
+            // Second package
             var availabilities2 = new Availability[]
             {
                 new Availability()
@@ -1212,30 +1242,29 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             };
             unitOfWork.Articles.CreateAvailabilities(
                 job.JobID,
-                availabilities1, // Verfügbarkeiten
-                true,            // Komplettupdate (vorher löschen)
-                true            // Update ist vollständig?
+                availabilities1, // Availabilities
+                true,            // Complete (delete first)
+                true            // Update is necessary?
             );
             Console.ReadLine();
         }
 
         static void getArticleByExternal_Key(ContextUOW unitOfWork)
         {
-            Console.WriteLine("Alle Entitäten haben ein Feld External_Key in das die eigene ID");
-            Console.WriteLine("der Warenwirtschaft hinterlegt werden kann.");
-            Console.WriteLine("Auf Basis dieses External_Keys kann dann zugegriffen werden.");
+            Console.WriteLine("All entities have an External_Key field in which their own primary key, such as the ID of the external software system,");
+            Console.WriteLine("can be stored. The entity can then be accessed on the basis of this External_Key.");
             Console.WriteLine();
             Console.Write("External_Key: ");
             var external_key = Console.ReadLine();
 
             Console.Clear();
-            // Nur die ArticleID abfragen damit die Abfrage schneller geht
+            // Only retreive the ArticleID for a faster result
             var article = unitOfWork.Articles.Get(external_key, new string[]{"ArticleID"});
             if (article == null)
-                Console.WriteLine("Kein Artikel gefunden!");
+                Console.WriteLine("No article found!");
             else
             {
-                // danach kann mit der ArticleID weitergearbeitet werden
+                // the we can work with the ArticleID
                 getArticle(unitOfWork, new Article.Summary() { ArticleID = article.ArticleID });
             }
             
@@ -1245,7 +1274,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             unitOfWork.Cache.Clear();
 
-            Console.WriteLine("Folgende Caches wurden gelöscht:");
+            Console.WriteLine("Following caches were cleared:");
             Console.WriteLine(" - OutputCache");
             Console.WriteLine(" - Session Cache");
             Console.WriteLine(" - Search Cache");
@@ -1254,11 +1283,11 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void getArticle(ContextUOW unitOfWork, Article.Summary summary)
         {
-            Console.WriteLine("Felder die belegt werden sollen können auch angegeben werden.");
-            Console.WriteLine("Dadurch braucht der Server nicht alle Felder belegen und kann schneller antworten.");
-            Console.WriteLine("<Enter> für Alle Felder, ansonsten z.B. Name,Name2,Keys");
+            Console.WriteLine("Properties can be defined for the query.");
+            Console.WriteLine("This helps to increase the query speed for the server.");
+            Console.WriteLine("<Enter> for all properties, otherwise e.g. Name,Name2,Keys");
             Console.WriteLine();
-            Console.Write("Auswahl: ");
+            Console.Write("Choice: ");
             var properties = Console.ReadLine();
 
             Console.Clear();
@@ -1269,33 +1298,33 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Name:" + article.Name);
             Console.WriteLine("Name 2:" + article.Name2);
 
-            Console.WriteLine("VARIANTEN");
+            Console.WriteLine("Variants");
             if (article.Keys != null)
             {
                 foreach (var key in article.Keys)
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("Artikelnummer: " + key.Value);
+                    Console.WriteLine("Articlenumber: " + key.Value);
                     Console.WriteLine("Info: " + key.Info);
                     Console.WriteLine("EAN: " + key.EAN);
                     foreach (var price in key.Prices)
                     {
-                        Console.WriteLine("Preis " + (price.Quantity ?? 1), price.Price);
+                        Console.WriteLine("Price " + (price.Quantity ?? 1), price.Price);
                     }
                 }
             }
 
             Console.WriteLine("");
 
-            Console.WriteLine("Bitte wählen Sie eine Funktion:");
-            Console.WriteLine("(1) - Aktualisieren");
-            Console.WriteLine("(2) - Aktualisieren (Englisch)");
-            Console.WriteLine("(3) - Löschen");
-            Console.WriteLine("(4) - Löschen (permanent)");
-            Console.WriteLine("(5) - External_Key setzen für z.B. Verlinkung zur Warenwirtschaft");
-            Console.WriteLine("(6) - Dialog aufrufen");
+            Console.WriteLine("Please select:");
+            Console.WriteLine("(1) - Update");
+            Console.WriteLine("(2) - Update (English)");
+            Console.WriteLine("(3) - Delete");
+            Console.WriteLine("(4) - Delete (permanent)");
+            Console.WriteLine("(5) - Set External_Key e.g. link to external software system");
+            Console.WriteLine("(6) - Open dialog");
             Console.WriteLine();
-            Console.Write("Auswahl: ");
+            Console.Write("Choice: ");
             switch (Console.ReadLine())
             {
                 case "1":
@@ -1330,16 +1359,16 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.Clear();
             var voucher = unitOfWork.Vouchers.Get(summary.VoucherID);
             Console.WriteLine("ID:" + voucher.VoucherID);
-            Console.WriteLine("Preis:" + voucher.Price);
-            Console.WriteLine("Guthaben:" + voucher.Remaining);
+            Console.WriteLine("Price:" + voucher.Price);
+            Console.WriteLine("Balance:" + voucher.Remaining);
 
-            Console.WriteLine("Zahlungen:");
+            Console.WriteLine("Payments:");
             foreach(var payment in voucher.Payments)
             {
-                Console.WriteLine("* Preis: " + payment.Price);
+                Console.WriteLine("* Price: " + payment.Price);
                 Console.WriteLine("* Info: " + payment.Info);
-                Console.WriteLine("* Zahlart: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
-                Console.WriteLine("* Gutschein: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
+                Console.WriteLine("* Payment Method: " + payment.PaymentMethod != null ? payment.PaymentMethod.ID.ToString() : "--");
+                Console.WriteLine("* Code: " + payment.VoucherCode != null ? payment.VoucherCode.Voucher.ID.ToString() : "--");
             }
             
 
@@ -1355,9 +1384,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var articles = unitOfWork.Articles.FindAll(null, pageIndex, 10, null).Items; // GET api/orders/all
 
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
@@ -1368,7 +1397,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                     i++;
                 }
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -1402,9 +1431,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var vouchers = unitOfWork.Vouchers.FindAll(null, pageIndex, 10, null).Items; // GET api/vouchers/all
 
-                Console.WriteLine("Seite: " + (pageIndex + 1));
-                Console.WriteLine("(+) - Nächste Seite");
-                Console.WriteLine("(-) - Vorherige Seite");
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
                 Console.WriteLine("===================");
                 Console.WriteLine();
 
@@ -1415,7 +1444,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                     i++;
                 }
                 Console.WriteLine();
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
                 selection = Console.ReadLine();
                 switch (selection)
                 {
@@ -1444,9 +1473,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void validate(ContextUOW unitOfWork)
         {
             Console.WriteLine();
-            Console.Write("Benutzername: ");
+            Console.Write("Username: ");
             var user = Console.ReadLine();
-            Console.Write("Passwort: ");
+            Console.Write("Password: ");
             var password = Console.ReadLine();
 
             var token = unitOfWork.Account.Validate(user, password); // POST api/account/validate?user={benutzer}&password={passwort}
@@ -1459,35 +1488,33 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var member = new Member();
             
 
-            string connectionString = "vendor=Test,token=8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplS70KURnyjuUT2iVgfaxWqTjmZ72owjsBYZfAd79WYirvSrDyUwKAgU=,endpoint=http://localhost:61235/";
-
-            using (var unitOfWork = new ContextUOW(connectionString))
+            using (var unitOfWork = new ContextUOW("Test", "<token>", "<endpunkt>"))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {
-                    Console.WriteLine("Daten werden abgefragt..."+s);
+                    Console.WriteLine("Query data..."+s);
                 };
 
-                Console.WriteLine("Verbunden mit: "+unitOfWork.Endpoint);
+                Console.WriteLine("Connected to: "+unitOfWork.Endpoint);
                 Console.WriteLine("");
 
-                Console.WriteLine("Bitte wählen Sie eine Funktion:");
-                Console.WriteLine("(1) - Authorisieren");
-                Console.WriteLine("(2) - Artikel auflisten");
-                Console.WriteLine("(3) - Bestellungen auflisten");
-                Console.WriteLine("(4) - Artikel anlegen");
-                Console.WriteLine("(5) - Artikel per External_Key abfragen");
-                Console.WriteLine("(6) - Cache löschen (OutputCache, EF Cache u.s.w.)");
-                Console.WriteLine("(7) - Filialen auflisten");
-                Console.WriteLine("(8) - Kunden auflisten");
-                Console.WriteLine("(9) - Auftragsverwaltung aufrufen");
-                Console.WriteLine("(10) - Verfügbarkeiten");
-                Console.WriteLine("(11) - Bestellung anlegen");
-                Console.WriteLine("(12) - Gutscheine auflisten");
-                Console.WriteLine("(13) - Verfügbarkeiten");
-                Console.WriteLine("(14) - Positionsupdates");
+                Console.WriteLine("Please select:");
+                Console.WriteLine("(1) - authorize");
+                Console.WriteLine("(2) - Query articles");
+                Console.WriteLine("(3) - Query orders");
+                Console.WriteLine("(4) - Create article");
+                Console.WriteLine("(5) - Quuery article by External_Key");
+                Console.WriteLine("(6) - Clear caches  (OutputCache, EF Cache u.s.w.)");
+                Console.WriteLine("(7) - Query chainstores");
+                Console.WriteLine("(8) - Query customers");
+                Console.WriteLine("(9) - Open Order Management");
+                Console.WriteLine("(10) - Availabilities");
+                Console.WriteLine("(11) - Create order");
+                Console.WriteLine("(12) - Query vouchers");
+                Console.WriteLine("(13) - Availabilities");
+                Console.WriteLine("(14) - Positionupdates");
                 Console.WriteLine("");
-                Console.Write("Auswahl: ");
+                Console.Write("Choice: ");
 
                 try
                 {
@@ -1550,17 +1577,17 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                             getOrdersForStatusupdate(unitOfWork);
                             break;
                         default:
-                            Console.WriteLine("Auswahl nicht unterstützt");
+                            Console.WriteLine("Choice not supported");
                             break;
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Fehler: " + e.Message);
+                    Console.WriteLine("Error: " + e.Message);
                 }
 
                 Console.WriteLine("");
-                Console.WriteLine("Drücken Sie eine beliebige Taste zum Beenden");
+                Console.WriteLine("Press any key to exit");
                 Console.ReadLine();
             }
             
