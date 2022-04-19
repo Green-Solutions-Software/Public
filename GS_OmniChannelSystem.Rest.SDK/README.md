@@ -37,11 +37,7 @@
 
 > [Request new loyalty cards](#Request-new-loyalty-cards)
 
-<<<<<<< Updated upstream
 > [Validate new debit cards](#validate-new-debit-cards)
-=======
-> [Validate new loyalty cards](#Validate-new-loyalty-cards)
->>>>>>> Stashed changes
 
 > [Current sales](#Current-sales)
 
@@ -271,11 +267,7 @@ A session is valid indefinitely.
 
 The API calls are made as a REST request, authenticated with an access token.
 
-<<<<<<< Updated upstream
 # Error handling
-=======
-# Rrror handling
->>>>>>> Stashed changes
 
 If a call fails, a json object with the error information is returned.
 
@@ -429,11 +421,7 @@ The orders can be saved as api/orders with the status "Ready(4) so that the syst
 | url| api/videos|
 | --- | --- |
 
-<<<<<<< Updated upstream
-# Branches
-=======
 # Chainstores
->>>>>>> Stashed changes
 
 | url| api/chainstores|
 | --- | --- |
@@ -443,11 +431,7 @@ The orders can be saved as api/orders with the status "Ready(4) so that the syst
 | url| api/members|
 | --- | --- |
 
-<<<<<<< Updated upstream
 # Article
-=======
-# Articles
->>>>>>> Stashed changes
 
 | url| api/articles|
 | --- | --- |
@@ -643,11 +627,7 @@ The file is returned as a return(please refer **[File](#file)** )
 
 The file is returned as a return(please refer **[Files](#file)** )
 
-<<<<<<< Updated upstream
-# Coupons
-=======
 # Voucher
->>>>>>> Stashed changes
 
 | url| api/vouchers| |
 | --- | --- | --- |
@@ -664,11 +644,7 @@ The file is returned as a return(please refer **[Files](#file)** )
 
 The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
-<<<<<<< Updated upstream
-## Find coupon
-=======
 ## Find voucher
->>>>>>> Stashed changes
 
 | **function(GET)** | **parameter** | **Type** | **description** |
 | --- | --- | --- | --- |
