@@ -285,7 +285,7 @@ https://{domain}/api/
 
 There are 6 types of requests common to all entities:
 
-| **URL** | **method** | **description** |
+| **URL** | **method** | **Description** |
 | --- | --- | --- |
 | api/{entities}| GET| Query list of entities|
 | api/{entities}/{id}| GET| query entity|
@@ -297,7 +297,7 @@ There are 6 types of requests common to all entities:
 
 All functions expect 3 host headers:
 
-| **headers** | **description** |
+| **headers** | **Description** |
 | --- | --- |
 | **tokens** | Authorization|
 | **language** | language(e.g. de-DE) |
@@ -306,7 +306,7 @@ All functions expect 3 host headers:
 
 All functions that return lists have the following parameters:
 
-| **parameter** | **description** |
+| **Parameter** | **Description** |
 | --- | --- |
 | **pageIndex** | Current page|
 | **pageSize** | Number of entries per page|
@@ -332,7 +332,7 @@ This allows you to try out all queries without having implemented the interface.
 
 The authorization only has to be carried out once by the developer. The resulting token can then be used permanently for access without the username/password having to be transmitted again:
 
-| **function** | **parameter** | **description** |
+| **Function** | **Parameter** | **Description** |
 | --- | --- | --- |
 | api/account/validate|user| User name| |
 | |password| password|
@@ -343,7 +343,7 @@ A token is returned as a return, which must be given in all subsequent queries.
 
 This method must be used to log in as a user via the app. This then provides not only a token but also information about the logged-in user.
 
-| **function** | **parameter** | **description** |
+| **Function** | **Parameter** | **Description** |
 | --- | --- | --- |
 | api/account/login|user| User name| |
 | |password| password|
@@ -383,7 +383,7 @@ Please refer **[Loyalty card](#loyaltycard)**
 
 **Function: GET** /api/debitcards?orderby=ValidatedOn
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
@@ -393,7 +393,7 @@ New customer cards must be validated once by WaWi so that they can also be used 
 
 **Function: POST** /api/debitcards/validate/{id}
 
-| **parameter** | **Type** | **description** |
+| **Parameter** | **Type** | **Description** |
 | --- | --- | --- |
 | **i.e** |long| Customer card ID|
 | **valid** |boolean| Valid or not|
@@ -442,7 +442,7 @@ With this function, an article can be created and automatically enriched with da
 
 **Function: POST** api/articles/create
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **importExternal** |boolean| Add external data?| |
 | **compareNameSecondary** |boolean| compare name 2?| |
@@ -453,7 +453,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 **Function: POST** api/articles/transaction
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
 
@@ -464,7 +464,7 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 ## Edit dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
 
@@ -472,7 +472,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[E
 
 ## Edit variant dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
 
@@ -513,7 +513,7 @@ The keys of the variants of the articles with the individual prices
 
 ## Update Status
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/transactions/status/{ID}|ID| **long** | ID of the order| |
 |BODY| **status message** | please refer **[OrderStatus](#orderstatus)** |
@@ -522,7 +522,7 @@ As a return, the order will be returned (please refer **[order](#order)** )
 
 ## Ship dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
 
@@ -530,7 +530,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To
 
 ## Confirm dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/confirm/{id}|ID| **long** | ID of the order|
 
@@ -538,7 +538,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[c
 
 ## Complete dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
 
@@ -546,7 +546,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and **[com
 
 ## Cancel dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
 
@@ -554,7 +554,7 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and**[canc
 
 ## Order management dialog
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/orders/dialog| | | |
 
@@ -568,7 +568,7 @@ Delivers the delivery note for an order.
 
 Please note that you will only receive the items that have been confirmed, so this function may only be called up after the order has been confirmed.
 
-| **function(GET)** | **parameter** | **Type** | **description** |
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/documents/order/{orderid}/{type}|orderid| **long** | ID of the order|
 | |type| **string** | DeliverySlip|
@@ -580,7 +580,7 @@ Delivers the delivery note for a partial order.
 
 Please note that you will only receive the items that have been confirmed, so this function may only be called up after the order has been confirmed.
 
-| **function(GET)** | **parameter** | **Type** | **description** |
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/documents/order/{orderid}/{type}/{transactionid}|orderid| **long** | ID of the order| |
 |type| **string** | DeliverySlip| |
@@ -600,7 +600,7 @@ please refer **[ShipmentOrder](#shipmentorder)**
 
 The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer **[ShipmentOrder](#shipmentorder)** )
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/shipmentorders/items/label/{id}|ID| **long** | Shipment ID|
 
@@ -613,7 +613,7 @@ The pdf is returned as a return
 
 ## Upload files
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/datafiles/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
@@ -621,7 +621,7 @@ The file is returned as a return(please refer **[File](#file)** )
 
 ## Upload images
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/pictures/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
 
@@ -634,7 +634,7 @@ The file is returned as a return(please refer **[Files](#file)** )
 
 ## Create voucher
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/create|Surname| **string** | Name for the new voucher| |
 |amount| **double** | amount| |
@@ -646,7 +646,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 ## Find voucher
 
-| **function(GET)** | **parameter** | **Type** | **description** |
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/find|keyValue| **string** | Coupon Code(without space) |
 
@@ -656,7 +656,7 @@ Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
 
 Reserve a payment for a voucher. During the time, the revenue is considered consumed until the time expires and cannot be used elsewhere.
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/reserve|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
@@ -671,7 +671,7 @@ As a return, the created payment is returned (please refer **[payments](#payment
 
 After a payment has been reserved, the payment can then be made(during the time of reservation)
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/pay|paymentid| **long** | Payment ID(please refer **[payments](#payment)** ) |
 
@@ -681,7 +681,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 Cancel a payment for a voucher
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/cancel|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
@@ -695,7 +695,7 @@ As a return, the created payment is returned (please refer **[payments](#payment
 
 Generates new codes without creating them in the database(for your own printed vouchers)
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/vouchers/generate/codes|count| **internal** | number of codes| |
 
@@ -738,12 +738,12 @@ please refer **[messages](#message)**
 
 ## Create a message
 
-| **function(POST)** | **parameter** | **Type** | **description** |
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/messages/create|BODY| **[messages](#message)** | Message to be created|
 
 The following fields must be set in the message:
-|**Surname** |**Type** |**value** |**description** |
+|**Surname** |**Type** |**value** |**Description** |
 | --- | --- | --- | --- |
 |Direction|**short** | | Outgoing or incoming |
 |Type|**short** | |(please refer **[MessageType](#messagetype)**) |
@@ -758,7 +758,7 @@ The created message is returned as a return (please refer **[messages](#message)
 # Return delivery has been received
 The return has been received at the warehouse
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 16|Return delivery has been received(82) |
@@ -770,7 +770,7 @@ The return has been received at the warehouse
 # Returns quality check passed
 The return has been checked and passed the test
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 17|Returns check passed(80) |
@@ -780,7 +780,7 @@ The return has been checked and passed the test
 # Returns quality check failed
 The return was checked and did not pass the test
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 18|Returns check failed(81) |
@@ -790,7 +790,7 @@ The return was checked and did not pass the test
 # Order delivered
 The order has been delivered
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 5|delivery done(21) |
@@ -799,7 +799,7 @@ The order has been delivered
 # Received pick-up order
 The pickup request has been received
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 14|received pick-up order(64) |
@@ -808,7 +808,7 @@ The pickup request has been received
 # Customer cancellation request confirmed
 The customer's cancellation request is confirmed
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 19|Customer cancellation request confirmed(275) |
@@ -817,7 +817,7 @@ The customer's cancellation request is confirmed
 # Cancellation not possible
 The customer's cancellation request is rejected because cancellation is no longer possible
 
-| **Surname** | **Type** | **value** | **description** |
+| **Surname** | **Type** | **value** | **Description** |
 | --- | --- | --- | --- |
 |directions| **short** | 1|Outgoing message|
 |Type| **short** | 20|Cancellation is no longer possible(71)|
@@ -866,7 +866,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 
 **Function:** api/pictos/{id}
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **i.e** | long| Article ID| Article for which the pictogram is to be queried|
 | **width** | internal| Broad| px|
@@ -878,7 +878,7 @@ A list of all valid pictograms for the selected item
 
 **Definition:**
 
-| **Field** | **Type** | **description** |
+| **Field** | **Type** | **Description** |
 | --- | --- | --- |
 | Surname| string| Pictogram name(shown in bold below/next to the pictogram)e.g. "Location|
 | text| string| Text of the pictogram(displayed below/next to the name)e.g. "Sunny|
@@ -890,7 +890,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/search
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **search** |string| search term| |
 | **orderBy** |string| Title, Title2| |
@@ -911,7 +911,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/articles{id}
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| Article ID| |
 | **search** |string| search term| |
@@ -922,7 +922,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/reports/{id}
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the report| |
 | **search** |string| search term| |
@@ -933,7 +933,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/videos/{id}
 
-| **parameter** | **Type** | **description** | **remark** |
+| **Parameter** | **Type** | **Description** | **remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the video| |
 | **search** |string| search term| |
