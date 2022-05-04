@@ -12,11 +12,13 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Authorization](#Authorization)**
 
-**[External primary key](#External-primary-key)**
+**General**
 
-**[Set external primary key](#Set-external-primary-key)**
+> **[External primary key](#External-primary-key)**
 
-**[Query entity via external primary key](#Query-entity-via-external-primary-key)**
+> **[Set external primary key](#Set-external-primary-key)**
+
+> **[Query entity via external primary key](#Query-entity-via-external-primary-key)**
 
 **[Articles](#articles)**
 
