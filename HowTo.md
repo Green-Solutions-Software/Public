@@ -20,11 +20,11 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Articles](#articles)**
 
-**[Transfer article master data](#Transfer-article-master-data)**
+> **[Transfer article master data](#Transfer-article-master-data)**
 
-**[Add channel specific article numbers](#Add-channel-specific-article-numbers)**
+> **[Add channel specific article numbers](#Add-channel-specific-article-numbers)**
 
-**[Transfer article movement data](#Transfer-article-movement-data)**
+> **[Transfer article movement data](#Transfer-article-movement-data)**
 
 **[Orders](#orders)**
 
