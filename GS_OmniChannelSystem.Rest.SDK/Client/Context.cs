@@ -283,6 +283,20 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return executeRequest<S>(request);
         }
 
+        protected S post<S>(string resource, Dictionary<string, object> parameters = null)
+            where S : class, new()
+        {
+            var client = createClient();
+            var request = new RestRequest(resource, Method.POST);
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                    request.AddParameter(parameter.Key, parameter.Value, ParameterType.QueryString);
+            }
+
+            return executeRequest<S>(request);
+        }
+
         protected U post<T, S, U>(string resource, T entity, Dictionary<string, object> parameters = null)
             where T : class, new()
             where S : class, new()
@@ -609,6 +623,12 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return post<T,S>(resource, entity, dict);
         }
 
+        public S Post<S>(string resource, Dictionary<string, object> dict = null)
+            where S : class, new()
+        {
+            return post<S>(resource, dict);
+        }
+
         public U Post<T, S, U>(string resource, T entity, string[] properties = null, Dictionary<string, object> dict = null)
             where T : class, new()
             where S : class, new()
@@ -623,6 +643,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
             return post<T, S, U>(resource, entity, dict);
         }
+
 
         private static string toString(string[] properties)
         {

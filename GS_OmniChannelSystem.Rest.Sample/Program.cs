@@ -156,6 +156,17 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         }
 
+        static void createArticleLinkTarget(ContextUOW unitOfWork)
+        {
+            // POST articles/create/linktarget
+            var linkTarget = unitOfWork.Articles.LinkTarget(
+                "233181-test", 
+                "Testartikel"
+           );  
+            Console.WriteLine("LinkTarget was created. ID = " + linkTarget.Url);
+
+        }
+
         static void createArticleTransaction(ContextUOW unitOfWork)
         {
             var transactions = new List<ArticleTransactionArgs>();
@@ -1035,7 +1046,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
             args.Articles = articles.ToArray();
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
-            Console.WriteLine("Order was updated: " + result.Length+" updates");
+            Console.WriteLine("Order was updated: " + order.OrderID);
         }
 
         static void cancelOrder(ContextUOW unitOfWork, Order order)
@@ -1488,7 +1499,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var member = new Member();
             
 
-            using (var unitOfWork = new ContextUOW("Test", "<token>", "<endpunkt>"))
+            using (var unitOfWork = new ContextUOW("Test", "http://localhost:61235/", "8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplVqYNi0Uhm+/K6z6UTrTy82kUuxt8LxuBA=="))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {
@@ -1513,6 +1524,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("(12) - Query vouchers");
                 Console.WriteLine("(13) - Availabilities");
                 Console.WriteLine("(14) - Positionupdates");
+                Console.WriteLine("(15) - Create Linktarget");
                 Console.WriteLine("");
                 Console.Write("Choice: ");
 
@@ -1575,6 +1587,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                         case "14":
                             Console.Clear();
                             getOrdersForStatusupdate(unitOfWork);
+                            break;
+                        case "15":
+                            Console.Clear();
+                            createArticleLinkTarget(unitOfWork);
                             break;
                         default:
                             Console.WriteLine("Choice not supported");
