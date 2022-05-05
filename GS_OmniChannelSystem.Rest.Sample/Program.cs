@@ -1499,7 +1499,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             var member = new Member();
             
 
-            using (var unitOfWork = new ContextUOW("Test", "http://localhost:61235/", "8xn+HVHclg5wfcbqGq9zmgw2EYr5Lswv36Qg1KZlqnU/tPZxX6QplVqYNi0Uhm+/K6z6UTrTy82kUuxt8LxuBA=="))
+            using (var unitOfWork = new ContextUOW("Test", "<endpoint>", "<token>"))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {
