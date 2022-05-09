@@ -74,7 +74,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 -  **[Customer not reached](#customers-not-reached)**
 
--  **[Customer not found](#customers-not-found)**
+-  **[Delivery not possible](#Delivery-not-possible)**
 
 
 # Authorization
@@ -482,4 +482,4 @@ The handling of the messages are still work in progress and will be defined soon
 
 ### Customer not reached
 
-### Customer not found
+### Delivery not possible
