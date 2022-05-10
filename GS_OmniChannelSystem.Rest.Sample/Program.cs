@@ -1,4 +1,4 @@
-﻿
+
 using GS.OmniChannelSystem.Rest.SDK.Api.Args;
 using GS.OmniChannelSystem.Rest.SDK.Client;
 using GS.OmniChannelSystem.Rest.SDK.Extensions;
@@ -590,6 +590,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("(8) - Refund order");
             Console.WriteLine("(9) - Split order");
             Console.WriteLine("(A) - Update order on position status");
+            Console.WriteLine("(M) - Service");
             Console.WriteLine();
             Console.Write("Choice: ");
             switch (Console.ReadLine())
@@ -634,7 +635,71 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                     Console.Clear();
                     updateOrderPositionStatus(unitOfWork);
                     break;
+                case "M":
+                    Console.Clear();
+                    getOrderMessages(unitOfWork, order);
+                    break;
             }
+
+        }
+
+        static void executeMessageWorkflow(ContextUOW unitOfWork, Message message, Workflow workflow)
+        {
+            Console.WriteLine("Text: " + workflow.Text);
+            Console.WriteLine("Type: " + workflow.Type.ToString());
+            var newMessage = unitOfWork.Messages.ExecuteWorkflow(message.MessageID, workflow);
+            Console.WriteLine("Neue Meldung erstellt: " + newMessage.Number);
+
+        }
+
+        static void getMessageWorkflow(ContextUOW unitOfWork, Message message)
+        {
+            var order = unitOfWork.Messages.Get(message.MessageID); // GET api/orders/{id}
+
+            Console.WriteLine("Number:" + message.Number);
+            Console.WriteLine("Subject:" + message.Subject);
+            Console.WriteLine("Type:" + message.Type.ToString());
+
+            var workflows = unitOfWork.Messages.GetWorkflow(message.MessageID);
+
+            // Positions
+            Console.WriteLine("Please select:");
+            int i = 0;
+            foreach (var workflow in workflows)
+            {
+                Console.WriteLine("(" + i + ") - " + workflow.Text);
+                Console.WriteLine("Type:" + workflow.Type.ToString());
+                i++;
+            }
+
+            Console.WriteLine();
+            Console.Write("Choice: ");
+            executeMessageWorkflow(unitOfWork, message, workflows.ElementAt(Convert.ToInt16(Console.ReadLine())));
+        }
+
+        static void getOrderMessages(ContextUOW unitOfWork, Order order)
+        {
+            //var order = unitOfWork.Orders.Get(order.OrderID); // GET api/orders/{id}
+
+            Console.WriteLine("Ordernumber:" + order.OrderID);
+            Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
+            var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+
+            // Positions
+            Console.WriteLine("Please select:");
+            int i = 0;
+            foreach (var message in messages.Items)
+            {
+                Console.WriteLine("("+i+") - "+ message.Number);
+                Console.WriteLine("Subject:" + message.Subject);
+                Console.WriteLine("Type:" + message.Type.ToString());
+                i++;
+            }
+            
+            Console.WriteLine();
+            Console.Write("Choice: ");
+            Console.Clear();
+            getMessageWorkflow(unitOfWork, messages.Items.ElementAt(Convert.ToInt16(Console.ReadLine())));
 
         }
 

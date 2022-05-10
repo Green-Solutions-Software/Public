@@ -928,6 +928,24 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return executeRequest<Message>(request);
         }
 
+        public Message ExecuteMessageWorkflow(long messageId, Workflow workflow)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/"+messageId+"/workflow/execute", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(workflow);
+            return executeRequest<Message>(request);
+        }
+
+        // Messages
+        public List<Workflow> GetMessageWorkflow(long messageId)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/"+ messageId + "/workflow", Method.GET);
+            request.RequestFormat = DataFormat.Json;
+            return executeRequest<List<Workflow>>(request);
+        }
+
         public void ClearLocalCache()
         {
             this.cache.Clear();
