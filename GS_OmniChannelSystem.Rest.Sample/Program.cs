@@ -156,6 +156,26 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         }
 
+        static void createInvoice(ContextUOW unitOfWork)
+        {
+            var member = unitOfWork.Members.Get(1);
+
+            var invoice = new Invoice();
+            invoice.Member = new EntityReference(member.MemberID);
+            invoice.Address = new EntityReference(member.ContactAddresses.First().ContactAddressID);
+            invoice.Positions = new List<InvoicePosition>();
+            var position = new InvoicePosition();
+            position.Text = "Acer Palmatum Bloodgood";
+            position.Price = 19.99;
+            position.Quantity = 10;
+            invoice.SequenceItem = new SequenceItem();
+            invoice.SequenceItem.Key = "4711";
+            invoice.SequenceItem.Number = "4711";
+            var summary = unitOfWork.Invoices.Create(invoice);  // POST api/invoices/create
+            Console.WriteLine("Article was created. ID = " + invoice.InvoiceID);
+
+        }
+
         static void createArticleLinkTarget(ContextUOW unitOfWork)
         {
             // POST articles/create/linktarget

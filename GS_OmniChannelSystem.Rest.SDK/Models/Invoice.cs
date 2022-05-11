@@ -40,7 +40,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public EntityReference DebitCard { get; set; }
         public EntityReference Address { get; set; }
         public EntityReference Sequence { get; set; }
-        public EntityReference SequenceItem { get; set; }
+        public SequenceItem SequenceItem { get; set; }
         public List<InvoicePosition> Positions { get; set; }
         public List<InvoiceState> States { get; set; }
         public List<Payment> Payments { get; set; }
