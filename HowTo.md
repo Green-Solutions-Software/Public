@@ -549,211 +549,128 @@ To reply you have to retreive the right workflow and execute it.
 
 
 ```csharp
-    // Retreive all messages for this order
-    var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-    // Find the one to reply to
-    var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-    // Get the workflows for this message
-    var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-    // find the one we want to send
-    var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpCompleted);
-    // Set workflow speficic data
-    workflow.Replacement = true; // Replace the good
-    workflow.Refund = false; // Refund it
-    workflow.Positions = new List<WorkflowOrderItem>(); // Positions which were received
-    workflow.Positions.Add(new WorkflowOrderItem() { OrderItemID = order.Items.First().OrderItemID, Quantity = 1 });
-    // Execute the workflow and create a new reply message
-    unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionPickUpCompleted);
+// Set workflow speficic data
+workflow.Replacement = true; // Replace the good
+workflow.Refund = false; // Refund it
+workflow.Positions = new List<WorkflowOrderItem>(); // Positions which were received
+workflow.Positions.Add(new WorkflowOrderItem() { OrderItemID = order.Items.First().OrderItemID, Quantity = 1 });
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Returns quality check passed
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpCompleted);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReturnsInspectionPassed);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionPassed);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Returns quality check failed
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpCompleted);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReturnsInspectionFailed);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionFailed);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Order delivered
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryCompleted);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryCompleted);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Received pick-up order
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.ReturnViaEMail);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpAwaited);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionPickUpAwaited);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+
 ```
 
 ### Confirm delivery date
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.CollectionDateTimeAcknowledged);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionDateTimeAcknowledged);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Change of delivery date
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryChangeSchedule);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryChangeSchedule);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Customer not reached
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryPendingAwaitingSpecificDateTimes);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryPendingAwaitingSpecificDateTimes);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Delivery not possible
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.NotDeliverable);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.NotDeliverable);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Delivery incomplete
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReceiptOfGoodParticiallyAcknowledged);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReceiptOfGoodParticiallyAcknowledged);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Delivery refused
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryRefusedByRecipient);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryRefusedByRecipient);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Goods damaged
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.Damaged);
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.Damaged);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Cancellation no longer possible
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CancellationViaEmail);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.CancellationIsNoLongerPossible);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CancellationIsNoLongerPossible);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
 
 ### Cancellation Request confirmed
 
 ```csharp
-// Retreive all messages for this order
-var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-// Find the one to reply to
-var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CancellationViaEmail);
-// Get the workflows for this message
-var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-// find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.CancellationRequestConfirmed);            
+// Retreive all workflows for this order
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CancellationRequestConfirmed);
 // Execute the workflow and create a new reply message
-unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 ```
