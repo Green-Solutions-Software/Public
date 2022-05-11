@@ -946,6 +946,15 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return executeRequest<List<Workflow>>(request);
         }
 
+        public Workflow FindMessageOrderWorkflow(long orderid, MessageType type)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/order/" + orderid + "/workflow", Method.GET);
+            request.AddParameter("type", type);
+            request.RequestFormat = DataFormat.Json;
+            return executeRequest<Workflow>(request);
+        }
+
         public void ClearLocalCache()
         {
             this.cache.Clear();

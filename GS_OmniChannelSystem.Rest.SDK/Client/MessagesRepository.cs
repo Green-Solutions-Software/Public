@@ -26,6 +26,11 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return this.context.GetMessageWorkflow(messageId);
         }
 
+        public Workflow FindOrderWorkflow(long orderid, MessageType type)
+        {
+            return this.context.FindMessageOrderWorkflow(orderid, type);
+        }
+
         public Message ExecuteWorkflow(long messageId, Workflow workflow)
         {
             return this.context.ExecuteMessageWorkflow(messageId, workflow);

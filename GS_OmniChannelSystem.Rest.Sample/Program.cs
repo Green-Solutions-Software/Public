@@ -707,15 +707,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Ordernumber:" + order.OrderID);
             Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
             // Retreive all messages for this order
-            var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-            // Find the one to reply to
-            var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpCompleted);
-            // Get the workflows for this message
-            var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
-            // find the one we wan't to send
-            var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReturnsInspectionFailed);
+            var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionFailed);
             // Execute the workflow and create a new reply message
-            unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+            unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
 
         }
 
