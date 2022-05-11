@@ -122,8 +122,11 @@
 
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
+
 > [Create a message](#Create-a-message)
+
 > [Workflows](#Workflows)
+
 > [Execute a workflow](#Execute-a-workflow)
 
 **[Shopping carts](#Shopping-carts)**
