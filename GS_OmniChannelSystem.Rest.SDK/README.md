@@ -749,9 +749,9 @@ please refer **[messages](#message)**
 
 Retreives all messages for an order
 
-| url| api/messages/order/{id}| Description |
-| --- | --- | --- |
-| id | **long**| ID of the Order
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/messages/order/{id}|id| **long** | ID of the Order|
 
 please refer **[messages](#message)**
 
