@@ -1075,6 +1075,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             // Base 64 encoded Data URI with the Pdf
             orderTransaction.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
 
+            // If you use our OCS for invoices you can link it via a EntityReference
+            var invoice = unitOfWork.Invoices.Get(1);
+            orderTransaction.InvoiceID = invoice.InvoiceID;
+
             // Order - Position
             var positionTransaction = new OrderTransactionPosition();
             // Number

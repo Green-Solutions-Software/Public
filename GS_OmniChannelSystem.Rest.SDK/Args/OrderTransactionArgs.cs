@@ -32,6 +32,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Api.Args
         public string InvoiceURI { get; set; }
         public string InvoiceFilename { get; set; }
         public string InvoiceMimeType { get; set; }
+        public long? InvoiceID { get; set; }
 
     }
 
