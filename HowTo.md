@@ -78,6 +78,8 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 - **[Delivery incomplete](#Delivery-incomplete)**
 
+- **[Goods damaged](#Goods-damaged)**
+
 - **[Delivery refused](#Delivery-refused)**
 
 - **[Cancellation no longer possible](#cancellation-no-longer-possible)**
@@ -677,7 +679,21 @@ var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReceiptOfGoo
 unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
 ```
 
-### Delivery refused
+### Delivery incomplete
+```csharp
+// Retreive all messages for this order
+var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+// Find the one to reply to
+var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
+// Get the workflows for this message
+var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
+// find the one we wan't to send
+var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.Damaged);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+```
+
+### Goods damaged
 ```csharp
 // Retreive all messages for this order
 var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
