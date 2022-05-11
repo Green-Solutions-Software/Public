@@ -121,15 +121,10 @@
 
 
 **[Messages](#Messages)**
-
+> [Retreive messages for an order](#Retreive-messages-for-an-order)
 > [Create a message](#Create-a-message)
-  - [Return delivery has been received](#Return-delivery-is-received)
-  - [Returns quality check passed](#Returns-quality-check-passed)
-  - [Returns quality check failed](#Returns-quality-check-failed)
-  - [Order delivered](#Order-delivered)
-  - [Received pick-up order](#Pick-up-order-received)
-  - [Customer cancellation request confirmed](#Cancellation-request-of-the-customer-confirmed)
-  - [Cancellation not possible](#Cancellation-not-possible)
+> [Workflows](#Workflows)
+> [Execute a workflow](#Execute-a-workflow)
 
 **[Shopping carts](#Shopping-carts)**
 
@@ -734,7 +729,7 @@ The following barcode types are currently available for printing:
 - code 128
 - EAN 13
 
-# News
+# Messages
 
 Data is exchanged between the web shop and the supplier via messages.
 Each message can have one of the **[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer **[MessageDirection](#messagedirection)**).
@@ -744,6 +739,16 @@ For an outgoing message, please set the "receiver" and for incoming messages the
 
 | url| api/messages| |
 | --- | --- | --- |
+
+please refer **[messages](#message)**
+
+## Retreive messages for an order
+
+Retreives all messages for an order
+
+| url| api/messages/order/{id}| Description |
+| --- | --- | --- |
+| id | **long**| ID of the Order
 
 please refer **[messages](#message)**
 
@@ -766,73 +771,28 @@ The following fields must be set in the message:
 
 The created message is returned as a return (please refer **[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
 
-# Return delivery has been received
-The return has been received at the warehouse
+**Attention:** The recommended way to create new messages is to use our Workflow API which takes care of several conditions
 
-| **Surname** | **Type** | **value** | **Description** |
+## Workflows
+
+You can retreive a workflow for a defined message. This workflow defines "replys" you could submit
+
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 16|Return delivery has been received(82) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|replacement| **boolean** |  | replace goods(Yes No) |
-|refund| **boolean** |  | refund goods(Yes No) |
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
+| api/messages/{id}/workflow|id| **long** | ID of the message you want to reply|
 
-# Returns quality check passed
-The return has been checked and passed the test
+Returns an Array of **[Workflow](#workflow)** to choose from
 
-| **Surname** | **Type** | **value** | **Description** |
+## Execute a workflow
+
+This method creates the Reply message depending on a Workflow
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 17|Returns check passed(80) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
+| api/messages/{id}/workflow/execute|id| **long** | ID of the message you want to reply|
+||BODY| **[Workflow](#workflow)** | the Workflow to execute|
 
-# Returns quality check failed
-The return was checked and did not pass the test
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 18|Returns check failed(81) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
-
-# Order delivered
-The order has been delivered
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 5|delivery done(21) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Received pick-up order
-The pickup request has been received
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 14|received pick-up order(64) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Customer cancellation request confirmed
-The customer's cancellation request is confirmed
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 19|Customer cancellation request confirmed(275) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Cancellation not possible
-The customer's cancellation request is rejected because cancellation is no longer possible
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 20|Cancellation is no longer possible(71)|
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
+Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 # Shopping carts
 
@@ -2111,6 +2071,20 @@ As soon as cached content has been changed in the database, the corresponding ca
   "Succeeded": true,
   "External_Key": null,
   "External_COR_ID": null
+}
+```
+
+## Workflow
+
+```json
+{
+    "Text": "Goods shipped",
+    "Title": null,
+    "Action": "reply",
+    "Type": 16,
+    "Refund": false,
+    "Replacement": false,
+    "Positions": null
 }
 ```
 
