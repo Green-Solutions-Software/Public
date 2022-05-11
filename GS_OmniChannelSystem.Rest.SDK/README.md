@@ -125,6 +125,8 @@
 
 > [Workflows](#Workflows)
 
+> [Find workflow for an order](#find-workflow-for-an-order)
+
 > [Execute a workflow](#Execute-a-workflow)
 
 > [Create a message](#Create-a-message)
@@ -194,6 +196,8 @@
 > [FoundVoucher](#Foundvoucher)
 
 > [OrderStatusType](#Orderstatustype)
+
+> [MessageType](#MessageType)
 
 > [TransactionStatus](#Transactionstatus)
 
@@ -789,6 +793,17 @@ You can retreive a workflow for a defined message. This workflow defines "replys
 | api/messages/{id}/workflow|id| **long** | ID of the message you want to reply|
 
 Returns an Array of **[Workflow](#workflow)** to choose from
+
+## Find workflow for an order
+
+To send a specific message you first need to find a fitting workflow
+
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/messages/order/{id}/workflow|id| **long** | ID of the Order you want to reply to|
+||type| **[MessageType](#MessageType)** | Type of message you want to submit |
+
+Returns an **[Workflow](#workflow)**
 
 ## Execute a workflow
 
@@ -2327,6 +2342,43 @@ As soon as cached content has been changed in the database, the corresponding ca
 
 ```
 
+## MessageType
+```csharp
+public enum MessageType
+{
+    CancellationRequested, // Anfrage Stornierung
+    ReturnRequested, // Anfrage Rückgabe/Reklamation
+    Order, // Bestellung
+    ProcessBegun, // Bestellung Empfangsbestätigung (5)
+    DeliveryArranged, // Ware versendet / Ware an Spedition übergeben (24)
+    DeliveryCompleted, // Lieferung durchgeführt (21)
+    DeliveryRefusedByRecipient, // Annahme der Lieferung verweigert (325)
+    ReceiptOfGoodParticiallyAcknowledged, // Lieferung unvollständig (73)
+    DeliveryScheduled, // Bestätigung des Liefertermins (209)
+    DeliveryUnsuccessfullAttempt, // Kunde nicht angetroffen (210)
+    DeliveryChangeSchedule, // Änderung des Liefertermins (212)
+    Damaged, // Ware beschädigt (218)
+    DeliveryPendingAwaitingSpecificDateTimes,  // Kunde nicht erreicht (216)
+    NotDeliverable, // Terminavisierung nicht möglich 243
+    CollectionPickUpAwaited, // Abholauftrag erhalten (64)
+    CollectionDateTimeAcknowledged, // Bestätigung des Abholtermins (13)
+    CollectionPickUpCompleted, // Retourenlieferung ist eingegangen (82)
+    ReturnsInspectionPassed, // Retouren-Prüfung bestanden (80)
+    ReturnsInspectionFailed, // Retouren-Prüfung nicht bestanden (81)
+    CancellationRequestConfirmed, // Stornoanfrage des Kunden bestätigt (275)
+    CancellationIsNoLongerPossible, // Storno nicht mehr möglich (71)
+    CancellationBeportedBySupplier, // Storno vom Lieferanten gemeldet (56)
+    EMail, // E-Mail Nachricht
+    RequestAccepted, // Anfrage akzeptiert
+    RequestRejected, // Anfrage abgelehnt
+    UpdateStatus, // Status aktualisieren
+    ReturnViaEMail, // Retoure (per E-Mail erhalten)
+    InventoryReport, // Bestandsmeldung
+    Invoice, // Rechnung
+    CancellationViaEmail // Storno (per E-Mail erhalten)
+}
+
+```
 ## OrderStatusType
 
 ```csharp
