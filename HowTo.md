@@ -50,6 +50,9 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 > **[Embed order management](#Embed-order-management)**
 
+**[Invoices](#Invoices)**
+> **[Create an invoice](#Create-an-invoice)**
+
 **[Messages](#Messages)**
 
 > **[Query messages](#query-messages)**
@@ -466,6 +469,24 @@ if (Console.ReadLine() == "y")
 
 ```
 
+# Create an invoice
+```csharp
+var member = unitOfWork.Members.Get(1);
+var invoice = new Invoice();
+invoice.Member = new EntityReference(member.MemberID);
+invoice.Address = new EntityReference(member.ContactAddresses.First().ContactAddressID);
+invoice.Positions = new List<InvoicePosition>();
+var position = new InvoicePosition();
+position.Text = "Acer Palmatum Bloodgood";
+position.Price = 19.99;
+position.Quantity = 10;
+invoice.SequenceItem = new SequenceItem();
+invoice.SequenceItem.Key = "4711";
+invoice.SequenceItem.Number = "4711";
+var summary = unitOfWork.Invoices.Create(invoice);  // POST api/invoices/create
+Console.WriteLine("Invoice was created. ID = " + invoice.InvoiceID);
+```
+
 # Messages 
 
 The handling of the messages are still work in progress and will be defined soon.
@@ -679,7 +700,7 @@ var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReceiptOfGoo
 unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
 ```
 
-### Delivery incomplete
+### Delivery refused
 ```csharp
 // Retreive all messages for this order
 var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
@@ -688,7 +709,7 @@ var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Ord
 // Get the workflows for this message
 var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
 // find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.Damaged);
+var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryRefusedByRecipient);
 // Execute the workflow and create a new reply message
 unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
 ```
@@ -702,7 +723,7 @@ var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Ord
 // Get the workflows for this message
 var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
 // find the one we wan't to send
-var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryRefusedByRecipient);
+var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.Damaged);
 // Execute the workflow and create a new reply message
 unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
 ```
