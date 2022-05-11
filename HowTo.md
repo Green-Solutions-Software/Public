@@ -76,6 +76,10 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 - **[Delivery not possible](#Delivery-not-possible)**
 
+- **[Delivery incomplete](#Delivery-incomplete)**
+
+- **[Delivery refused](#Delivery-refused)**
+
 - **[Cancellation no longer possible](#cancellation-no-longer-possible)**
 
 - **[Cancellation Request confirmed](#Cancellation-Request-confirmed)**
@@ -655,6 +659,34 @@ var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Ord
 var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
 // find the one we wan't to send
 var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.NotDeliverable);            
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+```
+
+### Delivery incomplete
+```csharp
+// Retreive all messages for this order
+var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+// Find the one to reply to
+var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
+// Get the workflows for this message
+var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
+// find the one we wan't to send
+var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReceiptOfGoodParticiallyAcknowledged);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+```
+
+### Delivery refused
+```csharp
+// Retreive all messages for this order
+var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+// Find the one to reply to
+var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.Order);
+// Get the workflows for this message
+var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
+// find the one we wan't to send
+var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.DeliveryRefusedByRecipient);
 // Execute the workflow and create a new reply message
 unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
 ```
