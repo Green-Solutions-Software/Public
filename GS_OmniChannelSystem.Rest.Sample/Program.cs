@@ -645,6 +645,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void executeMessageWorkflow(ContextUOW unitOfWork, Message message, Workflow workflow)
         {
+            Console.Clear();
             Console.WriteLine("Text: " + workflow.Text);
             Console.WriteLine("Type: " + workflow.Type.ToString());
             var newMessage = unitOfWork.Messages.ExecuteWorkflow(message.MessageID, workflow);
@@ -655,20 +656,23 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void getMessageWorkflow(ContextUOW unitOfWork, Message message)
         {
             var order = unitOfWork.Messages.Get(message.MessageID); // GET api/orders/{id}
-
+            Console.Clear();
             Console.WriteLine("Number:" + message.Number);
             Console.WriteLine("Subject:" + message.Subject);
             Console.WriteLine("Type:" + message.Type.ToString());
 
             var workflows = unitOfWork.Messages.GetWorkflow(message.MessageID);
 
+            Console.WriteLine("");
             // Positions
             Console.WriteLine("Please select:");
             int i = 0;
             foreach (var workflow in workflows)
             {
                 Console.WriteLine("(" + i + ") - " + workflow.Text);
-                Console.WriteLine("Type:" + workflow.Type.ToString());
+                Console.WriteLine("     Type:" + workflow.Type.ToString());
+                Console.WriteLine("==============================");
+                Console.WriteLine("");
                 i++;
             }
 
@@ -680,25 +684,27 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void getOrderMessages(ContextUOW unitOfWork, Order order)
         {
             //var order = unitOfWork.Orders.Get(order.OrderID); // GET api/orders/{id}
-
+            Console.Clear();
             Console.WriteLine("Ordernumber:" + order.OrderID);
             Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
             var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
 
             // Positions
+            Console.WriteLine("");
             Console.WriteLine("Please select:");
             int i = 0;
             foreach (var message in messages.Items)
             {
                 Console.WriteLine("("+i+") - "+ message.Number);
-                Console.WriteLine("Subject:" + message.Subject);
-                Console.WriteLine("Type:" + message.Type.ToString());
+                Console.WriteLine("     Subject:" + message.Subject);
+                Console.WriteLine("     Type:" + message.Type.ToString());
+                Console.WriteLine("==============================");
+                Console.WriteLine("");
                 i++;
             }
-            
+
             Console.WriteLine();
-            Console.Write("Choice: ");
-            Console.Clear();
+            Console.Write("Choice: ");            
             getMessageWorkflow(unitOfWork, messages.Items.ElementAt(Convert.ToInt16(Console.ReadLine())));
 
         }
