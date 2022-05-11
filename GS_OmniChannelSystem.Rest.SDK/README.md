@@ -123,11 +123,11 @@
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
 
-> [Create a message](#Create-a-message)
-
 > [Workflows](#Workflows)
 
 > [Execute a workflow](#Execute-a-workflow)
+
+> [Create a message](#Create-a-message)
 
 **[Shopping carts](#Shopping-carts)**
 
@@ -756,6 +756,10 @@ Retreives all messages for an order
 please refer **[messages](#message)**
 
 ## Create a message
+
+> Please note that this is not the recommended way. Use **[Workflows](#workflows)** instead.
+
+
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
