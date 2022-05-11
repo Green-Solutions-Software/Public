@@ -41,10 +41,6 @@
 
 > [Current sales](#Current-sales)
 
-> [Orders](#Orders)
-
-> [Order](#Order)
-
 **[Videos](#Videos)**
 
 **[Chainstores](#Chainstores)**
@@ -82,6 +78,8 @@
 > [Cancel dialog](#Dialog-cancel)
 
 > [Order management dialog](#dialog-order-management)
+
+**[Invoices](#Invoices)**
 
 **[Documents](#Documents)**
 
@@ -178,6 +176,8 @@
 **[Data structures](#Data-structures)**
 
 > [Order](#Order)
+
+> [Invoice](#Invoice)
 
 > [ShipmentOrder](#Shipmentorder)
 
@@ -406,10 +406,6 @@ The current turnover and the individual order data must be transmitted at fixed 
 
 To do this, set the turnover field to the currently booked turnover.
 
-## Orders
-
-Orders now have a link "Loyalty Card"
-
 ## Order data
 
 The orders can be saved as api/orders with the status "Ready(4) so that the system knows that the order has gone through the checkout.
@@ -559,6 +555,21 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and**[canc
 | api/orders/dialog| | | |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and **[order management](#order-management)** )
+
+## All orders
+
+
+> This function is only allowed by users within the main account of the shop! Otherwise, a corresponding error is raised.
+
+
+| url| api/orders/all|
+| --- | --- |
+
+# Invoices
+
+| **url** | **api/invoices** |
+| --- | --- |
+
 
 # Documents
 
@@ -1361,6 +1372,271 @@ As soon as cached content has been changed in the database, the corresponding ca
   },
   "External_Key": null,
   "External_COR_ID": null
+}
+```
+
+## Invoice
+
+```json
+{
+    "InvoiceID": 1,
+    "Number": "2020-101",
+    "TaxPlus": false,
+    "Date": "2020-03-24T00:00:00",
+    "Type": 0,
+    "AutomaticallyCreated": false,
+    "Text": "Einkauf vom 24.03.2020",
+    "Notes": null,
+    "CancelationNote": null,
+    "Description": null,
+    "DeliveryDate": "2020-03-24T00:00:00",
+    "Language": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#56#241#21",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 1
+    },
+    "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#11#203#34",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "State": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#13#50#17",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Member": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#42#198#71",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "DebitCard": null,
+    "Address": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#11#190#161",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Sequence": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#25#167#164",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "SequenceItem": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#25#167#145",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Positions": [
+        {
+            "InvoicePositionID": 1,
+            "Quantity": 1,
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "TotalPrice": 5.0,
+            "TaxCosts": 0.8,
+            "TaxRate": {
+                "Percent": 19.0,
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#57#28#97",
+                "External_Key": "Helsinki#1",
+                "External_RowVersion": "#0#0#0#0#0#0#10#230",
+                "External_COR_ID": null
+            },
+            "TaxIncluded": true,
+            "Text": "AKTIV-ERDE Bio-Erde",
+            "Text2": null,
+            "BeginDate": null,
+            "EndDate": null,
+            "OrderItem": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#13#60#36",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "BookAccount": null,
+            "State": null,
+            "ArticleKey": null,
+            "Article": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#49#224",
+            "Deleted": false
+        }
+    ],
+    "States": [
+        {
+            "InvoiceStateID": 1,
+            "State": 0,
+            "PaymentDate": "2020-04-03T07:05:39.89",
+            "DueDate": "2020-04-03T07:05:39.89",
+            "Document": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#50#17",
+            "Deleted": false
+        }
+    ],
+    "Payments": [
+        {
+            "PaymentID": 25,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": -99.99,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#113",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 26,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#123",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 27,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#130",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 28,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#132",
+            "Deleted": false
+        }
+    ],
+    "Orders": [],
+    "PaydOn": "2020-03-24T08:05:02.467",
+    "DubiosOn": null,
+    "PaymentMethod": {
+        "ID": 3,
+        "RowVersion": "#0#0#0#0#0#61#135#153",
+        "External_Key": "Helsinki#3",
+        "External_RowVersion": "#0#0#0#0#0#3#116#216",
+        "External_COR_ID": null
+    },
+    "TotalPriceNet": 4.2016806722689077,
+    "TotalPriceGros": 5.0,
+    "TotalPaid": 5.0,
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#26#144#131",
+    "Deleted": false
 }
 ```
 
