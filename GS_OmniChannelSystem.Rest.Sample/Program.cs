@@ -681,6 +681,24 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             executeMessageWorkflow(unitOfWork, message, workflows.ElementAt(Convert.ToInt16(Console.ReadLine())));
         }
 
+        static void replyOrderMessages(ContextUOW unitOfWork, Order order)
+        {
+            Console.Clear();
+            Console.WriteLine("Ordernumber:" + order.OrderID);
+            Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
+            // Retreive all messages for this order
+            var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+            // Find the one to reply to
+            var orderMessage = messages.Items.SingleOrDefault(m => m.Type == MessageType.CollectionPickUpCompleted);
+            // Get the workflows for this message
+            var workflows = unitOfWork.Messages.GetWorkflow(orderMessage.MessageID);
+            // find the one we wan't to send
+            var workflow = workflows.SingleOrDefault(m => m.Type == MessageType.ReturnsInspectionFailed);
+            // Execute the workflow and create a new reply message
+            unitOfWork.Messages.ExecuteWorkflow(orderMessage.MessageID, workflow);
+
+        }
+
         static void getOrderMessages(ContextUOW unitOfWork, Order order)
         {
             //var order = unitOfWork.Orders.Get(order.OrderID); // GET api/orders/{id}
@@ -688,7 +706,6 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Ordernumber:" + order.OrderID);
             Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
             var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
-
             // Positions
             Console.WriteLine("");
             Console.WriteLine("Please select:");
