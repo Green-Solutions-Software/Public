@@ -59,6 +59,8 @@
 
 > [Edit variant dialog](#Dialog-variant-edit)
 
+> [Create QR - Code Linktarget](#Create-QR---Code-Linktarget)
+
 **[Price lists](#Price-lists)**
 
 > [Price lists - Entries](#price-list-entries)
@@ -385,7 +387,7 @@ Please refer **[Loyalty card](#loyaltycard)**
 
 **Function: GET** /api/debitcards?orderby=ValidatedOn
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
@@ -440,7 +442,7 @@ With this function, an article can be created and automatically enriched with da
 
 **Function: POST** api/articles/create
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **importExternal** |boolean| Add external data?| |
 | **compareNameSecondary** |boolean| compare name 2?| |
@@ -451,9 +453,21 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 **Function: POST** api/articles/transaction
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
+
+
+## Create QR - Code Linktarget
+
+Create a new linktarget for a QR Code
+
+**Function: POST** api/articles/create/linktarget
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| extkey |**string**| Article Number ||
+| info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
 
 ## Variants
 
@@ -859,7 +873,7 @@ Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 **Function:** api/pictos/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** | long| Article ID| Article for which the pictogram is to be queried|
 | **width** | internal| Broad| px|
@@ -883,7 +897,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/search
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **search** |string| search term| |
 | **orderBy** |string| Title, Title2| |
@@ -904,7 +918,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/articles{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| Article ID| |
 | **search** |string| search term| |
@@ -915,7 +929,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/reports/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the report| |
 | **search** |string| search term| |
@@ -926,7 +940,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/videos/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the video| |
 | **search** |string| search term| |
