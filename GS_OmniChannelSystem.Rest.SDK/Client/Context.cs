@@ -283,6 +283,20 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return executeRequest<S>(request);
         }
 
+        protected S post<S>(string resource, Dictionary<string, object> parameters = null)
+            where S : class, new()
+        {
+            var client = createClient();
+            var request = new RestRequest(resource, Method.POST);
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                    request.AddParameter(parameter.Key, parameter.Value, ParameterType.QueryString);
+            }
+
+            return executeRequest<S>(request);
+        }
+
         protected U post<T, S, U>(string resource, T entity, Dictionary<string, object> parameters = null)
             where T : class, new()
             where S : class, new()
@@ -609,6 +623,12 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return post<T,S>(resource, entity, dict);
         }
 
+        public S Post<S>(string resource, Dictionary<string, object> dict = null)
+            where S : class, new()
+        {
+            return post<S>(resource, dict);
+        }
+
         public U Post<T, S, U>(string resource, T entity, string[] properties = null, Dictionary<string, object> dict = null)
             where T : class, new()
             where S : class, new()
@@ -623,6 +643,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
             return post<T, S, U>(resource, entity, dict);
         }
+
 
         private static string toString(string[] properties)
         {
@@ -905,6 +926,33 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             request.RequestFormat = DataFormat.Json;
             request.AddBody(message);
             return executeRequest<Message>(request);
+        }
+
+        public Message ExecuteMessageWorkflow(long messageId, Workflow workflow)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/"+messageId+"/workflow/execute", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(workflow);
+            return executeRequest<Message>(request);
+        }
+
+        // Messages
+        public List<Workflow> GetMessageWorkflow(long messageId)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/"+ messageId + "/workflow", Method.GET);
+            request.RequestFormat = DataFormat.Json;
+            return executeRequest<List<Workflow>>(request);
+        }
+
+        public Workflow FindMessageOrderWorkflow(long orderid, MessageType type)
+        {
+            var client = createClient();
+            var request = new RestRequest("api/messages/order/" + orderid + "/workflow", Method.GET);
+            request.AddParameter("type", type);
+            request.RequestFormat = DataFormat.Json;
+            return executeRequest<Workflow>(request);
         }
 
         public void ClearLocalCache()

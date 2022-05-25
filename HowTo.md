@@ -12,19 +12,21 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Authorization](#Authorization)**
 
-**[External primary key](#External-primary-key)**
+**General**
 
-**[Set external primary key](#Set-external-primary-key)**
+> **[External primary key](#External-primary-key)**
 
-**[Query entity via external primary key](#Query-entity-via-external-primary-key)**
+> **[Set external primary key](#Set-external-primary-key)**
+
+> **[Query entity via external primary key](#Query-entity-via-external-primary-key)**
 
 **[Articles](#articles)**
 
-**[Transfer article master data](#Transfer-article-master-data)**
+> **[Transfer article master data](#Transfer-article-master-data)**
 
-**[Add channel specific article numbers](#Add-channel-specific-article-numbers)**
+> **[Add channel specific article numbers](#Add-channel-specific-article-numbers)**
 
-**[Transfer article movement data](#Transfer-article-movement-data)**
+> **[Transfer article movement data](#Transfer-article-movement-data)**
 
 **[Orders](#orders)**
 
@@ -48,13 +50,16 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 > **[Embed order management](#Embed-order-management)**
 
+**[Invoices](#Invoices)**
+> **[Create an invoice](#Create-an-invoice)**
+
 **[Messages](#Messages)**
 
 > **[Query messages](#query-messages)**
 
 > **[Process messages](#Process-messages)**
 
-> **[Generate message](#Generate-message)**
+> **[Reply to a message](#Reply-message)**
 
 - **[Return delivery has been received](#Return-delivery-has-been-received)**
 
@@ -68,11 +73,21 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 - **[Confirm delivery date](#Confirm-delivery-date)**
 
--  **[Change delivery date](#Change-delivery-date)**
+- **[Change delivery date](#Change-delivery-date)**
 
--  **[Customer not reached](#customers-not-reached)**
+- **[Customer not reached](#customers-not-reached)**
 
--  **[Customer not found](#customers-not-found)**
+- **[Delivery not possible](#Delivery-not-possible)**
+
+- **[Delivery incomplete](#Delivery-incomplete)**
+
+- **[Goods damaged](#Goods-damaged)**
+
+- **[Delivery refused](#Delivery-refused)**
+
+- **[Cancellation no longer possible](#cancellation-no-longer-possible)**
+
+- **[Cancellation Request confirmed](#Cancellation-Request-confirmed)**
 
 
 # Authorization
@@ -454,30 +469,193 @@ if (Console.ReadLine() == "y")
 
 ```
 
+# Create an invoice
+```csharp
+var member = unitOfWork.Members.Get(1);
+var invoice = new Invoice();
+invoice.Member = new EntityReference(member.MemberID);
+invoice.Address = new EntityReference(member.ContactAddresses.First().ContactAddressID);
+invoice.Positions = new List<InvoicePosition>();
+var position = new InvoicePosition();
+position.Text = "Acer Palmatum Bloodgood";
+position.Price = 19.99;
+position.Quantity = 10;
+invoice.SequenceItem = new SequenceItem();
+invoice.SequenceItem.Key = "4711";
+invoice.SequenceItem.Number = "4711";
+var summary = unitOfWork.Invoices.Create(invoice);  // POST api/invoices/create
+Console.WriteLine("Invoice was created. ID = " + invoice.InvoiceID);
+```
+
 # Messages 
 
 The handling of the messages are still work in progress and will be defined soon.
 
 ## Query messages
 
+Query all messages (incoming + outgoing) for your order to reply on a message
+
+```csharp
+    Console.Clear();
+    Console.WriteLine("Ordernumber:" + order.OrderID);
+    Console.WriteLine("Date:" + order.CreatedOn.ToShortDateString());
+    var messages = unitOfWork.Messages.GetForOrder(order.OrderID, null, 0, 10, null);
+
+    // Positions
+    Console.WriteLine("");
+    int i = 0;
+    foreach (var message in messages.Items)
+    {
+        Console.WriteLine("("+i+") - "+ message.Number);
+        Console.WriteLine("     Subject:" + message.Subject);
+        Console.WriteLine("     Type:" + message.Type.ToString());
+        Console.WriteLine("==============================");
+        Console.WriteLine("");
+        i++;
+    }
+```
+
 ## Process messages
 
-## Generate message
+To process you can retreive all the messages and mark them as read
+
+## Reply message
+
+To reply you have to retreive the right workflow and execute it.
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionPassed);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
 
 ### Return delivery has been received
 
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionPickUpCompleted);
+// Set workflow speficic data
+workflow.Replacement = true; // Replace the good
+workflow.Refund = false; // Refund it
+workflow.Positions = new List<WorkflowOrderItem>(); // Positions which were received
+workflow.Positions.Add(new WorkflowOrderItem() { OrderItemID = order.Items.First().OrderItemID, Quantity = 1 });
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
 ### Returns quality check passed
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionPassed);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
 
 ### Returns quality check failed
 
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReturnsInspectionFailed);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
 ### Order delivered
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryCompleted);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
 
 ### Received pick-up order
 
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionPickUpAwaited);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+
+```
+
 ### Confirm delivery date
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CollectionDateTimeAcknowledged);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
 
 ### Change of delivery date
 
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryChangeSchedule);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
 ### Customer not reached
 
-### Customer not found
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryPendingAwaitingSpecificDateTimes);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Delivery not possible
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.NotDeliverable);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Delivery incomplete
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.ReceiptOfGoodParticiallyAcknowledged);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Delivery refused
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.DeliveryRefusedByRecipient);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Goods damaged
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.Damaged);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Cancellation no longer possible
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CancellationIsNoLongerPossible);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```
+
+### Cancellation Request confirmed
+
+```csharp
+// Find workflow for our message to send
+var workflow = unitOfWork.Messages.FindOrderWorkflow(order.OrderID, MessageType.CancellationRequestConfirmed);
+// Execute the workflow and create a new reply message
+unitOfWork.Messages.ExecuteWorkflow(workflow.MessageID, workflow);
+```

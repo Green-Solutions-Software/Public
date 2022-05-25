@@ -194,6 +194,9 @@
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\SequenceItem.cs" />
+    <Compile Include="Models\Workflow.cs" />
+    <Compile Include="Models\FoundLinkTarget.cs" />
     <Compile Include="Models\MessagePosition.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\CalculationGroupItem.cs" />

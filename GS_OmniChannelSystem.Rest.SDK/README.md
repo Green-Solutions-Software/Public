@@ -41,10 +41,6 @@
 
 > [Current sales](#Current-sales)
 
-> [Orders](#Orders)
-
-> [Order](#Order)
-
 **[Videos](#Videos)**
 
 **[Chainstores](#Chainstores)**
@@ -62,6 +58,8 @@
 > [Edit dialog](#Dialog-edit)
 
 > [Edit variant dialog](#Dialog-variant-edit)
+
+> [Create QR - Code Linktarget](#Create-QR---Code-Linktarget)
 
 **[Price lists](#Price-lists)**
 
@@ -82,6 +80,8 @@
 > [Cancel dialog](#Dialog-cancel)
 
 > [Order management dialog](#dialog-order-management)
+
+**[Invoices](#Invoices)**
 
 **[Documents](#Documents)**
 
@@ -123,15 +123,15 @@
 
 
 **[Messages](#Messages)**
+> [Retreive messages for an order](#Retreive-messages-for-an-order)
+
+> [Workflows](#Workflows)
+
+> [Find workflow for an order](#find-workflow-for-an-order)
+
+> [Execute a workflow](#Execute-a-workflow)
 
 > [Create a message](#Create-a-message)
-  - [Return delivery has been received](#Return-delivery-is-received)
-  - [Returns quality check passed](#Returns-quality-check-passed)
-  - [Returns quality check failed](#Returns-quality-check-failed)
-  - [Order delivered](#Order-delivered)
-  - [Received pick-up order](#Pick-up-order-received)
-  - [Customer cancellation request confirmed](#Cancellation-request-of-the-customer-confirmed)
-  - [Cancellation not possible](#Cancellation-not-possible)
 
 **[Shopping carts](#Shopping-carts)**
 
@@ -179,6 +179,8 @@
 
 > [Order](#Order)
 
+> [Invoice](#Invoice)
+
 > [ShipmentOrder](#Shipmentorder)
 
 > [Article](#Article)
@@ -196,6 +198,8 @@
 > [FoundVoucher](#Foundvoucher)
 
 > [OrderStatusType](#Orderstatustype)
+
+> [MessageType](#MessageType)
 
 > [TransactionStatus](#Transactionstatus)
 
@@ -383,7 +387,7 @@ Please refer **[Loyalty card](#loyaltycard)**
 
 **Function: GET** /api/debitcards?orderby=ValidatedOn
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
@@ -405,10 +409,6 @@ New customer cards must be validated once by WaWi so that they can also be used 
 The current turnover and the individual order data must be transmitted at fixed intervals.
 
 To do this, set the turnover field to the currently booked turnover.
-
-## Orders
-
-Orders now have a link "Loyalty Card"
 
 ## Order data
 
@@ -442,7 +442,7 @@ With this function, an article can be created and automatically enriched with da
 
 **Function: POST** api/articles/create
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **importExternal** |boolean| Add external data?| |
 | **compareNameSecondary** |boolean| compare name 2?| |
@@ -453,9 +453,21 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 **Function: POST** api/articles/transaction
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
+
+
+## Create QR - Code Linktarget
+
+Create a new linktarget for a QR Code
+
+**Function: POST** api/articles/create/linktarget
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| extkey |**string**| Article Number ||
+| info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
 
 ## Variants
 
@@ -561,6 +573,21 @@ As a return, the dialog is returned (please refer **[dialog](#dialog) and**[canc
 | api/orders/dialog| | | |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and **[order management](#order-management)** )
+
+## All orders
+
+
+> This function is only allowed by users within the main account of the shop! Otherwise, a corresponding error is raised.
+
+
+| url| api/orders/all|
+| --- | --- |
+
+# Invoices
+
+| **url** | **api/invoices** |
+| --- | --- |
+
 
 # Documents
 
@@ -725,7 +752,7 @@ The following barcode types are currently available for printing:
 - code 128
 - EAN 13
 
-# News
+# Messages
 
 Data is exchanged between the web shop and the supplier via messages.
 Each message can have one of the **[MessageType](#messagetype)** have defined types. Outgoing or incoming messages can be generated(please refer **[MessageDirection](#messagedirection)**).
@@ -738,7 +765,21 @@ For an outgoing message, please set the "receiver" and for incoming messages the
 
 please refer **[messages](#message)**
 
+## Retreive messages for an order
+
+Retreives all messages for an order
+
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/messages/order/{id}|id| **long** | ID of the Order|
+
+please refer **[messages](#message)**
+
 ## Create a message
+
+> Please note that this is not the recommended way. Use **[Workflows](#workflows)** instead.
+
+
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
@@ -757,73 +798,39 @@ The following fields must be set in the message:
 
 The created message is returned as a return (please refer **[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
 
-# Return delivery has been received
-The return has been received at the warehouse
+**Attention:** The recommended way to create new messages is to use our Workflow API which takes care of several conditions
 
-| **Surname** | **Type** | **value** | **Description** |
+## Workflows
+
+You can retreive a workflow for a defined message. This workflow defines "replys" you could submit
+
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 16|Return delivery has been received(82) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|replacement| **boolean** |  | replace goods(Yes No) |
-|refund| **boolean** |  | refund goods(Yes No) |
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
+| api/messages/{id}/workflow|id| **long** | ID of the message you want to reply|
 
-# Returns quality check passed
-The return has been checked and passed the test
+Returns an Array of **[Workflow](#workflow)** to choose from
 
-| **Surname** | **Type** | **value** | **Description** |
+## Find workflow for an order
+
+To send a specific message you first need to find a fitting workflow
+
+| **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 17|Returns check passed(80) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
+| api/messages/order/{id}/workflow|id| **long** | ID of the Order you want to reply to|
+||type| **[MessageType](#MessageType)** | Type of message you want to submit |
 
-# Returns quality check failed
-The return was checked and did not pass the test
+Returns an **[Workflow](#workflow)**
 
-| **Surname** | **Type** | **value** | **Description** |
+## Execute a workflow
+
+This method creates the Reply message depending on a Workflow
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 18|Returns check failed(81) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-|positions| **MessagePosition[]** |  | List of positions(please refer **[MessagePosition](#MessagePosition)**)  |
+| api/messages/{id}/workflow/execute|id| **long** | ID of the message you want to reply|
+||BODY| **[Workflow](#workflow)** | the Workflow to execute|
 
-# Order delivered
-The order has been delivered
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 5|delivery done(21) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Received pick-up order
-The pickup request has been received
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 14|received pick-up order(64) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Customer cancellation request confirmed
-The customer's cancellation request is confirmed
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 19|Customer cancellation request confirmed(275) |
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
-
-# Cancellation not possible
-The customer's cancellation request is rejected because cancellation is no longer possible
-
-| **Surname** | **Type** | **value** | **Description** |
-| --- | --- | --- | --- |
-|directions| **short** | 1|Outgoing message|
-|Type| **short** | 20|Cancellation is no longer possible(71)|
-|order| **[EntityReference](#entityreference)**|  | ID of the order|
+Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 # Shopping carts
 
@@ -868,7 +875,7 @@ The customer's cancellation request is rejected because cancellation is no longe
 
 **Function:** api/pictos/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** | long| Article ID| Article for which the pictogram is to be queried|
 | **width** | internal| Broad| px|
@@ -892,7 +899,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/search
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **search** |string| search term| |
 | **orderBy** |string| Title, Title2| |
@@ -913,7 +920,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/articles{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| Article ID| |
 | **search** |string| search term| |
@@ -924,7 +931,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/reports/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the report| |
 | **search** |string| search term| |
@@ -935,7 +942,7 @@ A list of all valid pictograms for the selected item
 
 **Function:** api/cross/videos/{id}
 
-| **Parameter** | **Type** | **Description** | **remark** |
+| **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **i.e** |long| ID of the video| |
 | **search** |string| search term| |
@@ -1363,6 +1370,271 @@ As soon as cached content has been changed in the database, the corresponding ca
   },
   "External_Key": null,
   "External_COR_ID": null
+}
+```
+
+## Invoice
+
+```json
+{
+    "InvoiceID": 1,
+    "Number": "2020-101",
+    "TaxPlus": false,
+    "Date": "2020-03-24T00:00:00",
+    "Type": 0,
+    "AutomaticallyCreated": false,
+    "Text": "Einkauf vom 24.03.2020",
+    "Notes": null,
+    "CancelationNote": null,
+    "Description": null,
+    "DeliveryDate": "2020-03-24T00:00:00",
+    "Language": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#56#241#21",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 1
+    },
+    "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#11#203#34",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "State": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#13#50#17",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Member": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#42#198#71",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "DebitCard": null,
+    "Address": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#11#190#161",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Sequence": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#25#167#164",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "SequenceItem": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#25#167#145",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Positions": [
+        {
+            "InvoicePositionID": 1,
+            "Quantity": 1,
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "TotalPrice": 5.0,
+            "TaxCosts": 0.8,
+            "TaxRate": {
+                "Percent": 19.0,
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#57#28#97",
+                "External_Key": "Helsinki#1",
+                "External_RowVersion": "#0#0#0#0#0#0#10#230",
+                "External_COR_ID": null
+            },
+            "TaxIncluded": true,
+            "Text": "AKTIV-ERDE Bio-Erde",
+            "Text2": null,
+            "BeginDate": null,
+            "EndDate": null,
+            "OrderItem": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#13#60#36",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "BookAccount": null,
+            "State": null,
+            "ArticleKey": null,
+            "Article": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#49#224",
+            "Deleted": false
+        }
+    ],
+    "States": [
+        {
+            "InvoiceStateID": 1,
+            "State": 0,
+            "PaymentDate": "2020-04-03T07:05:39.89",
+            "DueDate": "2020-04-03T07:05:39.89",
+            "Document": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#50#17",
+            "Deleted": false
+        }
+    ],
+    "Payments": [
+        {
+            "PaymentID": 25,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": -99.99,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#113",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 26,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#123",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 27,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#130",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 28,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#132",
+            "Deleted": false
+        }
+    ],
+    "Orders": [],
+    "PaydOn": "2020-03-24T08:05:02.467",
+    "DubiosOn": null,
+    "PaymentMethod": {
+        "ID": 3,
+        "RowVersion": "#0#0#0#0#0#61#135#153",
+        "External_Key": "Helsinki#3",
+        "External_RowVersion": "#0#0#0#0#0#3#116#216",
+        "External_COR_ID": null
+    },
+    "TotalPriceNet": 4.2016806722689077,
+    "TotalPriceGros": 5.0,
+    "TotalPaid": 5.0,
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#26#144#131",
+    "Deleted": false
 }
 ```
 
@@ -1840,6 +2112,20 @@ As soon as cached content has been changed in the database, the corresponding ca
 }
 ```
 
+## Workflow
+
+```json
+{
+    "Text": "Goods shipped",
+    "Title": null,
+    "Action": "reply",
+    "Type": 16,
+    "Refund": false,
+    "Replacement": false,
+    "Positions": null
+}
+```
+
 ## Payment
 
 ```json
@@ -2072,6 +2358,43 @@ As soon as cached content has been changed in the database, the corresponding ca
 
 ```
 
+## MessageType
+```csharp
+public enum MessageType
+{
+    CancellationRequested, // Anfrage Stornierung
+    ReturnRequested, // Anfrage Rückgabe/Reklamation
+    Order, // Bestellung
+    ProcessBegun, // Bestellung Empfangsbestätigung (5)
+    DeliveryArranged, // Ware versendet / Ware an Spedition übergeben (24)
+    DeliveryCompleted, // Lieferung durchgeführt (21)
+    DeliveryRefusedByRecipient, // Annahme der Lieferung verweigert (325)
+    ReceiptOfGoodParticiallyAcknowledged, // Lieferung unvollständig (73)
+    DeliveryScheduled, // Bestätigung des Liefertermins (209)
+    DeliveryUnsuccessfullAttempt, // Kunde nicht angetroffen (210)
+    DeliveryChangeSchedule, // Änderung des Liefertermins (212)
+    Damaged, // Ware beschädigt (218)
+    DeliveryPendingAwaitingSpecificDateTimes,  // Kunde nicht erreicht (216)
+    NotDeliverable, // Terminavisierung nicht möglich 243
+    CollectionPickUpAwaited, // Abholauftrag erhalten (64)
+    CollectionDateTimeAcknowledged, // Bestätigung des Abholtermins (13)
+    CollectionPickUpCompleted, // Retourenlieferung ist eingegangen (82)
+    ReturnsInspectionPassed, // Retouren-Prüfung bestanden (80)
+    ReturnsInspectionFailed, // Retouren-Prüfung nicht bestanden (81)
+    CancellationRequestConfirmed, // Stornoanfrage des Kunden bestätigt (275)
+    CancellationIsNoLongerPossible, // Storno nicht mehr möglich (71)
+    CancellationBeportedBySupplier, // Storno vom Lieferanten gemeldet (56)
+    EMail, // E-Mail Nachricht
+    RequestAccepted, // Anfrage akzeptiert
+    RequestRejected, // Anfrage abgelehnt
+    UpdateStatus, // Status aktualisieren
+    ReturnViaEMail, // Retoure (per E-Mail erhalten)
+    InventoryReport, // Bestandsmeldung
+    Invoice, // Rechnung
+    CancellationViaEmail // Storno (per E-Mail erhalten)
+}
+
+```
 ## OrderStatusType
 
 ```csharp

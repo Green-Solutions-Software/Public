@@ -30,6 +30,14 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return this.context.Post<Article, Article.Summary>(this.resource+"/create", entity, null, dict);
         }
 
+        public FoundLinkTarget LinkTarget(string extkey, string info = null)
+        {
+            var dict = new Dictionary<string, object>();
+            dict["extkey"] = extkey;
+            dict["info"] = info;
+            return this.context.Post<FoundLinkTarget>(this.resource + "/create/linktarget", dict);
+        }
+
         public bool Transactions(ArticleTransactionArgs[] transactions, bool immediateIndex = true)
         {
             this.context.Post<List<ArticleTransactionArgs>, object>(this.resource + "/transaction", transactions.ToList());

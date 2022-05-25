@@ -36,6 +36,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public OrderType Type { get; set; }
         public DateTime? StatusOn { get; set; }
         public DateTime? RecentOn { get; set; }
+        public string ReceiptNumber { get; set; }
         public double TotalCostsArticles { get; set; }
         public double TotalPaid { get; set; }
         public double? TotalTaxCosts1 { get; set; }
