@@ -316,7 +316,7 @@ All functions that return lists have the following parameters:
 | **pageSize** | Number of entries per page|
 | **Search** | search string|
 | **orderBy** | Sorting(string) |
-| **filter** | filter criteria|
+| **filter** | filter criteria (field\|value,field2\|value) |
 
 > **Query/update selected fields only**
 
@@ -522,7 +522,6 @@ The keys of the variants of the articles with the individual prices
 | --- | --- | --- |
 | filter| **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
 | channelid| **long**| ID of the Channel|
-
 
 
 ## Update Status
