@@ -517,8 +517,12 @@ The keys of the variants of the articles with the individual prices
 
 > This function is only allowed by users within the main account of the shop! Otherwise, a corresponding error is raised.
 
+| **url** | **api/orders/all** |
+| --- | --- |
 
-| url| api/orders/all| Description|
+**Filters**
+
+| Filter | Type | Description |
 | --- | --- | --- |
 | filter| **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
 | channelid| **long**| ID of the Channel|
