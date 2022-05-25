@@ -524,7 +524,7 @@ The keys of the variants of the articles with the individual prices
 
 | Filter | Type | Description |
 | --- | --- | --- |
-| filter| **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
+| status | **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
 | channelid| **long**| ID of the Channel|
 
 
