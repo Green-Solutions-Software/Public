@@ -461,4 +461,14 @@ namespace GS.Cordoba.Rest
         HalfFilled,
         StrongFilled,
     }
+
+    public enum PlantPictureStatusType : short
+    {
+        NotEdited,
+        Edited,
+        AssignedAndApproved_,
+        Rejected,
+        Assigned_,
+        Approved
+    };
 }

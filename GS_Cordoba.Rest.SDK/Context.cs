@@ -11,6 +11,27 @@ using GS.Cordoba.Rest.SDK.Exceptions;
 
 namespace GS.Cordoba.Rest
 {
+    public class DummyCache : IBlobCache
+    {
+        public List<string> GetAllKeys()
+        {
+            return new List<string>();
+        }
+
+        public Task<T> GetOrFetchObject<T>(string key, Func<Task<T>> get, DateTimeOffset absoluteExpiration)
+        {
+            return get();
+        }
+
+        public void Invalidate(string key)
+        {
+        }
+
+        public void InvalidateAll()
+        {
+        }
+    }
+
     public class Context : IContext
     {
         public TimeSpan Expiration { get; set; }
@@ -189,7 +210,7 @@ namespace GS.Cordoba.Rest
 
         public Context(string connectionString, IBlobCache cache)
         {
-            this.cache = cache;
+            this.cache = cache ?? new DummyCache();
             this.Expiration = TimeSpan.FromMinutes(5);
 
             foreach (var param in connectionString.Split(','))

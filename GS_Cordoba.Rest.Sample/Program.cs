@@ -13,18 +13,18 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
     class Program
     {
 
-        static async void getPlant(UnitOfWork unitOfWork, Item item)
+        static void getPlant(UnitOfWork unitOfWork, Item item)
         {
             Console.Clear();
 
-            var plant = await unitOfWork.Plants.Get(item.ID);
+            var plant = unitOfWork.Plants.Get(item.ID).Result;
             Console.WriteLine("Name: " + plant.Name);
             Console.WriteLine("Name 2: " + plant.Name2);
             Console.ReadLine();
 
         }
 
-        static async void querySearch(UnitOfWork unitOfWork)
+        static void querySearch(UnitOfWork unitOfWork)
         {
             int pageIndex = 0;
             string selection = null;
@@ -32,7 +32,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             {
                 var args = new GS.Cordoba.Rest.SDK.Models.SearchArgs();
                 args.Types = new string[] { typeof(Plant).Name };
-                var plants = (await unitOfWork.Search.Search(null, 1, 10, null, args)).Items;
+                var plants = unitOfWork.Search.Search("acer", 1, 10, null, args).Result.Items;
 
                 Console.WriteLine("Page: " + (pageIndex + 1));
                 Console.WriteLine("(+) - Next page");
@@ -43,7 +43,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 int i = 0;
                 foreach (var plantSummary in plants)
                 {
-                    Console.WriteLine("(" + i + ") - " + plantSummary.Title);
+                    Console.WriteLine("(" + i + ") - " + plantSummary.NamePrimary);
                     i++;
                 }
                 Console.WriteLine();
@@ -77,7 +77,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void Main(string[] args)
         {
 
-            using (var unitOfWork = new UnitOfWork("Test", "<endpoint>", "<token>"))
+            using (var unitOfWork = new UnitOfWork("Test", "https://app-stage.green-solutions.net/", "8xn+HVHclg4Oct7n+97PGWNnCFYi7aqma3FwWErLdohbCpHu7nECZsTHt9xc+X5j8U5FLMVXGr/N51rYvWhFToM1AFHaqfaSZ6/FRWMMs/Wj31PecuM6EA=="))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {

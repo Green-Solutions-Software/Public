@@ -28,9 +28,9 @@ namespace GS.Cordoba.Rest.SDK.Models
         public Contact ContactPerson { get; set; }
         public PictureEntityReference Logo { get; set; }
         public EntityReference CustomerGroup { get; set; }
-        public ObservableCollection<Address> Adresses { get; set; } // N:1
-        public ObservableCollection<MemberPhoto> Photos { get; set; } // N:1
-        public ObservableCollection<EntityReferenceWithKey> Features { get; set; } // N:1
+        public List<Address> Adresses { get; set; } // N:1
+        public List<MemberPhoto> Photos { get; set; } // N:1
+        public List<EntityReferenceWithKey> Features { get; set; } // N:1
 
         public string Description { get; set; }
         public bool Locked { get; set; }
