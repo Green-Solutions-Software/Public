@@ -297,6 +297,17 @@ namespace GS.Cordoba.Rest
             return get<Article>("api/articles/{id}", id);
         }
 
+        // Plants
+        public Task<Paginated<Article.Summary>> FindPlants(string search, int pageIndex, int pageSize, string orderBy)
+        {
+            return find<Article.Summary>("api/files", search, pageIndex, pageSize, orderBy);
+        }
+
+        public Task<Plant> GetPlant(long id)
+        {
+            return get<Plant>("api/plants/{id}", id);
+        }
+
         // Containers
         public Task<Paginated<Container.Summary>> FindContainers(string search, int pageIndex, int pageSize, string orderBy)
         {

@@ -47,6 +47,7 @@
     <Compile Include="Classes\Strings.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Exceptions\RequestException.cs" />
+    <Compile Include="Interfaces\IPlantsRepository.cs" />
     <Compile Include="Interfaces\IBlobCache.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IArticlesRepository.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="Models\PaginatedSearch.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\Plant.cs" />
+    <Compile Include="Models\PlantColor.cs" />
+    <Compile Include="Models\PlantTask.cs" />
     <Compile Include="Models\PrintSettings.cs" />
     <Compile Include="Models\ProgressHub.cs" />
     <Compile Include="Models\SearchArgs.cs" />
@@ -117,8 +121,10 @@
     <Compile Include="Models\SignageVariable.cs" />
     <Compile Include="Models\Summary.cs" />
     <Compile Include="Models\Template.cs" />
+    <Compile Include="Models\TimePeriod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CORAccountRepository.cs" />
+    <Compile Include="Repositories\CORPlantsRepository.cs" />
     <Compile Include="Repositories\CORArticlesRepository.cs" />
     <Compile Include="Repositories\CORBasketsRepository.cs" />
     <Compile Include="Repositories\CORCalendarItemsRepository.cs" />

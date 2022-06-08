@@ -387,4 +387,78 @@ namespace GS.Cordoba.Rest
         Coupon,
         SignageRequest
     }
+
+    public enum DifficultyType : short
+    {
+        Beginner,
+        Experienced,
+        Expert
+    }
+
+    public enum PlantCareEffort : short
+    {
+        Much,
+        Medium,
+        Less
+    }
+
+    public enum PlantColorType : short
+    {
+        LeaveAutumnColor,
+        LeaveColor,
+        BloomingColor,
+        FruitColor,
+        SummerColor,
+        WinterColor,
+        Shoot,
+        LeafEdge,
+        LeafCenter,
+        LeafStipe,
+        LeafVein,
+        Pulp,
+        Bark,
+        Branches,
+        Blade
+    }
+
+    public enum PlantGrowthSpeed : short
+    {
+        Slow,
+        Average,
+        Fast
+    }
+
+    public enum PlantFlowerSmellType : short
+    {
+        PoorFragrant,
+        Fragrant,
+        StrongFragrant
+    }
+
+    public enum PlantHardinessType : short
+    {
+        FrostResistent,
+        MaybeFrostResistent,
+        NotFrostResistent
+    }
+
+    public enum PlantAlwaysGreenType : short
+    {
+        SummerGreen,
+        AlwaysGreen,
+        WinterGreen
+    }
+
+    public enum PlantPruningType : short
+    {
+        NoPruning,
+        Cutable
+    }
+
+    public enum PlantFlowerFillingType : short
+    {
+        Filled,
+        HalfFilled,
+        StrongFilled,
+    }
 }

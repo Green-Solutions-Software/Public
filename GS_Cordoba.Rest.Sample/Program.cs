@@ -1,5 +1,6 @@
 
 using GS.Cordoba.Rest;
+using GS.Cordoba.Rest.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,67 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 {
     class Program
     {
+
+        static async void getPlant(UnitOfWork unitOfWork, Item item)
+        {
+            Console.Clear();
+
+            var plant = await unitOfWork.Plants.Get(item.ID);
+            Console.WriteLine("Name: " + plant.Name);
+            Console.WriteLine("Name 2: " + plant.Name2);
+            Console.ReadLine();
+
+        }
+
+        static async void querySearch(UnitOfWork unitOfWork)
+        {
+            int pageIndex = 0;
+            string selection = null;
+            do
+            {
+                var args = new GS.Cordoba.Rest.SDK.Models.SearchArgs();
+                args.Types = new string[] { typeof(Plant).Name };
+                var plants = (await unitOfWork.Search.Search(null, 1, 10, null, args)).Items;
+
+                Console.WriteLine("Page: " + (pageIndex + 1));
+                Console.WriteLine("(+) - Next page");
+                Console.WriteLine("(-) - Prev page");
+                Console.WriteLine("===================");
+                Console.WriteLine();
+
+                int i = 0;
+                foreach (var plantSummary in plants)
+                {
+                    Console.WriteLine("(" + i + ") - " + plantSummary.Title);
+                    i++;
+                }
+                Console.WriteLine();
+                Console.Write("Choice: ");
+                selection = Console.ReadLine();
+                switch (selection)
+                {
+                    case "+":
+                        pageIndex++;
+                        Console.Clear();
+                        break;
+                    case "-":
+                        pageIndex--;
+                        Console.Clear();
+                        break;
+                    default:
+                        if (!string.IsNullOrEmpty(selection))
+                        {
+                            Console.Clear();
+                            getPlant(unitOfWork, plants.ElementAt(Convert.ToInt16(selection)));
+                        }
+                        break;
+
+                }
+
+            } while (selection == "+" || selection == "-");
+
+        }
+
 
         static void Main(string[] args)
         {
@@ -26,21 +88,8 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("");
 
                 Console.WriteLine("Please select:");
-                Console.WriteLine("(1) - authorize");
-                Console.WriteLine("(2) - Query articles");
-                Console.WriteLine("(3) - Query orders");
-                Console.WriteLine("(4) - Create article");
-                Console.WriteLine("(5) - Quuery article by External_Key");
-                Console.WriteLine("(6) - Clear caches  (OutputCache, EF Cache u.s.w.)");
-                Console.WriteLine("(7) - Query chainstores");
-                Console.WriteLine("(8) - Query customers");
-                Console.WriteLine("(9) - Open Order Management");
-                Console.WriteLine("(10) - Availabilities");
-                Console.WriteLine("(11) - Create order");
-                Console.WriteLine("(12) - Query vouchers");
-                Console.WriteLine("(13) - Availabilities");
-                Console.WriteLine("(14) - Positionupdates");
-                Console.WriteLine("(15) - Create Linktarget");
+                Console.WriteLine("(1) - Query Search");
+                Console.WriteLine("(2) - Get Plant");
                 Console.WriteLine("");
                 Console.Write("Choice: ");
 
@@ -50,7 +99,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                     {
                         case "1":
                             Console.Clear();
-                            //validate(unitOfWork);
+                            querySearch(unitOfWork);
                             break;
                         
                         default:

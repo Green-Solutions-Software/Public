@@ -64,6 +64,7 @@ namespace GS.Cordoba.Rest
         public IMembersRepository Members => new CORMembersRepository(this.context);
         public ISearchRepository Search => new CORSearchRepository(this.context);
         public IArticlesRepository Articles => new CORArticlesRepository(this.context);
+        public IPlantsRepository Plants => new CORPlantsRepository(this.context);
         public IMailingsRepository Mailings => new CORMailingsRepository(this.context);
         public IAccountRepository Account => new CORAccountRepository(this.context);
         public IContainersRepository Containers => new CORContainersRepository(this.context);
