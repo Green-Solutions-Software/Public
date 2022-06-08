@@ -77,7 +77,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void Main(string[] args)
         {
 
-            using (var unitOfWork = new UnitOfWork("Test", "https://app-stage.green-solutions.net/", "8xn+HVHclg4Oct7n+97PGWNnCFYi7aqma3FwWErLdohbCpHu7nECZsTHt9xc+X5j8U5FLMVXGr/N51rYvWhFToM1AFHaqfaSZ6/FRWMMs/Wj31PecuM6EA=="))
+            using (var unitOfWork = new UnitOfWork("Test", "<endpoint>", "<token>"))
             {
                 unitOfWork.OnExecuteRequest = (s) =>
                 {
