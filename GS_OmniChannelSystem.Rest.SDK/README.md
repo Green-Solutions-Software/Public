@@ -5,6 +5,8 @@
 
 ## Contents
 
+**[Installation](#Installation)**
+
 **[Overview](#Overview)**
 
 **[Hints](#Hints)**
@@ -258,6 +260,14 @@
 > [To write an article](#To-write-an-article)
 
 > [Query orders](#Orders-query)
+
+# Installation
+
+Simply install the SDK via nuget with the following command
+
+``` powershell
+Install-Package GS.PflanzenCMS.Rest.SDK -Version 1.0.0
+```
 
 # Overview
 

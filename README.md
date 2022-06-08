@@ -8,10 +8,14 @@ This gives our customers such as garden centers, nurseries and tree nurseries th
 
 Today we are one of the most successful software companies in the green industry and offer everything from a single source!
 
-https://www.nuget.org/packages/GS.PflanzenCMS.Rest.SDK/
+## Omni Channel System
 
 [REST API Omni Channel System](GS_OmniChannelSystem.Rest.SDK)
 
 [Sample Application](GS_OmniChannelSystem.Rest.Sample)
 
 [Step-by-step instructions for connecting external systems](HowTo.md)
+
+
+## Plant Database
+[REST API Plant Database](GS_Cordoba.Rest.SDK)

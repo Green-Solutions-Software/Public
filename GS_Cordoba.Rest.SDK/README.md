@@ -1,11 +1,11 @@
 
-# Cordoba
+# Plant Database
 ## REST API
 
 
 # Overview
 
-With the Green Solutions REST API, data of the Cordoba plant system can be accessed.
+With the Green Solutions REST API, data of the Plant Data system can be accessed.
 
 As an innovative software company, we have specialized 100% in the horticultural industry. With our cloud-based omni-channel solution, all relevant online and offline channels such as web shop, website, signage, newsletters, apps, social media, print media, etc. can be managed centrally from one system. In addition, the customer can access the huge Green Solutions database for all channels - with thousands of photos, videos, editorial reports, plant and product data.
 
