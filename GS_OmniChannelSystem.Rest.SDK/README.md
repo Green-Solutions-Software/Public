@@ -37,11 +37,21 @@
 
 **[Loyalty cards](#Loyalty-cards)**
 
+> [Transfer existing loyalty card owners](#Transfer-existing-loyalty-card-owners)
+
 > [Request new loyalty cards](#Request-new-loyalty-cards)
 
-> [Validate new debit cards](#validate-new-debit-cards)
+> [Request modified personal data of loyalty card owners](#Request-modified-personal-data-of-loyalty-card-owners)
 
-> [Current sales](#Current-sales)
+> [Update modified personal data of loyalty card owners](#Update-modified-personal-data-of-loyalty-card-owners)
+
+> [Request verified loyalty cards](#Request-verified-loyalty-cards)
+
+> [Transfer stationary purchases](#Transfer-stationary-purchases)
+
+> [Update loyalty card bonus and turn over](#Update-loyalty-card-bonus-and-turn-over)
+
+> [Transfer bonus vouchers](#Transfer-bonus-vouchers)
 
 **[Videos](#Videos)**
 
