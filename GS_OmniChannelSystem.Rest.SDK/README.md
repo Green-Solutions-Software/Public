@@ -35,7 +35,7 @@
 
 **[Reports](#Reports)**
 
-**[Loyalty cards](#Loyaltycards)**
+**[Loyalty cards](#Loyalty-cards)**
 
 > [Request new loyalty cards](#Request-new-loyalty-cards)
 
@@ -386,12 +386,26 @@ As a return, an AccountInfo is returned with all information about the logged-in
 
 # Loyalty cards
 
-| url| api/debit cards|
+| url| api/debitcards|
 | --- | --- |
+
+## Transfer existing loyalty card owners
+
+Transfers all existing loyalty card owners with rudimentary personal information. This information will only be used to recognize existing loyalty card owners during the loyalty card verification process.
+
+**-> Beschreibung der Attribute, die gesetzt werden können**
+
+
+**Function: GET** /api/debitcards?orderby=ValidatedOn
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
+
 
 ## Request new loyalty cards
 
-Lists new loyalty cards without validation at the top of the list. You can then continue page by page until a record appears that has already been validated.
+Returns a list with new loyalty cards. These cards had been manually registrered by the  future loyalty card owner.
 
 Please refer **[Loyalty card](#loyaltycard)**
 
@@ -401,9 +415,9 @@ Please refer **[Loyalty card](#loyaltycard)**
 | --- | --- | --- | --- |
 | **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
 
-## Validate new debit cards
+## Request modified personal data of loyalty card owners
 
-New customer cards must be validated once by WaWi so that they can also be used by the logged-in user. To do this, please load the customer who is assigned to the card and compare e.g. address data
+Returns a list of members that have changed their personal data. With this function changes on personal data of the loyalty card owner can be hold synchronously with the external system.
 
 **Function: POST** /api/debitcards/validate/{id}
 
@@ -414,17 +428,73 @@ New customer cards must be validated once by WaWi so that they can also be used 
 | **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
 | **turnover** |doubles| Current turnover on the customer card|
 
-## Current sales
+## Update modified personal data of loyalty card owners
 
-The current turnover and the individual order data must be transmitted at fixed intervals.
+With this function the personal data of the loyalty card owners that have changed their personal data offline e.g. at the POS can be synchronized.
 
-To do this, set the turnover field to the currently booked turnover.
+**Function: POST** /api/debitcards/validate/{id}
 
-## Order data
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| **i.e** |long| Customer card ID|
+| **valid** |boolean| Valid or not|
+| **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
+| **turnover** |doubles| Current turnover on the customer card|
 
-The orders can be saved as api/orders with the status "Ready(4) so that the system knows that the order has gone through the checkout.
+## Request verified loyalty cards
 
-> Please make sure that you only send us orders that you have not received from us!
+Returns a list with verfied loyalty cards. These cards had been manually verfied by the   loyalty card owner.
+
+**Function: POST** /api/debitcards/validate/{id}
+
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| **i.e** |long| Customer card ID|
+| **valid** |boolean| Valid or not|
+| **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
+| **turnover** |doubles| Current turnover on the customer card|
+
+
+## Transfer stationary purchases
+
+Transfers all stationary purchases of the loyalty card owner. 
+
+**-> Beschreibung der Attribute, die gesetzt werden können**
+
+
+**Function: GET** /api/debitcards?orderby=ValidatedOn
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
+
+## Update loyalty card bonus and turn over
+
+With this function the bonus and turn ober of the loyalty card can be updated.
+
+**Function: POST** /api/debitcards/validate/{id}
+
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| **i.e** |long| Customer card ID|
+| **valid** |boolean| Valid or not|
+| **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
+| **turnover** |doubles| Current turnover on the customer card|
+
+## Transfer bonus vouchers
+
+Transfers all bonus vouchers the the loyalty card owners. This voucher can be redeemed online or offline.
+
+**-> Beschreibung der Attribute, die gesetzt werden können**
+
+
+**Function: GET** /api/debitcards?orderby=ValidatedOn
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **orderby** |string| Sorting| Lists the customer cards that have not yet been assigned|
+
+
 
 # Videos
 
