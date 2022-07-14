@@ -418,11 +418,11 @@ Transfers all existing loyalty card owners with rudimentary personal information
 
 Returns a list with new loyalty cards. These cards had been manually registrered by the  future loyalty card owner.
 
-**Function: GET** /api/members?debitCards=true&orderby=RecentOn%20desc
+**Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **debitCards** |bool| With Debitcard| Lists the members with Debitcards assigned in the most recent order|
+| **filter** |string|debitcard=true | Filter by Debit Card Owners|
 | **orderBy** |bool| RecentOn desc| Sory descending by recent|
 
 Returns **[Member](#Member)**
@@ -431,11 +431,11 @@ Returns **[Member](#Member)**
 
 Returns a list of members that have changed their personal data. With this function changes on personal data of the loyalty card owner can be hold synchronously with the external system.
 
-**Function: GET** /api/members?debitCards=true&orderby=RecentOn%20desc
+**Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **debitCards** |bool| With Debitcard| Lists the members with Debitcards assigned in the most recent order|
+| **filter** |string|debitcard=true | Filter by Debit Card Owners|
 | **orderBy** |bool| RecentOn desc| Sory descending by recent|
 
 Return **[Member](#Member)**
@@ -456,11 +456,11 @@ With this function the personal data of the loyalty card owners that have change
 
 Returns a list with verfied loyalty cards. These cards had been manually verfied by the   loyalty card owner.
 
-**Function: GET** /api/members?debitCards=true&orderby=RecentOn%20desc
+**Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **debitCards** |bool| With Debitcard| Lists the members with Debitcards assigned in the most recent order|
+| **filter** |string|debitcard=true | Filter by Debit Card Owners|
 | **orderBy** |bool| RecentOn desc| Sory descending by recent|
 
 Returns **[Member](#Member)**
