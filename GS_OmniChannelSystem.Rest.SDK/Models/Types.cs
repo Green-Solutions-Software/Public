@@ -1600,7 +1600,15 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         [Description("Packzettel (Bestellungen)")]
         PackingSlipOrders,
         [Description("Umlagerungsauftrag")]
-        TransferOrder
+        TransferOrder,
+        [Description("Merkliste")]
+        WatchList,
+        [Description("Bestellung")]
+        MarkupOrder,
+        [Description("Anfrage Verifizierung Kundenkarte per Brief")]
+        DebitCardVerificationCodeLetter,
+        [Description("Dokument - Vorlage")]
+        DocumentTemplate
     }
 
     public enum WorkerLocation
