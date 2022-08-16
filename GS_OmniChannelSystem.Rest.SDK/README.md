@@ -527,7 +527,7 @@ Transfers all bonus vouchers the the loyalty card owners. This voucher can be re
 | url| api/members|
 | --- | --- |
 
-## Edit-Customer-Dialog
+## Edit Customer Dialog
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
