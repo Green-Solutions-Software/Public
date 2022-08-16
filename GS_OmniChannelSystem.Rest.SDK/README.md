@@ -59,6 +59,8 @@
 
 **[Customers](#Customers)**
 
+> [Edit Dialog](#Edit-Customer-Dialog)
+
 **[Article](#Article)**
 
 > [Extended facility](#Extended-facility)
@@ -524,6 +526,14 @@ Transfers all bonus vouchers the the loyalty card owners. This voucher can be re
 
 | url| api/members|
 | --- | --- |
+
+## Edit-Customer-Dialog
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/members/dialog/{id}|ID| **long** | ID of the item to be edited|
+
+As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
 # Article
 
