@@ -39,4 +39,4 @@ jobs:
       run: nuget pack ${env:restoreProject} -IncludeReferencedProjects -OutputFileNamesWithoutVersion -Version ${env:VERSION} -Properties Configuration=Release 
 
     - name: Push
-      run: nuget push ${env:pkgPath} --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
+      run: nuget push ${env:pkgPath} ${{ secrets.NUGETAPI }} -Source ${env:nugetFeed}
