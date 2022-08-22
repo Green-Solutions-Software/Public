@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
+    <id>GS_Cordoba.Rest.SDK</id>
+    <version>1.0.0</version>
+    <title>Green Solutions Cordoba SDK</title>
+    <authors>Green-Solutions Software GmbH</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <!-- <icon>icon.png</icon> -->
     <projectUrl>https://github.com/Green-Solutions-Software/Public/</projectUrl>
-    <description>$description$</description>
+    <description>SDK for http://app.green-solutions.net/</description>
     <releaseNotes>First Release.</releaseNotes>
-    <copyright>$copyright$</copyright>
+    <copyright>Green-Solutions Software GmbH</copyright>
     <tags>GreenSolutions Green-Solutions</tags>
   </metadata>
 </package>
