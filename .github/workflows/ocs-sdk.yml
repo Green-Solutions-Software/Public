@@ -6,7 +6,7 @@ jobs:
   publish:
     name: publish OCS SDK package
     if: startsWith(github.ref, 'refs/tags/ocs-sdk')
-    runs-on: windows-latest
+    runs-on: self-hosted
     timeout-minutes: 15
     env:
       restoreProject: "GS_OmniChannelSystem.Rest.SDK/GS_OmniChannelSystem.Rest.SDK.csproj"
