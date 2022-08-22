@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 15
     env:
       restoreProject: "GS_OmniChannelSystem.Rest.SDK/GS_OmniChannelSystem.Rest.SDK.csproj"
-      pkgPath: "GS_OmniChannelSystem.Rest.SDK/GS_OmniChannelSystem.Rest.SDK.nupkg"
+      pkgPath: "GS_OmniChannelSystem.Rest.SDK.nupkg"
       tagPath: "ocs-sdk"
       nugetFeed: "https://api.nuget.org/v3/index.json"
     steps:
