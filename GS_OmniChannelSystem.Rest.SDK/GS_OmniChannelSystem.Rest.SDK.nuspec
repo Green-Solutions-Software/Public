@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>GS.PflanzenCMS.Rest.SDK</id>
+    <id>GS_OmniChannelSystem.Rest.SDK</id>
     <version>1.0.0</version>
     <title>Green-Solutions OCS SDK</title>
     <authors>Green-Solutions Software GmbH</authors>
