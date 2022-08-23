@@ -630,6 +630,19 @@ The keys of the variants of the articles with the individual prices
 | --- | --- | --- |
 | status | **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
 | channelid| **long**| ID of the Channel|
+| external_key2| **string**| External_Key2 of the order|
+| transactiontype| **[TransactionType](#TransactionType)**| Filters by the given transaction type|
+| supplierid| **long**| Filters by the given supplier id|
+| producerid| **long**| Filters by the given producer id|
+| brandid| **long**| Filters by the given brand id|
+| suppliers| **bool**| Filters by with supplier or without|
+| items | **int**| Filters by the item count|
+| weight | **double**| Filters by the item weight|
+| categoryids | **double**| Filters by the given category ids (comma separated)|
+| storagelocations | **string**| Filters by the given storager locations (comma separated)|
+| recenton | **DateTime-DateTime**| Filters by the given date range|
+| suspended| **bool**| Filters by the suspended or not suspended|
+| transaction| **string**| Filters by the given payment transaction |
 
 
 ## Update Status
