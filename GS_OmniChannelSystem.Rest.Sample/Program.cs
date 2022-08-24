@@ -1068,7 +1068,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Confirm order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
-            args.Status = OrderTransactionStatusType.Confirmed;
+            args.OrderStatus = OrderStatusType.Confirmed;
             args.StatusOn = DateTime.Now;
             args.Message = "Confirmation message";
 
@@ -1157,14 +1157,11 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         static void cancelOrder(ContextUOW unitOfWork, Order order)
         {
-            var transaction = order.Transactions.First();
-
             Console.WriteLine("Cancel order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
-            args.Status = OrderTransactionStatusType.Cancelled;
+            args.OrderStatus = OrderStatusType.Canceled;
             args.StatusOn = DateTime.Now;
-            args.OrderTransactionID = transaction.OrderTransactionID;
             args.Message = "Cancellation message";
 
             var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
@@ -1264,7 +1261,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine("Finish order: " + order.OrderID);
             Console.WriteLine();
             var args = new OrderTransactionArgs();
-            args.Status = OrderTransactionStatusType.Ready;
+            args.OrderStatus = OrderStatusType.Ready;
             args.InvoiceFilename = "Rechung.pdf";
             args.InvoiceMimeType = "application/pdf";
             // Base 64 encoded Data URI with the pdf
