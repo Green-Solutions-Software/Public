@@ -345,7 +345,7 @@ This example shows how to update the order status as confirmed. This function ca
 Console.WriteLine("Confirm order: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
-args.Status = OrderTransactionStatusType.Confirmed;
+args.OrderStatus = OrderStatusType.Confirmed;
 args.StatusOn = DateTime.Now;
 args.Message = "Message for the confirmation";
 
@@ -374,7 +374,7 @@ This example shows how to cancel the entire order.
 Console.WriteLine("Cancel order: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
-args.Status = OrderTransactionStatusType.Cancelled;
+args.OrderStatus = OrderStatusType.Canceled;
 args.StatusOn = DateTime.Now;
 args.Message = "Cancellation Message";
 
@@ -440,7 +440,7 @@ This example shows how to update the order as completed.
  Console.WriteLine("Finish Ordewr: " + order.OrderID);
 Console.WriteLine();
 var args = new OrderTransactionArgs();
-args.Status = OrderTransactionStatusType.Ready;
+args.OrderStatus = OrderStatusType.Ready;
 args.InvoiceFilename = "invoice.pdf";
 args.InvoiceMimeType = "application/pdf";
 // Base 64 enocded Data URI with the Pdf
