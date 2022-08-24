@@ -2528,6 +2528,20 @@ public enum OrderStatusType : short
 
 ```
 
+## TransactionType
+
+```csharp
+public enum TransactionType : short
+{
+    Shipping,
+    ClickAndCollect,
+    RadiusDelivery,
+    Download,
+    Cashdesc
+}
+
+```
+
 ## TransactionStatus
 
 ```csharp
