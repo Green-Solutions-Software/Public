@@ -61,6 +61,8 @@
 
 > [Register new Customer](#Register-new-Customer)
 
+> [Unregister logged in Customer](#Unregister-logged-in-Customer)
+
 > [Edit Dialog](#Edit-Customer-Dialog)
 
 
@@ -541,6 +543,16 @@ Transfers all bonus vouchers the the loyalty card owners. This voucher can be re
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **BODY** |**[RegisterArgs](#RegisterArgs)**| Customer Data | |
+
+Returns the new Member (please refer to **[Member](#Member)**)
+
+## Unregister logged in Customer
+
+**Function: POST** api/unregister
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| permanent |**bool**| Delete permanent | If permanent all personal data will be anonymized |
 
 Returns the new Member (please refer to **[Member](#Member)**)
   
