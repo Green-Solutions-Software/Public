@@ -445,6 +445,7 @@ args.InvoiceFilename = "invoice.pdf";
 args.InvoiceMimeType = "application/pdf";
 // Base 64 enocded Data URI with the Pdf
 args.InvoiceURI = "data:application/pdf;base64,jhakuzbsahdga676f3jhgbsa5as6g";
+args.InvoiceID = 123; // From Invoices Table
 
 var newOrder = unitOfWork.Orders.UpdateStatus(order.OrderID, args);
 Console.WriteLine("Order was finished: " + order.Notes);
