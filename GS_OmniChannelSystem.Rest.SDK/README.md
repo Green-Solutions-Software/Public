@@ -39,13 +39,9 @@
 
 > [Transfer existing loyalty card owners](#Transfer-existing-loyalty-card-owners)
 
-> [Request new loyalty cards](#Request-new-loyalty-cards)
+> [Request events](#Request-events)
 
-> [Request modified personal data of loyalty card owners](#Request-modified-personal-data-of-loyalty-card-owners)
-
-> [Update modified personal data of loyalty card owners](#Update-modified-personal-data-of-loyalty-card-owners)
-
-> [Request verified loyalty cards](#Request-verified-loyalty-cards)
+> [Confirm event](#confirm-event)
 
 > [Transfer stationary purchases](#Transfer-stationary-purchases)
 
@@ -430,6 +426,33 @@ Transfers all existing loyalty card owners with rudimentary personal information
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **BODY** |**[DebitCardMember[]](#DebitCardMember)**| Members| Array with all the Debit Card Members|
+
+## Request events
+
+Returns a list of events for the ERP to perform which were not yet confirmed
+
+**Function: GET** api/channels/events/todo/{id}
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **id** |long | Channel ID | |
+
+Returns a list of **[Event](#Event)** which have to be performed.
+
+> Remarks:
+> + If DebitCard is not null you have to update/import the debitcard
+> + If Owner is not null you have to update/import the member
+
+## Confirm todo
+
+Confirms a todo as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
+
+**Function: PUT** api/channels/events/todo/{id}/done
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **id** |long | Channel ID | |
+| **eventId** |long | Event ID | |
 
 
 ## Request new loyalty cards
