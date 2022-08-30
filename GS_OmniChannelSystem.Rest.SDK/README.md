@@ -140,6 +140,13 @@
 
 > [Barcodes](#Barcodes)
 
+**[Coupons](#Coupons)**
+
+> [Validate a coupon](#Validate-a-coupon)
+
+> [Pay off a coupon](#Pay-Off-a-coupon)
+
+> [Devalue a coupon](#Devalue-a-coupon)
 
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
@@ -900,6 +907,45 @@ The customer cancels a product offline that was paid for with a voucher. Now thi
 The following barcode types are currently available for printing:
 - code 128
 - EAN 13
+
+# Coupons
+
+## Validate a coupon
+
+Validates a coupon
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/coupons/validate|BODY| **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Basket |
+| |id| **long** | Coupon ID |
+| |chainstore| **string** | Chainstore number |
+
+Return Null if invalid != null otherwise
+
+## Pay off a coupon
+
+Pays off a coupon an returns operations to perform on the basket
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/coupons/payoff|BODY| **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Basket |
+| |id| **long** | Coupon ID |
+| |chainstore| **string** | Chainstore number |
+
+Returns a list of **[FoundVoucherOperation](#FoundVoucherOperation)** to perform
+
+
+## Devalue a coupon
+
+Devalues a coupon
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/coupons/devalue||  |  |
+| |id| **long** | Coupon ID |
+| |chainstore| **string** | Chainstore number |
+
+Return true or false
 
 # Messages
 
