@@ -265,6 +265,8 @@
 
 > [RegisterArgs](#RegisterArgs)
 
+> [FoundLinkTarget](#FoundLinkTarget)
+
 **[Dialogs](#dialogs)**
 
 > [To ship](#Toship)
@@ -631,6 +633,8 @@ Create a new linktarget for a QR Code
 | --- | --- | --- | --- |
 | extkey |**string**| Article Number ||
 | info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
+
+Returns a **[FoundLinkTarget](#FoundLinkTarget)**
 
 ## Variants
 
@@ -6854,6 +6858,13 @@ public enum MessageDirection {
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#2#54#177",
   "Deleted": false
+}
+```
+
+# FoundLinkTarget
+```json
+{
+    "Url" : "https://www.test.com"
 }
 ```
 
