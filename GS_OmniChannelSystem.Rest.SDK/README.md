@@ -116,9 +116,9 @@
 
 **[Voucher](#Voucher)**
 
-> [Create Voucher](#Create-voucher)
+> [Create voucher](#Create-voucher)
 
-> [Find coupon](#Coupon-find)
+> [Find voucher](#Find-voucher)
 
 > [Reserve payment](#Payment-reserve)
 
@@ -138,11 +138,11 @@
 
 **[Coupons](#Coupons)**
 
-> [Validate a coupon](#Validate-a-coupon)
+> [Validate coupon](#Validate-coupon)
 
-> [Pay off a coupon](#Pay-Off-a-coupon)
+> [Pay off coupon](#Pay-Off-coupon)
 
-> [Devalue a coupon](#Devalue-a-coupon)
+> [Devalue coupon](#Devalue-coupon)
 
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
@@ -264,8 +264,6 @@
 > [CreateCashdeskArgs](#CreateCashdeskArgs)
 
 > [RegisterArgs](#RegisterArgs)
-
-> [FoundLinkTarget](#FoundLinkTarget)
 
 **[Dialogs](#dialogs)**
 
@@ -634,8 +632,6 @@ Create a new linktarget for a QR Code
 | extkey |**string**| Article Number ||
 | info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
 
-Returns a **[FoundLinkTarget](#FoundLinkTarget)**
-
 ## Variants
 
 | url| api/articlekeys|
@@ -860,7 +856,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 | **Function(GET)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/vouchers/find|keyValue| **string** | Coupon Code(without space) |
+| api/vouchers/find|keyValue| **string** | Voucher Code(without space) |
 
 Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
 
@@ -919,7 +915,7 @@ The customer buys a voucher offline and this is then sent by **[Create Voucher](
 
 ## Pay with a voucher at the POS
 
-The customer buys offline and pays with an online voucher. First the voucher is searched for(**[find coupon](#coupon-find)**).
+The customer buys offline and pays with an online voucher. First the voucher is searched for(**[find voucher](#find-voucher)**).
 If none is found, the voucher is not a valid online voucher. If one is found, the
 desired payment can be reserved (**[Reserve payment](#Reserve-payment)**). If the balance is no longer sufficient, a
 appropriate error returned. After completing the payment then the payment
@@ -937,9 +933,9 @@ The following barcode types are currently available for printing:
 
 # Coupons
 
-## Validate a coupon
+## Validate coupon
 
-Validates a coupon
+This function validates a coupon, if it´s valid or not.
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
@@ -949,9 +945,9 @@ Validates a coupon
 
 Return Null if invalid != null otherwise
 
-## Pay off a coupon
+## Pay off coupon
 
-Pays off a coupon an returns operations to perform on the basket
+Pays off a coupon and returns operations that can be performed on the basket.
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
@@ -962,9 +958,9 @@ Pays off a coupon an returns operations to perform on the basket
 Returns a list of **[FoundVoucherOperation](#FoundVoucherOperation)** to perform
 
 
-## Devalue a coupon
+## Devalue coupon
 
-Devalues a coupon
+Devalues a coupon.
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
@@ -6858,13 +6854,6 @@ public enum MessageDirection {
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#2#54#177",
   "Deleted": false
-}
-```
-
-# FoundLinkTarget
-```json
-{
-    "Url" : "https://www.test.com"
 }
 ```
 
