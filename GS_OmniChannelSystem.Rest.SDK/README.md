@@ -1045,9 +1045,8 @@ This method creates the Reply message depending on a Workflow
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/messages/{id}/workflow/execute|id| **long** | ID of the message you want to reply|
-||BODY| **[Workflow](#workflow)** | the Workflow to execute|
-
+| api/messages/workflow/execute|BODY| **[Workflow](#workflow)** | the Workflow to execute|
+ 
 Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 # Shopping carts
