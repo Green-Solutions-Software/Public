@@ -43,6 +43,8 @@
 
 > [Confirm event](#confirm-event)
 
+> [Trigger event](#trigger-event)
+
 > [Transfer stationary purchases](#Transfer-stationary-purchases)
 
 > [Update loyalty card bonus and turn over](#Update-loyalty-card-bonus-and-turn-over)
@@ -261,6 +263,8 @@
 
 > [Member](#Member)
 
+> [Event](#Event)
+
 > [CreateCashdeskArgs](#CreateCashdeskArgs)
 
 > [RegisterArgs](#RegisterArgs)
@@ -443,9 +447,9 @@ Returns a list of **[Event](#Event)** which have to be performed.
 > + If DebitCard is not null you have to update/import the debitcard
 > + If Owner is not null you have to update/import the member
 
-## Confirm todo
+## Confirm event
 
-Confirms a todo as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
+Confirms an event as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
 
 **Function: PUT** api/channels/events/todo/{id}/done
 
@@ -453,6 +457,17 @@ Confirms a todo as processed. After it has processed it's no longer delivered vi
 | --- | --- | --- | --- |
 | **id** |long | Channel ID | |
 | **eventId** |long | Event ID | |
+
+## Trigger event
+
+Triggers an event
+
+**Function: POST** api/channels/events/todo/{id}/trigger
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **id** |long | Channel ID | |
+| **BODY** |**[Event](#Event)** | Event | |
 
 
 ## Request new loyalty cards
@@ -854,11 +869,17 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 
 ## Find voucher
 
-| **Function(GET)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/vouchers/find|keyValue| **string** | Voucher Code(without space) |
+| Url| GET api/vouchers/find| |
+| --- | --- | --- |
 
-Return: voucher code(please refer **[FoundVoucher](#foundvoucher)** )
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+|keyValue| **string** | Voucher Code(without space) |
+|chainstore| **string** | Chainstore number |
+|external| **bool** | Search in external Connections |
+|exception| **bool** | Make an exception instead of return null |
+
+Return: voucher code (please refer **[FoundVoucher](#foundvoucher)**)
 
 ## Reserve payment
 
@@ -868,10 +889,11 @@ Reserve a payment for a voucher. During the time, the revenue is considered cons
 | --- | --- | --- | --- |
 | api/vouchers/reserve|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
+|external| **string** | External Source returned by Find |
 |amount| **double** | Amount to be reserved| |
 |name| **string** | currency(e.g. EUR) | |
 |info| **string** | An information that is visible when paying| |
-|minutes| **internal** | Number of minutes for which the payment should be reserved|
+|minutes| **int** | Number of minutes for which the payment should be reserved|
 
 As a return, the created payment is returned (please refer **[payments](#payment)** ).
 
@@ -890,7 +912,7 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 Cancel a payment for a voucher
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | 
 | api/vouchers/cancel|voucherID| **long** | Voucher ID| |
 |voucherCodeID| **long** | Voucher Code ID| |
 |amount| **double** | Amount to be reserved| |
@@ -6719,7 +6741,16 @@ public enum MessageDirection {
 }
 ```
 
+# Event
 
+```json
+{
+  "EventID": 2,
+  "Info": "New DebitCard",
+  "Key": null,
+  "Type": 0
+}
+```
 
 # AccountInfo
 
