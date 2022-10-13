@@ -984,14 +984,14 @@ The format is as follows:
 | String | Description | 
 | -- | -- |
 | 0QR | Fixed header |
-| -- | -- |
+| |  |
 | A | Start Articles |
 | 8 | Quantity |
 | 1010 | PLU |
-| -- | -- |
+| |  |
 | V | Start Vouchers |
 | 4711 | VoucherID |
-| -- | -- |
+|  |  |
 | M | Start Member |
 | 4722 | MemberID |
 
