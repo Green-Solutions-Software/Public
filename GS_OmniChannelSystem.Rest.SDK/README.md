@@ -51,6 +51,12 @@
 
 > [Transfer bonus vouchers](#Transfer-bonus-vouchers)
 
+**[Coupons](#Coupons)**
+
+> [Validate coupon](#Validate-coupon)
+
+> [Devalue coupon](#Devalue-coupon)
+
 **[Videos](#Videos)**
 
 **[Chainstores](#Chainstores)**
@@ -137,14 +143,6 @@
 > [Cancel voucher at the POS](#Cancel-by-voucher-am-pos)
 
 > [Barcodes](#Barcodes)
-
-**[Coupons](#Coupons)**
-
-> [Validate coupon](#Validate-coupon)
-
-> [Pay off coupon](#Pay-Off-coupon)
-
-> [Devalue coupon](#Devalue-coupon)
 
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
@@ -978,23 +976,8 @@ This function validates a coupon, if it´s valid or not.
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
 | api/coupons/validate|BODY| **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Basket |
-| |id| **long** | Coupon ID |
-| |chainstore| **string** | Chainstore number |
 
-Return Null if invalid != null otherwise
-
-## Pay off coupon
-
-Pays off a coupon and returns operations that can be performed on the basket.
-
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/coupons/payoff|BODY| **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Basket |
-| |id| **long** | Coupon ID |
-| |chainstore| **string** | Chainstore number |
-
-Returns a list of **[FoundVoucherOperation](#FoundVoucherOperation)** to perform
-
+Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
 ## Devalue coupon
 
@@ -1002,9 +985,7 @@ Devalues a coupon.
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/coupons/devalue||  |  |
-| |id| **long** | Coupon ID |
-| |chainstore| **string** | Chainstore number |
+| api/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Basket |
 
 Return true or false
 
@@ -6958,23 +6939,129 @@ public enum MessageDirection {
 	"External_CMS_OrderID": 4711,
 	"External_CMS_TransactionID": 0,
 	"External_COR_Owner": "Warenwirtschaft",
-	"Currency": "EUR", // Währung
+	"Currency": "EUR", // Währung,
+    "Vouchers" : [ // Aktivierte Coupons
+        {"ID" : 100},
+        {"ID" : 200}
+    ],    
 	"Items":[
 		{
-		"Info":"Schneckentod 150g", // Bon Zeile
-		"Price":2.99, // Einzelpreis
-		"Quantity":2, // Menge
-		"TotalPrice":5.98, // Gesamtrpreis
-		"TaxRate":19.00 // MwSt. Satz
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Schneckentod 150g", // Bon Zeile
+            "Price":2.99, // Einzelpreis
+            "Quantity":2, // Menge
+            "TotalPrice":5.98, // Gesamtrpreis
+            "TaxRate":19.00, // MwSt. Satz
+            "TotalDiscount" : null, // Rabatt
+            "Categories":[ // Kategorien
+                {"ID" : 1, Number = "4711"},
+            ],
+            "ArticleGroups":[ // Warengruppen / Artikelgruppen
+                {"ID" : 1, Number = "4711"},                
+            ]
 		},
 		{
-		"Info":"Blumenkelle",
-		"Price":3.99,
-		"Quantity":1,
-		"TotalPrice":3.99,
-		"TaxRate":19.00
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Blumenkelle",
+            "Price":3.99,
+            "Quantity":1,
+            "TotalPrice":3.99,
+            "TaxRate":19.00,
+            "TotalDiscount" : 10.0 // Rabatt
 		}
 	]
+}
+```
+
+# ValidateCashdeskResult
+```json
+{
+    // Warenkorb
+    "CashDesk" : {
+        "Date":"2021-07-27T08:21:48",
+        "Chainstore" : "Standort",
+        "OwnerMemberID":192,
+        "OrderStatus":3,
+        "TotalCosts":9.97, // Gesamtkosten
+        "External_CMS_OrderID": 4711,
+        "External_CMS_TransactionID": 0,
+        "External_COR_Owner": "Warenwirtschaft",
+        "Currency": "EUR", // Währung,
+        "Vouchers" : [ // Coupons
+            {"ID" : 100},
+            {"ID" : 200},
+            {"ID" : 300}
+        ],    
+        "Items":[
+            {
+                "ArticleKey" : "4755884", // Artikelnummer
+                "EAN" : "123456789012", // EAN
+                "Info":"Schneckentod 150g", // Bon Zeile
+                "Price":2.99, // Einzelpreis
+                "Quantity":2, // Menge
+                "TotalPrice":5.98, // Gesamtrpreis
+                "TaxRate":19.00, // MwSt. Satz
+                "TotalDiscount" : null, // Rabatt
+                "Categories":[ // Kategorien
+                    {"ID" : 1, Number = "4711"},
+                ],
+                "ArticleGroups":[ // Warengruppen / Artikelgruppen
+                    {"ID" : 1, Number = "4711"},                
+                ]
+            },
+            {
+                "ArticleKey" : "4755884", // Artikelnummer
+                "EAN" : "123456789012", // EAN
+                "Info":"Blumenkelle",
+                "Price":3.99,
+                "Quantity":1,
+                "TotalPrice":3.99,
+                "TaxRate":19.00,
+                "TotalDiscount" : 10.0 // Rabatt
+            }
+        ]
+    },
+
+    // Resultierende Coupons
+    "Vouchers" : [
+        // 5€ Discount
+        {
+            "Voucher" : {"ID" : 100},
+            "TotalDiscount" : 5, // 5€ Discount
+            "Items" : [ // Affected product
+                {
+                    "ArticleKey" : "4755884", // Artikelnummer
+                    "EAN" : "123456789012", // EAN
+                    "Info":"Schneckentod 150g", // Bon Zeile
+                    "Price":2.99, // Einzelpreis
+                    "Quantity":2 // Menge
+                    
+                }
+            ]
+        },
+        // Giveaway article
+        {
+            "Voucher" : {"ID" : 200},
+            "TotalDiscount" : null, 
+            "Items" : [ // new giveaway article
+                {
+                    "ArticleKey" : "4755887", // Artikelnummer
+                    "EAN" : "123456789012", // EAN
+                    "Info":"Schneckentod 150g", // Bon Zeile
+                    "Quantity":2 // Menge
+                }
+            ]
+        },
+        // Not used coupon
+        {
+            "Voucher" : {"ID" : 300},
+            "TotalDiscount" : null,
+            "Items" : null
+        }
+    ]
+
 }
 ```
 
