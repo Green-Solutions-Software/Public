@@ -53,9 +53,9 @@
 
 **[Coupons](#Coupons)**
 
-> [Validate coupon](#Validate-coupon)
+> [Validate coupons](#Validate-coupons)
 
-> [Devalue coupon](#Devalue-coupon)
+> [Devalue coupons](#Devalue-coupons)
 
 **[Videos](#Videos)**
 
@@ -264,6 +264,10 @@
 > [Event](#Event)
 
 > [CreateCashdeskArgs](#CreateCashdeskArgs)
+
+> [ValidateCashdeskArgs](#ValidateCashdeskArgs)
+
+> [ValidateCashdeskResult](#ValidateCashdeskResult)
 
 > [RegisterArgs](#RegisterArgs)
 
@@ -969,25 +973,23 @@ Coupons are discounts on products or product groups. These both types are suppor
 The coupons are configurated in the Green Solutions Cloud Software backend so that they do not have to be created additionally in the ERP system. Therefore all products and product groups of the ERP system need to be exported (e.g. as JSON) and uploaded to the Green Solutions Cloud Software. In the Green Solutions Cloud Software backend one can create the coupon and then map it with the product or product group of the ERP system.
 The ultimate user would activate all coupons (e.g. in the app) so that they can be redeemed at the cash desk. The ultimate user shows his loyalty card (e.g. QR code), which not only contains his loyalty card number, but also all activated coupons. The user can then be identified and assigned via the loyalty card number. After that one would validate the individual coupons against Green Solutions Cloud Software API using the MemberID, CouponID, LocationID. If the coupon is valid, the request returns the associated meta data, such as product or your product group of the ERP system and the numerical or percentage discount.
 
-## Validate coupon
+## Validate coupons
 
-This function validates a coupon, if it´s valid or not.
+This function validates a list of Coupons and returns the affected Items
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/coupons/validate|BODY| **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Basket |
+| api/coupons/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
 
 Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
-## Devalue coupon
+## Devalue coupons
 
-Devalues a coupon.
+Devalues a coupon 
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Basket |
-
-Return true or false
+| api/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Bon |
 
 # Messages
 
@@ -6930,6 +6932,52 @@ public enum MessageDirection {
 ```
 
 # CreateCashdeskArgs
+```json
+{
+	"Date":"2021-07-27T08:21:48",
+	"OwnerMemberID":192,
+	"OrderStatus":3,
+	"TotalCosts":9.97, // Gesamtkosten
+	"External_CMS_OrderID": 4711,
+	"External_CMS_TransactionID": 0,
+	"External_COR_Owner": "Warenwirtschaft",
+	"Currency": "EUR", // Währung,
+    "Vouchers" : [ // Aktivierte Coupons
+        {"ID" : 100},
+        {"ID" : 200}
+    ],    
+	"Items":[
+		{
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Schneckentod 150g", // Bon Zeile
+            "Price":2.99, // Einzelpreis
+            "Quantity":2, // Menge
+            "TotalPrice":5.98, // Gesamtrpreis
+            "TaxRate":19.00, // MwSt. Satz
+            "TotalDiscount" : null, // Rabatt
+            "Categories":[ // Kategorien
+                {"ID" : 1, Number = "4711"},
+            ],
+            "ArticleGroups":[ // Warengruppen / Artikelgruppen
+                {"ID" : 1, Number = "4711"},                
+            ]
+		},
+		{
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Blumenkelle",
+            "Price":3.99,
+            "Quantity":1,
+            "TotalPrice":3.99,
+            "TaxRate":19.00,
+            "TotalDiscount" : 10.0 // Rabatt
+		}
+	]
+}
+```
+
+# ValidateCashdeskArgs
 ```json
 {
 	"Date":"2021-07-27T08:21:48",
