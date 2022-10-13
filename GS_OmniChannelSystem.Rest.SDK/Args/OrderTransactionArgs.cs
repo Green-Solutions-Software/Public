@@ -71,6 +71,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Api.Args
         public bool PlaceSupplierOrders { get; set; }
         public bool FireAndForget { get; set; }
         public DateTime? EarliestShippingDate { get; set; }
+        public bool NoMails { get; set; }
 
         public OrderTransactionArgs()
         {
