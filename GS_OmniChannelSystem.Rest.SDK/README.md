@@ -999,7 +999,7 @@ The format is as follows:
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt" of "GS74RCJ835". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
 
-The already mentioned sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
+The  sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
 
 ```
     GS74RCJ8350QRA;8;1010,2,1020,1;
@@ -1009,7 +1009,6 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
 ```
     0QRA;8;1010,2,1020,1;626A
 ```
-
 
 ## Validate coupons
 
