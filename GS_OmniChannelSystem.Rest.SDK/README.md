@@ -981,10 +981,6 @@ The QR Code will be shown from the customer to the caSHIER and has to be scanned
 
 The format is as follows:
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- | 
-| api/vouchers/cancel|voucherID| **long** | Voucher ID| |
-
 | String | Description | 
 | -- | -- |
 | 0QR | Fixed header |
