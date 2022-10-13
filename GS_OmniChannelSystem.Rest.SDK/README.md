@@ -977,7 +977,7 @@ The ultimate user would activate all coupons (e.g. in the app) so that they can 
 
 ## Scan a QR Code
 
-The QR Code will be shown from the customer to the caSHIER and has to be scanned and decoded.
+The QR Code will be shown from the customer to the Cashier and has to be scanned and decoded.
 
 The format is as follows:
 
