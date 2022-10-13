@@ -7029,13 +7029,10 @@ public enum MessageDirection {
     // Warenkorb
     "CashDesk" : {
         "Date":"2021-07-27T08:21:48",
-        "Chainstore" : "Standort",
-        "OwnerMemberID":192,
+        "Chainstore" : "Standort", // Nummer des Standort
+        "OwnerMemberID":192, // Member ID
         "OrderStatus":3,
         "TotalCosts":9.97, // Gesamtkosten
-        "External_CMS_OrderID": 4711,
-        "External_CMS_TransactionID": 0,
-        "External_COR_Owner": "Warenwirtschaft",
         "Currency": "EUR", // Währung,
         "Vouchers" : [ // Coupons
             {"ID" : 100},
