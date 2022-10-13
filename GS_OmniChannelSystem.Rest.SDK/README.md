@@ -53,6 +53,8 @@
 
 **[Coupons](#Coupons)**
 
+> [Scan a QR Code](#Scan-a-QR-Code)
+
 > [Validate coupons](#Validate-coupons)
 
 > [Devalue coupons](#Devalue-coupons)
@@ -972,6 +974,46 @@ Coupons are discounts on products or product groups. These both types are suppor
 
 The coupons are configurated in the Green Solutions Cloud Software backend so that they do not have to be created additionally in the ERP system. Therefore all products and product groups of the ERP system need to be exported (e.g. as JSON) and uploaded to the Green Solutions Cloud Software. In the Green Solutions Cloud Software backend one can create the coupon and then map it with the product or product group of the ERP system.
 The ultimate user would activate all coupons (e.g. in the app) so that they can be redeemed at the cash desk. The ultimate user shows his loyalty card (e.g. QR code), which not only contains his loyalty card number, but also all activated coupons. The user can then be identified and assigned via the loyalty card number. After that one would validate the individual coupons against Green Solutions Cloud Software API using the MemberID, CouponID, LocationID. If the coupon is valid, the request returns the associated meta data, such as product or your product group of the ERP system and the numerical or percentage discount.
+
+## Scan a QR Code
+
+The QR Code will be shown from the customer to the caSHIER and has to be scanned and decoded.
+
+The format is as follows:
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- | 
+| api/vouchers/cancel|voucherID| **long** | Voucher ID| |
+
+| String | Description | 
+| -- | -- |
+| 0QR | Fixed header |
+| -- | -- |
+| A | Start Articles |
+| 8 | Quantity |
+| 1010 | PLU |
+| -- | -- |
+| V | Start Vouchers |
+| 4711 | VoucherID |
+| -- | -- |
+| M | Start Member |
+| 4722 | MemberID |
+
+
+
+Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt" of "GS74RCJ835". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
+
+The already mentioned sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
+
+```
+    GS74RCJ8350QRA;8;1010,2,1020,1;
+```
+
+of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the content of the barcode is therefore:
+```
+    0QRA;8;1010,2,1020,1;626A
+```
+
 
 ## Validate coupons
 
