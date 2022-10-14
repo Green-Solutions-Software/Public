@@ -996,9 +996,7 @@ The format is as follows:
 | 4711 | VoucherID |
 
 
-
-
-Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt" of "GS74RCJ835". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
+Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
 
 The  sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
 
