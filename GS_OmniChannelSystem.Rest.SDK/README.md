@@ -1009,6 +1009,49 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
     0QRA;8;1010,2,1020,1;626A
 ```
 
+A sample implementation in C# would look like this:
+
+``` csharp
+private string CreateQR(QRInfo info)
+{
+    StringBuilder sb = new StringBuilder();
+    sb.Append("0QR");
+    if(info.Articles != null && info.Articles.Any())
+    {
+        sb.Append("A;");
+        sb.Append(info.MemberID + ";");
+        foreach (var article in info.Articles)
+        {
+            if (article != info.Articles.First())
+                sb.Append(",");
+            sb.Append(article.Value+","+ article.Quantity);
+        }
+        sb.Append(";");
+    }
+    if (info.Vouchers != null && info.Vouchers.Any())
+    {
+        sb.Append("V;");
+        foreach (var voucher in info.Vouchers)
+        {
+            if (voucher != info.Vouchers.First())
+                sb.Append(",");
+            sb.Append(voucher);
+        }
+        sb.Append(";");
+    }
+
+    // MD5 Hash
+    var md5Hasher = MD5.Create();
+    var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("{Salt}" + sb.ToString()));
+    var sbMd5 = new StringBuilder();
+    for (var i = 0; i < data.Length; i++)
+        sbMd5.Append(data[i].ToString("x2"));
+    var md5 = sbMd5.ToString().ToUpper();
+    var result = sb.ToString() + md5.Substring(0, 2) + md5.Substring(md5.Length - 2, 2);
+    return result;
+}
+    
+
 ## Validate coupons
 
 This function validates a list of Coupons and returns the affected Items
