@@ -1012,6 +1012,19 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
 A sample implementation in C# would look like this:
 
 ``` csharp
+public class QRArticle
+{
+    public int Quantity { get; set; }
+    public string Value { get; set; }
+}
+
+public class QRInfo
+{
+    public long? MemberID { get; set; }
+    public QRArticle[] Articles { get; set; }
+    public long[] Vouchers { get; set; }
+}
+
 private string CreateQR(QRInfo info)
 {
     StringBuilder sb = new StringBuilder();
