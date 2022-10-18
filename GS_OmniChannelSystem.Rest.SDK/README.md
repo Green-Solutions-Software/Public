@@ -1050,7 +1050,26 @@ private string CreateQR(QRInfo info)
     var result = sb.ToString() + md5.Substring(0, 2) + md5.Substring(md5.Length - 2, 2);
     return result;
 }
-    
+
+var x = CreateQR(new QRInfo()
+{
+    MemberID = 8,
+    Articles = new QRArticle[]
+    {
+        new QRArticle()
+        {
+            Quantity = 2,
+            Value = "1010"
+        },
+        new QRArticle()
+        {
+            Quantity = 1,
+            Value = "1020"
+        }
+    }
+});
+MessageBox.Show("x");
+```
 
 ## Validate coupons
 
