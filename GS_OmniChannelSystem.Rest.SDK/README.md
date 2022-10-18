@@ -1081,7 +1081,7 @@ var x = CreateQR(new QRInfo()
         }
     }
 });
-MessageBox.Show("x");
+MessageBox.Show(x);
 ```
 
 ## Validate coupons
