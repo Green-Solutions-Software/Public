@@ -972,6 +972,10 @@ Coupons are discounts on products or product groups. These both types are suppor
     - Example: Mini aloe vera for every purchase
     - Example: 1 potting soil 60l 
 
+- Multiple Points on basket
+    - Example: 2x Points
+    - Example: 4x Points
+
 The coupons are configurated in the Green Solutions Cloud Software backend so that they do not have to be created additionally in the ERP system. Therefore all products and product groups of the ERP system need to be exported (e.g. as JSON) and uploaded to the Green Solutions Cloud Software. In the Green Solutions Cloud Software backend one can create the coupon and then map it with the product or product group of the ERP system.
 The ultimate user would activate all coupons (e.g. in the app) so that they can be redeemed at the cash desk. The ultimate user shows his loyalty card (e.g. QR code), which not only contains his loyalty card number, but also all activated coupons. The user can then be identified and assigned via the loyalty card number. After that one would validate the individual coupons against Green Solutions Cloud Software API using the MemberID, CouponID, LocationID. If the coupon is valid, the request returns the associated meta data, such as product or your product group of the ERP system and the numerical or percentage discount.
 
@@ -7154,9 +7158,10 @@ public enum MessageDirection {
         "TotalCosts":9.97, // Gesamtkosten
         "Currency": "EUR", // Währung,
         "Vouchers" : [ // Coupons
-            {"ID" : 100},
-            {"ID" : 200},
-            {"ID" : 300}
+            {"ID" : 100}, // 5€ Discount
+            {"ID" : 200}, // Giveaway article
+            {"ID" : 300}, // Not used coupon
+            {"ID" : 400}  // 4x Points
         ],    
         "Items":[
             {
@@ -7223,6 +7228,11 @@ public enum MessageDirection {
             "Voucher" : {"ID" : 300},
             "TotalDiscount" : null,
             "Items" : null
+        },
+        // 4x Points
+        {
+            "Voucher" : {"ID" : 400},
+            "ExtraPoints" : 4
         }
     ]
 
