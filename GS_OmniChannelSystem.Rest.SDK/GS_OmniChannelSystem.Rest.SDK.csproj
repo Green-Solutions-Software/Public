@@ -52,6 +52,7 @@
     <Compile Include="Args\SearchArgs.cs" />
     <Compile Include="Args\SearchCrossArgs.cs" />
     <Compile Include="Args\UploadArgs.cs" />
+    <Compile Include="Classes\QRCode.cs" />
     <Compile Include="Classes\Web.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\Strings.cs" />

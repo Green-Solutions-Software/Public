@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GS.PflanzenCMS.Rest.SDK.Classes.QRCode;
 
 namespace GS_PflanzenCMS.Net.Rest.Sample
 {
@@ -1596,6 +1597,29 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.Write("Token: " + token);
         }
 
+        static void createQRCode(ContextUOW unitOfWork)
+        {
+            var code = CreateQR(new QRInfo()
+            {
+                MemberID = 8,
+                Articles = new QRArticle[]
+                {
+                    new QRArticle()
+                    {
+                        Quantity = 2,
+                        Value = "1010"
+                    },
+                    new QRArticle()
+                    {
+                        Quantity = 1,
+                        Value = "1020"
+                    }
+                }
+            });
+            Console.WriteLine();
+            Console.Write("Code: " + code);
+        }
+
         static void Main(string[] args)
         {
 
@@ -1628,6 +1652,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("(13) - Availabilities");
                 Console.WriteLine("(14) - Positionupdates");
                 Console.WriteLine("(15) - Create Linktarget");
+                Console.WriteLine("(16) - Create QR - Code");
                 Console.WriteLine("");
                 Console.Write("Choice: ");
 
@@ -1694,6 +1719,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                         case "15":
                             Console.Clear();
                             createArticleLinkTarget(unitOfWork);
+                            break;
+                        case "16":
+                            Console.Clear();
+                            createQRCode(unitOfWork);
                             break;
                         default:
                             Console.WriteLine("Choice not supported");
