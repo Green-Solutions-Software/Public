@@ -1059,7 +1059,7 @@ A sample implementation in C# would look like this:
 
         // MD5 Hash
         var md5Hasher = MD5.Create();
-        var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("GS74RCJ835" + sb.ToString()));
+        var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("{salt}" + sb.ToString()));
         var sbMd5 = new StringBuilder();
         for (var i = 0; i < data.Length; i++)
             sbMd5.Append(data[i].ToString("x2"));
