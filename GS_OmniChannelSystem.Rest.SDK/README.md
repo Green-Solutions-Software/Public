@@ -994,6 +994,7 @@ The format is as follows:
 | -- | List of activated Coupons|
 | V | Start Vouchers |
 | 4711 | VoucherID |
+| NR | Print no receipt |
 
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
@@ -1012,61 +1013,66 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
 A sample implementation in C# would look like this:
 
 ``` csharp
-public class QRArticle
-{
-    public int Quantity { get; set; }
-    public string Value { get; set; }
-}
-
-public class QRInfo
-{
-    public long? MemberID { get; set; }
-    public QRArticle[] Articles { get; set; }
-    public long[] Vouchers { get; set; }
-}
-
-private string CreateQR(QRInfo info)
-{
-    StringBuilder sb = new StringBuilder();
-    sb.Append("0QR");
-    if(info.Articles != null && info.Articles.Any())
+    public class QRArticle
     {
-        sb.Append("A;");
-        sb.Append(info.MemberID + ";");
-        foreach (var article in info.Articles)
-        {
-            if (article != info.Articles.First())
-                sb.Append(",");
-            sb.Append(article.Value+","+ article.Quantity);
-        }
-        sb.Append(";");
-    }
-    if (info.Vouchers != null && info.Vouchers.Any())
-    {
-        sb.Append("V;");
-        foreach (var voucher in info.Vouchers)
-        {
-            if (voucher != info.Vouchers.First())
-                sb.Append(",");
-            sb.Append(voucher);
-        }
-        sb.Append(";");
+        public int Quantity { get; set; }
+        public string Value { get; set; }
     }
 
-    // MD5 Hash
-    var md5Hasher = MD5.Create();
-    var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("{Salt}" + sb.ToString()));
-    var sbMd5 = new StringBuilder();
-    for (var i = 0; i < data.Length; i++)
-        sbMd5.Append(data[i].ToString("x2"));
-    var md5 = sbMd5.ToString().ToUpper();
-    var result = sb.ToString() + md5.Substring(0, 2) + md5.Substring(md5.Length - 2, 2);
-    return result;
-}
+    public class QRInfo
+    {
+        public long? MemberID { get; set; }
+        public QRArticle[] Articles { get; set; }
+        public long[] Vouchers { get; set; }
+        public bool NoReceipt { get; set; }
+    }
+
+    private string CreateQR(QRInfo info)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("0QR");
+        if(info.Articles != null && info.Articles.Any())
+        {
+            sb.Append("A;");
+            sb.Append(info.MemberID + ";");
+            foreach (var article in info.Articles)
+            {
+                if (article != info.Articles.First())
+                    sb.Append(",");
+                sb.Append(article.Value+","+ article.Quantity);
+            }
+            sb.Append(";");
+        }
+        if (info.Vouchers != null && info.Vouchers.Any())
+        {
+            sb.Append("V;");
+            foreach (var voucher in info.Vouchers)
+            {
+                if (voucher != info.Vouchers.First())
+                    sb.Append(",");
+                sb.Append(voucher);
+            }
+            sb.Append(";");
+        }
+        if(info.NoReceipt)
+            sb.Append("NR;");
+
+        // MD5 Hash
+        var md5Hasher = MD5.Create();
+        var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("GS74RCJ835" + sb.ToString()));
+        var sbMd5 = new StringBuilder();
+        for (var i = 0; i < data.Length; i++)
+            sbMd5.Append(data[i].ToString("x2"));
+        var md5 = sbMd5.ToString().ToUpper();
+        var result = sb.ToString() + md5.Substring(0, 2) + md5.Substring(md5.Length - 2, 2);
+        return result;
+    }
 
 var x = CreateQR(new QRInfo()
 {
+    // Logged in Member
     MemberID = 8,
+    // Articles
     Articles = new QRArticle[]
     {
         new QRArticle()
@@ -1079,7 +1085,9 @@ var x = CreateQR(new QRInfo()
             Quantity = 1,
             Value = "1020"
         }
-    }
+    },
+    // Print no receipt
+    NoReceipt = true
 });
 MessageBox.Show(x);
 ```
