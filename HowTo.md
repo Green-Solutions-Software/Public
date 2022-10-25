@@ -95,7 +95,7 @@ As an innovative software company, we have specialized 100% in the horticultural
 This example shows how a connection to the middleware is defined via a vendor, a token and the endpoint.
 
 ```csharp
-var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpoint>");
+var unitOfWork = new ContextUOW("<vendor>", "<endpoint>", "<token>");
 // GET api/account/info
 var token = unitOfWork.Account.Info(); 
 ```
