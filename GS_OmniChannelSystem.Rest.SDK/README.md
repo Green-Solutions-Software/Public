@@ -1102,7 +1102,7 @@ This function validates a list of Coupons and returns the affected Items
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/coupons/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
+| api/debitcards/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
 
 Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
@@ -1112,7 +1112,7 @@ Devalues a coupon
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Bon |
+| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Bon |
 
 # Messages
 
