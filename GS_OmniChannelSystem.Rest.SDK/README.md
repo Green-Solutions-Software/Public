@@ -86,6 +86,8 @@
 
 > [Create QR - Code Linktarget](#Create-QR---Code-Linktarget)
 
+> [Commonly used article fields](#commonly-used-article-fields)
+
 **[Price lists](#Price-lists)**
 
 > [Price lists - Entries](#price-list-entries)
@@ -650,6 +652,46 @@ Create a new linktarget for a QR Code
 | --- | --- | --- | --- |
 | extkey |**string**| Article Number ||
 | info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
+
+## Commonly used article fields
+| **Surname** | **Format** | **Category** | **Description** |
+| --- | --- | --- | --- |
+| Item number | Text,necessary| base data | Designates a key to identify the article |
+| EAN | text, optional | Base data |Designates the EAN code  |
+| Name 1 |text, required | Base data| Denotes the primary name of the article |
+| Name 2 | text, optional| base data| Denotes the secondary name of the article |
+| Info |text, optional |base data | Designates further information about the article |
+| Inventory | number, optional |transaction data | Denotes the available stock in the system |
+| Packaging Unit |number, optional | base data | Designates the packaging unit |
+| Currency | Text,necessary |base data | Denotes the currency |
+| Price | number, required | transaction data| Denotes the price |
+| Strike price | number, optional|transaction data | Denotes the strike price |
+| Graduated prices |number, optional |transaction data | Defines the prices from a certain quantity |
+| Tax class |number, required | base data| Denotes the tax class in percent |
+| VAT included |bool , required | base data | Indicates whether the price of the item includes VAT |
+| From quantity |number, optional | base data| Denotes the quantity from which the price applies. Scale prices can be defined in this field. See graduated prices |
+|Description| text, optional| content| Denotes the text for the description. The description must not be longer than 50-70 words. |
+| Colours| text, optional| attribute| Denotes the colors. These can be specified comma separated |
+| Photos || content| Photos |
+| Files | | content| Files |
+| Categories | text, optional|base data |Denotes the categories.|
+| Keywords |text, optional | base data | Denotes the keywords. |
+| Inactive | boolean , optional| transaction data| Indicates whether the item is inactive. Unless an article has been marked as active, it will not be displayed |
+|Width from (in cm) |number, optional | attribute| Denotes the width of (in cm) |
+|Width to (in cm) |number, optional | attribute| Denotes the width to (in cm) |
+|Height from (in cm) |number, optional| attribute| Denotes the height of (in cm) |
+|Height to (in cm) |number, optional| attribute| Denotes the height to (in cm) |
+| Length from (in cm) |number, optional| attribute| the length (in cm) |
+| Length to (in cm) |number, optional| attribute| the length (in cm) |
+| weight of (in g) |number, optional| attribute|Denotes the weight of (in cm) |
+| weight to (in g) |number, optional| attribute|Denotes the weight to (in cm) |
+|Depth from (in cm) |number, optional| attribute| Denotes the depth of (in cm) |
+|Depth to (in cm) |number, optional| attribute| Denotes the depth to (in cm) |
+|Diameter from (in cm) |number, optional| attribute|Denotes the diameter from (in cm) |
+|Diameter to (in cm) |number, optional| attribute|Denotes the diameter up to (in cm) |
+| Packaging size| number, optional |base data | Denotes the packaging size |
+| Pack size unit| text, optional | base data | Designates the unit for the packaging size |
+
 
 ## Variants
 
