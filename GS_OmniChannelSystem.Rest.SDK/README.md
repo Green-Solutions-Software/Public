@@ -41,6 +41,8 @@
 
 > [Request events](#Request-events)
 
+> [Request events for member](#Request-events-for-member)
+
 > [Confirm event](#confirm-event)
 
 > [Trigger event](#trigger-event)
@@ -453,6 +455,23 @@ Returns a list of **[Event](#Event)** which have to be performed.
 > + If DebitCard is not null you have to update/import the debitcard
 > + If Owner is not null you have to update/import the member
 
+## Request events for member
+
+Returns a list of events for the ERP to perform which were not yet confirmed for a member
+
+**Function: GET** api/channels/events/{id}/member/{memberid}
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **id** |long | Channel ID | |
+| **memberid** |long | Member ID | |
+
+Returns a list of **[Event](#Event)** which have to be performed.
+
+> Remarks:
+> + If DebitCard is not null you have to update/import the debitcard
+> + If Owner is not null you have to update/import the member
+
 ## Confirm event
 
 Confirms an event as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
@@ -665,7 +684,7 @@ Create a new linktarget for a QR Code
 | Packaging Unit |number, optional | base data | Designates the packaging unit |
 | Currency | Text,necessary |base data | Denotes the currency |
 | Price | number, required | transaction data| Denotes the price |
-| Strike price | number, optional|transaction data | Denotes the strike price |
+| Old price | number, optional|transaction data | Denotes the old price which will be striked out |
 | Graduated prices |number, optional |transaction data | Defines the prices from a certain quantity |
 | Tax class |number, required | base data| Denotes the tax class in percent |
 | VAT included |bool , required | base data | Indicates whether the price of the item includes VAT |
