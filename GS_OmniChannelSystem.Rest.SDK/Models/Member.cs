@@ -34,6 +34,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public List<EntityReference> Articles { get; set; }
         public List<EntityReference> Roles { get; set; }
         public List<EntityReference> Rights { get; set; }
+        public List<EntityReference> Pricelists { get; set; }
         public List<CalculationGroupItem> Conditions { get; set; }
         public List<Contact> Contacts { get; set; } // N:1
         public string Description { get; set; }
