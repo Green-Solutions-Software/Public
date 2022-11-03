@@ -443,11 +443,7 @@ Transfers all existing loyalty card owners with rudimentary personal information
 
 Returns a list of events for the ERP to perform which were not yet confirmed
 
-**Function: GET** api/channels/events/{id}
-
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **id** |long | Channel ID | |
+**Function: GET** api/channels/events
 
 Returns a list of **[Event](#Event)** which have to be performed.
 
@@ -459,11 +455,10 @@ Returns a list of **[Event](#Event)** which have to be performed.
 
 Returns a list of events for the ERP to perform which were not yet confirmed for a member
 
-**Function: GET** api/channels/events/{id}/member/{memberid}
+**Function: GET** api/channels/events/member/{memberid}
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **id** |long | Channel ID | |
 | **memberid** |long | Member ID | |
 
 Returns a list of **[Event](#Event)** which have to be performed.
@@ -481,17 +476,15 @@ Confirms an event as processed. After it has processed it's no longer delivered 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **id** |long | Channel ID | |
-| **eventId** |long | Event ID | |
 
 ## Trigger event
 
 Triggers an event
 
-**Function: POST** api/channels/events/{id}/trigger
+**Function: POST** api/channels/events/trigger
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **id** |long | Channel ID | |
 | **BODY** |**[Event](#Event)** | Event | |
 
 
