@@ -249,6 +249,8 @@
 
 > [OrderStatus](#Orderstatus)
 
+> [PriceUnitType](#PriceUnitType)
+
 > [loyalty card](#Loyaltycard)
 
 > [Result](#Result)
@@ -3009,6 +3011,47 @@ public enum MessageDirection {
 
 "Articles" : null, // Array von ArtikelStatus 34.12
 
+}
+```
+
+## PriceUnitType
+ ```csharp
+    [Description("Stück")] // 0
+    Pcs,
+    [Description("Liter")] // 1
+    Liter,
+    [Description("Meter")] // 2
+    Meter,
+    [Description("Quadratmeter")] // 3
+    SquareMeter,
+    [Description("Kilogramm")] // 4
+    kg,
+    [Description("VE")] // 5
+    PackingUnit,
+    [Description("Zentimeter")] // 6
+    cm,
+    [Description("Gramm")] // 7
+    g,
+    [Description("Millimeter")] // 8
+    mm,
+    [Description("Milliliter")] // 9
+    ml,
+    [Description("Paket")] // 10
+    pk,
+    [Description("Tafel")] // 11
+    Plate,
+    [Description("Kubikmeter")] // 12
+    CubicMeter,
+    [Description("Bündel")] // 12
+    Bunch,
+    [Description("Lage")] // 12
+    Tray,
+    [Description("Karre")] // 12
+    CC,
+    [Description("Korn")] // 12
+    Grain,
+    [Description("Pille")] // 12
+    Pill
 }
 ```
 
