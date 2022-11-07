@@ -3042,15 +3042,15 @@ public enum MessageDirection {
     Plate,
     [Description("Kubikmeter")] // 12
     CubicMeter,
-    [Description("Bündel")] // 12
+    [Description("Bündel")] // 13
     Bunch,
-    [Description("Lage")] // 12
+    [Description("Lage")] // 14
     Tray,
-    [Description("Karre")] // 12
+    [Description("Karre")] // 15
     CC,
-    [Description("Korn")] // 12
+    [Description("Korn")] // 16
     Grain,
-    [Description("Pille")] // 12
+    [Description("Pille")] // 17
     Pill
 }
 ```
