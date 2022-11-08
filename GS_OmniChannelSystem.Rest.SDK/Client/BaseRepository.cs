@@ -78,9 +78,9 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             return this.context.Put<T>(this.resource + "/{id}", id, entity, properties);
         }
 
-        public virtual S Create(T entity)
+        public virtual T Create(T entity)
         {
-            return this.context.Post<T,S>(this.resource, entity);
+            return this.context.Post<T,T>(this.resource, entity);
         }
 
         public virtual U Create<U>(T entity) where U:class, new()

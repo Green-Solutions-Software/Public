@@ -29,7 +29,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Interfaces
         where S : GS.OmniChannelSystem.Rest.SDK.Models.Summary
     {
         Paginated<S> FindAll(string search, int pageIndex, int pageSize, string orderBy, string filter = null, string ids = null);
-        S Create(T entity);
+        T Create(T entity);
 
     }
 
