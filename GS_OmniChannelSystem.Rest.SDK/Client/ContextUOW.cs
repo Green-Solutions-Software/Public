@@ -37,6 +37,19 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             }
         }
 
+        public string[] Options
+        {
+            get
+            {
+                return Context.Options;
+            }
+            set
+            {
+                Context.Options = value;
+            }
+        }
+
+
         public string Endpoint
         {
             get

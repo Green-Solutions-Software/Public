@@ -88,6 +88,10 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
                 client.AddDefaultHeader("vendor", this.vendor);
 
             client.AddDefaultHeader("language", this.language);
+
+            foreach(var option in this.Options)
+                client.AddDefaultHeader("option", option);
+
             return client;
         }
 
@@ -391,6 +395,8 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
         public bool Invalidate { get; set; }
 
         public Type[] Types { get; internal set; }
+
+        public string[] Options { get; set; }
 
 
         public Context(string connectionString, string language)
