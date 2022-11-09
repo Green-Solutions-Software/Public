@@ -89,8 +89,11 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
             client.AddDefaultHeader("language", this.language);
 
-            foreach(var option in this.Options)
-                client.AddDefaultHeader("option", option);
+            if(this.Options != null)
+            {
+                foreach(var option in this.Options)
+                    client.AddDefaultHeader("option", option);
+            }
 
             return client;
         }
