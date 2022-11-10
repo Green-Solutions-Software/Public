@@ -85,6 +85,8 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public string External_CMS_Number { get; set; }
         public string OwnerName { get; internal set; }
         public string ConfirmationMessage { get; set; }
+        public string OwnerNumber { get; set; }
+
         public bool TaxPlus { get; set; }
         // Kasse
         public string Seller { get; set; }
