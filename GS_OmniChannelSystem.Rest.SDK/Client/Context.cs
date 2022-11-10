@@ -409,6 +409,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             set
             {
                 this.options = value;
+                this.client = null;
             }
         }
 
