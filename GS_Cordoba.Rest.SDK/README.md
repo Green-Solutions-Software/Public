@@ -13,9 +13,13 @@ As an innovative software company, we have specialized 100% in the horticultural
 
 **[Authorization](#Authorization)**
 
-**[Search](#Search)**
+**[Search Plants](#Search-Plants)**
 
 **[Query Plant](#QueryPlant)**
+
+**[Search Pictures](#Search-Pictures)**
+
+**[Download Picture](#Download-Picture)**
 
 # Authorization
 
@@ -27,16 +31,15 @@ var var unitOfWork = new ContextUOW("<vendor>", "<token>", "<endpoint>");
 var token = unitOfWork.Account.Info(); 
 ```
 
-# Search
+# Search Plants
 
-This example shows how to seach a specific plant
+This example shows how to search a specific plant
 
 ```csharp
 var args = new GS.Cordoba.Rest.SDK.Models.SearchArgs();
 args.Types = new string[] { typeof(Plant).Name };
 var plants = unitOfWork.Search.Search("acer", 1, 10, null, args).Result.Items;
 ```
-
 
 # Query Plant
 
@@ -48,3 +51,16 @@ Console.WriteLine("Name: " + plant.Name);
 Console.WriteLine("Name 2: " + plant.Name2);
 ```
 
+# Search Pictures
+
+This example shows how to search a specific picture
+
+```csharp
+var args = new GS.Cordoba.Rest.SDK.Models.SearchArgs();
+args.Types = new string[] { typeof(PlantPicture).Name };
+var pictures = unitOfWork.Search.Search("acer", 1, 10, null, args).Result.Items;
+```
+
+# Download Picture
+
+For safety reasons please ask for details
