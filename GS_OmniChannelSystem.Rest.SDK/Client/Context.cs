@@ -72,7 +72,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
         protected RestClient createClient(bool needToken = true)
         {
-            if (client != null)
+            if (client != null && this.Options == null)
                 return client;
 
             if (string.IsNullOrEmpty(this.endpoint))
