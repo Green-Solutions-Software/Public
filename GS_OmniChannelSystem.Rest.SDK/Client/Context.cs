@@ -72,30 +72,30 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
         protected RestClient createClient(bool needToken = true)
         {
-            if (client != null && this.Options == null)
-                return client;
+            if (this.client != null)
+                return this.client;
 
             if (string.IsNullOrEmpty(this.endpoint))
                 throw new ArgumentNullException("endpoint");
             if (string.IsNullOrEmpty(this.token) && needToken)
                 throw new ArgumentNullException("token");
 
-            client = new RestClient(this.endpoint);
+            this.client = new RestClient(this.endpoint);
             if (!string.IsNullOrEmpty(this.token))
-                client.AddDefaultHeader("token", this.token);
+                this.client.AddDefaultHeader("token", this.token);
 
             if (!string.IsNullOrEmpty(this.vendor))
-                client.AddDefaultHeader("vendor", this.vendor);
+                this.client.AddDefaultHeader("vendor", this.vendor);
 
-            client.AddDefaultHeader("language", this.language);
+            this.client.AddDefaultHeader("language", this.language);
 
-            if(this.Options != null)
+            if (this.Options != null)
             {
-                foreach(var option in this.Options)
-                    client.AddDefaultHeader("option", option);
+                foreach (var option in this.Options)
+                    this.client.AddDefaultHeader("option", option);
             }
 
-            return client;
+            return this.client;
         }
 
         protected string getKey(RestRequest request)
@@ -399,7 +399,18 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
 
         public Type[] Types { get; internal set; }
 
-        public string[] Options { get; set; }
+        protected string[] options = null;
+        public string[] Options 
+        {
+            get
+            {
+                return this.options;
+            }
+            set
+            {
+                this.options = value;
+            }
+        }
 
 
         public Context(string connectionString, string language)
