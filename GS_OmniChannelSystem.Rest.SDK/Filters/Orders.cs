@@ -42,6 +42,9 @@ namespace GS.OmniChannelSystem.Rest.SDK.Filters
             if (Status != null)
                 dict["status"] = ((short)Status).ToString();
 
+            if (OwnerMemberID != null)
+                dict["ownermemberid"] = this.OwnerMemberID.ToString();
+
             if (CreatedOnFrom != null)
             {
                 if (CreatedOnTo == null)
@@ -80,5 +83,8 @@ namespace GS.OmniChannelSystem.Rest.SDK.Filters
         // Erstellt
         public DateTime? CreatedOnFrom { get; set; }
         public DateTime? CreatedOnTo { get; set; }
+
+        // Kunde
+        public long? OwnerMemberID { get; set; }
     }
 }
