@@ -1037,120 +1037,7 @@ The ultimate user would activate all coupons (e.g. in the app) so that they can 
 
 ## Scan a QR Code
 
-The QR Code will be shown from the customer to the Cashier and has to be scanned and decoded.
-
-The format is as follows:
-
-| String | Description | 
-| -- | -- |
-| 0QR | Fixed header |
-| -- | Logged in Member |
-| M | Start Member |
-| 4722 | MemberID |
-| -- | List of Articles (Scan & Go) |
-| A | Start Articles |
-| 8 | Quantity |
-| 1010 | PLU |
-| -- | List of activated Coupons|
-| V | Start Vouchers |
-| 4711 | VoucherID |
-| NR | Print no receipt |
-
-
-Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
-
-The  sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
-
-```
-    GS74RCJ8350QRA;8;1010,2,1020,1;
-```
-
-of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the content of the barcode is therefore:
-```
-    0QRA;8;1010,2,1020,1;626A
-```
-
-A sample implementation in C# would look like this:
-
-``` csharp
-    public class QRArticle
-    {
-        public int Quantity { get; set; }
-        public string Value { get; set; }
-    }
-
-    public class QRInfo
-    {
-        public long? MemberID { get; set; }
-        public QRArticle[] Articles { get; set; }
-        public long[] Vouchers { get; set; }
-        public bool NoReceipt { get; set; }
-    }
-
-    private string CreateQR(QRInfo info)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.Append("0QR");
-        if(info.Articles != null && info.Articles.Any())
-        {
-            sb.Append("A;");
-            sb.Append(info.MemberID + ";");
-            foreach (var article in info.Articles)
-            {
-                if (article != info.Articles.First())
-                    sb.Append(",");
-                sb.Append(article.Value+","+ article.Quantity);
-            }
-            sb.Append(";");
-        }
-        if (info.Vouchers != null && info.Vouchers.Any())
-        {
-            sb.Append("V;");
-            foreach (var voucher in info.Vouchers)
-            {
-                if (voucher != info.Vouchers.First())
-                    sb.Append(",");
-                sb.Append(voucher);
-            }
-            sb.Append(";");
-        }
-        if(info.NoReceipt)
-            sb.Append("NR;");
-
-        // MD5 Hash
-        var md5Hasher = MD5.Create();
-        var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("{salt}" + sb.ToString()));
-        var sbMd5 = new StringBuilder();
-        for (var i = 0; i < data.Length; i++)
-            sbMd5.Append(data[i].ToString("x2"));
-        var md5 = sbMd5.ToString().ToUpper();
-        var result = sb.ToString() + md5.Substring(0, 2) + md5.Substring(md5.Length - 2, 2);
-        return result;
-    }
-
-var x = CreateQR(new QRInfo()
-{
-    // Logged in Member
-    MemberID = 8,
-    // Articles
-    Articles = new QRArticle[]
-    {
-        new QRArticle()
-        {
-            Quantity = 2,
-            Value = "1010"
-        },
-        new QRArticle()
-        {
-            Quantity = 1,
-            Value = "1020"
-        }
-    },
-    // Print no receipt
-    NoReceipt = true
-});
-MessageBox.Show(x);
-```
+The QR Code will be shown from the customer to the Cashier and has to be scanned and decoded. You have to scan it and give it to **[Validate coupons](#Validate-coupons)**.
 
 ## Validate coupons
 
@@ -7201,6 +7088,7 @@ public enum MessageDirection {
 ```json
 {
 	"Date":"2021-07-27T08:21:48",
+    "BarcodeQR" : "0QRA;8;1010,2,1020,1;", // gescannter QR-Code
 	"OwnerMemberID":192,
 	"OrderStatus":3,
 	"TotalCosts":9.97, // Gesamtkosten
@@ -7208,12 +7096,9 @@ public enum MessageDirection {
 	"External_CMS_TransactionID": 0,
 	"External_COR_Owner": "Warenwirtschaft",
 	"Currency": "EUR", // Währung,
-    "Vouchers" : [ // Aktivierte Coupons
-        {"ID" : 100},
-        {"ID" : 200}
-    ],    
 	"Items":[
 		{
+            "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
             "ArticleKey" : "4755884", // Artikelnummer
             "EAN" : "123456789012", // EAN
             "Info":"Schneckentod 150g", // Bon Zeile
@@ -7222,6 +7107,7 @@ public enum MessageDirection {
             "TotalPrice":5.98, // Gesamtrpreis
             "TaxRate":19.00, // MwSt. Satz
             "TotalDiscount" : null, // Rabatt
+            "PriceNet" : false, // Rabattierbar?
             "Categories":[ // Kategorien
                 {"ID" : 1, Number = "4711"},
             ],
@@ -7230,6 +7116,7 @@ public enum MessageDirection {
             ]
 		},
 		{
+            "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
             "ArticleKey" : "4755884", // Artikelnummer
             "EAN" : "123456789012", // EAN
             "Info":"Blumenkelle",
@@ -7251,41 +7138,53 @@ public enum MessageDirection {
         "Date":"2021-07-27T08:21:48",
         "Chainstore" : "Standort", // Nummer des Standort
         "OwnerMemberID":192, // Member ID
+        "OwnerMemberNumber":"4711", // Kundennummer
         "OrderStatus":3,
         "TotalCosts":9.97, // Gesamtkosten
         "Currency": "EUR", // Währung,
+        // Coupons aktiviert
         "Vouchers" : [ // Coupons
             {"ID" : 100}, // 5€ Discount
             {"ID" : 200}, // Giveaway article
             {"ID" : 300}, // Not used coupon
             {"ID" : 400}  // 4x Points
         ],    
+        "TotalDiscountAbsolut" : null, // Rabatt absolut
+        "TotalDiscountPercent" : null, // Rabatt Prozent
         "Items":[
             {
+                "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
                 "ArticleKey" : "4755884", // Artikelnummer
                 "EAN" : "123456789012", // EAN
                 "Info":"Schneckentod 150g", // Bon Zeile
-                "Price":2.99, // Einzelpreis
                 "Quantity":2, // Menge
-                "TotalPrice":5.98, // Gesamtrpreis
-                "TaxRate":19.00, // MwSt. Satz
-                "TotalDiscount" : null, // Rabatt
-                "Categories":[ // Kategorien
+                "TotalDiscountAbsolut" : null, // Rabatt absolut
+                "TotalDiscountPercent" : null, // Rabatt Prozent
+                // Kategorien
+                "Categories":[ 
                     {"ID" : 1, Number = "4711"},
                 ],
-                "ArticleGroups":[ // Warengruppen / Artikelgruppen
+                // Warengruppen / Artikelgruppen
+                "ArticleGroups":[ 
                     {"ID" : 1, Number = "4711"},                
+                ],
+                // Coupons angewendet
+                "Vouchers" : [ 
+                    {"ID" : 100}
                 ]
             },
             {
+                "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
                 "ArticleKey" : "4755884", // Artikelnummer
                 "EAN" : "123456789012", // EAN
                 "Info":"Blumenkelle",
-                "Price":3.99,
                 "Quantity":1,
-                "TotalPrice":3.99,
-                "TaxRate":19.00,
-                "TotalDiscount" : 10.0 // Rabatt
+                "TotalDiscountAbsolut" : 10, // Rabatt absolut
+                "TotalDiscountPercent" : null, // Rabatt Prozent
+                // Coupons angewendet
+                "Vouchers" : [ 
+                    {"ID" : 200}
+                ]
             }
         ]
     },
