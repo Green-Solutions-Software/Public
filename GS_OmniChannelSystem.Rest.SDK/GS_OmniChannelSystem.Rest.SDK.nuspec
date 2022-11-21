@@ -13,5 +13,10 @@
     <releaseNotes>First Release.</releaseNotes>
     <copyright>Green-Solutions Software GmbH</copyright>
     <tags>GreenSolutions Green-Solutions</tags>
+	<dependencies>
+      <group>
+        <dependency id="RestSharp" version="106.15.0" />
+      </group>
+    </dependencies>
   </metadata>
 </package>
