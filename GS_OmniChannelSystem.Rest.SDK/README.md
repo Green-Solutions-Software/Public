@@ -35,9 +35,11 @@
 
 **[Reports](#Reports)**
 
-**[Loyalty cards](#Loyalty-cards)**
+**[Loyalty program](#Loyalty-program)**
 
 > [Transfer existing loyalty card owners](#Transfer-existing-loyalty-card-owners)
+
+> [Transfer categories](#Transfer-categories)
 
 > [Request events](#Request-events)
 
@@ -440,6 +442,15 @@ Transfers all existing loyalty card owners with rudimentary personal information
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
 | **BODY** |**[DebitCardMember[]](#DebitCardMember)**| Members| Array with all the Debit Card Members|
+
+## Transfer categories
+Transfers all existing external categories relevant for the loyalty program
+
+**Function: POST** /api/categories/external
+
+| **Parameter** | **Type** | **Description** | **Remark** |
+| --- | --- | --- | --- |
+| **BODY** |**[ExtCategory[]](#ExtCategory)**| Categories | Array with all the external Categories|
 
 ## Request events
 
@@ -2968,6 +2979,16 @@ public enum MessageDirection {
             "EMail" : "info@muster.de" // E-Mail Adresse
         }
     }
+}
+```
+
+## ExtCategory
+```json
+{
+    "CategoryID" : 1,
+    "Name" : "Name",
+    "Key" : "Number",
+    "Parent" : {"ID" : 5}
 }
 ```
 
