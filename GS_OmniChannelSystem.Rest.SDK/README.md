@@ -7089,10 +7089,10 @@ public enum MessageDirection {
 {
     "BarcodeQR" : "0QRA;8;1010,2,1020,1;", // gescannter QR-Code
     "Chainstore" : "Standort", // Nummer des Standort
-	"TotalCosts":9.97, // Gesamtkosten
-	"Currency": "EUR", // Währung,
-	"Items":[
-		{
+    "TotalCosts":9.97, // Gesamtkosten
+    "Currency": "EUR", // Währung,
+    "Items":[
+        {
             "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
             "ArticleKey" : "4755884", // Artikelnummer
             "EAN" : "123456789012", // EAN
@@ -7109,8 +7109,8 @@ public enum MessageDirection {
             "ArticleGroups":[ // Warengruppen / Artikelgruppen
                 {"ID" : 1, Number = "4711"},                
             ]
-		},
-		{
+        },
+        {
             "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
             "ArticleKey" : "4755884", // Artikelnummer
             "EAN" : "123456789012", // EAN
@@ -7120,8 +7120,8 @@ public enum MessageDirection {
             "TotalPrice":3.99,
             "TaxRate":19.00,
             "TotalDiscount" : 10.0 // Rabatt
-		}
-	]
+        }
+    ]
 }
 ```
 
