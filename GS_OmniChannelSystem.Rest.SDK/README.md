@@ -7134,7 +7134,6 @@ public enum MessageDirection {
         "Chainstore" : "Standort", // Nummer des Standort
         "OwnerMemberID":192, // Member ID
         "OwnerMemberNumber":"4711", // Kundennummer
-        "OrderStatus":3,
         "TotalCosts":9.97, // Gesamtkosten
         "Currency": "EUR", // Währung,
         // Coupons aktiviert
