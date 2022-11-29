@@ -7087,7 +7087,7 @@ public enum MessageDirection {
 # ValidateCashdeskArgs
 ```json
 {
-    "BarcodeQR" : "0QRA;8;1010,2,1020,1;", // gescannter QR-Code
+    "BarcodeQR" : "xxx", // gescannter QR-Code
     "Chainstore" : "Standort", // Nummer des Standort
     "TotalCosts":9.97, // Gesamtkosten
     "Currency": "EUR", // Währung,
@@ -7105,9 +7105,6 @@ public enum MessageDirection {
             "PriceNet" : false, // Rabattierbar?
             "Categories":[ // Kategorien
                 {"ID" : 1, Number = "4711"},
-            ],
-            "ArticleGroups":[ // Warengruppen / Artikelgruppen
-                {"ID" : 1, Number = "4711"},                
             ]
         },
         {
@@ -7154,14 +7151,6 @@ public enum MessageDirection {
                 "Quantity":2, // Menge
                 "TotalDiscountAbsolut" : null, // Rabatt absolut
                 "TotalDiscountPercent" : null, // Rabatt Prozent
-                // Kategorien
-                "Categories":[ 
-                    {"ID" : 1, Number = "4711"},
-                ],
-                // Warengruppen / Artikelgruppen
-                "ArticleGroups":[ 
-                    {"ID" : 1, Number = "4711"},                
-                ],
                 // Coupons angewendet
                 "Vouchers" : [ 
                     {"ID" : 100}
