@@ -59,7 +59,7 @@
 
 > [Validate coupons](#Validate-coupons)
 
-> [Devalue coupons](#Devalue-coupons)
+> [Redeem coupons](#Devalue-coupons)
 
 **[Videos](#Videos)**
 
@@ -1049,13 +1049,13 @@ This function validates a list of Coupons and returns the affected Items
 
 Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
-## Devalue coupons
+## Redeem coupons
 
-Devalues a coupon 
+Redeem coupons 
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Bon |
+| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
 
 # Messages
 
@@ -7087,14 +7087,9 @@ public enum MessageDirection {
 # ValidateCashdeskArgs
 ```json
 {
-	"Date":"2021-07-27T08:21:48",
     "BarcodeQR" : "0QRA;8;1010,2,1020,1;", // gescannter QR-Code
-	"OwnerMemberID":192,
-	"OrderStatus":3,
+    "Chainstore" : "Standort", // Nummer des Standort
 	"TotalCosts":9.97, // Gesamtkosten
-	"External_CMS_OrderID": 4711,
-	"External_CMS_TransactionID": 0,
-	"External_COR_Owner": "Warenwirtschaft",
 	"Currency": "EUR", // Währung,
 	"Items":[
 		{
@@ -7197,6 +7192,7 @@ public enum MessageDirection {
             "TotalDiscount" : 5, // 5€ Discount
             "Items" : [ // Affected product
                 {
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
                     "ArticleKey" : "4755884", // Artikelnummer
                     "EAN" : "123456789012", // EAN
                     "Info":"Schneckentod 150g", // Bon Zeile
@@ -7212,6 +7208,7 @@ public enum MessageDirection {
             "TotalDiscount" : null, 
             "Items" : [ // new giveaway article
                 {
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
                     "ArticleKey" : "4755887", // Artikelnummer
                     "EAN" : "123456789012", // EAN
                     "Info":"Schneckentod 150g", // Bon Zeile
