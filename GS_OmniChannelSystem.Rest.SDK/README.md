@@ -152,6 +152,8 @@
 
 > [Barcodes](#Barcodes)
 
+> [Query Voucher Balance Page](#Query-Voucher-Balance-Page)
+
 **[Messages](#Messages)**
 > [Retreive messages for an order](#Retreive-messages-for-an-order)
 
@@ -631,7 +633,7 @@ Returns the new Member (please refer to **[Member](#Member)**)
 | permanent |**bool**| Delete permanent | If permanent all personal data will be anonymized |
 
 Returns the new Member (please refer to **[Member](#Member)**)
-  
+
 ## Edit Customer Dialog
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
@@ -1023,6 +1025,17 @@ The customer cancels a product offline that was paid for with a voucher. Now thi
 The following barcode types are currently available for printing:
 - code 128
 - EAN 13
+
+# Query Voucher Balance Page
+
+Returns a URL to a page where the current balance for the voucher is shown. This Url can be printed anywhere on the voucher to help the customer to check the current balance
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/vouchers/query/balance|ID| **long** | ID of the voucher|
+
+As a return, the dialog is returned (please refer **[dialog](#dialog)**)
+
 
 # Coupons
 
