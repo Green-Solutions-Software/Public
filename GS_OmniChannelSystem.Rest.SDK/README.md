@@ -37,6 +37,8 @@
 
 **[Loyalty program](#Loyalty-program)**
 
+> [Loyalty Cards](#Loyalty-cards)
+
 > [Transfer existing loyalty card owners](#Transfer-existing-loyalty-card-owners)
 
 > [Transfer categories](#Transfer-categories)
@@ -430,7 +432,9 @@ As a return, an AccountInfo is returned with all information about the logged-in
 | url| api/reports|
 | --- | --- |
 
-# Loyalty cards
+# Loyalty program
+
+## Loyalty Cards
 
 | url| api/debitcards|
 | --- | --- |
