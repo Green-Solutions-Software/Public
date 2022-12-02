@@ -7165,22 +7165,25 @@ public enum MessageDirection {
 {
     // Bon drucken?
     "PrintReceipt" : false,
+    // Member ID
+    "OwnerMemberID":192,
+     // Kundennummer
+    "OwnerMemberNumber":"4711",
     
+    // Aktivierte Gutscheine
+    "Vouchers" : [ // Coupons
+        {"ID" : 100}, // 5€ Discount
+        {"ID" : 200}, // Giveaway article
+        {"ID" : 300}, // Not used coupon
+        {"ID" : 400}  // 4x Points
+    ],    
+
     // Warenkorb
     "CashDesk" : {
         "Date":"2021-07-27T08:21:48",
         "Chainstore" : "Standort", // Nummer des Standort
-        "OwnerMemberID":192, // Member ID
-        "OwnerMemberNumber":"4711", // Kundennummer
         "TotalCosts":9.97, // Gesamtkosten
         "Currency": "EUR", // Währung,
-        // Coupons aktiviert
-        "Vouchers" : [ // Coupons
-            {"ID" : 100}, // 5€ Discount
-            {"ID" : 200}, // Giveaway article
-            {"ID" : 300}, // Not used coupon
-            {"ID" : 400}  // 4x Points
-        ],    
         "TotalDiscountAbsolut" : null, // Rabatt absolut
         "TotalDiscountPercent" : null, // Rabatt Prozent
         "Items":[
