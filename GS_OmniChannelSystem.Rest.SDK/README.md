@@ -7163,6 +7163,9 @@ public enum MessageDirection {
 # ValidateCashdeskResult
 ```json
 {
+    // Bon drucken?
+    "PrintReceipt" : false,
+    
     // Warenkorb
     "CashDesk" : {
         "Date":"2021-07-27T08:21:48",
