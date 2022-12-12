@@ -490,11 +490,11 @@ Returns a list of **[Event](#Event)** which have to be performed.
 
 Confirms an event as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
 
-**Function: PUT** api/channels/events/{id}/done
+**Function: PUT** api/channels/events/done
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **id** |long | Channel ID | |
+| **eventId** |long | Event ID | |
 
 ## Trigger event
 
