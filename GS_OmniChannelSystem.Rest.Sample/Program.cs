@@ -1614,7 +1614,12 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                         Quantity = 1,
                         Value = "1020"
                     }
-                }
+                },
+                Vouchers = new long[]
+                {
+                    4711
+                },
+                NoReceipt = true
             });
             Console.WriteLine();
             Console.Write("Code: " + code);

@@ -63,7 +63,7 @@
 
 > [Validate coupons](#Validate-coupons)
 
-> [Redeem coupons](#Devalue-coupons)
+> [Redeem coupons](#Redeem-coupons)
 
 **[Videos](#Videos)**
 
@@ -1073,7 +1073,7 @@ This function validates a list of Coupons and returns the affected Items
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/debitcards/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
+| api/debitcards/coupons/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
 
 Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
@@ -1083,7 +1083,7 @@ Redeem coupons
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
 | --- | --- | --- | --- |
-| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
+| api/debitcards/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
 
 # Messages
 
@@ -7165,39 +7165,34 @@ public enum MessageDirection {
 {
     // Bon drucken?
     "PrintReceipt" : false,
-    // Member ID
-    "OwnerMemberID":192,
-     // Kundennummer
-    "OwnerMemberNumber":"4711",
     
-    // Aktivierte Gutscheine
-    "Vouchers" : [ // Coupons
-        {"ID" : 100}, // 5€ Discount
-        {"ID" : 200}, // Giveaway article
-        {"ID" : 300}, // Not used coupon
-        {"ID" : 400}  // 4x Points
-    ],    
+    // Kunde
+    "Owner": {
+        // Member ID
+        "ID" : 47,
+        // Kundennummer
+        "Number" : "4711"
+    },
 
+    // Rabatt auf Einkauf
+    "TotalDiscountAbsolut" : "10", // 10€
+    
     // Warenkorb
     "CashDesk" : {
-        "Date":"2021-07-27T08:21:48",
-        "Chainstore" : "Standort", // Nummer des Standort
-        "TotalCosts":9.97, // Gesamtkosten
-        "Currency": "EUR", // Währung,
-        "TotalDiscountAbsolut" : null, // Rabatt absolut
-        "TotalDiscountPercent" : null, // Rabatt Prozent
         "Items":[
             {
                 "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
                 "ArticleKey" : "4755884", // Artikelnummer
                 "EAN" : "123456789012", // EAN
                 "Info":"Schneckentod 150g", // Bon Zeile
+                "Price":2.99, // Einzelpreis
                 "Quantity":2, // Menge
-                "TotalDiscountAbsolut" : null, // Rabatt absolut
-                "TotalDiscountPercent" : null, // Rabatt Prozent
-                // Coupons angewendet
-                "Vouchers" : [ 
-                    {"ID" : 100}
+                "TotalPrice":5.98, // Gesamtrpreis
+                "TaxRate":19.00, // MwSt. Satz
+                "TotalDiscount" : null, // Rabatt
+                "PriceNet" : false, // Rabattierbar?
+                "Categories":[ // Kategorien
+                    {"ID" : 1, Number = "4711"},
                 ]
             },
             {
@@ -7205,13 +7200,11 @@ public enum MessageDirection {
                 "ArticleKey" : "4755884", // Artikelnummer
                 "EAN" : "123456789012", // EAN
                 "Info":"Blumenkelle",
+                "Price":3.99,
                 "Quantity":1,
-                "TotalDiscountAbsolut" : 10, // Rabatt absolut
-                "TotalDiscountPercent" : null, // Rabatt Prozent
-                // Coupons angewendet
-                "Vouchers" : [ 
-                    {"ID" : 200}
-                ]
+                "TotalPrice":3.99,
+                "TaxRate":19.00,
+                "TotalDiscount" : 10.0 // Rabatt
             }
         ]
     },
@@ -7221,10 +7214,10 @@ public enum MessageDirection {
         // 5€ Discount
         {
             "Voucher" : {"ID" : 100},
-            "TotalDiscount" : 5, // 5€ Discount
             "Items" : [ // Affected product
                 {
                     "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "TotalDiscountAbsolut" : 5, // 5 €
                     "ArticleKey" : "4755884", // Artikelnummer
                     "EAN" : "123456789012", // EAN
                     "Info":"Schneckentod 150g", // Bon Zeile
@@ -7237,10 +7230,10 @@ public enum MessageDirection {
         // Giveaway article
         {
             "Voucher" : {"ID" : 200},
-            "TotalDiscount" : null, 
             "Items" : [ // new giveaway article
                 {
                     "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "TotalDiscountAbsolut" : null, // 5 €
                     "ArticleKey" : "4755887", // Artikelnummer
                     "EAN" : "123456789012", // EAN
                     "Info":"Schneckentod 150g", // Bon Zeile
@@ -7248,16 +7241,15 @@ public enum MessageDirection {
                 }
             ]
         },
-        // Not used coupon
-        {
-            "Voucher" : {"ID" : 300},
-            "TotalDiscount" : null,
-            "Items" : null
-        },
         // 4x Points
         {
             "Voucher" : {"ID" : 400},
             "ExtraPoints" : 4
+        },
+        // Not used coupon
+        {
+            "Voucher" : {"ID" : 300},
+            "Items" : null
         }
     ]
 
