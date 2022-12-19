@@ -60,7 +60,7 @@ namespace GS.PflanzenCMS.Rest.SDK.Classes
             // MD5 Hash
             var md5Hasher = MD5.Create();
             // Please replace the salt with the secret salt !!!
-            var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("GS74RCJ835" + sb.ToString()));
+            var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes("salt" + sb.ToString()));
             var sbMd5 = new StringBuilder();
             for (var i = 0; i < data.Length; i++)
                 sbMd5.Append(data[i].ToString("x2"));
