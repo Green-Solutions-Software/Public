@@ -7142,7 +7142,7 @@ public enum MessageDirection {
             "TotalDiscount" : null, // Rabatt
             "PriceNet" : false, // Rabattierbar?
             "Categories":[ // Kategorien
-                {"ID" : 1, Number = "4711"},
+                {"ID" : 1, "Number" : "4711"},
             ]
         },
         {
