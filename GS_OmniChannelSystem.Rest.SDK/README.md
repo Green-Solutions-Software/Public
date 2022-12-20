@@ -1062,15 +1062,12 @@ The ultimate user would activate all coupons (e.g. in the app) so that they can 
 ## Scan a QR Code
 
 
-The QR Code will be shown from the customer to the caSHIER and has to be scanned and decoded.
+The QR Code will be shown from the customer to the cashier and has to be scanned and decoded.
 
 The format is as follows:
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- | 
-| api/vouchers/cancel|voucherID| **long** | Voucher ID| |
-
 | String | Description | 
+| -- | -- | 
 | 0QR | Fixed header |
 | A | Start Articles |
 | 8 | Quantity |
