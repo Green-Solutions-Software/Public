@@ -61,10 +61,6 @@
 
 > [Scan a QR Code](#Scan-a-QR-Code)
 
-> [Validate coupons](#Validate-coupons)
-
-> [Redeem coupons](#Redeem-coupons)
-
 **[Videos](#Videos)**
 
 **[Chainstores](#Chainstores)**
@@ -1065,25 +1061,38 @@ The ultimate user would activate all coupons (e.g. in the app) so that they can 
 
 ## Scan a QR Code
 
-The QR Code will be shown from the customer to the Cashier and has to be scanned and decoded. You have to scan it and give it to **[Validate coupons](#Validate-coupons)**.
 
-## Validate coupons
+The QR Code will be shown from the customer to the caSHIER and has to be scanned and decoded.
 
-This function validates a list of Coupons and returns the affected Items
-
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/debitcards/coupons/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
-
-Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
-
-## Redeem coupons
-
-Redeem coupons 
+The format is as follows:
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/debitcards/coupons/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
+| --- | --- | --- | --- | 
+| api/vouchers/cancel|voucherID| **long** | Voucher ID| |
+
+| String | Description | 
+| 0QR | Fixed header |
+| A | Start Articles |
+| 8 | Quantity |
+| 1010 | PLU |
+| V | Start Vouchers |
+| 4711 | Voucher - Codes |
+| M | Start Member |
+| 4722 | Member Number |
+
+
+Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt" of "GS74RCJ835". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
+
+The already mentioned sample QR "0QRA;8;1010,2,1020,1;" (Customer 8, 2*PLU 1010 and 1*1020) would thus by prefixing the secret part to
+
+```
+    GS74RCJ8350QRA;8;1010,2,1020,1;
+```
+
+of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the content of the barcode is therefore:
+```
+    0QRA;8;1010,2,1020,1;626A
+```
 
 # Messages
 

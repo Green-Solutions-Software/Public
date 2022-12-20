@@ -1601,23 +1601,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             var code = CreateQR(new QRInfo()
             {
-                MemberID = 8,
-                Articles = new QRArticle[]
+                MemberNumber = "1",
+                Vouchers = new string[]
                 {
-                    new QRArticle()
-                    {
-                        Quantity = 2,
-                        Value = "1010"
-                    },
-                    new QRArticle()
-                    {
-                        Quantity = 1,
-                        Value = "1020"
-                    }
-                },
-                Vouchers = new long[]
-                {
-                    4711
+                    "12"
                 },
                 NoReceipt = true
             });

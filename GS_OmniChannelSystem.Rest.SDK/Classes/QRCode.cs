@@ -17,9 +17,9 @@ namespace GS.PflanzenCMS.Rest.SDK.Classes
 
         public class QRInfo
         {
-            public long? MemberID { get; set; }
+            public string MemberNumber { get; set; }
             public QRArticle[] Articles { get; set; }
-            public long[] Vouchers { get; set; }
+            public string[] Vouchers { get; set; }
             public bool NoReceipt { get; set; }
         }
 
@@ -27,10 +27,10 @@ namespace GS.PflanzenCMS.Rest.SDK.Classes
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("0QR");
-            if (info.MemberID != null)
+            if (info.MemberNumber != null)
             {
                 sb.Append("M;");
-                sb.Append(info.MemberID + ";");
+                sb.Append(info.MemberNumber + ";");
             }
             if (info.Articles != null && info.Articles.Any())
             {
