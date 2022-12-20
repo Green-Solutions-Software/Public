@@ -41,8 +41,6 @@
 
 > [Transfer existing loyalty card owners](#Transfer-existing-loyalty-card-owners)
 
-> [Transfer categories](#Transfer-categories)
-
 > [Request events](#Request-events)
 
 > [Request events for member](#Request-events-for-member)
@@ -59,7 +57,7 @@
 
 **[Coupons](#Coupons)**
 
-> [Scan a QR Code](#Scan-a-QR-Code)
+> [Scan a QR-Code](#Scan-a-QR-Code)
 
 **[Videos](#Videos)**
 
