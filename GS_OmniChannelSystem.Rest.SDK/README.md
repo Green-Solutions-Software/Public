@@ -1082,6 +1082,7 @@ The format is as follows:
 | 4711 | Voucher - Codes |
 | M | Start Member |
 | 4722 | Member Number |
+| NR | Print no receipt |
 
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
