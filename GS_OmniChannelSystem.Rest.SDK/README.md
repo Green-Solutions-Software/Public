@@ -233,6 +233,10 @@
 
 > [MessageType](#MessageType)
 
+> [EventType](#EventType)
+
+> [ChannelType](#ChannelType)
+
 > [TransactionStatus](#Transactionstatus)
 
 > [BasketType](#Baskettype)
@@ -280,6 +284,8 @@
 > [ValidateCashdeskResult](#ValidateCashdeskResult)
 
 > [RegisterArgs](#RegisterArgs)
+
+> [TriggerEventArgs](#TriggerEventArgs)
 
 **[Dialogs](#dialogs)**
 
@@ -494,13 +500,15 @@ Confirms an event as processed. After it has processed it's no longer delivered 
 
 ## Trigger event
 
-Triggers an event
+Trigger events in the following cases:
+
+- Coupon / Bonus has been used
 
 **Function: POST** api/channels/events/trigger
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **BODY** |**[Event](#Event)** | Event | |
+| **BODY** |**[TriggerEventArgs](#TriggerEventArgs)** | Event | |
 
 
 ## Request new loyalty cards
@@ -2740,6 +2748,36 @@ public enum MessageType
 }
 
 ```
+## EventType
+
+```csharp
+public enum EventType : short
+{
+    NewDebitCard = 45, // Neue Kundenkarte erstellt
+    RegisteredDebitCard = 46, // Neue Kundenkarte erstellt auf Basis bestehender Kundenkarte
+    MemberChangedProfile = 47, // Kundendaten geändert
+    DebitCardValidateOtherIdentityConfirmation = 48, // Mitarbeiter hat Kundenkarte verifiziert (Sonstige Identitätsbestätigung
+    DebitCardNotFound = 50, // Kunde hat Kundenkarte wurde aber im System nicht gefunden
+    DebitCardValidateTelephoneVerificationOfIdentity = 51, // Mitarbeiter hat Kundenkarte verifiziert (telefonische Identitätsbestätigung)
+    DebitCardValidateOnSiteVerificationOfIdentity = 52, // Mitarbeiter hat Kundenkarte verifiziert (Identitätsbestätigung vor Ort)
+    DebitCardValidateByMember = 53, // Kunde hat Kundenkarte verifiziert
+    DebitCardCantValidateByMember = 54, // Kunde konnte Kundenkarte nicht verifizieren
+    VoucherDevalued = 55 // Gutschein/Prämie/Extra Punkte eingelöst
+}
+
+```
+
+## ChannelType
+
+```csharp
+public enum ChannelType : short
+{
+    Connection = 2, // ERP
+    App = 3 // App
+}
+
+```
+
 ## OrderStatusType
 
 ```csharp
@@ -7041,6 +7079,16 @@ public enum MessageDirection {
   "External_COR_Owner": null,
   "RowVersion": "#0#0#0#0#0#2#54#177",
   "Deleted": false
+}
+```
+
+# TriggerEventArgs
+```json
+{
+	"Type" : 55, // Event Type (Voucher devalued) (see **[EventType](#EventType)**)
+    "Channels" : [3], // Which channels to trigger on (3 = App, see **[ChannelType](#ChannelType)**)
+    "MemberNumber" : "4711", // Member Number
+    "VoucherKeyValues" : ["ABC", "DEF"] // Vouchers to devalue
 }
 ```
 
