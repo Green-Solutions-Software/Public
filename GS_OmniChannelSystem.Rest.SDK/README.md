@@ -7085,12 +7085,14 @@ public enum MessageDirection {
 # TriggerEventArgs
 ```json
 {
-	"Type" : 55, // Event Type (Voucher devalued) (see **[EventType](#EventType)**)
-    "Channels" : [3], // Which channels to trigger on (3 = App, see **[ChannelType](#ChannelType)**)
+	"Type" : 55, // Event Type (Voucher devalued)
+    "Channels" : [3], // Which channels to trigger on (3 = App)
     "MemberNumber" : "4711", // Member Number
     "VoucherKeyValues" : ["ABC", "DEF"] // Vouchers to devalue
 }
 ```
+
+See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)**) for a list of options
 
 # RegisterArgs
 ```json
