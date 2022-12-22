@@ -7092,7 +7092,7 @@ public enum MessageDirection {
 }
 ```
 
-See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)**) for a list of options
+See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)** for a list of options
 
 # RegisterArgs
 ```json
