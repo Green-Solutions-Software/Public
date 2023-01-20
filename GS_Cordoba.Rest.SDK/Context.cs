@@ -415,6 +415,17 @@ namespace GS.Cordoba.Rest
             return get<CalendarItem>("api/calendaritems/{id}", id);
         }
 
+        // PlantPictures
+        public Task<Paginated<PlantPicture.Summary>> FindPlantPictures(string search, int pageIndex, int pageSize, string orderBy)
+        {
+            return find<PlantPicture.Summary>("api/plantpictures", search, pageIndex, pageSize, orderBy);
+        }
+
+        public Task<PlantPicture> GetPlantPicture(long id)
+        {
+            return get<PlantPicture>("api/plantpictures/{id}", id);
+        }
+
         // Search
         public Task<PaginatedSearch> Search(string search, int pageIndex, int pageSize, string orderBy, SearchArgs args)
         {

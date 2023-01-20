@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -471,4 +472,42 @@ namespace GS.Cordoba.Rest
         Assigned_,
         Approved
     };
+
+    public enum PlantShapeType : short
+    {
+        [Description("Stamm")]
+        Stamm,
+        [Description("Kugel")]
+        Kugel,
+        [Description("Pyramide")]
+        Pyramid,
+        [Description("Spirale")]
+        Spiral,
+        [Description("Zylinder")]
+        Cylinder,
+        [Description("Würfel")]
+        Cube,
+        [Description("Kegel")]
+        Cone,
+        [Description("Pompon")]
+        Pompon,
+        [Description("Spalier")]
+        Cordon,
+        [Description("Figur")]
+        Figure
+    }
+
+    public enum PlantPictureType : short
+    {
+        [Description("Freisteller")]
+        Free,
+        [Description("Emotional")]
+        Emotional,
+        [Description("Klassisch")]
+        Classic,
+        [Description("Foto")]
+        Photo,
+        [Description("360 Grad")]
+        ThreeSixty
+    }
 }

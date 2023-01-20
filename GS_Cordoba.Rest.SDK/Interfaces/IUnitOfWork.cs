@@ -11,6 +11,7 @@ namespace GS.Cordoba.Rest.SDK.Interfaces
         string Token { get; set; }
         string Endpoint { get; set; }
         ILanguagesRepository Languages { get; }
+        IPlantPicturesRepository PlantPictures { get; }
         ISearchRepository Search { get; }
         ICurrenciesRepository Currencies { get; }
         ICalendarItemsRepository CalendarItems { get; }

@@ -59,6 +59,7 @@ namespace GS.Cordoba.Rest
         }
 
         public ILanguagesRepository Languages => new CORLanguagesRepository(this.context);
+        public IPlantPicturesRepository PlantPictures => new CORPlantPicturesRepository(this.context);
         public ICurrenciesRepository Currencies => new CORCurrenciesRepository(this.context);
         public ICalendarItemsRepository CalendarItems => new CORCalendarItemsRepository(this.context);
         public IMembersRepository Members => new CORMembersRepository(this.context);
