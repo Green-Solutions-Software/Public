@@ -492,11 +492,11 @@ Returns a list of **[Event](#Event)** which have to be performed.
 
 Confirms an event as processed. After it has processed it's no longer delivered via **[Request events](#Request-events)**
 
-**Function: PUT** api/channels/events/done
+**Function: POST** api/channels/events/confirm/{id}
 
 | **Parameter** | **Type** | **Description** | **Remark** |
 | --- | --- | --- | --- |
-| **eventId** |long | Event ID | |
+| **id** |long | Event ID | |
 
 ## Trigger event
 
