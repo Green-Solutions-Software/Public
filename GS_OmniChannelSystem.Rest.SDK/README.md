@@ -7088,7 +7088,8 @@ public enum MessageDirection {
 	"Type" : 55, // Event Type (Voucher devalued)
     "Channels" : [3], // Which channels to trigger on (3 = App)
     "MemberNumber" : "4711", // Member Number
-    "VoucherKeyValues" : ["ABC", "DEF"] // Vouchers to devalue
+    "VoucherKeyValues" : ["ABC", "DEF"], // Vouchers to devalue
+    "Processed" : false // Processed or not. If not it will show up in your event queue
 }
 ```
 
