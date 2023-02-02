@@ -1090,8 +1090,11 @@ The format is as follows:
 | 4711 | Voucher - Codes |
 | M | Start Member |
 | 4722 | Member Number |
+| D | Start Debit Card |
+| 4722 | Debit Card Number |
+| P | Start Payment |
+| 11.50 | Amount to pay via Debit Card (11.50 €) |
 | NR | Print no receipt |
-
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
 
