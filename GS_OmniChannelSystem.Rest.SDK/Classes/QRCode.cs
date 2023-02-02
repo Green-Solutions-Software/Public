@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,6 +22,8 @@ namespace GS.PflanzenCMS.Rest.SDK.Classes
             public QRArticle[] Articles { get; set; }
             public string[] Vouchers { get; set; }
             public bool NoReceipt { get; set; }
+            public string DebitCardNumber { get; set; }
+            public double? Amount { get; set; }
         }
 
         public static string CreateQR(QRInfo info)
@@ -53,6 +56,16 @@ namespace GS.PflanzenCMS.Rest.SDK.Classes
                     sb.Append(voucher);
                 }
                 sb.Append(";");
+            }
+            if (info.DebitCardNumber != null)
+            {
+                sb.Append("D;");
+                sb.Append(info.DebitCardNumber + ";");
+            }
+            if (info.Amount != null)
+            {
+                sb.Append("P;");
+                sb.Append(Math.Round(info.Amount.Value, 2).ToString(new CultureInfo("en-US")) + ";");
             }
             if (info.NoReceipt)
                 sb.Append("NR;");

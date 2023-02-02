@@ -1606,7 +1606,9 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 {
                     "12"
                 },
-                NoReceipt = true
+                NoReceipt = true,
+                DebitCardNumber = "42",
+                Amount = 11.5
             });
             Console.WriteLine();
             Console.Write("Code: " + code);
