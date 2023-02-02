@@ -54,5 +54,10 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
         {
             return FindAll(search, pageIndex, pageSize, orderBy, filter != null ? filter.ToString() : (string)null, ids != null ? GS.OmniChannelSystem.Rest.SDK.Classes.Strings.ListStringCombine(ids,m=>m.ToString(),",") : null);
         }
+
+        public Order GetForShop(string external_key, string[] properties = null)
+        {
+            return this.context.Get<Order>(this.resource + "/all/ext?ext=" + HttpUtility.UrlEncode(external_key), properties);
+        }
     }
 }
