@@ -6,7 +6,7 @@ jobs:
   publish:
     name: publish Cordoba SDK package
     if: startsWith(github.ref, 'refs/tags/cordoba-sdk')
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows]
     timeout-minutes: 15
     env:
       restoreProject: "GS_Cordoba.Rest.SDK/GS_Cordoba.Rest.SDK.csproj"
