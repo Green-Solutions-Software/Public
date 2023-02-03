@@ -20,5 +20,6 @@ namespace GS.OmniChannelSystem.Rest.SDK.Interfaces
         Dialog Dialog();
         Order UpdateStatus(long id, OrderTransactionArgs args);
         OrderUpdates[] UpdatePositions(long id, OrderTransactionPositions positions);
+        Order GetForShop(string external_key, string[] properties = null);
     }
 }
