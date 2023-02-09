@@ -592,6 +592,7 @@ instead of id|
 | **valid** |boolean| Valid or not|
 | **errors** |string| If not valid, the reason can be given here. This text is then displayed to the customer when he tries to buy with the card. Otherwise please enter empty|
 | **turnover** |doubles| Current turnover on the customer card|
+| **points** |doubles| Current points on the customer card|
 | **bonus** |doubles| Current Bonus on the customer card|
 
 Returns the updated Loyalty Card **[DebitCard](#DebitCard)**
