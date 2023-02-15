@@ -2496,6 +2496,11 @@ As soon as cached content has been changed in the database, the corresponding ca
     "RowVersion": "#0#0#0#0#0#3#93#115",
     "External_Key": null
   },
+  "DebitCard": {
+    "ID": 1,
+    "RowVersion": "#0#0#0#0#0#3#93#115",
+    "External_Key": null
+  },
   "VoucherCode": null,
   "External_Key": null,
   "External_COR_ID": null,
