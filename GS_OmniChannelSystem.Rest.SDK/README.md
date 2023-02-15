@@ -3034,7 +3034,7 @@ public enum MessageDirection {
     "DebitCard":{
         "KeyValue" : "4711" // Kundenkartennummer
     },
-    "ContactAddresses" :{
+    "ContactAddresses" :[{
         "Address" : {
             "Street" : "Musterstrasse", // Straße
             "HouseNumber" : "3", // Hausnummer
@@ -3050,7 +3050,7 @@ public enum MessageDirection {
             "Mobile" : "1123/4567", // Mobil
             "EMail" : "info@muster.de" // E-Mail Adresse
         }
-    }
+    }]
 }
 ```
 
