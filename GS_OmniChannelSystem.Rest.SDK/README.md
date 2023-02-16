@@ -2762,9 +2762,9 @@ public enum MessageType
 ```csharp
 public enum EventType : short
 {
-    NewDebitCard = 45, // Neue Kundenkarte erstellt
-    RegisteredDebitCard = 46, // Neue Kundenkarte erstellt auf Basis bestehender Kundenkarte
-    MemberChangedProfile = 47, // Kundendaten geändert
+    NewDebitCard = 45, // Created a new loyalty card
+    RegisteredDebitCard = 46, // New customer card created based on existing customer card
+    MemberChangedProfile = 47, // Customer data changed
     DebitCardValidateOtherIdentityConfirmation = 48, // Mitarbeiter hat Kundenkarte verifiziert (Sonstige Identitätsbestätigung
     DebitCardNotFound = 50, // Kunde hat Kundenkarte wurde aber im System nicht gefunden
     DebitCardValidateTelephoneVerificationOfIdentity = 51, // Mitarbeiter hat Kundenkarte verifiziert (telefonische Identitätsbestätigung)
@@ -6953,7 +6953,16 @@ public enum MessageDirection {
   "EventID": 2,
   "Info": "New DebitCard",
   "Key": null,
-  "Type": 0
+  "Type": 0,
+  "Owner": {
+        // Member ID
+        "ID" : 47,
+        // Kundennummer
+        "Number" : "4711"
+    },
+  "DebitCard": { 
+    "ID" : 1
+  }
 }
 ```
 
