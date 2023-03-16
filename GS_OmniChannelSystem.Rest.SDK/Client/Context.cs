@@ -6,6 +6,7 @@ using GS.OmniChannelSystem.Rest.SDK.Models;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -979,6 +980,48 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
         public void ClearLocalCache()
         {
             this.cache.Clear();
+        }
+
+        // Vouchers
+        public FoundVoucher FindVoucher(string keyValue, string chainstore = null, bool external = false, bool exception = false)
+        {
+            var dict = new Dictionary<string, object>();
+            dict["keyValue"] = keyValue;
+            dict["chainstore"] = chainstore;
+            dict["exception"] = exception;
+            return get<FoundVoucher>("api/vouchers/find", dict);
+        }
+
+        public Payment ReserveVoucher(long voucherID, long voucherCodeID, double amount, string currencyName, string info, int minutes, string chainstore = null)
+        {
+            var dict = new Dictionary<string, object>();
+            dict["voucherID"] = voucherID;
+            dict["voucherCodeID"] = voucherCodeID;
+            dict["amount"] = Math.Round(amount, 2).ToString(new CultureInfo("en-US"));
+            dict["currencyName"] = currencyName;
+            dict["info"] = info;
+            dict["minutes"] = minutes;
+            dict["chainstore"] = chainstore;
+            return post<Payment>("api/vouchers/reserve", dict);
+        }
+
+        public Payment CancelVoucher(long voucherID, long voucherCodeID, double amount, string currencyName, string info, string chainstore = null)
+        {
+            var dict = new Dictionary<string, object>();
+            dict["voucherID"] = voucherID;
+            dict["voucherCodeID"] = voucherCodeID;
+            dict["amount"] = Math.Round(amount, 2).ToString(new CultureInfo("en-US"));
+            dict["currencyName"] = currencyName;
+            dict["info"] = info;
+            dict["chainstore"] = chainstore;
+            return post<Payment>("api/vouchers/cancel", dict);
+        }
+
+        public Voucher PayVoucher(long paymentID)
+        {
+            var dict = new Dictionary<string, object>();
+            dict["paymentID"] = paymentID;
+            return post<Voucher>("api/vouchers/pay", dict);
         }
 
     }

@@ -15,5 +15,25 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
         {
             
         }
+
+        public FoundVoucher Find(string keyValue, string chainstore = null, bool external = false, bool exception = false)
+        {
+            return this.context.FindVoucher(keyValue, chainstore, exception);
+        }
+
+        public Payment Reserve(long voucherID, long voucherCodeID, double amount, string currencyName, string info, int minutes, string chainstore = null)
+        {
+            return this.context.ReserveVoucher(voucherID, voucherCodeID, amount, currencyName, info, minutes, chainstore);
+        }
+
+        public Payment Cancel(long voucherID, long voucherCodeID, double amount, string currencyName, string info, string chainstore = null)
+        {
+            return this.context.CancelVoucher(voucherID, voucherCodeID, amount, currencyName, info, chainstore);
+        }
+
+        public Models.Voucher Pay(long paymentID)
+        {
+            return this.context.PayVoucher(paymentID);
+        }
     }
 }
