@@ -1597,6 +1597,24 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.Write("Token: " + token);
         }
 
+        static void payWithVoucher(ContextUOW unitOfWork)
+        {
+            Console.WriteLine();
+            Console.Write("Code: ");
+            var code = Console.ReadLine();
+            var foundVoucher = unitOfWork.Vouchers.Find(code);
+            if (foundVoucher == null)
+                throw new Exception("Voucher not found: " + code);
+
+            // Reserve a payment
+            var payment = unitOfWork.Vouchers.Reserve(foundVoucher.VoucherID, foundVoucher.VoucherCodeID, 5, "EUR", "Test", 5);
+
+            // Execute the payment
+            var voucher = unitOfWork.Vouchers.Pay(payment.PaymentID);
+
+            Console.WriteLine($"Remaining: {voucher.Remaining}");            
+        }
+
         static void createQRCode(ContextUOW unitOfWork)
         {
             var code = CreateQR(new QRInfo()
@@ -1647,6 +1665,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                 Console.WriteLine("(14) - Positionupdates");
                 Console.WriteLine("(15) - Create Linktarget");
                 Console.WriteLine("(16) - Create QR - Code");
+                Console.WriteLine("(17) - Pay with Voucher");
                 Console.WriteLine("");
                 Console.Write("Choice: ");
 
@@ -1717,6 +1736,10 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
                         case "16":
                             Console.Clear();
                             createQRCode(unitOfWork);
+                            break;
+                        case "17":
+                            Console.Clear();
+                            payWithVoucher(unitOfWork);
                             break;
                         default:
                             Console.WriteLine("Choice not supported");
