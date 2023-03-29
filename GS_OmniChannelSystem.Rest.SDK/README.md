@@ -1081,14 +1081,14 @@ The QR Code will be shown from the customer to the cashier and has to be scanned
 
 The format is as follows:
 
-| String | Description | 
+| String | Description | Comment|
 | -- | -- | 
 | 0QR | Fixed header |
 | A | Start Articles |
 | 8 | Quantity |
 | 1010 | PLU |
 | V | Start Vouchers |
-| 4711 | Voucher - Codes |
+| 4711 | Voucher - Codes (comma separated) | Could by a Voucher Code for a discount or a paid voucher (e.g. G15Q PNVJ 1T8L 1QL7)
 | M | Start Member |
 | 4722 | Member Number |
 | D | Start Debit Card |
@@ -1096,6 +1096,7 @@ The format is as follows:
 | P | Start Payment |
 | 11.50 | Amount to pay via Debit Card (11.50 €) |
 | NR | Print no receipt |
+
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
 
