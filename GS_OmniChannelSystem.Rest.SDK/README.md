@@ -944,6 +944,7 @@ The file is returned as a return(please refer **[Files](#file)** )
 | api/vouchers/create|Surname| **string** | Name for the new voucher| |
 |amount| **double** | amount| |
 |name| **string** | currency(e.g. EUR) | |
+|ownerNumber| **string** | Customer Number for the ultimate user (see Member.Number) | |
 |info| **string** | An information that is visibly stored with the voucher| |
 |deleted| **boolean** | Create deleted|
 
