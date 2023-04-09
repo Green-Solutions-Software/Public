@@ -1088,14 +1088,19 @@ The format is as follows:
 | A | Start Articles ||
 | 8 | Quantity ||
 | 1010 | PLU ||
+| | | |
 | V | Start Vouchers ||
 | 4711 | Voucher - Codes (comma separated) | Could by a Voucher Code for a discount or a paid voucher (e.g. G15Q PNVJ 1T8L 1QL7)|
+| | | |
 | M | Start Member ||
 | 4722 | Member Number ||
+| | | |
 | D | Start Debit Card ||
 | 4722 | Debit Card Number ||
+| | | |
 | P | Start Payment ||
 | 11.50 | Amount to pay via Debit Card (11.50 €) ||
+| | | |
 | NR | Print no receipt ||
 
 
