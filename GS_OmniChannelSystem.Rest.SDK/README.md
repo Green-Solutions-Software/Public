@@ -7113,7 +7113,7 @@ public enum MessageDirection {
 {
 	"Type" : 55, // Event Type (Voucher devalued)
     "Channels" : [3], // Which channels to trigger on (3 = App)
-    "MemberNumber" : "4711", // Member Number
+    "MemberNumber" : "4711", // Member Number (Member.Number)
     "VoucherKeyValues" : ["ABC", "DEF"], // Vouchers to devalue
     "Processed" : false // Processed or not. If not it will show up in your event queue
 }
@@ -7171,16 +7171,13 @@ See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)** for a list 
 {
 	"Date":"2021-07-27T08:21:48",
 	"OwnerMemberID":192,
+    "OwnerMemberNumber": "4711", // Member.Number (could be used instead of OwnerMemberID)
 	"OrderStatus":3,
 	"TotalCosts":9.97, // Gesamtkosten
 	"External_CMS_OrderID": 4711,
 	"External_CMS_TransactionID": 0,
 	"External_COR_Owner": "Warenwirtschaft",
 	"Currency": "EUR", // Währung,
-    "Vouchers" : [ // Aktivierte Coupons
-        {"ID" : 100},
-        {"ID" : 200}
-    ],    
 	"Items":[
 		{
             "ArticleKey" : "4755884", // Artikelnummer
