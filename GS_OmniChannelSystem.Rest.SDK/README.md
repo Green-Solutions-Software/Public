@@ -7169,43 +7169,37 @@ See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)** for a list 
 # CreateCashdeskArgs
 ```json
 {
-	"Date":"2021-07-27T08:21:48",
-	"OwnerMemberID":192,
+    "Date": "2021-07-27T08:21:48",
+    "OwnerMemberID": 192,
     "OwnerMemberNumber": "4711", // Member.Number (could be used instead of OwnerMemberID)
-	"OrderStatus":3,
-	"TotalCosts":9.97, // Gesamtkosten
-	"External_CMS_OrderID": 4711,
-	"External_CMS_TransactionID": 0,
-	"External_COR_Owner": "Warenwirtschaft",
-	"Currency": "EUR", // Währung,
-	"Items":[
-		{
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
-            "Info":"Schneckentod 150g", // Bon Zeile
-            "Price":2.99, // Einzelpreis
-            "Quantity":2, // Menge
-            "TotalPrice":5.98, // Gesamtrpreis
-            "TaxRate":19.00, // MwSt. Satz
-            "TotalDiscount" : null, // Rabatt
-            "Categories":[ // Kategorien
-                {"ID" : 1, Number = "4711"},
-            ],
-            "ArticleGroups":[ // Warengruppen / Artikelgruppen
-                {"ID" : 1, Number = "4711"},                
-            ]
-		},
-		{
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
-            "Info":"Blumenkelle",
-            "Price":3.99,
-            "Quantity":1,
-            "TotalPrice":3.99,
-            "TaxRate":19.00,
-            "TotalDiscount" : 10.0 // Rabatt
-		}
-	]
+    "OrderStatus": 3,
+    "TotalCosts": 9.97, // Gesamtkosten
+    "External_CMS_OrderID": 4711,
+    "External_CMS_TransactionID": 0,
+    "External_COR_Owner": "Warenwirtschaft",
+    "Currency": "EUR", // Währung,
+    "Items": [
+        {
+            "ArticleKey": "4755884", // Artikelnummer
+            "EAN": "123456789012", // EAN
+            "Info": "Schneckentod 150g", // Bon Zeile
+            "Price": 2.99, // Einzelpreis
+            "Quantity": 2, // Menge
+            "TotalPrice": 5.98, // Gesamtrpreis
+            "TaxRate": 19.00, // MwSt. Satz
+            "TotalDiscount": null // Rabatt            
+        },
+        {
+            "ArticleKey": "4755884", // Artikelnummer
+            "EAN": "123456789012", // EAN
+            "Info": "Blumenkelle",
+            "Price": 3.99,
+            "Quantity": 1,
+            "TotalPrice": 3.99,
+            "TaxRate": 19.00,
+            "TotalDiscount": 10.0 // Rabatt
+        }
+    ]
 }
 ```
 
