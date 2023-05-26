@@ -510,4 +510,14 @@ namespace GS.Cordoba.Rest
         [Description("360 Grad")]
         ThreeSixty
     }
+
+    public enum PriorityType : short
+    {
+        [Description("Niedrig")]
+        Low,
+        [Description("Mittel")]
+        Medium,
+        [Description("Hoch")]
+        High
+    }
 }

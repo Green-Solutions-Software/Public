@@ -107,4 +107,9 @@ namespace GS.Cordoba.Rest.SDK.Models
         }
     }
 
+    public class EntityReferenceWithISO : EntityReference
+    {
+        public string ISO { get; set; }
+    }
+
 }
