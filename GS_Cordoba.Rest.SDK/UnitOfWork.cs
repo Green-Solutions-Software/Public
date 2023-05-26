@@ -77,6 +77,7 @@ namespace GS.Cordoba.Rest
         public IFormatsRepository Formats => new CORFormatsRepository(this.context);
         public IBasketsRepository Baskets => new CORBasketsRepository(this.context);
         public INewsRepository News => new CORNewsRepository(this.context);
+        public IVideosRepository Videos => new CORVideosRepository(this.context);
 
         public void Dispose()
         {

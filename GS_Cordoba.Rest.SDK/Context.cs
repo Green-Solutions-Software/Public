@@ -285,6 +285,17 @@ namespace GS.Cordoba.Rest
             return get<Currency>("api/currencies/{id}", id);
         }
 
+        // Videos
+        public Task<Paginated<Video.Summary>> FindVideos(string search, int pageIndex, int pageSize, string orderBy)
+        {
+            return find<Video.Summary>("api/videos", search, pageIndex, pageSize, orderBy);
+        }
+
+        public Task<Video> GetVideo(long id)
+        {
+            return get<Video>("api/videos/{id}", id);
+        }
+
         // Templates
         public Task<Paginated<Template.Summary>> FindTemplates(string search, int pageIndex, int pageSize, string orderBy)
         {

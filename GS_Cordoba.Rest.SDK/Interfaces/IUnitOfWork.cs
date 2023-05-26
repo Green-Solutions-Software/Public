@@ -14,6 +14,7 @@ namespace GS.Cordoba.Rest.SDK.Interfaces
         IPlantPicturesRepository PlantPictures { get; }
         ISearchRepository Search { get; }
         ICurrenciesRepository Currencies { get; }
+        IVideosRepository Videos { get; }
         ICalendarItemsRepository CalendarItems { get; }
         IMembersRepository Members { get; }
         IArticlesRepository Articles { get; }
