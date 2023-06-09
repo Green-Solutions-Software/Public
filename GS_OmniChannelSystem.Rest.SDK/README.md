@@ -49,7 +49,7 @@
 
 > [Trigger event](#trigger-event)
 
-> [Transfer stationary purchases](#Transfer-stationary-purchases)
+> [Transfer in-store purchases](#Transfer-in-store-purchases)
 
 > [Update loyalty card bonus and turn over](#Update-loyalty-card-bonus-and-turn-over)
 
@@ -563,9 +563,9 @@ Returns a list with verfied loyalty cards. These cards had been manually verfied
 Returns **[Member](#Member)**
 
 
-## Transfer stationary purchases
+## Transfer in-store purchases
 
-Transfers a stationary purchase of the loyalty card owner. 
+Transfers a in-store purchase of the loyalty card owner. 
 
 **Function: POST** /api/orders/create/cashdesc
 
