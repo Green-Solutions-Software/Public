@@ -12,7 +12,8 @@ Today we are one of the most successful software companies in the green industry
 
 [REST API Omni Channel System](GS_OmniChannelSystem.Rest.SDK)
 
-[Digital Customer Loyalty Processes](GS_OmniChannelSystem.Rest.SDK/processes_digital_customer_loyalty.pdf)
+[Digital Customer Loyalty Processes](GS_OmniChannelSystem.Rest.SDK/processes_digital_customer_loyalty_cs.pptx)
+[Digital Customer Loyalty Processes (ERP)](GS_OmniChannelSystem.Rest.SDK/processes_digital_customer_loyalty_erp.pdf)
 
 [Sample Application](GS_OmniChannelSystem.Rest.Sample)
 
