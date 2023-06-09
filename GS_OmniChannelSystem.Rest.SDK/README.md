@@ -61,6 +61,10 @@
 
 > [Scan a QR-Code](#Scan-a-QR-Code)
 
+> [Validate Basket](#Validate-basket)
+
+> [Redeem Basket](#Devalue-basket)
+
 **[Videos](#Videos)**
 
 **[Chainstores](#Chainstores)**
@@ -1077,7 +1081,6 @@ api/vouchers
 
 ## Scan a QR Code
 
-
 The QR Code will be shown from the customer to the cashier and has to be scanned and decoded.
 
 The format is as follows:
@@ -1116,6 +1119,24 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
 ```
     0QRA;8;1010,2,1020,1;626A
 ```
+
+## Validate basket
+
+This function validates a cash desc basket and returns the affected items
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/debitcards/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
+
+Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
+
+## Redeem basket
+
+Redeem coupons used in a basket 
+
+| **Function(POST)** | **Parameter** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
 
 # Messages
 
