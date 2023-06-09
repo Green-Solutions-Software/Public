@@ -63,7 +63,7 @@
 
 > [Validate Basket](#Validate-basket)
 
-> [Redeem Basket](#Devalue-basket)
+> [Redeem Basket](#Redeem-basket)
 
 **[Videos](#Videos)**
 
