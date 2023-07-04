@@ -1079,6 +1079,50 @@ You have to transfer your Coupons and Bonus via the vouchers endpoint:
 
 api/vouchers
 
+### Coupon
+
+A coupon is normaly a percent discount
+
+```json
+{
+  "VoucherID": 28,
+  "Name": "10% Rabatt",
+  "Info": "auf alles",
+  "ValidFrom": null, 
+  "ValidTo": "2019-08-10T00:00:00",
+  "KeyValue": "abc", // Identifier for the ERP
+  "Type": 0, // Coupon
+  "External_Key": null,
+  "External_COR_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#5#132#3",
+  "Deleted": false
+}
+```
+
+
+### Bonus
+
+A bonus is normally a 100% discount on a product
+
+```json
+{
+  "VoucherID": 28,
+  "Name": "Happy Week",
+  "Info": "",
+  "ValidFrom": null, 
+  "ValidTo": "2019-08-10T00:00:00",
+  "KeyValue": "4711", // Identifier for the ERP
+  "Type": 0, // Coupon
+  "External_Key": null,
+  "External_COR_ID": null,
+  "External_COR_Owner": null,
+  "RowVersion": "#0#0#0#0#0#5#132#3",
+  "Deleted": false
+}
+```
+
+
 ## Scan a QR Code
 
 The QR Code will be shown from the customer to the cashier and has to be scanned and decoded.
