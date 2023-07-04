@@ -1081,7 +1081,7 @@ api/vouchers
 
 ### Coupon
 
-A coupon is normaly a percent discount
+A coupon is normally a percent discount
 
 ```json
 {
@@ -1113,7 +1113,7 @@ A bonus is normally a 100% discount on a product
   "ValidFrom": null, 
   "ValidTo": "2019-08-10T00:00:00",
   "KeyValue": "4711", // Identifier for the ERP
-  "Type": 0, // Coupon
+  "Type": 2, // Bonus
   "External_Key": null,
   "External_COR_ID": null,
   "External_COR_Owner": null,
