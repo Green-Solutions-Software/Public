@@ -736,7 +736,7 @@ Create a new linktarget for a QR Code
 
 ## Import articles via file
 
-[Sample File for Article Import](GS_OmniChannelSystem.Rest.SDK/json/import.json)
+[Sample File for Article Import](json/import.json)
 
 
 
