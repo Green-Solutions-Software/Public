@@ -94,6 +94,8 @@
 
 > [Commonly used article fields](#commonly-used-article-fields)
 
+> [Import articles via file](#Import-articles-via-file)
+
 **[Price lists](#Price-lists)**
 
 > [Price lists - Entries](#price-list-entries)
@@ -731,6 +733,11 @@ Create a new linktarget for a QR Code
 |Diameter to (in cm) |number, optional| attribute|Denotes the diameter up to (in cm) |
 | Packaging size| number, optional |base data | Denotes the packaging size |
 | Pack size unit| text, optional | base data | Designates the unit for the packaging size |
+
+## Import articles via file
+
+[Sample File for Article Import](GS_OmniChannelSystem.Rest.SDK/json/import.json)
+
 
 
 ## Variants
