@@ -157,6 +157,130 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
 
         }
 
+        static void createArticle_Import(ContextUOW unitOfWork)
+        {
+            var articles = new List<Article>();
+            var categories = new List<Category>();
+            var countries = new List<Country>();
+            var articleGroups = new List<ArticleGroup>();
+            var currencies= new List<Currency>();
+            var pictures = new List<Picture>();
+
+
+            var article = new Article();
+            articles.Add(article);
+
+            article.Name = "Acer Palmatum Bloodgood";
+            article.Name2 = "Fächerahorn Bloodgood";
+            article.Description = "Dies ist eine lange Beschreibung";
+            article.ShortDescription = "Dies ist eine kurze Beschreibung";
+
+            // Set ArticleGroup
+            var articleGroup = new ArticleGroup();
+            articleGroup.Name = "abc";
+            articleGroup.External_Key = "abc";
+            articleGroups.Add(articleGroup);
+            article.ArticleGroups = new List<EntityReference>();
+            article.ArticleGroups.Add(new EntityReference() { External_Key = articleGroup.External_Key });
+
+            // Set Category
+            var category = new Category();
+            category.Name = "Pflanzen";
+            category.External_Key = "pflanzen";
+            article.Categories = new List<EntityReference>();
+            article.Categories.Add(new EntityReference() { External_Key = category.External_Key });
+            categories.Add(category);
+
+            // Add Texts
+            var text = new ArticleText();
+            article.Texts = new List<ArticleText>();
+            article.Texts.Add(text);
+            text.Type = TextType.BulletPoints;
+            text.Title = "Kaufargumente";
+            text.Value = "	* frosthart * duftend * wintergrün * Kübel geeignet";
+
+            // Availabilities
+            var timePeriod = new TimePeriod();
+            article.Available = new List<TimePeriod>();
+            article.Available.Add(timePeriod);
+            timePeriod.FromCW = 10; // Calendarweek (from)
+            timePeriod.ToCW = 20; // Calendarweek (to)
+            timePeriod.StockQuantity = 100; // Stock Quantity
+
+            // Add variants (Articlenumbers)
+            var articleKey = new ArticleKey();
+            article.Keys = new List<ArticleKey>();
+            article.Keys.Add(articleKey);
+
+            articleKey.Value = "47811"; // Articlenumber
+            articleKey.Info = "C/  50 - 60";
+            articleKey.AvailableForClickAndCollect = true; // Click & Collect
+            articleKey.AvailableForRadiusDelivery = true; // Send
+            articleKey.AvailableForShipping = true; // Deliver
+            articleKey.PackingSize = 20; // Payking Unit
+            articleKey.StockQuantity = 10; // Stock Quantity
+
+            articleKey.Available = new List<TimePeriod>();
+            articleKey.Available.Add(timePeriod);
+
+            // Tax
+            var country = new Country();
+            country.Name = "Deutschland";
+            country.ISO = "DE";
+            country.TaxRates = new List<TaxRate>();
+            country.TaxRates.Add(new TaxRate() { External_Key = "de19", Percent = 19.0 });
+            country.External_Key = "de";
+            countries.Add(country);
+
+            articleKey.TaxRate = new EntityReference() { External_Key = "de19" };
+
+
+            // Prices
+            var currency = new Currency();
+            currency.Name = "Euro";
+            currency.NameShort = "EUR";
+            currency.Sign = "€";
+            currency.External_Key = "EUR";
+            currencies.Add(currency);
+
+            var articleKeyPrice = new ArticleKeyPrice();
+            articleKey.Prices = new List<ArticleKeyPrice>();
+            articleKey.Prices.Add(articleKeyPrice);
+            articleKeyPrice.Price = 17; // Preis
+            articleKeyPrice.PriceOld = 25; // Streichpreis
+            articleKeyPrice.PriceUnitAmount = 10; // pro 10
+            articleKeyPrice.ValueUnitType = PriceUnitType.Liter; // Liter
+            articleKeyPrice.Quantity = 1; // Ab Stückzahl
+            articleKeyPrice.Currency = new EntityReference() { External_Key = currency.External_Key };
+            articleKeyPrice.TaxIncluded = true; // Mwst. inkl?
+            articleKeyPrice.PriceNet = true; // Netto - Preis (keine Rabatte)
+
+            var picture = new Picture();
+            picture.Name = "aaaaa.png";
+            picture.External_Key = "aaaaa.png";
+            picture.Url = "ftp://local/import/aaaaa.png";
+            pictures.Add(picture);
+
+            articleKey.Photos = new List<ArticleKeyPhoto>();
+            articleKey.Photos.Add(new ArticleKeyPhoto()
+            {
+                Picture = new PictureEntityReference() { External_Key = picture.External_Key }
+            });
+
+            var import = new Import();
+            import.Articles = articles.ToArray();
+            import.Categories = categories.ToArray();
+            import.Countries = countries.ToArray();
+            import.ArticleGroups = articleGroups.ToArray();
+            import.Currencies = currencies.ToArray();
+            import.Pictures = pictures.ToArray();
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(import);
+            Console.WriteLine("Json: ");
+            Console.WriteLine(json);
+
+        }
+
         static void createInvoice(ContextUOW unitOfWork)
         {
             var member = unitOfWork.Members.Get(1);
@@ -1619,13 +1743,13 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         {
             var code = CreateQR(new QRInfo()
             {
-                MemberNumber = "1",
+                MemberNumber = "50",
                 Vouchers = new string[]
                 {
-                    "12"
+                    "32"
                 },
                 NoReceipt = true,
-                DebitCardNumber = "42",
+                DebitCardNumber = "50",
                 Amount = 11.5
             });
             Console.WriteLine();
@@ -1635,8 +1759,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void Main(string[] args)
         {
 
-            var member = new Member();
-            
+            createArticle_Import(null);
 
             using (var unitOfWork = new ContextUOW("Test", "<endpoint>", "<token>"))
             {
