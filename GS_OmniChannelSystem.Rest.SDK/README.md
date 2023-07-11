@@ -7250,6 +7250,12 @@ See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)** for a list 
     "External_CMS_TransactionID": 0,
     "External_COR_Owner": "Warenwirtschaft",
     "Currency": "EUR", // Währung,
+
+    // Bon
+    "ReceiptURI" : null, // Bon als DataURI
+    "ReceiptFilename" : null, // Dateiname Bon
+    "ReceiptMimeType" : null, // Mimetype Bon
+
     "Items": [
         {
             "ArticleKey": "4755884", // Artikelnummer
