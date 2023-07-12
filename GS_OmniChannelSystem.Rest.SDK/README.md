@@ -993,7 +993,7 @@ Reserve a payment for a voucher. During the time, the revenue is considered cons
 |voucherCodeID| **long** | Voucher Code ID| |
 |external| **string** | External Source returned by Find |
 |amount| **double** | Amount to be reserved| |
-|name| **string** | currency(e.g. EUR) | |
+|currencyName| **string** | currency(e.g. EUR) | |
 |info| **string** | An information that is visible when paying| |
 |minutes| **int** | Number of minutes for which the payment should be reserved|
 
