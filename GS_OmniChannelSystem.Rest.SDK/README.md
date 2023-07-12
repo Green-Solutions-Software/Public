@@ -77,6 +77,8 @@
 
 > [Edit Dialog](#Edit-Customer-Dialog)
 
+> [Import Customers via file](#Import-Customers-via-file)
+
 
 **[Article](#Article)**
 
@@ -659,6 +661,11 @@ Returns the new Member (please refer to **[Member](#Member)**)
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
+## Import Customers via file
+
+[Sample File for Customer Import](Json/Member.json)
+
+
 # Article
 
 | url| api/articles|
@@ -739,11 +746,6 @@ Create a new linktarget for a QR Code
 ## Import articles via file
 
 [Sample File for Article Import](Json/Import.json)
-
-## Import members via file
-
-[Sample File for Member Import](Json/Member.json)
-
 
 
 ## Variants
