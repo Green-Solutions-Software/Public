@@ -740,6 +740,10 @@ Create a new linktarget for a QR Code
 
 [Sample File for Article Import](Json/Import.json)
 
+## Import members via file
+
+[Sample File for Member Import](Json/Member.json)
+
 
 
 ## Variants
