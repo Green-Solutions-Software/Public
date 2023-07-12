@@ -293,6 +293,8 @@
 
 > [TriggerEventArgs](#TriggerEventArgs)
 
+> [Data Uri](#Data-Uri)
+
 **[Dialogs](#dialogs)**
 
 > [To ship](#Toship)
@@ -7192,6 +7194,27 @@ public enum MessageDirection {
 ```
 
 See **[EventType](#EventType)** and  **[ChannelType](#ChannelType)** for a list of options
+
+# Data Uri
+
+A Data Uri is a base 64 encoded file.
+
+For example a simple xml file like this
+
+```xml
+    <note>
+    <to>Tove</to>
+    <from>Jani</from>
+    <heading>Reminder</heading>
+    <body>Don't forget me this weekend!</body>
+    </note>
+```
+
+would look like this as a data uri
+
+```
+    data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=
+```
 
 # RegisterArgs
 ```json

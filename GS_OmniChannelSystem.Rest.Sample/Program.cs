@@ -1,5 +1,6 @@
 
 using GS.OmniChannelSystem.Rest.SDK.Api.Args;
+using GS.OmniChannelSystem.Rest.SDK.Classes;
 using GS.OmniChannelSystem.Rest.SDK.Client;
 using GS.OmniChannelSystem.Rest.SDK.Extensions;
 using GS.OmniChannelSystem.Rest.SDK.Models;
@@ -280,6 +281,15 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             Console.WriteLine(json);
 
         }
+        static void createDataURI(ContextUOW unitOfWork)
+        {
+            var file = @"c:\test.xml";
+            Console.WriteLine("Reading from "+file);
+            var dataUri = new DataUri(System.IO.File.ReadAllBytes(file), "application/xml");
+            Console.WriteLine("dataUri: "+dataUri.ToString());
+
+        }
+
 
         static void createInvoice(ContextUOW unitOfWork)
         {
