@@ -13,6 +13,12 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
 
         }
 
+        public EntityReference(Entity entity)
+        {
+            this.External_Key = entity.External_Key;
+            this.ID = System.Convert.ToInt64(getID(entity));
+        }
+
         public EntityReference(long id)
         {
             this.ID = id;
@@ -54,6 +60,32 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
             return sb.ToString();
         }
 
+        protected static object getID(object fromObject)
+        {
+            var type = fromObject.GetType();
+            var idProp = type.GetProperty(type.Name + "ID");
+            if (idProp != null)
+                return idProp.GetValue(fromObject, null);
+
+            idProp = type.BaseType.GetProperty(type.BaseType.Name + "ID");
+            if (idProp != null)
+                return idProp.GetValue(fromObject, null);
+
+            idProp = type.GetProperty("ID");
+            if (idProp != null)
+                return idProp.GetValue(fromObject, null);
+
+            idProp = type.BaseType.BaseType != null
+                ? type.BaseType.GetProperty(type.BaseType.BaseType.Name + "ID")
+                : null;
+            if (idProp != null)
+                return idProp.GetValue(fromObject, null);
+
+            foreach (var prop in type.GetProperties().Where(m => !m.Name.Contains("_") && m.Name.EndsWith("ID")))
+                return prop.GetValue(fromObject, null);
+
+            throw new Exception("Primary Key not found");
+        }
     }
 
     public class EntityReferenceWithType : EntityReference

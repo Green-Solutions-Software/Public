@@ -63,7 +63,98 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
             member.Users.Add(user);
 
             unitOfWork.Members.Create(member);
-        }      
+        }
+
+        static void createMember_Import(ContextUOW unitOfWork)
+        {
+            var articles = new List<Article>();
+            var categories = new List<Category>();
+            var countries = new List<Country>();
+            var articleGroups = new List<ArticleGroup>();
+            var currencies = new List<Currency>();
+            var pictures = new List<Picture>();
+            var roles = new List<Role>();
+            var customerGroups = new List<CustomerGroup>();
+            var members = new List<Member>();
+
+            // Prices
+            var currency = new Currency();
+            currency.Name = "Euro";
+            currency.NameShort = "EUR";
+            currency.Sign = "€";
+            currency.External_Key = "EUR";
+            currencies.Add(currency);
+
+            var role = new Role();
+            role.Key = "member";
+            role.Name = "Kunde";
+            roles.Add(role);
+
+            var customerGroup = new CustomerGroup();
+            customerGroup.Key = "standard";
+            customerGroup.Name = "Standard";
+            customerGroups.Add(customerGroup);
+
+            User user = new User();
+            Member member = new Member();
+            member.External_Key = "abc";
+            member.Currency = new EntityReference() { External_Key = currency.External_Key };
+
+            member.MainContact = new Contact();
+            member.MainContact.Apellation = Apellation.Mr;
+            member.MainContact.FirstName = "Jon";
+            member.MainContact.LastName = "Doe";
+            member.MainContact.EMail = "jon@doe.com";
+            member.Roles = new List<EntityReference>();
+            member.Roles.Add(new EntityReference(role));
+
+            var contact = new Contact();
+            contact.Apellation = Apellation.Mr;
+            contact.FirstName = "Jon";
+            contact.LastName = "Doe";
+
+            var address = new Address();
+            address.Street = "Street";
+            address.Zip = "26802";
+
+            member.Adresses = new List<Address>();
+            member.Adresses.Add(address);
+
+            var contactAddress = new ContactAddress();
+            contactAddress.Type = AddressType.Main;
+            contactAddress.Contact = contact;
+            contactAddress.Address = address;
+            member.ContactAddresses = new List<ContactAddress>();
+            member.ContactAddresses.Add(contactAddress);
+
+            user.Contact = member.MainContact;
+            user.EMail = "jondoe@test.de!";
+            user.Login = user.EMail;
+            user.Password = "password";
+            user.AutomaticPassword = true;
+            user.Roles = new List<EntityReference>();
+            user.Roles.Add(new EntityReference(role));
+
+            member.CustomerGroup = new EntityReference(customerGroup);
+            members.Add(member);
+
+            var import = new Import();
+            import.Articles = articles.ToArray();
+            import.Categories = categories.ToArray();
+            import.Countries = countries.ToArray();
+            import.ArticleGroups = articleGroups.ToArray();
+            import.Currencies = currencies.ToArray();
+            import.Pictures = pictures.ToArray();
+            import.Roles = roles.ToArray();
+            import.Members = members.ToArray();
+            import.CustomerGroups = customerGroups.ToArray();
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(import);
+            Console.WriteLine("Json: ");
+            Console.WriteLine(json);
+
+
+        }
 
         static void createArticle(ContextUOW unitOfWork)
         {
@@ -1769,7 +1860,7 @@ namespace GS_PflanzenCMS.Net.Rest.Sample
         static void Main(string[] args)
         {
 
-            createArticle_Import(null);
+            createMember_Import(null);
 
             using (var unitOfWork = new ContextUOW("Test", "<endpoint>", "<token>"))
             {
