@@ -2386,7 +2386,14 @@ As soon as cached content has been changed in the database, the corresponding ca
     "Brand": null,
     "BotanicName": null,
     "NameTranslation": null,
-    "Photos": [],
+    "Photos": [
+        {
+            "External_Key": "Rose_Picture_1",
+            "DisplayMode": "Auto", // Auto, Full, Cut 
+            "Priority": 1, // Order for display
+            "Title": "Rose in the field", // Title of the Picture
+        }
+    ],
     "Prices": [{
       "ArticleKeyPriceID": 1712,
       "Quantity": 0,
@@ -2536,7 +2543,17 @@ As soon as cached content has been changed in the database, the corresponding ca
   "External_COR_ID": null
 }
 ```
+| Field  | Datatype                     | Required | Description      | Options |
+|--------|------------------------------|----------|------------------|---------|
+| Photos | Array of [Photos](#Photos) |          | a list of images |         |
 
+### Photos
+| Field        | Datatype |      Required      | Description                                                 | Options                 |
+|--------------|----------|:------------------:|-------------------------------------------------------------|-------------------------|
+| External_Key | string   | :heavy_check_mark: | external primary key                                        |                         |
+| DisplayMode  | string   | :heavy_check_mark: | should the original image be shown or should it be adjusted | `Auto` `Cut` `Full`     |
+| Priority     | int      | :heavy_check_mark: | Order for display                                           | numeric characters      |
+| Title        | string   |                    | Title of the Picture                                        | alphanumeric characters |
 
 ## Job
 
@@ -7221,6 +7238,21 @@ would look like this as a data uri
 ```
     data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=
 ```
+# Picture
+```json
+{
+    "Url": "ftp://In/Pictures/Rose1.jpg",
+    "Name": "Rose1.jpg",
+    "Type": "image/jpeg",
+    "External_Key": "Rose_Picture_1",
+}
+```
+| Field        | Datatype |      Required      | Description                              | Options                                                        |
+|--------------|----------|:------------------:|------------------------------------------|----------------------------------------------------------------|
+| Url          | String   | :heavy_check_mark: | Absolute path to the file inside the ftp |                                                                |
+| Name         | String   | :heavy_check_mark: | Filename                                 | alphanumeric characters                                        |
+| Type         | String   | :heavy_check_mark: | Mime file type                           | `image/gif` `image/bmp` `image/jpeg` `image/x-png` `image/png` |
+| External_Key | string   | :heavy_check_mark: | External primary key                     | alphanumeric characters                                        |
 
 # RegisterArgs
 ```json
