@@ -2393,6 +2393,7 @@ As soon as cached content has been changed in the database, the corresponding ca
             "External_Key": "Rose_Picture_1",
             "DisplayMode": "Auto", // Auto, Full, Cut 
             "Priority": 1, // Order for display
+            "Picture": { "External_Key": "Rose_Picture_1" },
             "Title": "Rose in the field", // Title of the Picture
         }
     ],
@@ -2555,6 +2556,7 @@ As soon as cached content has been changed in the database, the corresponding ca
 | External_Key | string   | :heavy_check_mark: | external primary key                                        |                         |
 | DisplayMode  | string   | :heavy_check_mark: | should the original image be shown or should it be adjusted | `Auto` `Cut` `Full`     |
 | Priority     | int      | :heavy_check_mark: | Order for display                                           | numeric characters      |
+| Picture      | [Picture](#Picture) | :heavy_check_mark: | Reference for the Picture | { "External_Key": "Rose_Picture_1"}|
 | Title        | string   |                    | Title of the Picture                                        | alphanumeric characters |
 
 ## Job
