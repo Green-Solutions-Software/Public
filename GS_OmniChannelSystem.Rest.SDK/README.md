@@ -297,6 +297,8 @@
 
 > [Data Uri](#Data-Uri)
 
+> [Picture](#Picture)
+
 **[Dialogs](#dialogs)**
 
 > [To ship](#Toship)
