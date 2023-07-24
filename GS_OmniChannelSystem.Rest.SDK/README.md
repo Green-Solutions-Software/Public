@@ -214,90 +214,89 @@
 > [Clean up caches](#Caches-clean-up)
 
 **[Data structures](#Data-structures)**
-
-> [Order](#Order)
-
-> [Member](#Member)
-
-> [Invoice](#Invoice)
-
-> [ShipmentOrder](#Shipmentorder)
+> [Account info](#Accountinfo)
 
 > [Article](#Article)
 
-> [Job](#Job)
-
-> [Payments](#Payment)
-
-> [EntityReference](#Entityreference)
-
-> [Vouchers](#Voucher)
-
-> [Voucher code](#Vouchercode)
-
-> [FoundVoucher](#Foundvoucher)
-
-> [OrderStatusType](#Orderstatustype)
-
-> [MessageType](#MessageType)
-
-> [EventType](#EventType)
+> [BasketType](#Baskettype)
 
 > [ChannelType](#ChannelType)
 
-> [TransactionStatus](#Transactionstatus)
+> [CreateCashdeskArgs](#CreateCashdeskArgs)
 
-> [BasketType](#Baskettype)
-
-> [MessageType](#Messagetype)
-
-> [MessageDirection](#Messagedirection)
-
-> [Documentation](#Documentation)
-
-> [Item status](#Item-status)
-
-> [Files](#File)
-
-> [Transaction](#Transaction)
-
-> [OrderStatus](#Orderstatus)
-
-> [PriceUnitType](#PriceUnitType)
-
-> [loyalty card](#Loyaltycard)
-
-> [Result](#Result)
+> [Data Uri](#Data-Uri)
 
 > [Dialog](#Dialog)
 
-> [Upload](#Upload)
+> [Documentation](#Documentation)
+
+> [EntityReference](#Entityreference)
+
+> [Event](#Event)
+
+> [EventType](#EventType)
+
+> [Files](#File)
+
+> [FoundVoucher](#Foundvoucher)
+
+> [Invoice](#Invoice)
+
+> [Item status](#Item-status)
+
+> [Job](#Job)
+
+> [loyalty card](#Loyaltycard)
+
+> [Member](#Member)
 
 > [Messages](#Message)
+
+> [MessageDirection](#Messagedirection)
+
+> [MessageType](#MessageType)
+
+> [Order](#Order)
+
+> [OrderStatus](#Orderstatus)
+
+> [OrderStatusType](#Orderstatustype)
+
+> [PackingFormType](#PackingFormType)
+
+> [Picture](#Picture)
 
 > [Pricelist](#Pricelist)
 
 > [PricelistItem](#Pricelistitem)
 
-> [Account info](#Accountinfo)
+> [PriceUnitType](#PriceUnitType)
 
-> [Member](#Member)
+> [Payments](#Payment)
 
-> [Event](#Event)
+> [RegisterArgs](#RegisterArgs)
 
-> [CreateCashdeskArgs](#CreateCashdeskArgs)
+> [Result](#Result)
+
+> [ShipmentOrder](#Shipmentorder)
+
+> [TimePeriod](#Timeperiod)
+
+> [Transaction](#Transaction)
+
+> [TransactionStatus](#Transactionstatus)
+
+> [TriggerEventArgs](#TriggerEventArgs)
+
+> [Upload](#Upload)
 
 > [ValidateCashdeskArgs](#ValidateCashdeskArgs)
 
 > [ValidateCashdeskResult](#ValidateCashdeskResult)
 
-> [RegisterArgs](#RegisterArgs)
+> [Voucher code](#Vouchercode)
 
-> [TriggerEventArgs](#TriggerEventArgs)
-
-> [Data Uri](#Data-Uri)
-
-> [Picture](#Picture)
+> [Vouchers](#Voucher)
 
 **[Dialogs](#dialogs)**
 
@@ -361,34 +360,34 @@ https://{domain}/api/
 
 There are 6 types of requests common to all entities:
 
-| **URL** | **method** | **Description** |
-| --- | --- | --- |
-| api/{entities}| GET| Query list of entities|
-| api/{entities}/{id}| GET| query entity|
-| api/{entities}/?ext={external\_key}| GET| Query entity based on External\_key|
-| api/{entities}/{id}| PUT| update entity|
-| api/{entities}| PUT| Update/create multiple entities when transferring an array|
-| api/{entities}/{id}| DELETE| delete entity|
-| api/{entities}| POST OFFICE| Create a new entity|
+| **URL**                             | **method**  | **Description**                                            |
+|-------------------------------------|-------------|------------------------------------------------------------|
+| api/{entities}                      | GET         | Query list of entities                                     |
+| api/{entities}/{id}                 | GET         | query entity                                               |
+| api/{entities}/?ext={external\_key} | GET         | Query entity based on External\_key                        |
+| api/{entities}/{id}                 | PUT         | update entity                                              |
+| api/{entities}                      | PUT         | Update/create multiple entities when transferring an array |
+| api/{entities}/{id}                 | DELETE      | delete entity                                              |
+| api/{entities}                      | POST OFFICE | Create a new entity                                        |
 
 All functions expect 3 host headers:
 
-| **headers** | **Description** |
-| --- | --- |
-| **tokens** | Authorization|
+| **headers**  | **Description**      |
+|--------------|----------------------|
+| **tokens**   | Authorization        |
 | **language** | language(e.g. de-DE) |
-| **version** | 1.0(default) |
-| **vendor** | Any name|
+| **version**  | 1.0(default)         |
+| **vendor**   | Any name             |
 
 All functions that return lists have the following parameters:
 
-| **Parameter** | **Description** |
-| --- | --- |
-| **pageIndex** | Current page|
-| **pageSize** | Number of entries per page|
-| **Search** | search string|
-| **orderBy** | Sorting(string) |
-| **filter** | filter criteria (field\|value,field2\|value) |
+| **Parameter** | **Description**                              |
+|---------------|----------------------------------------------|
+| **pageIndex** | Current page                                 |
+| **pageSize**  | Number of entries per page                   |
+| **Search**    | search string                                |
+| **orderBy**   | Sorting(string)                              |
+| **filter**    | filter criteria (field\|value,field2\|value) |
 
 > **Query/update selected fields only**
 
@@ -459,18 +458,18 @@ Transfers all existing loyalty card owners with rudimentary personal information
 
 **Function: POST** /api/members/debitcards
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[DebitCardMember[]](#DebitCardMember)**| Members| Array with all the Debit Card Members|
+| **Parameter** | **Type**                                  | **Description** | **Remark**                            |
+|---------------|-------------------------------------------|-----------------|---------------------------------------|
+| **BODY**      | **[DebitCardMember[]](#DebitCardMember)** | Members         | Array with all the Debit Card Members |
 
 ## Transfer categories
 Transfers all existing external categories relevant for the loyalty program
 
 **Function: POST** /api/categories/external
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[ExtCategory[]](#ExtCategory)**| Categories | Array with all the external Categories|
+| **Parameter** | **Type**                          | **Description** | **Remark**                             |
+|---------------|-----------------------------------|-----------------|----------------------------------------|
+| **BODY**      | **[ExtCategory[]](#ExtCategory)** | Categories      | Array with all the external Categories |
 
 ## Request events
 
@@ -491,8 +490,8 @@ Returns a list of events for the ERP to perform which were not yet confirmed for
 **Function: GET** api/channels/events/member/{memberid}
 
 | **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **memberid** |long | Member ID | |
+|---------------|----------|-----------------|------------|
+| **memberid**  | long     | Member ID       |            |
 
 Returns a list of **[Event](#Event)** which have to be performed.
 
@@ -507,8 +506,8 @@ Confirms an event as processed. After it has processed it's no longer delivered 
 **Function: POST** api/channels/events/confirm/{id}
 
 | **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **id** |long | Event ID | |
+|---------------|----------|-----------------|------------|
+| **id**        | long     | Event ID        |            |
 
 ## Trigger event
 
@@ -518,9 +517,9 @@ Trigger events in the following cases:
 
 **Function: POST** api/channels/events/trigger
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[TriggerEventArgs](#TriggerEventArgs)** | Event | |
+| **Parameter** | **Type**                                  | **Description** | **Remark** |
+|---------------|-------------------------------------------|-----------------|------------|
+| **BODY**      | **[TriggerEventArgs](#TriggerEventArgs)** | Event           |            |
 
 
 ## Request new loyalty cards
@@ -529,10 +528,10 @@ Returns a list with new loyalty cards. These cards had been manually registrered
 
 **Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **filter** |string|debitcard=true | Filter by Debit Card Owners|
-| **orderBy** |bool| RecentOn desc| Sory descending by recent|
+| **Parameter** | **Type** | **Description** | **Remark**                  |
+|---------------|----------|-----------------|-----------------------------|
+| **filter**    | string   | debitcard=true  | Filter by Debit Card Owners |
+| **orderBy**   | bool     | RecentOn desc   | Sory descending by recent   |
 
 Returns **[Member](#Member)**
 
@@ -542,10 +541,10 @@ Returns a list of members that have changed their personal data. With this funct
 
 **Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **filter** |string|debitcard=true | Filter by Debit Card Owners|
-| **orderBy** |bool| RecentOn desc| Sory descending by recent|
+| **Parameter** | **Type** | **Description** | **Remark**                  |
+|---------------|----------|-----------------|-----------------------------|
+| **filter**    | string   | debitcard=true  | Filter by Debit Card Owners |
+| **orderBy**   | bool     | RecentOn desc   | Sory descending by recent   |
 
 Return **[Member](#Member)**
 
@@ -556,9 +555,9 @@ With this function the personal data of the loyalty card owners that have change
 
 **Function: PUT** /api/members
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[Member](#Member)**| Member| Updated Member Body|
+| **Parameter** | **Type**              | **Description** | **Remark**          |
+|---------------|-----------------------|-----------------|---------------------|
+| **BODY**      | **[Member](#Member)** | Member          | Updated Member Body |
 
 
 ## Request verified loyalty cards
@@ -567,10 +566,10 @@ Returns a list with verfied loyalty cards. These cards had been manually verfied
 
 **Function: GET** /api/members?filter=debitcard|true&orderby=RecentOn%20desc
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **filter** |string|debitcard=true | Filter by Debit Card Owners|
-| **orderBy** |bool| RecentOn desc| Sory descending by recent|
+| **Parameter** | **Type** | **Description** | **Remark**                  |
+|---------------|----------|-----------------|-----------------------------|
+| **filter**    | string   | debitcard=true  | Filter by Debit Card Owners |
+| **orderBy**   | bool     | RecentOn desc   | Sory descending by recent   |
 
 Returns **[Member](#Member)**
 
@@ -581,9 +580,9 @@ Transfers a in-store purchase of the loyalty card owner.
 
 **Function: POST** /api/orders/create/cashdesc
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[CreateCashdeskArgs](#CreateCashdeskArgs)**| Stationary Purchase| |
+| **Parameter** | **Type**                                      | **Description**     | **Remark** |
+|---------------|-----------------------------------------------|---------------------|------------|
+| **BODY**      | **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Stationary Purchase |            |
 
 Returns **[Order](#Order)**
 
@@ -593,10 +592,10 @@ With this function the bonus and turn ober of the loyalty card can be updated.
 
 **Function: POST** /api/debitcards/validate/{id}
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| **id** |long| Loyalty card ID|
-| **number** |string| Optional: The Debit Card Number instead of the id|
+| **Parameter** | **Type** | **Description**                                   |
+|---------------|----------|---------------------------------------------------|
+| **id**        | long     | Loyalty card ID                                   |
+| **number**    | string   | Optional: The Debit Card Number instead of the id |
 | **ownerMemberNumber** |string| Optional: The Member Number 
 instead of id|
 | **ownerMemberID** |string| Optional: The Member IS instead of id|
@@ -615,9 +614,9 @@ Transfers all bonus vouchers the the loyalty card owners. This voucher can be re
 
 **Function: POST** /api/vouchers
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[Voucher](#Voucher)**| Voucher Body| |
+| **Parameter** | **Type**                | **Description** | **Remark** |
+|---------------|-------------------------|-----------------|------------|
+| **BODY**      | **[Voucher](#Voucher)** | Voucher Body    |            |
 
 
 # Videos
@@ -639,9 +638,9 @@ Transfers all bonus vouchers the the loyalty card owners. This voucher can be re
 
 **Function: POST** api/register
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |**[RegisterArgs](#RegisterArgs)**| Customer Data | |
+| **Parameter** | **Type**                          | **Description** | **Remark** |
+|---------------|-----------------------------------|-----------------|------------|
+| **BODY**      | **[RegisterArgs](#RegisterArgs)** | Customer Data   |            |
 
 Returns the new Member (please refer to **[Member](#Member)**)
 
@@ -649,17 +648,17 @@ Returns the new Member (please refer to **[Member](#Member)**)
 
 **Function: POST** api/unregister
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| permanent |**bool**| Delete permanent | If permanent all personal data will be anonymized |
+| **Parameter** | **Type** | **Description**  | **Remark**                                        |
+|---------------|----------|------------------|---------------------------------------------------|
+| permanent     | **bool** | Delete permanent | If permanent all personal data will be anonymized |
 
 Returns the new Member (please refer to **[Member](#Member)**)
 
 ## Edit Customer Dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/members/dialog/{id}|ID| **long** | ID of the item to be edited|
+| **Function(POST)**      | **Parameter** | **Type** | **Description**             |
+|-------------------------|---------------|----------|-----------------------------|
+| api/members/dialog/{id} | ID            | **long** | ID of the item to be edited |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
@@ -679,10 +678,10 @@ With this function, an article can be created and automatically enriched with da
 
 **Function: POST** api/articles/create
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **importExternal** |boolean| Add external data?| |
-| **compareNameSecondary** |boolean| compare name 2?| |
+| **Parameter**            | **Type** | **Description**    | **Remark** |
+|--------------------------|----------|--------------------|------------|
+| **importExternal**       | boolean  | Add external data? |            |
+| **compareNameSecondary** | boolean  | compare name 2?    |            |
 
 ## Transactions
 
@@ -690,9 +689,9 @@ With this function, stocks and prices can be updated for larger quantities of it
 
 **Function: POST** api/articles/transaction
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **BODY** |ArticleTransactionArgs[]| An array with multiple transactions| Please refer **[transactions](#transactions)** |
+| **Parameter** | **Type**                 | **Description**                     | **Remark**                                     |
+|---------------|--------------------------|-------------------------------------|------------------------------------------------|
+| **BODY**      | ArticleTransactionArgs[] | An array with multiple transactions | Please refer **[transactions](#transactions)** |
 
 
 ## Create QR - Code Linktarget
@@ -701,49 +700,49 @@ Create a new linktarget for a QR Code
 
 **Function: POST** api/articles/create/linktarget
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| extkey |**string**| Article Number ||
-| info |**string**| Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data|
+| **Parameter** | **Type**   | **Description**                   | **Remark**                                           |
+|---------------|------------|-----------------------------------|------------------------------------------------------|
+| extkey        | **string** | Article Number                    |                                                      |
+| info          | **string** | Article Name (e.g. Acer Palmatum) | The name is needed for the mapping to the right data |
 
 ## Commonly used article fields
-| **Surname** | **Format** | **Category** | **Description** |
-| --- | --- | --- | --- |
-| Item number | Text,necessary| base data | Designates a key to identify the article |
-| EAN | text, optional | Base data |Designates the EAN code  |
-| Name 1 |text, required | Base data| Denotes the primary name of the article |
-| Name 2 | text, optional| base data| Denotes the secondary name of the article |
-| Info |text, optional |base data | Designates further information about the article |
-| Inventory | number, optional |transaction data | Denotes the available stock in the system |
-| Packaging Unit |number, optional | base data | Designates the packaging unit |
-| Currency | Text,necessary |base data | Denotes the currency |
-| Price | number, required | transaction data| Denotes the price |
-| Old price | number, optional|transaction data | Denotes the old price which will be striked out |
-| Graduated prices |number, optional |transaction data | Defines the prices from a certain quantity |
-| Tax class |number, required | base data| Denotes the tax class in percent |
-| VAT included |bool , required | base data | Indicates whether the price of the item includes VAT |
-| From quantity |number, optional | base data| Denotes the quantity from which the price applies. Scale prices can be defined in this field. See graduated prices |
-|Description| text, optional| content| Denotes the text for the description. The description must not be longer than 50-70 words. |
-| Colours| text, optional| attribute| Denotes the colors. These can be specified comma separated |
-| Photos || content| Photos |
-| Files | | content| Files |
-| Categories | text, optional|base data |Denotes the categories.|
-| Keywords |text, optional | base data | Denotes the keywords. |
-| Inactive | boolean , optional| transaction data| Indicates whether the item is inactive. Unless an article has been marked as active, it will not be displayed |
-|Width from (in cm) |number, optional | attribute| Denotes the width of (in cm) |
-|Width to (in cm) |number, optional | attribute| Denotes the width to (in cm) |
-|Height from (in cm) |number, optional| attribute| Denotes the height of (in cm) |
-|Height to (in cm) |number, optional| attribute| Denotes the height to (in cm) |
-| Length from (in cm) |number, optional| attribute| the length (in cm) |
-| Length to (in cm) |number, optional| attribute| the length (in cm) |
-| weight of (in g) |number, optional| attribute|Denotes the weight of (in cm) |
-| weight to (in g) |number, optional| attribute|Denotes the weight to (in cm) |
-|Depth from (in cm) |number, optional| attribute| Denotes the depth of (in cm) |
-|Depth to (in cm) |number, optional| attribute| Denotes the depth to (in cm) |
-|Diameter from (in cm) |number, optional| attribute|Denotes the diameter from (in cm) |
-|Diameter to (in cm) |number, optional| attribute|Denotes the diameter up to (in cm) |
-| Packaging size| number, optional |base data | Denotes the packaging size |
-| Pack size unit| text, optional | base data | Designates the unit for the packaging size |
+| **Surname**           | **Format**         | **Category**     | **Description**                                                                                                    |
+|-----------------------|--------------------|------------------|--------------------------------------------------------------------------------------------------------------------|
+| Item number           | Text,necessary     | base data        | Designates a key to identify the article                                                                           |
+| EAN                   | text, optional     | Base data        | Designates the EAN code                                                                                            |
+| Name 1                | text, required     | Base data        | Denotes the primary name of the article                                                                            |
+| Name 2                | text, optional     | base data        | Denotes the secondary name of the article                                                                          |
+| Info                  | text, optional     | base data        | Designates further information about the article                                                                   |
+| Inventory             | number, optional   | transaction data | Denotes the available stock in the system                                                                          |
+| Packaging Unit        | number, optional   | base data        | Designates the packaging unit                                                                                      |
+| Currency              | Text,necessary     | base data        | Denotes the currency                                                                                               |
+| Price                 | number, required   | transaction data | Denotes the price                                                                                                  |
+| Old price             | number, optional   | transaction data | Denotes the old price which will be striked out                                                                    |
+| Graduated prices      | number, optional   | transaction data | Defines the prices from a certain quantity                                                                         |
+| Tax class             | number, required   | base data        | Denotes the tax class in percent                                                                                   |
+| VAT included          | bool , required    | base data        | Indicates whether the price of the item includes VAT                                                               |
+| From quantity         | number, optional   | base data        | Denotes the quantity from which the price applies. Scale prices can be defined in this field. See graduated prices |
+| Description           | text, optional     | content          | Denotes the text for the description. The description must not be longer than 50-70 words.                         |
+| Colours               | text, optional     | attribute        | Denotes the colors. These can be specified comma separated                                                         |
+| Photos                |                    | content          | Photos                                                                                                             |
+| Files                 |                    | content          | Files                                                                                                              |
+| Categories            | text, optional     | base data        | Denotes the categories.                                                                                            |
+| Keywords              | text, optional     | base data        | Denotes the keywords.                                                                                              |
+| Inactive              | boolean , optional | transaction data | Indicates whether the item is inactive. Unless an article has been marked as active, it will not be displayed      |
+| Width from (in cm)    | number, optional   | attribute        | Denotes the width of (in cm)                                                                                       |
+| Width to (in cm)      | number, optional   | attribute        | Denotes the width to (in cm)                                                                                       |
+| Height from (in cm)   | number, optional   | attribute        | Denotes the height of (in cm)                                                                                      |
+| Height to (in cm)     | number, optional   | attribute        | Denotes the height to (in cm)                                                                                      |
+| Length from (in cm)   | number, optional   | attribute        | the length (in cm)                                                                                                 |
+| Length to (in cm)     | number, optional   | attribute        | the length (in cm)                                                                                                 |
+| weight of (in g)      | number, optional   | attribute        | Denotes the weight of (in cm)                                                                                      |
+| weight to (in g)      | number, optional   | attribute        | Denotes the weight to (in cm)                                                                                      |
+| Depth from (in cm)    | number, optional   | attribute        | Denotes the depth of (in cm)                                                                                       |
+| Depth to (in cm)      | number, optional   | attribute        | Denotes the depth to (in cm)                                                                                       |
+| Diameter from (in cm) | number, optional   | attribute        | Denotes the diameter from (in cm)                                                                                  |
+| Diameter to (in cm)   | number, optional   | attribute        | Denotes the diameter up to (in cm)                                                                                 |
+| Packaging size        | number, optional   | base data        | Denotes the packaging size                                                                                         |
+| Pack size unit        | text, optional     | base data        | Designates the unit for the packaging size                                                                         |
 
 ## Import articles via file
 
@@ -757,17 +756,17 @@ Create a new linktarget for a QR Code
 
 ## Edit dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/articles/dialog/{id}|ID| **long** | ID of the item to be edited|
+| **Function(POST)**       | **Parameter** | **Type** | **Description**             |
+|--------------------------|---------------|----------|-----------------------------|
+| api/articles/dialog/{id} | ID            | **long** | ID of the item to be edited |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[Edit article](#Edit-article)** )
 
 ## Edit variant dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/articles/dialog/key/{id}|ID| **long** | ID of the variant to be processed|
+| **Function(POST)**           | **Parameter** | **Type** | **Description**                   |
+|------------------------------|---------------|----------|-----------------------------------|
+| api/articles/dialog/key/{id} | ID            | **long** | ID of the variant to be processed |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
@@ -783,15 +782,15 @@ Price lists / listings with customer-specific prices(please refer **[pricelist](
 The entries correspond to the articles in the price list(please refer **[PricelistItem](#pricelistitem)**).
 The keys of the variants of the articles with the individual prices
 
-| url| api/pricelistitems|
-| --- | --- |
-| filter| pricelistid|
+| url    | api/pricelistitems |
+|--------|--------------------|
+| filter | pricelistid        |
 
 # Orders
 
 | **url** | **api/orders** |
-| --- | --- |
-| filter| ownermemberid|
+|---------|----------------|
+| filter  | ownermemberid  |
 
 ## All orders
 
@@ -803,23 +802,23 @@ The keys of the variants of the articles with the individual prices
 
 **Filters**
 
-| Filter | Type | Description |
-| --- | --- | --- |
-| status | **[OrderStatusType](#OrderStatusType)**| Filters by the given Order Status|
-| channelid| **long**| ID of the Channel|
-| external_key2| **string**| External_Key2 of the order|
-| transactiontype| **[TransactionType](#TransactionType)**| Filters by the given transaction type|
-| supplierid| **long**| Filters by the given supplier id|
-| producerid| **long**| Filters by the given producer id|
-| brandid| **long**| Filters by the given brand id|
-| suppliers| **bool**| Filters by with supplier or without|
-| items | **int**| Filters by the item count|
-| weight | **double**| Filters by the item weight|
-| categoryids | **double**| Filters by the given category ids (comma separated)|
-| storagelocations | **string**| Filters by the given storager locations (comma separated)|
-| recenton | **DateTime-DateTime**| Filters by the given date range|
-| suspended| **bool**| Filters by the suspended or not suspended|
-| transaction| **string**| Filters by the given payment transaction |
+| Filter           | Type                                    | Description                                               |
+|------------------|-----------------------------------------|-----------------------------------------------------------|
+| status           | **[OrderStatusType](#OrderStatusType)** | Filters by the given Order Status                         |
+| channelid        | **long**                                | ID of the Channel                                         |
+| external_key2    | **string**                              | External_Key2 of the order                                |
+| transactiontype  | **[TransactionType](#TransactionType)** | Filters by the given transaction type                     |
+| supplierid       | **long**                                | Filters by the given supplier id                          |
+| producerid       | **long**                                | Filters by the given producer id                          |
+| brandid          | **long**                                | Filters by the given brand id                             |
+| suppliers        | **bool**                                | Filters by with supplier or without                       |
+| items            | **int**                                 | Filters by the item count                                 |
+| weight           | **double**                              | Filters by the item weight                                |
+| categoryids      | **double**                              | Filters by the given category ids (comma separated)       |
+| storagelocations | **string**                              | Filters by the given storager locations (comma separated) |
+| recenton         | **DateTime-DateTime**                   | Filters by the given date range                           |
+| suspended        | **bool**                                | Filters by the suspended or not suspended                 |
+| transaction      | **string**                              | Filters by the given payment transaction                  |
 
 
 ## Update Status
@@ -833,41 +832,41 @@ As a return, the order will be returned (please refer **[order](#order)** )
 
 ## Ship dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/orders/transactions/dialog/delivered/{id}|ID| **long** | ID of the transaction of the order(must be sent) |
+| **Function(POST)**                            | **Parameter** | **Type** | **Description**                                  |
+|-----------------------------------------------|---------------|----------|--------------------------------------------------|
+| api/orders/transactions/dialog/delivered/{id} | ID            | **long** | ID of the transaction of the order(must be sent) |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)** and**[To ship](##to ship)** )
 
 ## Confirm dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/orders/dialog/confirm/{id}|ID| **long** | ID of the order|
+| **Function(POST)**             | **Parameter** | **Type** | **Description** |
+|--------------------------------|---------------|----------|-----------------|
+| api/orders/dialog/confirm/{id} | ID            | **long** | ID of the order |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)** and **[confirm order](#confirm-order)**)
 
 ## Complete dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/orders/dialog/finish/{id}|ID| **long** | ID of the order|
+| **Function(POST)**            | **Parameter** | **Type** | **Description** |
+|-------------------------------|---------------|----------|-----------------|
+| api/orders/dialog/finish/{id} | ID            | **long** | ID of the order |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and **[complete order](#order-complete)** )
 
 ## Cancel dialog
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/orders/dialog/cancel/{id}|ID| **long** | ID of the order|
+| **Function(POST)**            | **Parameter** | **Type** | **Description** |
+|-------------------------------|---------------|----------|-----------------|
+| api/orders/dialog/cancel/{id} | ID            | **long** | ID of the order |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and**[cancel order](#cancel-order)** )
 
 ## Order management dialog
 
 | **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/orders/dialog| | | |
+|--------------------|---------------|----------|-----------------|
+| api/orders/dialog  |               |          |                 |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog) and **[order management](#order-management)** )
 
@@ -894,11 +893,11 @@ Delivers the delivery note for an order.
 
 Please note that you will only receive the items that have been confirmed, so this function may only be called up after the order has been confirmed.
 
-| **Function(GET)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/documents/order/{orderid}/{type}|orderid| **long** | ID of the order|
-| |type| **string** | DeliverySlip|
-| | output| | DOCX, PDF|
+| **Function(GET)**                    | **Parameter** | **Type**   | **Description** |
+|--------------------------------------|---------------|------------|-----------------|
+| api/documents/order/{orderid}/{type} | orderid       | **long**   | ID of the order |
+|                                      | type          | **string** | DeliverySlip    |
+|                                      | output        |            | DOCX, PDF       |
 
 ## Delivery note partial order
 
@@ -926,9 +925,9 @@ please refer **[ShipmentOrder](#shipmentorder)**
 
 The parcel label can be queried with this function. To do this, pass one of the ShipmentOrderID of the shipping order(please refer **[ShipmentOrder](#shipmentorder)** )
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/shipmentorders/items/label/{id}|ID| **long** | Shipment ID|
+| **Function(POST)**                  | **Parameter** | **Type** | **Description** |
+|-------------------------------------|---------------|----------|-----------------|
+| api/shipmentorders/items/label/{id} | ID            | **long** | Shipment ID     |
 
 The pdf is returned as a return
 
@@ -939,17 +938,17 @@ The pdf is returned as a return
 
 ## Upload files
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/datafiles/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
+| **Function(POST)**   | **Parameter** | **Type**   | **Description**                    |
+|----------------------|---------------|------------|------------------------------------|
+| api/datafiles/upload | BODY          | **Upload** | please refer **[Upload](#upload)** |
 
 The file is returned as a return(please refer **[File](#file)** )
 
 ## Upload images
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/pictures/upload|BODY| **Upload** | please refer **[Upload](#upload)** |
+| **Function(POST)**  | **Parameter** | **Type**   | **Description**                    |
+|---------------------|---------------|------------|------------------------------------|
+| api/pictures/upload | BODY          | **Upload** | please refer **[Upload](#upload)** |
 
 The file is returned as a return(please refer **[Files](#file)** )
 
@@ -976,12 +975,12 @@ The voucher will be returned as a return(please refer **[vouchers](#voucher)** )
 | Url| GET api/vouchers/find| |
 | --- | --- | --- |
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-|keyValue| **string** | Voucher Code(without space) |
-|chainstore| **string** | Chainstore number |
-|external| **bool** | Search in external Connections |
-|exception| **bool** | Make an exception instead of return null |
+| **Parameter** | **Type**   | **Description**                          |
+|---------------|------------|------------------------------------------|
+| keyValue      | **string** | Voucher Code(without space)              |
+| chainstore    | **string** | Chainstore number                        |
+| external      | **bool**   | Search in external Connections           |
+| exception     | **bool**   | Make an exception instead of return null |
 
 Return: voucher code (please refer **[FoundVoucher](#foundvoucher)**)
 
@@ -1005,9 +1004,9 @@ As a return, the created payment is returned (please refer **[payments](#payment
 
 After a payment has been reserved, the payment can then be made(during the time of reservation)
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/vouchers/pay|paymentid| **long** | Payment ID(please refer **[payments](#payment)** ) |
+| **Function(POST)** | **Parameter** | **Type** | **Description**                                    |
+|--------------------|---------------|----------|----------------------------------------------------|
+| api/vouchers/pay   | paymentid     | **long** | Payment ID(please refer **[payments](#payment)** ) |
 
 The voucher will be returned as a return(please refer **[vouchers](#voucher)** ).
 
@@ -1061,9 +1060,9 @@ The following barcode types are currently available for printing:
 
 Returns a URL to a page where the current balance for the voucher is shown. This Url can be printed anywhere on the voucher to help the customer to check the current balance
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/vouchers/query/balance|ID| **long** | ID of the voucher|
+| **Function(POST)**         | **Parameter** | **Type** | **Description**   |
+|----------------------------|---------------|----------|-------------------|
+| api/vouchers/query/balance | ID            | **long** | ID of the voucher |
 
 As a return, the dialog is returned (please refer **[dialog](#dialog)**)
 
@@ -1146,26 +1145,26 @@ The QR Code will be shown from the customer to the cashier and has to be scanned
 
 The format is as follows:
 
-| String | Description | Comment|
-| -- | -- | --|
-| 0QR | Fixed header ||
-| A | Start Articles ||
-| 8 | Quantity ||
-| 1010 | PLU ||
-| | | |
-| V | Start Vouchers ||
-| 4711 | Voucher - Codes (comma separated) | Could by a Voucher Code for a discount or a paid voucher (e.g. G15Q PNVJ 1T8L 1QL7)|
-| | | |
-| M | Start Member ||
-| 4722 | Member Number ||
-| | | |
-| D | Start Debit Card ||
-| 4722 | Debit Card Number ||
-| | | |
-| P | Start Payment ||
-| 11.50 | Amount to pay via Debit Card (11.50 €) ||
-| | | |
-| NR | Print no receipt ||
+| String | Description                            | Comment                                                                             |
+|--------|----------------------------------------|-------------------------------------------------------------------------------------|
+| 0QR    | Fixed header                           |                                                                                     |
+| A      | Start Articles                         |                                                                                     |
+| 8      | Quantity                               |                                                                                     |
+| 1010   | PLU                                    |                                                                                     |
+|        |                                        |                                                                                     |
+| V      | Start Vouchers                         |                                                                                     |
+| 4711   | Voucher - Codes (comma separated)      | Could by a Voucher Code for a discount or a paid voucher (e.g. G15Q PNVJ 1T8L 1QL7) |
+|        |                                        |                                                                                     |
+| M      | Start Member                           |                                                                                     |
+| 4722   | Member Number                          |                                                                                     |
+|        |                                        |                                                                                     |
+| D      | Start Debit Card                       |                                                                                     |
+| 4722   | Debit Card Number                      |                                                                                     |
+|        |                                        |                                                                                     |
+| P      | Start Payment                          |                                                                                     |
+| 11.50  | Amount to pay via Debit Card (11.50 €) |                                                                                     |
+|        |                                        |                                                                                     |
+| NR     | Print no receipt                       |                                                                                     |
 
 
 Please apply the MD5 function to the complete string assembled so far including the trailing semicolon and a prefixed "salt". Then add the first two and last two digits of the 32-character MD5 hash to the string (letters please uppercase).
@@ -1185,9 +1184,9 @@ of which the MD5 hash is "626aebfe081a3912e7353445a64efa6a". Overall, the conten
 
 This function validates a cash desc basket and returns the affected items
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/debitcards/validate|BODY| **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon |
+| **Function(POST)**      | **Parameter** | **Type**                                          | **Description** |
+|-------------------------|---------------|---------------------------------------------------|-----------------|
+| api/debitcards/validate | BODY          | **[ValidateCashdeskArgs](#ValidateCashdeskArgs)** | Bon             |
 
 Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Discount or new Items
 
@@ -1195,9 +1194,9 @@ Returns **[ValidateCashdeskResult](#ValidateCashdeskResult)** with modified Disc
 
 Redeem coupons used in a basket 
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/debitcards/devalue|BODY| **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
+| **Function(POST)**     | **Parameter** | **Type**                                              | **Description** |
+|------------------------|---------------|-------------------------------------------------------|-----------------|
+| api/debitcards/devalue | BODY          | **[ValidateCashdeskResult](#ValidateCashdeskResult)** | Validate Result |
 
 # Messages
 
@@ -1216,9 +1215,9 @@ please refer **[messages](#message)**
 
 Retreives all messages for an order
 
-| **Function(GET)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/messages/order/{id}|id| **long** | ID of the Order|
+| **Function(GET)**       | **Parameter** | **Type** | **Description** |
+|-------------------------|---------------|----------|-----------------|
+| api/messages/order/{id} | id            | **long** | ID of the Order |
 
 please refer **[messages](#message)**
 
@@ -1228,20 +1227,20 @@ please refer **[messages](#message)**
 
 
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/messages/create|BODY| **[messages](#message)** | Message to be created|
+| **Function(POST)**  | **Parameter** | **Type**                 | **Description**       |
+|---------------------|---------------|--------------------------|-----------------------|
+| api/messages/create | BODY          | **[messages](#message)** | Message to be created |
 
 The following fields must be set in the message:
-|**Surname** |**Type** |**value** |**Description** |
-| --- | --- | --- | --- |
-|Direction|**short** | | Outgoing or incoming |
-|Type|**short** | |(please refer **[MessageType](#messagetype)**) |
-|Keys|**string** | | key for reference |
-|transmitter|**[EntityReference](#entityreference)**| | Sender |
-|receivers|**[EntityReference](#entityreference)**| | Receiver |
-|Parent|**[EntityReference](#entityreference)**| | Parent Message |
-|SenderConfirm|**boolean** | | Send confirmation by mail after dispatch |
+| **Surname**   | **Type**                                | **value** | **Description**                                |
+|---------------|-----------------------------------------|-----------|------------------------------------------------|
+| Direction     | **short**                               |           | Outgoing or incoming                           |
+| Type          | **short**                               |           | (please refer **[MessageType](#messagetype)**) |
+| Keys          | **string**                              |           | key for reference                              |
+| transmitter   | **[EntityReference](#entityreference)** |           | Sender                                         |
+| receivers     | **[EntityReference](#entityreference)** |           | Receiver                                       |
+| Parent        | **[EntityReference](#entityreference)** |           | Parent Message                                 |
+| SenderConfirm | **boolean**                             |           | Send confirmation by mail after dispatch       |
 
 The created message is returned as a return (please refer **[messages](#message)**). This is then sent to the recipient with the next job that processes the messages.
 
@@ -1251,9 +1250,9 @@ The created message is returned as a return (please refer **[messages](#message)
 
 You can retreive a workflow for a defined message. This workflow defines "replys" you could submit
 
-| **Function(GET)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/messages/{id}/workflow|id| **long** | ID of the message you want to reply|
+| **Function(GET)**          | **Parameter** | **Type** | **Description**                     |
+|----------------------------|---------------|----------|-------------------------------------|
+| api/messages/{id}/workflow | id            | **long** | ID of the message you want to reply |
 
 Returns an Array of **[Workflow](#workflow)** to choose from
 
@@ -1261,10 +1260,10 @@ Returns an Array of **[Workflow](#workflow)** to choose from
 
 To send a specific message you first need to find a fitting workflow
 
-| **Function(GET)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/messages/order/{id}/workflow|id| **long** | ID of the Order you want to reply to|
-||type| **[MessageType](#MessageType)** | Type of message you want to submit |
+| **Function(GET)**                | **Parameter** | **Type**                        | **Description**                      |
+|----------------------------------|---------------|---------------------------------|--------------------------------------|
+| api/messages/order/{id}/workflow | id            | **long**                        | ID of the Order you want to reply to |
+|                                  | type          | **[MessageType](#MessageType)** | Type of message you want to submit   |
 
 Returns an **[Workflow](#workflow)**
 
@@ -1272,9 +1271,9 @@ Returns an **[Workflow](#workflow)**
 
 This method creates the Reply message depending on a Workflow
 
-| **Function(POST)** | **Parameter** | **Type** | **Description** |
-| --- | --- | --- | --- |
-| api/messages/workflow/execute|BODY| **[Workflow](#workflow)** | the Workflow to execute|
+| **Function(POST)**            | **Parameter** | **Type**                  | **Description**         |
+|-------------------------------|---------------|---------------------------|-------------------------|
+| api/messages/workflow/execute | BODY          | **[Workflow](#workflow)** | the Workflow to execute |
  
 Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
@@ -1285,16 +1284,16 @@ Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 ## Filter
 
-| Surname| Type| value| description|
-| --- | --- | --- | --- |
-| type| **BasketType** | | please refer **[BasketType](#baskettype)** |
-| memberid| **long** | | MemberID to filter by|
-| my| **boolean** | true/false| Own records only|
+| Surname  | Type           | value      | description                                |
+|----------|----------------|------------|--------------------------------------------|
+| type     | **BasketType** |            | please refer **[BasketType](#baskettype)** |
+| memberid | **long**       |            | MemberID to filter by                      |
+| my       | **boolean**    | true/false | Own records only                           |
 
 ## Sorting
-| Surname|description|
-| --- | --- |
-| BasketID| Sort by ID|
+| Surname  | description |
+|----------|-------------|
+| BasketID | Sort by ID  |
 
 
 # Jobs
@@ -1304,28 +1303,28 @@ Returns an **[Messsage](#Messsage)** with the newly created Reply Message
 
 # Container
 
-| url| api/containers| |
-| --- | --- | --- |
-| key| api/containers/key/{key}| Find container with key|
-| items| API/containers/items/{id}| All entries of a container(including paging) |
+| url   | api/containers            |                                              |
+|-------|---------------------------|----------------------------------------------|
+| key   | api/containers/key/{key}  | Find container with key                      |
+| items | API/containers/items/{id} | All entries of a container(including paging) |
 
 # Annual planning
 
-| url| api/timelines| |
-| --- | --- | --- |
-| key| api/timelines/key/{key}| Search planning with key|
-| items| api/timelines/items/{id}| All entries of a plan(including paging) |
-| Current| api/timelines/current/{id}| All current entries of a plan(including paging) |
+| url     | api/timelines              |                                                 |
+|---------|----------------------------|-------------------------------------------------|
+| key     | api/timelines/key/{key}    | Search planning with key                        |
+| items   | api/timelines/items/{id}   | All entries of a plan(including paging)         |
+| Current | api/timelines/current/{id} | All current entries of a plan(including paging) |
 
 # Pictograms
 
 **Function:** api/pictos/{id}
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **i.e** | long| Article ID| Article for which the pictogram is to be queried|
-| **width** | internal| Broad| px|
-| **height** | internal| Height| px|
+| **Parameter** | **Type** | **Description** | **Remark**                                       |
+|---------------|----------|-----------------|--------------------------------------------------|
+| **i.e**       | long     | Article ID      | Article for which the pictogram is to be queried |
+| **width**     | internal | Broad           | px                                               |
+| **height**    | internal | Height          | px                                               |
 
 **Return:**
 
@@ -1333,67 +1332,67 @@ A list of all valid pictograms for the selected item
 
 **Definition:**
 
-| **Field** | **Type** | **Description** |
-| --- | --- | --- |
-| Surname| string| Pictogram name(shown in bold below/next to the pictogram)e.g. "Location|
-| text| string| Text of the pictogram(displayed below/next to the name)e.g. "Sunny|
-| key| string| Unique Key|
-| url| string| URL for the graphic|
-| PictoID| long| primary key|
+| **Field** | **Type** | **Description**                                                         |
+|-----------|----------|-------------------------------------------------------------------------|
+| Surname   | string   | Pictogram name(shown in bold below/next to the pictogram)e.g. "Location |
+| text      | string   | Text of the pictogram(displayed below/next to the name)e.g. "Sunny      |
+| key       | string   | Unique Key                                                              |
+| url       | string   | URL for the graphic                                                     |
+| PictoID   | long     | primary key                                                             |
 
 # Search
 
 **Function:** api/search
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **search** |string| search term| |
-| **orderBy** |string| Title, Title2| |
-| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
-| **BloomingTimeFrom** |internal| heyday of| months|
-| **BloomingTimeTo** |internal| heyday to| months|
-| **WidthFrom** |double| width of| cm|
-| **WidthTo** |double| width to| cm|
-| **HeightTo** |double| Height of| cm|
-| **HeightFrom** |double| height up to| cm|
-| **WeightFrom** |double| weight of| kg|
-| **WeightTo** |double| weight up| kg|
-| **GrowthFrom** |double| growth of| cm|
-| **GrowthTo** |double| increase up to| cm|
-| **FeatureIds** |long[]| features| ID#39;s of the characteristics(see Admin/Features) |
+| **Parameter**        | **Type** | **Description**        | **Remark**                                               |
+|----------------------|----------|------------------------|----------------------------------------------------------|
+| **search**           | string   | search term            |                                                          |
+| **orderBy**          | string   | Title, Title2          |                                                          |
+| **type**             | string   | Article, report, video | Can also be specified multiple times, e.g. Types=Article |
+| **BloomingTimeFrom** | internal | heyday of              | months                                                   |
+| **BloomingTimeTo**   | internal | heyday to              | months                                                   |
+| **WidthFrom**        | double   | width of               | cm                                                       |
+| **WidthTo**          | double   | width to               | cm                                                       |
+| **HeightTo**         | double   | Height of              | cm                                                       |
+| **HeightFrom**       | double   | height up to           | cm                                                       |
+| **WeightFrom**       | double   | weight of              | kg                                                       |
+| **WeightTo**         | double   | weight up              | kg                                                       |
+| **GrowthFrom**       | double   | growth of              | cm                                                       |
+| **GrowthTo**         | double   | increase up to         | cm                                                       |
+| **FeatureIds**       | long[]   | features               | ID#39;s of the characteristics(see Admin/Features)       |
 
 # Linked content for articles
 
 **Function:** api/cross/articles{id}
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **i.e** |long| Article ID| |
-| **search** |string| search term| |
-| **orderBy** |string| Title, Title2| |
-| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
+| **Parameter** | **Type** | **Description**        | **Remark**                                               |
+|---------------|----------|------------------------|----------------------------------------------------------|
+| **i.e**       | long     | Article ID             |                                                          |
+| **search**    | string   | search term            |                                                          |
+| **orderBy**   | string   | Title, Title2          |                                                          |
+| **type**      | string   | Article, report, video | Can also be specified multiple times, e.g. Types=Article |
 
 # Linked content for reports
 
 **Function:** api/cross/reports/{id}
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **i.e** |long| ID of the report| |
-| **search** |string| search term| |
-| **orderBy** |string| Title, Title2| |
-| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
+| **Parameter** | **Type** | **Description**        | **Remark**                                               |
+|---------------|----------|------------------------|----------------------------------------------------------|
+| **i.e**       | long     | ID of the report       |                                                          |
+| **search**    | string   | search term            |                                                          |
+| **orderBy**   | string   | Title, Title2          |                                                          |
+| **type**      | string   | Article, report, video | Can also be specified multiple times, e.g. Types=Article |
 
 # Linked content for videos
 
 **Function:** api/cross/videos/{id}
 
-| **Parameter** | **Type** | **Description** | **Remark** |
-| --- | --- | --- | --- |
-| **i.e** |long| ID of the video| |
-| **search** |string| search term| |
-| **orderBy** |string| Title, Title2| |
-| **type** |string| Article, report, video| Can also be specified multiple times, e.g. Types=Article|
+| **Parameter** | **Type** | **Description**        | **Remark**                                               |
+|---------------|----------|------------------------|----------------------------------------------------------|
+| **i.e**       | long     | ID of the video        |                                                          |
+| **search**    | string   | search term            |                                                          |
+| **orderBy**   | string   | Title, Title2          |                                                          |
+| **type**      | string   | Article, report, video | Can also be specified multiple times, e.g. Types=Article |
 
 # Add External
 
@@ -1403,11 +1402,11 @@ This function can be used to search for content from the Green Solutions databas
 
 **Function:** api/external/search
 
-|pageIndex| Current page|
-| --- | --- |
-|pageSize| Number of entries per page|
-|search| search string|
-|orderBy| Sorting(string) |
+| pageIndex | Current page               |
+|-----------|----------------------------|
+| pageSize  | Number of entries per page |
+| search    | search string              |
+| orderBy   | Sorting(string)            |
 
 **Return:**
 
@@ -1427,9 +1426,9 @@ The most suitable item
 
 **Function:** api/external/import/plants/{id}
 
-|i.e| External ID of the plant to be imported|
-| --- | --- |
-|to|ID of the article to be imported into(optional)|
+| i.e | External ID of the plant to be imported         |
+|-----|-------------------------------------------------|
+| to  | ID of the article to be imported into(optional) |
 
 ## Import videos
 
@@ -1483,6 +1482,664 @@ As soon as cached content has been changed in the database, the corresponding ca
 **Function:** POST api/cache/purge
 
 # Data structures
+
+## Article
+```json
+{
+  "ArticleID": 1375,
+  "Name": "Abies koreana 'Veredelung'",
+  "Name2": "Koreatanne 'Veredelung'",
+  "Description": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
+  "ShortDescription": null,
+  "Photos": [],
+  "ArticleGroups": [],
+  "Categories": [{
+    "ID": 0,
+    "RowVersion": "#0#0#0#0#0#2#15#209"
+  }],
+  "Countries": [],
+  "Available": [],
+  "Keys": [{
+    "ArticleKeyID": 1291,
+    "Info": "Sol C 20  125- 150",
+    "Value": "98820121",
+    "Decimals": 0,
+    "PackingUnit": 0,
+    "PackingSize": null,
+    "PackingUnitType": 0,
+    "PackingForm": null,
+    "DeliverSize": null,
+    "DeliverUnitType": null,
+    "DeliverType": null,
+    "StockQuantity": 1,
+    "EAN": "4011266062981",
+    "Country": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#2#58#151"
+    },
+    "TaxRate": {
+      "ID": 0,
+      "RowVersion": "#0#0#0#0#0#0#230#203"
+    },
+    "AvailableForShippingText": null,
+    "AvailableForShippingDeliverTime": null,
+    "AvailableForRadiusDeliveryText": null,
+    "AvailableForClickAndCollectText": null,
+    "GrowthFrom": null,
+    "GrowthTo": null,
+    "WeightFrom": null,
+    "WeightTo": null,
+    "WidthFrom": null,
+    "WidthTo": null,
+    "HeightFrom": null,
+    "HeightTo": null,
+    "DeliverHeightFrom": null,
+    "DeliverHeightTo": null,
+    "LengthFrom": null,
+    "LengthTo": null,
+    "DepthFrom": null,
+    "DepthTo": null,
+    "PotSize": null,
+    "PotSizeL": null,
+    "FillAmountFrom": null,
+    "FillAmountTo": null,
+    "DiameterFrom": null,
+    "DiameterTo": null,
+    "LoadingCapacityFrom": null,
+    "LoadingCapacityTo": null,
+    "BloomingTimeFrom": null,
+    "BloomingTimeTo": null,
+    "BloomingTimePeriod": null,
+    "BloomingTimePeriod2": null,
+    "Size": null,
+    "Quality": null,
+    "Features": [],
+    "Tasks": [],
+    "Grower": null,
+    "Brand": null,
+    "BotanicName": null,
+    "NameTranslation": null,
+    "Photos": [
+        {
+            "External_Key": "Rose_Picture_1",
+            "DisplayMode": "Auto", // Auto, Full, Cut 
+            "Priority": 1, // Order for display
+            "Picture": { "External_Key": "Rose_Picture_1" },
+            "Title": "Rose in the field", // Title of the Picture
+        }
+    ],
+    "Prices": [{
+      "ArticleKeyPriceID": 1712,
+      "Quantity": 0,
+      "Price": 189.5,
+      "PriceUnitAmount": null,
+      "ValueUnitType": null,
+      "PriceOld": null,
+      "PriceNet": false,
+      "TaxIncluded": true,
+      "Currency": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#0#77#11"
+      },
+      "External_Key": null,
+      "External_COR_ID": null
+    }],
+    "Attachments": [],
+    "Available": [],
+    "CustomFields": [{
+      "CustomFieldID": 1061,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#20"
+      },
+      "StringValue": "P",
+      "IntValue": null,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    }],
+    "Inactive": false,
+    "AvailableForShipping": true,
+    "AvailableForRadiusDelivery": false,
+    "AvailableForClickAndCollect": false,
+    "AvailableForMarketPlaces": false,
+    "External_Key": "98820121",
+    "External_COR_ID": null
+  }],
+  "Texts": [{
+      "ArticleTextID": 14006,
+      "Position": 0,
+      "Type": 31,
+      "Title": null,
+      "Value": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14007,
+      "Position": 0,
+      "Type": 87,
+      "Title": null,
+      "Value": "Nadelbaum mit attraktivem Zapfenschmuck\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14008,
+      "Position": 0,
+      "Type": 88,
+      "Title": null,
+      "Value": "Standort (Boden): kalkverträglich, lehmig, nährstoffreich; Standort (Licht): vollsonnig bis leicht schattig; Winterhärte: frosthart; Besonderheiten (Pflegetipp): Schnitt unüblich\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "ArticleTextID": 14009,
+      "Position": 0,
+      "Type": 65,
+      "Title": null,
+      "Value": "Blütezeit (Geruch): April bis Mai@Blütenfarbe: purpur@Blattfarbe, -phase: dunkelgrün, immergrün@Blattform: Nadeln bis 2 cm@Zapfen/Frucht: Zapfen blau-violett, später braun, eiförmig, aufrecht, bis 7 cm, sehr dekorativ@Wuchshöhe: über 5 m@Habitus: Nadelbaum@Standort (Boden): kalkverträglich, lehmig, nährstoffreich@Standort (Licht): vollsonnig bis leicht schattig@Verwendung Teil 1: Hausgarten, Steingarten, Einzelstellung, zusammen mit Rhododendron und Stauden@Rinde: im Alter rau@Winterhärte: frosthart\n",
+      "External_Key": null,
+      "External_COR_ID": null
+    }
+  ],
+  "Tasks": [],
+  "Ratings": [],
+  "Tags": [],
+  "Features": [],
+  "CustomFields": [{
+      "CustomFieldID": 1059,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#19"
+      },
+      "StringValue": null,
+      "IntValue": 24180,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    },
+    {
+      "CustomFieldID": 1060,
+      "Field": {
+        "ID": 0,
+        "RowVersion": "#0#0#0#0#0#2#34#20"
+      },
+      "StringValue": "P",
+      "IntValue": null,
+      "DateValue": null,
+      "FloatValue": null,
+      "BoolValue": null,
+      "External_Key": null,
+      "External_COR_ID": null
+    }
+  ],
+  "RatingCount": null,
+  "Teaser": null,
+  "Inactive": false,
+  "GrowthFrom": null,
+  "GrowthTo": null,
+  "WeightFrom": null,
+  "WeightTo": null,
+  "WidthFrom": null,
+  "WidthTo": null,
+  "HeightFrom": null,
+  "HeightTo": null,
+  "DeliverHeightFrom": null,
+  "DeliverHeightTo": null,
+  "LengthFrom": null,
+  "LengthTo": null,
+  "DepthFrom": null,
+  "DepthTo": null,
+  "PotSize": null,
+  "PotSizeL": null,
+  "FillAmountFrom": null,
+  "FillAmountTo": null,
+  "DiameterFrom": null,
+  "DiameterTo": null,
+  "LoadingCapacityFrom": null,
+  "LoadingCapacityTo": null,
+  "BloomingTimeFrom": null,
+  "BloomingTimeTo": null,
+  "BloomingTimePeriod": null,
+  "BloomingTimePeriod2": null,
+  "Size": null,
+  "Quality": null,
+  "Grower": null,
+  "Brand": null,
+  "BotanicName": null,
+  "NameTranslation": null,
+  "External_Key": "98820121",
+  "External_COR_ID": null
+}
+```
+| Field               | Datatype                                 | Required | Description             | Options |
+|---------------------|------------------------------------------|----------|-------------------------|---------|
+| ArticleID           | long                                     |          | internal primary key    |         |
+| Name                | string                                   |          | Name                    |         |
+| Name2               | string                                   |          | Name2                   |         |
+| Name3               | string                                   |          | Name3                   |         |
+| Description         | string                                   |          | Description             |         |
+| ShortDescription    | string                                   |          | ShortDescription        |         |
+| Photos              | Array of [Photos](#Photos)               |          | a list of images        |         |
+| ArticleGroups       | Array of [ArticleGroups](#ArticleGroups) |          | a list of groups        |         |
+| Categories          | Array of [Categories](#Categories)       |          | a list of categories    |         |
+| Countries           | Array of [Countries](#Countries)         |          | a list of countries     |         |
+| Available           | Array of [TimePeriod](#TimePeriod)       |          | a list of TimePeriod    |         |
+| Keys                | Array of [ArticleKeys](#ArticleKeys)     |          | a list of keys          |         |
+| Texts               | Array of [ArticleTexts](#ArticleTexts)   |          | a list of texts         |         |
+| Tasks               | Array of [Tasks](#Tasks)                 |          | a list of tasks         |         |
+| Ratings             | Array of [Ratings](#Ratings)             |          | a list of ratings       |         |
+| Tags                | Array of [Tags](#Tags)                   |          | a list of tags          |         |
+| Features            | Array of [Features](#Features)           |          | a list of features      |         |
+| CustomFields        | Array of [CustomFields](#CustomFields)   |          | a list of custom fields |         |
+| RatingCount         | int                                      |          | RatingCount             |         |
+| Teaser              | string                                   |          | Teaser                  |         |
+| Inactive            | boolean                                  |          | Inactive                |         |
+| GrowthFrom          | int                                      |          | GrowthFrom              |         |
+| GrowthTo            | int                                      |          | GrowthTo                |         |
+| WeightFrom          | int                                      |          | WeightFrom              |         |
+| WeightTo            | int                                      |          | WeightTo                |         |
+| WidthFrom           | int                                      |          | WidthFrom               |         |
+| WidthTo             | int                                      |          | WidthTo                 |         |
+| HeightFrom          | int                                      |          | HeightFrom              |         |
+| HeightTo            | int                                      |          | HeightTo                |         |
+| DeliverHeightFrom   | int                                      |          | DeliverHeightFrom       |         |
+| DeliverHeightTo     | int                                      |          | DeliverHeightTo         |         |
+| LengthFrom          | int                                      |          | LengthFrom              |         |
+| LengthTo            | int                                      |          | LengthTo                |         |
+| DepthFrom           | int                                      |          | DepthFrom               |         |
+| DepthTo             | int                                      |          | DepthTo                 |         |
+| PotSize             | int                                      |          | PotSize                 |         |
+| PotSizeL            | int                                      |          | PotSizeL                |         |
+| FillAmountFrom      | int                                      |          | FillAmountFrom          |         |
+| FillAmountTo        | int                                      |          | FillAmountTo            |         |
+| DiameterFrom        | int                                      |          | DiameterFrom            |         |
+| DiameterTo          | int                                      |          | DiameterTo              |         |
+| LoadingCapacityFrom | int                                      |          | LoadingCapacityFrom     |         |
+| LoadingCapacityTo   | int                                      |          | LoadingCapacityTo       |         |
+| BloomingTimeFrom    | int                                      |          | BloomingTimeFrom        |         |
+| BloomingTimeTo      | int                                      |          | BloomingTimeTo          |         |
+| BloomingTimePeriod  | int                                      |          | BloomingTimePeriod      |         |
+| BloomingTimePeriod2 | int                                      |          | BloomingTimePeriod2     |         |
+| Size                | int                                      |          | Size                    |         |
+| Quality             | int                                      |          | Quality                 |         |
+| Grower              | [Grower](#Grower)                        |          | Grower                  |         |
+| Brand               | [Brand](#Brand)                          |          | Brand                   |         |
+| BotanicName         | string                                   |          | BotanicName             |         |
+| NameTranslation     | string                                   |          | NameTranslation         |         |
+| External_Key        | string                                   |          | External_Key            |         |
+| External_COR_ID     | long                                     |          | External_COR_ID         |         |
+
+### Photos
+| Field        | Datatype            |      Required      | Description                                                 | Options                             |
+|--------------|---------------------|:------------------:|-------------------------------------------------------------|-------------------------------------|
+| External_Key | string              | :heavy_check_mark: | external primary key                                        |                                     |
+| DisplayMode  | string              | :heavy_check_mark: | should the original image be shown or should it be adjusted | `Auto` `Cut` `Full`                 |
+| Priority     | int                 | :heavy_check_mark: | Order for display                                           | numeric characters                  |
+| Picture      | [Picture](#Picture) | :heavy_check_mark: | Reference for the Picture                                   | { "External_Key": "Rose_Picture_1"} |
+| Title        | string              |                    | Title of the Picture                                        | alphanumeric characters             |
+
+### Keys
+| Field                                  | Datatype                                  |      Required      | Description                            | Options         |
+|----------------------------------------|-------------------------------------------|:------------------:|----------------------------------------|-----------------|
+| ArticleKeyID                           | int                                       |                    | internal primary key                   | default: `0`    |
+| Info                                   | string                                    | :heavy_check_mark: | Info                                   |                 |
+| Value                                  | string                                    | :heavy_check_mark: | Articlenumber                          |                 |
+| SupplierValue                          | string                                    |                    | SupplierValue                          |                 |
+| Decimals                               | short                                     |                    | Decimals                               |                 |
+| PackingUnit                            | double                                    |                    | PackingUnit                            |                 |
+| PackingSize                            | double                                    | :heavy_check_mark: | PackingSize                            |                 |
+| PackingUnitType                        | [PriceUnitType] (#PriceUnitType)          |                    | PackingUnitType                        |                 |
+| PackingForm                            | [PackingFormType] (#PackingFormType)      |                    | PackingForm                            |                 |
+| DeliverSize                            | int                                       |                    | DeliverSize                            |                 |
+| DeliverSize2                           | int                                       |                    | DeliverSize2                           |                 |
+| DeliverUnitType                        | int                                       |                    | DeliverUnitType                        |                 |
+| DeliverType                            | int                                       |                    | DeliverType                            |                 |
+| DevlierType2                           | int                                       |                    | DevlierType2                           |                 |
+| DeliverUnitType2                       | int                                       |                    | DeliverUnitType2                       |                 |
+| StockQuantity                          | int                                       | :heavy_check_mark: | StockQuantity                          |                 |
+| StorageLocation                        | string                                    |                    | StorageLocation                        |                 |
+| EAN                                    | string                                    |                    | EAN                                    |                 |
+| Country                                | [Country](#Country)                       |                    | Country                                |                 |
+| TaxRate                                | [TaxRate](#TaxRate)                       |                    | TaxRate                                |                 |
+| Category                               | [Category](#Category)                     |                    | Category                               |                 |
+| Teaser                                 | string                                    |                    | Teaser                                 |                 |
+| AvailableForShippingText               | string                                    |                    | AvailableForShippingText               |                 |
+| AvailableForShippingDeliverTime        | string                                    |                    | AvailableForShippingDeliverTime        |                 |
+| AvailableForRadiusDeliveryText         | string                                    |                    | AvailableForRadiusDeliveryText         |                 |
+| AvailableForRadiusDeliveryDeliverTime  | string                                    |                    | AvailableForRadiusDeliveryDeliverTime  |                 |
+| AvailableForClickAndCollectText        | string                                    |                    | AvailableForClickAndCollectText        |                 |
+| AvailableForClickAndCollectDeliverTime | string                                    |                    | AvailableForClickAndCollectDeliverTime |                 |
+| GrowthFrom                             | int                                       |                    | GrowthFrom                             |                 |
+| GrowthTo                               | int                                       |                    | GrowthTo                               |                 |
+| WeightFrom                             | int                                       |                    | WeightFrom                             |                 |
+| WeightTo                               | int                                       |                    | WeightTo                               |                 |
+| WidthFrom                              | int                                       |                    | WidthFrom                              |                 |
+| WidthTo                                | int                                       |                    | WidthTo                                |                 |
+| HeightFrom                             | int                                       |                    | HeightFrom                             |                 |
+| HeightTo                               | int                                       |                    | HeightTo                               |                 |
+| CircumferenceFrom                      | int                                       |                    | CircumferenceFrom                      |                 |
+| CircumferenceTo                        | int                                       |                    | CircumferenceTo                        |                 |
+| DeliverHeightFrom                      | int                                       |                    | DeliverHeightFrom                      |                 |
+| DeliverHeightTo                        | int                                       |                    | DeliverHeightTo                        |                 |
+| LengthFrom                             | int                                       |                    | LengthFrom                             |                 |
+| LengthTo                               | int                                       |                    | LengthTo                               |                 |
+| DepthFrom                              | int                                       |                    | DepthFrom                              |                 |
+| DepthTo                                | int                                       |                    | DepthTo                                |                 |
+| PotSize                                | int                                       |                    | PotSize                                |                 |
+| PotSizeL                               | int                                       |                    | PotSizeL                               |                 |
+| FillAmountFrom                         | int                                       |                    | FillAmountFrom                         |                 |
+| FillAmountTo                           | int                                       |                    | FillAmountTo                           |                 |
+| DiameterFrom                           | int                                       |                    | DiameterFrom                           |                 |
+| DiameterTo                             | int                                       |                    | DiameterTo                             |                 |
+| LoadingCapacityFrom                    | int                                       |                    | LoadingCapacityFrom                    |                 |
+| LoadingCapacityTo                      | int                                       |                    | LoadingCapacityTo                      |                 |
+| BloomingTimeFrom                       | int                                       |                    | BloomingTimeFrom                       |                 |
+| BloomingTimeTo                         | int                                       |                    | BloomingTimeTo                         |                 |
+| BloomingTimePeriod                     | int                                       |                    | BloomingTimePeriod                     |                 |
+| BloomingTimePeriod2                    | int                                       |                    | BloomingTimePeriod2                    |                 |
+| Priority                               | int                                       | :heavy_check_mark: | Priority                               |                 |
+| Size                                   | int                                       |                    | Size                                   |                 |
+| Quality                                | int                                       |                    | Quality                                |                 |
+| Features                               | [Feature](#Feature)                       |                    | Features                               |                 |
+| Tasks                                  | [Task](#Task)                             |                    | Tasks                                  |                 |
+| Grower                                 | [Grower](#Grower)                         |                    | Grower                                 |                 |
+| Brand                                  | [Brand](#Brand)                           |                    | Brand                                  |                 |
+| BotanicName                            | string                                    |                    | BotanicName                            |                 |
+| NameTranslation                        | string                                    |                    | NameTranslation                        |                 |
+| Photos                                 | [Photo](#Photo)                           | :heavy_check_mark: | Photos                                 |                 |
+| Prices                                 | [Price](#Price)                           | :heavy_check_mark: | Prices                                 |                 |
+| Attachments                            | [Attachment](#Attachment)                 |                    | Attachments                            |                 |
+| Available                              | [Available](#Available)                   | :heavy_check_mark: | Available                              |                 |
+| CustomFields                           | [CustomField](#CustomField)               |                    | CustomFields                           |                 |
+| MarketPlaceAccounts                    | [MarketPlaceAccount](#MarketPlaceAccount) |                    | MarketPlaceAccounts                    |                 |
+| Channel                                | [Channel](#Channel)                       |                    | Channel                                |                 |
+| Inactive                               | bool                                      |                    | Sets the key inactive                  |                 |
+| NotAvailable                           | bool                                      |                    | NotAvailable                           | default `false` |
+| AvailableForShipping                   | bool                                      |                    | AvailableForShipping                   |                 |
+| AvailableForRadiusDelivery             | bool                                      |                    | AvailableForRadiusDelivery             |                 |
+| AvailableForClickAndCollect            | bool                                      |                    | AvailableForClickAndCollect            |                 |
+| AvailableForMarketPlaces               | bool                                      |                    | AvailableForMarketPlaces               | default `false` |
+| AvailableForDropShipping               | bool                                      |                    | AvailableForDropShipping               | default `false` |
+| AvailableForDownload                   | bool                                      |                    | AvailableForDownload                   | default `false` |
+| External_Key                           | string                                    |                    | External_Key                           |                 |
+| External_RowVersion                    | string                                    |                    | External_RowVersion                    |                 |
+| External_COR_ID                        | string                                    |                    | External_COR_ID                        |                 |
+| External_DM_ID                         | string                                    |                    | External_DM_ID                         |                 |
+| External_COR_Owner                     | string                                    |                    | External_COR_Owner                     |                 |
+| RowVersion                             | string                                    |                    | RowVersion                             |                 |
+| Deleted                                | bool                                      |                    | Deleted                                | default `false` |
+
+
+## Invoice
+
+```json
+{
+    "InvoiceID": 1,
+    "Number": "2020-101",
+    "TaxPlus": false,
+    "Date": "2020-03-24T00:00:00",
+    "Type": 0,
+    "AutomaticallyCreated": false,
+    "Text": "Einkauf vom 24.03.2020",
+    "Notes": null,
+    "CancelationNote": null,
+    "Description": null,
+    "DeliveryDate": "2020-03-24T00:00:00",
+    "Language": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#56#241#21",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": 1
+    },
+    "Currency": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#11#203#34",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "State": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#13#50#17",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Member": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#42#198#71",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "DebitCard": null,
+    "Address": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#11#190#161",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Sequence": {
+        "ID": 1,
+        "RowVersion": "#0#0#0#0#0#25#167#164",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "SequenceItem": {
+        "ID": 2,
+        "RowVersion": "#0#0#0#0#0#25#167#145",
+        "External_Key": null,
+        "External_RowVersion": null,
+        "External_COR_ID": null
+    },
+    "Positions": [
+        {
+            "InvoicePositionID": 1,
+            "Quantity": 1,
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "TotalPrice": 5.0,
+            "TaxCosts": 0.8,
+            "TaxRate": {
+                "Percent": 19.0,
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#57#28#97",
+                "External_Key": "Helsinki#1",
+                "External_RowVersion": "#0#0#0#0#0#0#10#230",
+                "External_COR_ID": null
+            },
+            "TaxIncluded": true,
+            "Text": "AKTIV-ERDE Bio-Erde",
+            "Text2": null,
+            "BeginDate": null,
+            "EndDate": null,
+            "OrderItem": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#13#60#36",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "BookAccount": null,
+            "State": null,
+            "ArticleKey": null,
+            "Article": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#49#224",
+            "Deleted": false
+        }
+    ],
+    "States": [
+        {
+            "InvoiceStateID": 1,
+            "State": 0,
+            "PaymentDate": "2020-04-03T07:05:39.89",
+            "DueDate": "2020-04-03T07:05:39.89",
+            "Document": null,
+            "External_Key": null,
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#13#50#17",
+            "Deleted": false
+        }
+    ],
+    "Payments": [
+        {
+            "PaymentID": 25,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": -99.99,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#113",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 26,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 07.08.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409241",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#123",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 27,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#130",
+            "Deleted": true
+        },
+        {
+            "PaymentID": 28,
+            "ReservedUntil": null,
+            "Info": "Banküberweisung vom 21.07.2020",
+            "Price": 5.0,
+            "Currency": {
+                "ID": 1,
+                "RowVersion": "#0#0#0#0#0#11#203#34",
+                "External_Key": null,
+                "External_RowVersion": null,
+                "External_COR_ID": null
+            },
+            "VoucherCode": null,
+            "PaymentMethod": {
+                "ID": 3,
+                "RowVersion": "#0#0#0#0#0#61#135#153",
+                "External_Key": "Helsinki#3",
+                "External_RowVersion": "#0#0#0#0#0#3#116#216",
+                "External_COR_ID": null
+            },
+            "External_Key": "DE33700800850002222222#240409223",
+            "External_RowVersion": null,
+            "External_COR_ID": null,
+            "External_DM_ID": null,
+            "External_COR_Owner": null,
+            "RowVersion": "#0#0#0#0#0#26#144#132",
+            "Deleted": false
+        }
+    ],
+    "Orders": [],
+    "PaydOn": "2020-03-24T08:05:02.467",
+    "DubiosOn": null,
+    "PaymentMethod": {
+        "ID": 3,
+        "RowVersion": "#0#0#0#0#0#61#135#153",
+        "External_Key": "Helsinki#3",
+        "External_RowVersion": "#0#0#0#0#0#3#116#216",
+        "External_COR_ID": null
+    },
+    "TotalPriceNet": 4.2016806722689077,
+    "TotalPriceGros": 5.0,
+    "TotalPaid": 5.0,
+    "External_Key": null,
+    "External_RowVersion": null,
+    "External_COR_ID": null,
+    "External_DM_ID": null,
+    "External_COR_Owner": null,
+    "RowVersion": "#0#0#0#0#0#26#144#131",
+    "Deleted": false
+}
+```
 
 ## Order
 
@@ -1819,271 +2476,6 @@ As soon as cached content has been changed in the database, the corresponding ca
 }
 ```
 
-## Invoice
-
-```json
-{
-    "InvoiceID": 1,
-    "Number": "2020-101",
-    "TaxPlus": false,
-    "Date": "2020-03-24T00:00:00",
-    "Type": 0,
-    "AutomaticallyCreated": false,
-    "Text": "Einkauf vom 24.03.2020",
-    "Notes": null,
-    "CancelationNote": null,
-    "Description": null,
-    "DeliveryDate": "2020-03-24T00:00:00",
-    "Language": {
-        "ID": 1,
-        "RowVersion": "#0#0#0#0#0#56#241#21",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": 1
-    },
-    "Currency": {
-        "ID": 1,
-        "RowVersion": "#0#0#0#0#0#11#203#34",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "State": {
-        "ID": 1,
-        "RowVersion": "#0#0#0#0#0#13#50#17",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "Member": {
-        "ID": 2,
-        "RowVersion": "#0#0#0#0#0#42#198#71",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "DebitCard": null,
-    "Address": {
-        "ID": 2,
-        "RowVersion": "#0#0#0#0#0#11#190#161",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "Sequence": {
-        "ID": 1,
-        "RowVersion": "#0#0#0#0#0#25#167#164",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "SequenceItem": {
-        "ID": 2,
-        "RowVersion": "#0#0#0#0#0#25#167#145",
-        "External_Key": null,
-        "External_RowVersion": null,
-        "External_COR_ID": null
-    },
-    "Positions": [
-        {
-            "InvoicePositionID": 1,
-            "Quantity": 1,
-            "Price": 5.0,
-            "Currency": {
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#11#203#34",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "TotalPrice": 5.0,
-            "TaxCosts": 0.8,
-            "TaxRate": {
-                "Percent": 19.0,
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#57#28#97",
-                "External_Key": "Helsinki#1",
-                "External_RowVersion": "#0#0#0#0#0#0#10#230",
-                "External_COR_ID": null
-            },
-            "TaxIncluded": true,
-            "Text": "AKTIV-ERDE Bio-Erde",
-            "Text2": null,
-            "BeginDate": null,
-            "EndDate": null,
-            "OrderItem": {
-                "ID": 3,
-                "RowVersion": "#0#0#0#0#0#13#60#36",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "BookAccount": null,
-            "State": null,
-            "ArticleKey": null,
-            "Article": null,
-            "External_Key": null,
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#13#49#224",
-            "Deleted": false
-        }
-    ],
-    "States": [
-        {
-            "InvoiceStateID": 1,
-            "State": 0,
-            "PaymentDate": "2020-04-03T07:05:39.89",
-            "DueDate": "2020-04-03T07:05:39.89",
-            "Document": null,
-            "External_Key": null,
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#13#50#17",
-            "Deleted": false
-        }
-    ],
-    "Payments": [
-        {
-            "PaymentID": 25,
-            "ReservedUntil": null,
-            "Info": "Banküberweisung vom 07.08.2020",
-            "Price": -99.99,
-            "Currency": {
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#11#203#34",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "VoucherCode": null,
-            "PaymentMethod": {
-                "ID": 3,
-                "RowVersion": "#0#0#0#0#0#61#135#153",
-                "External_Key": "Helsinki#3",
-                "External_RowVersion": "#0#0#0#0#0#3#116#216",
-                "External_COR_ID": null
-            },
-            "External_Key": "DE33700800850002222222#240409241",
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#26#144#113",
-            "Deleted": true
-        },
-        {
-            "PaymentID": 26,
-            "ReservedUntil": null,
-            "Info": "Banküberweisung vom 07.08.2020",
-            "Price": 5.0,
-            "Currency": {
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#11#203#34",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "VoucherCode": null,
-            "PaymentMethod": {
-                "ID": 3,
-                "RowVersion": "#0#0#0#0#0#61#135#153",
-                "External_Key": "Helsinki#3",
-                "External_RowVersion": "#0#0#0#0#0#3#116#216",
-                "External_COR_ID": null
-            },
-            "External_Key": "DE33700800850002222222#240409241",
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#26#144#123",
-            "Deleted": true
-        },
-        {
-            "PaymentID": 27,
-            "ReservedUntil": null,
-            "Info": "Banküberweisung vom 21.07.2020",
-            "Price": 5.0,
-            "Currency": {
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#11#203#34",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "VoucherCode": null,
-            "PaymentMethod": {
-                "ID": 3,
-                "RowVersion": "#0#0#0#0#0#61#135#153",
-                "External_Key": "Helsinki#3",
-                "External_RowVersion": "#0#0#0#0#0#3#116#216",
-                "External_COR_ID": null
-            },
-            "External_Key": "DE33700800850002222222#240409223",
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#26#144#130",
-            "Deleted": true
-        },
-        {
-            "PaymentID": 28,
-            "ReservedUntil": null,
-            "Info": "Banküberweisung vom 21.07.2020",
-            "Price": 5.0,
-            "Currency": {
-                "ID": 1,
-                "RowVersion": "#0#0#0#0#0#11#203#34",
-                "External_Key": null,
-                "External_RowVersion": null,
-                "External_COR_ID": null
-            },
-            "VoucherCode": null,
-            "PaymentMethod": {
-                "ID": 3,
-                "RowVersion": "#0#0#0#0#0#61#135#153",
-                "External_Key": "Helsinki#3",
-                "External_RowVersion": "#0#0#0#0#0#3#116#216",
-                "External_COR_ID": null
-            },
-            "External_Key": "DE33700800850002222222#240409223",
-            "External_RowVersion": null,
-            "External_COR_ID": null,
-            "External_DM_ID": null,
-            "External_COR_Owner": null,
-            "RowVersion": "#0#0#0#0#0#26#144#132",
-            "Deleted": false
-        }
-    ],
-    "Orders": [],
-    "PaydOn": "2020-03-24T08:05:02.467",
-    "DubiosOn": null,
-    "PaymentMethod": {
-        "ID": 3,
-        "RowVersion": "#0#0#0#0#0#61#135#153",
-        "External_Key": "Helsinki#3",
-        "External_RowVersion": "#0#0#0#0#0#3#116#216",
-        "External_COR_ID": null
-    },
-    "TotalPriceNet": 4.2016806722689077,
-    "TotalPriceGros": 5.0,
-    "TotalPaid": 5.0,
-    "External_Key": null,
-    "External_RowVersion": null,
-    "External_COR_ID": null,
-    "External_DM_ID": null,
-    "External_COR_Owner": null,
-    "RowVersion": "#0#0#0#0#0#26#144#131",
-    "Deleted": false
-}
-```
-
 ## ShipmentOrder
 ```json
 {
@@ -2312,252 +2704,34 @@ As soon as cached content has been changed in the database, the corresponding ca
 }
 ```
 
-## Article
+
+
+## TimePeriod
+
 ```json
 {
-  "ArticleID": 1375,
-  "Name": "Abies koreana 'Veredelung'",
-  "Name2": "Koreatanne 'Veredelung'",
-  "Description": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
-  "ShortDescription": null,
-  "Photos": [],
-  "ArticleGroups": [],
-  "Categories": [{
-    "ID": 0,
-    "RowVersion": "#0#0#0#0#0#2#15#209"
-  }],
-  "Countries": [],
-  "Available": [],
-  "Keys": [{
-    "ArticleKeyID": 1291,
-    "Info": "Sol C 20  125- 150",
-    "Value": "98820121",
-    "Decimals": 0,
-    "PackingUnit": 0,
-    "PackingSize": null,
-    "PackingUnitType": 0,
-    "PackingForm": null,
-    "DeliverSize": null,
-    "DeliverUnitType": null,
-    "DeliverType": null,
-    "StockQuantity": 1,
-    "EAN": "4011266062981",
-    "Country": {
-      "ID": 0,
-      "RowVersion": "#0#0#0#0#0#2#58#151"
-    },
-    "TaxRate": {
-      "ID": 0,
-      "RowVersion": "#0#0#0#0#0#0#230#203"
-    },
-    "AvailableForShippingText": null,
-    "AvailableForShippingDeliverTime": null,
-    "AvailableForRadiusDeliveryText": null,
-    "AvailableForClickAndCollectText": null,
-    "GrowthFrom": null,
-    "GrowthTo": null,
-    "WeightFrom": null,
-    "WeightTo": null,
-    "WidthFrom": null,
-    "WidthTo": null,
-    "HeightFrom": null,
-    "HeightTo": null,
-    "DeliverHeightFrom": null,
-    "DeliverHeightTo": null,
-    "LengthFrom": null,
-    "LengthTo": null,
-    "DepthFrom": null,
-    "DepthTo": null,
-    "PotSize": null,
-    "PotSizeL": null,
-    "FillAmountFrom": null,
-    "FillAmountTo": null,
-    "DiameterFrom": null,
-    "DiameterTo": null,
-    "LoadingCapacityFrom": null,
-    "LoadingCapacityTo": null,
-    "BloomingTimeFrom": null,
-    "BloomingTimeTo": null,
-    "BloomingTimePeriod": null,
-    "BloomingTimePeriod2": null,
-    "Size": null,
-    "Quality": null,
-    "Features": [],
-    "Tasks": [],
-    "Grower": null,
-    "Brand": null,
-    "BotanicName": null,
-    "NameTranslation": null,
-    "Photos": [
-        {
-            "External_Key": "Rose_Picture_1",
-            "DisplayMode": "Auto", // Auto, Full, Cut 
-            "Priority": 1, // Order for display
-            "Picture": { "External_Key": "Rose_Picture_1" },
-            "Title": "Rose in the field", // Title of the Picture
-        }
-    ],
-    "Prices": [{
-      "ArticleKeyPriceID": 1712,
-      "Quantity": 0,
-      "Price": 189.5,
-      "PriceUnitAmount": null,
-      "ValueUnitType": null,
-      "PriceOld": null,
-      "PriceNet": false,
-      "TaxIncluded": true,
-      "Currency": {
-        "ID": 0,
-        "RowVersion": "#0#0#0#0#0#0#77#11"
-      },
-      "External_Key": null,
-      "External_COR_ID": null
-    }],
-    "Attachments": [],
-    "Available": [],
-    "CustomFields": [{
-      "CustomFieldID": 1061,
-      "Field": {
-        "ID": 0,
-        "RowVersion": "#0#0#0#0#0#2#34#20"
-      },
-      "StringValue": "P",
-      "IntValue": null,
-      "DateValue": null,
-      "FloatValue": null,
-      "BoolValue": null,
-      "External_Key": null,
-      "External_COR_ID": null
-    }],
-    "Inactive": false,
-    "AvailableForShipping": true,
-    "AvailableForRadiusDelivery": false,
-    "AvailableForClickAndCollect": false,
-    "AvailableForMarketPlaces": false,
-    "External_Key": "98820121",
-    "External_COR_ID": null
-  }],
-  "Texts": [{
-      "ArticleTextID": 14006,
-      "Position": 0,
-      "Type": 31,
-      "Title": null,
-      "Value": "Zierliche Tanne für kleine Gärten, zeigt sehr früh\nzierende Zapfen, hart.\n",
-      "External_Key": null,
-      "External_COR_ID": null
-    },
-    {
-      "ArticleTextID": 14007,
-      "Position": 0,
-      "Type": 87,
-      "Title": null,
-      "Value": "Nadelbaum mit attraktivem Zapfenschmuck\n",
-      "External_Key": null,
-      "External_COR_ID": null
-    },
-    {
-      "ArticleTextID": 14008,
-      "Position": 0,
-      "Type": 88,
-      "Title": null,
-      "Value": "Standort (Boden): kalkverträglich, lehmig, nährstoffreich; Standort (Licht): vollsonnig bis leicht schattig; Winterhärte: frosthart; Besonderheiten (Pflegetipp): Schnitt unüblich\n",
-      "External_Key": null,
-      "External_COR_ID": null
-    },
-    {
-      "ArticleTextID": 14009,
-      "Position": 0,
-      "Type": 65,
-      "Title": null,
-      "Value": "Blütezeit (Geruch): April bis Mai@Blütenfarbe: purpur@Blattfarbe, -phase: dunkelgrün, immergrün@Blattform: Nadeln bis 2 cm@Zapfen/Frucht: Zapfen blau-violett, später braun, eiförmig, aufrecht, bis 7 cm, sehr dekorativ@Wuchshöhe: über 5 m@Habitus: Nadelbaum@Standort (Boden): kalkverträglich, lehmig, nährstoffreich@Standort (Licht): vollsonnig bis leicht schattig@Verwendung Teil 1: Hausgarten, Steingarten, Einzelstellung, zusammen mit Rhododendron und Stauden@Rinde: im Alter rau@Winterhärte: frosthart\n",
-      "External_Key": null,
-      "External_COR_ID": null
-    }
-  ],
-  "Tasks": [],
-  "Ratings": [],
-  "Tags": [],
-  "Features": [],
-  "CustomFields": [{
-      "CustomFieldID": 1059,
-      "Field": {
-        "ID": 0,
-        "RowVersion": "#0#0#0#0#0#2#34#19"
-      },
-      "StringValue": null,
-      "IntValue": 24180,
-      "DateValue": null,
-      "FloatValue": null,
-      "BoolValue": null,
-      "External_Key": null,
-      "External_COR_ID": null
-    },
-    {
-      "CustomFieldID": 1060,
-      "Field": {
-        "ID": 0,
-        "RowVersion": "#0#0#0#0#0#2#34#20"
-      },
-      "StringValue": "P",
-      "IntValue": null,
-      "DateValue": null,
-      "FloatValue": null,
-      "BoolValue": null,
-      "External_Key": null,
-      "External_COR_ID": null
-    }
-  ],
-  "RatingCount": null,
-  "Teaser": null,
-  "Inactive": false,
-  "GrowthFrom": null,
-  "GrowthTo": null,
-  "WeightFrom": null,
-  "WeightTo": null,
-  "WidthFrom": null,
-  "WidthTo": null,
-  "HeightFrom": null,
-  "HeightTo": null,
-  "DeliverHeightFrom": null,
-  "DeliverHeightTo": null,
-  "LengthFrom": null,
-  "LengthTo": null,
-  "DepthFrom": null,
-  "DepthTo": null,
-  "PotSize": null,
-  "PotSizeL": null,
-  "FillAmountFrom": null,
-  "FillAmountTo": null,
-  "DiameterFrom": null,
-  "DiameterTo": null,
-  "LoadingCapacityFrom": null,
-  "LoadingCapacityTo": null,
-  "BloomingTimeFrom": null,
-  "BloomingTimeTo": null,
-  "BloomingTimePeriod": null,
-  "BloomingTimePeriod2": null,
-  "Size": null,
-  "Quality": null,
-  "Grower": null,
-  "Brand": null,
-  "BotanicName": null,
-  "NameTranslation": null,
-  "External_Key": "98820121",
-  "External_COR_ID": null
+  "TimePeriodID": 1,
+  "FromCW": "2016",
+  "ToCW": "2016-01-01T00:00:00",
+  "FromMonth": "2016-12-31T00:00:00",
+  "ToMonth": "2016-01-01T00:00:00",
+  "From": "2016-12-31T00:00:00",
+  "To": "2016-01-01T00:00:00",
+  "StockQuantity": 0,
+  "External_Key": null,
 }
 ```
-| Field  | Datatype                     | Required | Description      | Options |
-|--------|------------------------------|----------|------------------|---------|
-| Photos | Array of [Photos](#Photos) |          | a list of images |         |
-
-### Photos
-| Field        | Datatype |      Required      | Description                                                 | Options                 |
-|--------------|----------|:------------------:|-------------------------------------------------------------|-------------------------|
-| External_Key | string   | :heavy_check_mark: | external primary key                                        |                         |
-| DisplayMode  | string   | :heavy_check_mark: | should the original image be shown or should it be adjusted | `Auto` `Cut` `Full`     |
-| Priority     | int      | :heavy_check_mark: | Order for display                                           | numeric characters      |
-| Picture      | [Picture](#Picture) | :heavy_check_mark: | Reference for the Picture | { "External_Key": "Rose_Picture_1"}|
-| Title        | string   |                    | Title of the Picture                                        | alphanumeric characters |
+### TimePeriod
+| Field         | Datatype | Required | Description          | Options |
+|---------------|----------|:--------:|----------------------|---------|
+| TimePeriodID  | int      |          | ID of the TimePeriod |         |
+| FromCW        | string   |          | From CalendarWeek    |         |
+| ToCW          | string   |          | To CalendarWeek      |         |
+| FromMonth     | string   |          | From Month           |         |
+| ToMonth       | string   |          | To Month             |         |
+| From          | string   |          | From Date            |         |
+| To            | string   |          | To Date              |         |
+| StockQuantity | int      |          | Stock Quantity       |         |
 
 ## Job
 
@@ -3096,6 +3270,40 @@ public enum MessageDirection {
 "Articles" : null, // Array von ArtikelStatus 34.12
 
 }
+```
+
+## PackingFormType
+```csharp
+    [VD.Locale.Texts.Description("Beutel")]
+    Bag,
+    [VD.Locale.Texts.Description("Sack")]
+    Sack,
+    [VD.Locale.Texts.Description("Flasche")]
+    Bottle,
+    [VD.Locale.Texts.Description("Comfortbeutel")]
+    ComfortBag,
+    [VD.Locale.Texts.Description("Eimer")]
+    Bucket,
+    [VD.Locale.Texts.Description("Ballen")]
+    Bale,
+    [VD.Locale.Texts.Description("Jumbo Pack")]
+    JumboPack,
+    [VD.Locale.Texts.Description("Lose")]
+    Lose,
+    [VD.Locale.Texts.Description("Packung")]
+    Package,
+    [VD.Locale.Texts.Description("Faltschachtel")]
+    FoldingBox,
+    [VD.Locale.Texts.Description("Topf")]
+    pot,
+    [VD.Locale.Texts.Description("Pouchbeutel")]
+    PouchBag,
+    [VD.Locale.Texts.Description("Dose")]
+    Can,
+    [VD.Locale.Texts.Description("Karton")]
+    Carton,
+    [VD.Locale.Texts.Description("Schale")]
+     Bowl
 ```
 
 ## PriceUnitType
