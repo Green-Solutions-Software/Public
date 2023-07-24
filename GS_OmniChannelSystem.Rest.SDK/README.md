@@ -2711,10 +2711,10 @@ As soon as cached content has been changed in the database, the corresponding ca
 ```json
 {
   "TimePeriodID": 1,
-  "FromCW": "2016",
-  "ToCW": "2016-01-01T00:00:00",
-  "FromMonth": "2016-12-31T00:00:00",
-  "ToMonth": "2016-01-01T00:00:00",
+  "FromCW": "10",
+  "ToCW": "15",
+  "FromMonth": "2",
+  "ToMonth": "8",
   "From": "2016-12-31T00:00:00",
   "To": "2016-01-01T00:00:00",
   "StockQuantity": 0,
@@ -2729,8 +2729,8 @@ As soon as cached content has been changed in the database, the corresponding ca
 | ToCW          | string   |          | To CalendarWeek      |         |
 | FromMonth     | string   |          | From Month           |         |
 | ToMonth       | string   |          | To Month             |         |
-| From          | string   |          | From Date            |         |
-| To            | string   |          | To Date              |         |
+| From          | datetime |          | From Date            |         |
+| To            | datetime |          | To Date              |         |
 | StockQuantity | int      |          | Stock Quantity       |         |
 
 ## Job
