@@ -224,6 +224,8 @@
 
 > [CreateCashdeskArgs](#CreateCashdeskArgs)
 
+> [Currency](#Currency) 
+
 > [Data Uri](#Data-Uri)
 
 > [Dialog](#Dialog)
@@ -7450,66 +7452,6 @@ would look like this as a data uri
 ```
     data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=data:application/xml;base64,PG5vdGU+DQo8dG8+VG92ZTwvdG8+DQo8ZnJvbT5KYW5pPC9mcm9tPg0KPGhlYWRpbmc+UmVtaW5kZXI8L2hlYWRpbmc+DQo8Ym9keT5Eb24ndCBmb3JnZXQgbWUgdGhpcyB3ZWVrZW5kITwvYm9keT4NCjwvbm90ZT4=
 ```
-# Picture
-```json
-{
-    "Url": "ftp://In/Pictures/Rose1.jpg",
-    "Name": "Rose1.jpg",
-    "Type": "image/jpeg",
-    "External_Key": "Rose_Picture_1",
-}
-```
-| Field        | Datatype |      Required      | Description                              | Options                                                        |
-|--------------|----------|:------------------:|------------------------------------------|----------------------------------------------------------------|
-| Url          | String   | :heavy_check_mark: | Absolute path to the file inside the ftp |                                                                |
-| Name         | String   | :heavy_check_mark: | Filename                                 | alphanumeric characters                                        |
-| Type         | String   | :heavy_check_mark: | Mime file type                           | `image/gif` `image/bmp` `image/jpeg` `image/x-png` `image/png` |
-| External_Key | string   | :heavy_check_mark: | External primary key                     | alphanumeric characters                                        |
-
-# RegisterArgs
-```json
-{
-	"Contact": {
-        "Apellation" : 0, 
-        "FirstName" : "Max",
-        "LastName" : "Mustermann",
-        "Phone" : "+494954/937281",
-        "Mobile" : "+490174/217895",
-        "Fax" : "+494954/937281",
-        "Position" : "Lead",
-        "Homepage" : "https://www.test.com",
-        "EMail" : "info@gmail.com",
-        "Company" : "Green - Solutions",
-        "DisplayText" : null,
-        "Language" : {
-            "ID" : 1
-        }
-    },
-    "Address": {
-        "Street" : "Musterstraße",
-        "HouseNumber" : "1",
-        "Zip" : "26789",
-        "City" : "Musterstadt",
-        "Postbox" : "abc",
-        "Info" : "First Floor",
-        "Country" : {
-            "ID" : 1
-        },
-        "Type" : 0,
-        "Longitude" : null,
-        "Latitude" : null
-
-    },
-    "Apellation" : 0,
-    "Username" : "maxmustermann",
-    "Password" : "abcdefg",
-    "AGB" : true,
-    "External_Key" : "xxx",
-    "External_COR_Owner" : "ERP",
-    "Validate" : true,
-    "SendMail" : true
-}
-```
 
 # CreateCashdeskArgs
 ```json
@@ -7554,139 +7496,25 @@ would look like this as a data uri
 }
 ```
 
-# ValidateCashdeskArgs
+# Currency
 ```json
 {
-    "BarcodeQR" : "xxx", // gescannter QR-Code
-    "Chainstore" : "Standort", // Nummer des Standort
-    "TotalCosts":9.97, // Gesamtkosten
-    "Currency": "EUR", // Währung,
-    "Items":[
-        {
-            "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
-            "Info":"Schneckentod 150g", // Bon Zeile
-            "Price":2.99, // Einzelpreis
-            "Quantity":2, // Menge
-            "TotalPrice":5.98, // Gesamtrpreis
-            "TaxRate":19.00, // MwSt. Satz
-            "TotalDiscount" : null, // Rabatt
-            "PriceNet" : false, // Rabattierbar?
-            "Categories":[ // Kategorien
-                {"ID" : 1, "Number" : "4711"},
-            ]
-        },
-        {
-            "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
-            "Info":"Blumenkelle",
-            "Price":3.99,
-            "Quantity":1,
-            "TotalPrice":3.99,
-            "TaxRate":19.00,
-            "TotalDiscount" : 10.0 // Rabatt
-        }
-    ]
+    "CurrencyID": 0,
+    "Name": "Schweizer Franken",
+    "NameShort": "CHF",
+    "Sign": "Fr.",
+    "Factor": 1,
+    "External_Key": "CHF"
 }
 ```
-
-# ValidateCashdeskResult
-```json
-{
-    // Bon drucken?
-    "PrintReceipt" : false,
-    
-    // Kunde
-    "Owner": {
-        // Member ID
-        "ID" : 47,
-        // Kundennummer
-        "Number" : "4711"
-    },
-
-    // Rabatt auf Einkauf
-    "TotalDiscountAbsolut" : "10", // 10€
-    
-    // Warenkorb
-    "CashDesk" : {
-        "Items":[
-            {
-                "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-                "ArticleKey" : "4755884", // Artikelnummer
-                "EAN" : "123456789012", // EAN
-                "Info":"Schneckentod 150g", // Bon Zeile
-                "Price":2.99, // Einzelpreis
-                "Quantity":2, // Menge
-                "TotalPrice":5.98, // Gesamtrpreis
-                "TaxRate":19.00, // MwSt. Satz
-                "TotalDiscount" : null, // Rabatt
-                "PriceNet" : false, // Rabattierbar?
-                "Categories":[ // Kategorien
-                    {"ID" : 1, Number = "4711"},
-                ]
-            },
-            {
-                "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
-                "ArticleKey" : "4755884", // Artikelnummer
-                "EAN" : "123456789012", // EAN
-                "Info":"Blumenkelle",
-                "Price":3.99,
-                "Quantity":1,
-                "TotalPrice":3.99,
-                "TaxRate":19.00,
-                "TotalDiscount" : 10.0 // Rabatt
-            }
-        ]
-    },
-
-    // Resultierende Coupons
-    "Vouchers" : [
-        // 5€ Discount
-        {
-            "Voucher" : {"ID" : 100},
-            "Items" : [ // Affected product
-                {
-                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-                    "TotalDiscountAbsolut" : 5, // 5 €
-                    "ArticleKey" : "4755884", // Artikelnummer
-                    "EAN" : "123456789012", // EAN
-                    "Info":"Schneckentod 150g", // Bon Zeile
-                    "Price":2.99, // Einzelpreis
-                    "Quantity":2 // Menge
-                    
-                }
-            ]
-        },
-        // Giveaway article
-        {
-            "Voucher" : {"ID" : 200},
-            "Items" : [ // new giveaway article
-                {
-                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-                    "TotalDiscountAbsolut" : null, // 5 €
-                    "ArticleKey" : "4755887", // Artikelnummer
-                    "EAN" : "123456789012", // EAN
-                    "Info":"Schneckentod 150g", // Bon Zeile
-                    "Quantity":2 // Menge
-                }
-            ]
-        },
-        // 4x Points
-        {
-            "Voucher" : {"ID" : 400},
-            "ExtraPoints" : 4
-        },
-        // Not used coupon
-        {
-            "Voucher" : {"ID" : 300},
-            "Items" : null
-        }
-    ]
-
-}
-```
+| Field        | Datatype |      Required      | Description                | Options                 |
+|--------------|----------|:------------------:|----------------------------|-------------------------|
+| CurrencyID   | int      | :heavy_check_mark: | ID of the currency         |                         |
+| Name         | String   | :heavy_check_mark: | Name of the currency       |                         |
+| NameShort    | String   |                    | Short name of the currency |                         |
+| Sign         | String   | :heavy_check_mark: | Sign of the currency       | `€` `$` `CHF`           |
+| Factor       | decimal  |                    | Factor of the currency     |                         |
+| External_Key | string   |                    | External primary key       | alphanumeric characters |
 
 # Member
 
@@ -11276,6 +11104,201 @@ would look like this as a data uri
     "Deleted": false
 }
 ```
+# Picture
+```json
+{
+    "Url": "ftp://In/Pictures/Rose1.jpg",
+    "Name": "Rose1.jpg",
+    "Type": "image/jpeg",
+    "External_Key": "Rose_Picture_1",
+}
+```
+| Field        | Datatype |      Required      | Description                              | Options                                                        |
+|--------------|----------|:------------------:|------------------------------------------|----------------------------------------------------------------|
+| Url          | String   | :heavy_check_mark: | Absolute path to the file inside the ftp |                                                                |
+| Name         | String   | :heavy_check_mark: | Filename                                 | alphanumeric characters                                        |
+| Type         | String   | :heavy_check_mark: | Mime file type                           | `image/gif` `image/bmp` `image/jpeg` `image/x-png` `image/png` |
+| External_Key | string   | :heavy_check_mark: | External primary key                     | alphanumeric characters                                        |
+
+# RegisterArgs
+```json
+{
+	"Contact": {
+        "Apellation" : 0, 
+        "FirstName" : "Max",
+        "LastName" : "Mustermann",
+        "Phone" : "+494954/937281",
+        "Mobile" : "+490174/217895",
+        "Fax" : "+494954/937281",
+        "Position" : "Lead",
+        "Homepage" : "https://www.test.com",
+        "EMail" : "info@gmail.com",
+        "Company" : "Green - Solutions",
+        "DisplayText" : null,
+        "Language" : {
+            "ID" : 1
+        }
+    },
+    "Address": {
+        "Street" : "Musterstraße",
+        "HouseNumber" : "1",
+        "Zip" : "26789",
+        "City" : "Musterstadt",
+        "Postbox" : "abc",
+        "Info" : "First Floor",
+        "Country" : {
+            "ID" : 1
+        },
+        "Type" : 0,
+        "Longitude" : null,
+        "Latitude" : null
+
+    },
+    "Apellation" : 0,
+    "Username" : "maxmustermann",
+    "Password" : "abcdefg",
+    "AGB" : true,
+    "External_Key" : "xxx",
+    "External_COR_Owner" : "ERP",
+    "Validate" : true,
+    "SendMail" : true
+}
+```
+# ValidateCashdeskArgs
+```json
+{
+    "BarcodeQR" : "xxx", // gescannter QR-Code
+    "Chainstore" : "Standort", // Nummer des Standort
+    "TotalCosts":9.97, // Gesamtkosten
+    "Currency": "EUR", // Währung,
+    "Items":[
+        {
+            "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Schneckentod 150g", // Bon Zeile
+            "Price":2.99, // Einzelpreis
+            "Quantity":2, // Menge
+            "TotalPrice":5.98, // Gesamtrpreis
+            "TaxRate":19.00, // MwSt. Satz
+            "TotalDiscount" : null, // Rabatt
+            "PriceNet" : false, // Rabattierbar?
+            "Categories":[ // Kategorien
+                {"ID" : 1, "Number" : "4711"},
+            ]
+        },
+        {
+            "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
+            "ArticleKey" : "4755884", // Artikelnummer
+            "EAN" : "123456789012", // EAN
+            "Info":"Blumenkelle",
+            "Price":3.99,
+            "Quantity":1,
+            "TotalPrice":3.99,
+            "TaxRate":19.00,
+            "TotalDiscount" : 10.0 // Rabatt
+        }
+    ]
+}
+```
+
+# ValidateCashdeskResult
+```json
+{
+    // Bon drucken?
+    "PrintReceipt" : false,
+    
+    // Kunde
+    "Owner": {
+        // Member ID
+        "ID" : 47,
+        // Kundennummer
+        "Number" : "4711"
+    },
+
+    // Rabatt auf Einkauf
+    "TotalDiscountAbsolut" : "10", // 10€
+    
+    // Warenkorb
+    "CashDesk" : {
+        "Items":[
+            {
+                "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                "ArticleKey" : "4755884", // Artikelnummer
+                "EAN" : "123456789012", // EAN
+                "Info":"Schneckentod 150g", // Bon Zeile
+                "Price":2.99, // Einzelpreis
+                "Quantity":2, // Menge
+                "TotalPrice":5.98, // Gesamtrpreis
+                "TaxRate":19.00, // MwSt. Satz
+                "TotalDiscount" : null, // Rabatt
+                "PriceNet" : false, // Rabattierbar?
+                "Categories":[ // Kategorien
+                    {"ID" : 1, Number = "4711"},
+                ]
+            },
+            {
+                "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
+                "ArticleKey" : "4755884", // Artikelnummer
+                "EAN" : "123456789012", // EAN
+                "Info":"Blumenkelle",
+                "Price":3.99,
+                "Quantity":1,
+                "TotalPrice":3.99,
+                "TaxRate":19.00,
+                "TotalDiscount" : 10.0 // Rabatt
+            }
+        ]
+    },
+
+    // Resultierende Coupons
+    "Vouchers" : [
+        // 5€ Discount
+        {
+            "Voucher" : {"ID" : 100},
+            "Items" : [ // Affected product
+                {
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "TotalDiscountAbsolut" : 5, // 5 €
+                    "ArticleKey" : "4755884", // Artikelnummer
+                    "EAN" : "123456789012", // EAN
+                    "Info":"Schneckentod 150g", // Bon Zeile
+                    "Price":2.99, // Einzelpreis
+                    "Quantity":2 // Menge
+                    
+                }
+            ]
+        },
+        // Giveaway article
+        {
+            "Voucher" : {"ID" : 200},
+            "Items" : [ // new giveaway article
+                {
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "TotalDiscountAbsolut" : null, // 5 €
+                    "ArticleKey" : "4755887", // Artikelnummer
+                    "EAN" : "123456789012", // EAN
+                    "Info":"Schneckentod 150g", // Bon Zeile
+                    "Quantity":2 // Menge
+                }
+            ]
+        },
+        // 4x Points
+        {
+            "Voucher" : {"ID" : 400},
+            "ExtraPoints" : 4
+        },
+        // Not used coupon
+        {
+            "Voucher" : {"ID" : 300},
+            "Items" : null
+        }
+    ]
+
+}
+```
+
+
 
 # Dialogs
 
