@@ -33,6 +33,8 @@
 
 **[Categories](#Categories)**
 
+**[Product Groups](#Product-Groups)**
+
 **[Reports](#Reports)**
 
 **[Loyalty program](#Loyalty-program)**
@@ -440,6 +442,11 @@ As a return, an AccountInfo is returned with all information about the logged-in
 # Categories
 
 | url| api/categories|
+| --- | --- |
+
+# Product Groups
+
+| url| api/articlegroups|
 | --- | --- |
 
 # Reports
