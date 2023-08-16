@@ -53,7 +53,7 @@
 
 > [Transfer in-store purchases](#Transfer-in-store-purchases)
 
-> [Cancel in-store purchases](#Cancel-in-store-purchases)
+> [Update in-store purchases](#Update-in-store-purchases)
 
 > [Update loyalty card bonus and turn over](#Update-loyalty-card-bonus-and-turn-over)
 
@@ -597,7 +597,7 @@ Transfers a in-store purchase of the loyalty card owner.
 
 Returns **[Order](#Order)**
 
-## Cancel in-store purchases
+## Update in-store purchases
 
 Updates a in-store purchase
 
