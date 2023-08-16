@@ -53,6 +53,8 @@
 
 > [Transfer in-store purchases](#Transfer-in-store-purchases)
 
+> [Cancel in-store purchases](#Cancel-in-store-purchases)
+
 > [Update loyalty card bonus and turn over](#Update-loyalty-card-bonus-and-turn-over)
 
 > [Transfer bonus vouchers](#Transfer-bonus-vouchers)
@@ -588,6 +590,18 @@ Returns **[Member](#Member)**
 Transfers a in-store purchase of the loyalty card owner. 
 
 **Function: POST** /api/orders/create/cashdesc
+
+| **Parameter** | **Type**                                      | **Description**     | **Remark** |
+|---------------|-----------------------------------------------|---------------------|------------|
+| **BODY**      | **[CreateCashdeskArgs](#CreateCashdeskArgs)** | Stationary Purchase |            |
+
+Returns **[Order](#Order)**
+
+## Cancel in-store purchases
+
+Updates a in-store purchase
+
+**Function: POST** /api/orders/update/cashdesc
 
 | **Parameter** | **Type**                                      | **Description**     | **Remark** |
 |---------------|-----------------------------------------------|---------------------|------------|
