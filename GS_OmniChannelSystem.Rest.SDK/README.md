@@ -7443,9 +7443,10 @@ public enum MessageDirection {
 # TriggerEventArgs
 ```json
 {
-	"Type" : 55, // Event Type (Voucher devalued)
+    "Type" : 55, // Event Type (Voucher devalued)
     "Channels" : [3], // Which channels to trigger on (3 = App)
     "MemberNumber" : "4711", // Member Number (Member.Number)
+    "MemberID" : 22, // MemberID
     "VoucherKeyValues" : ["ABC", "DEF"], // Vouchers to devalue
     "Processed" : false // Processed or not. If not it will show up in your event queue
 }
