@@ -1,16 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <RootNamespace>GS.PflanzenCMS.Rest.SDK</RootNamespace>
-    <AssemblyName>GS.PflanzenCMS.Rest.SDK</AssemblyName>
+    <RootNamespace>GS.OmniChannelSystem.Rest.SDK</RootNamespace>
+    <AssemblyName>GS.OmniChannelSystem.Rest.SDK</AssemblyName>
     <TargetFramework>netstandard20</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<PackageId>GS_OmniChannelSystem.Rest.SDK</PackageId>
+	<Authors>Green Solutions Software GmbH</Authors>
+	<Copyright>Green Solutions Software GmbH</Copyright>
+	<Description>SDK for Green Solutions Cloud Software</Description>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/Green-Solutions-Software/Public.git</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/Green-Solutions-Software/Public</PackageProjectUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageTags>Green-Solutions GreenSolutions</PackageTags>
+	<PackageReleaseNotes>https://github.com/Green-Solutions-Software/Public</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Web" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>

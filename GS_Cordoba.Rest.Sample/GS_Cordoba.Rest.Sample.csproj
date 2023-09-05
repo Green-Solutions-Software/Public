@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RootNamespace>GS.Cordoba.Rest.Sample</RootNamespace>
-    <AssemblyName>GS_Cordoba.Rest.Sample</AssemblyName>
+    <AssemblyName>GS.Cordoba.Rest.Sample</AssemblyName>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>

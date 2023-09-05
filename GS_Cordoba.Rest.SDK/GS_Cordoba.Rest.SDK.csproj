@@ -5,6 +5,16 @@
     <AssemblyName>GS.Cordoba.Rest.SDK</AssemblyName>
     <TargetFramework>netstandard20</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageId>GS_Cordoba.Rest.SDK</PackageId>
+	<Authors>Green Solutions Software GmbH</Authors>
+	<Copyright>Green Solutions Software GmbH</Copyright>
+	<Description>SDK for Green Solutions app.green-solutions.net</Description>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/Green-Solutions-Software/Public.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Green-Solutions-Software/Public</PackageProjectUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageTags>Green-Solutions GreenSolutions</PackageTags>
+    <PackageReleaseNotes>https://github.com/Green-Solutions-Software/Public</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
