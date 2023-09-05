@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32228.343
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS_Cordoba.Rest.SDK", "GS_Cordoba.Rest.SDK\GS_Cordoba.Rest.SDK.csproj", "{EDC8653F-FF52-48D2-B67B-7386A7D7066F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GS_Cordoba.Rest.SDK", "GS_Cordoba.Rest.SDK\GS_Cordoba.Rest.SDK.csproj", "{EDC8653F-FF52-48D2-B67B-7386A7D7066F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GS_Cordoba.Rest.Sample", "GS_Cordoba.Rest.Sample\GS_Cordoba.Rest.Sample.csproj", "{AB8BF5A8-913B-49F8-8E4B-BB9F9B6E1D34}"
 EndProject
