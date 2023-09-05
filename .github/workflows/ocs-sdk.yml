@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 15
     env:
       restoreProject: "GS_OmniChannelSystem.Rest.SDK/GS_OmniChannelSystem.Rest.SDK.csproj"
-      pkgPath: "GS_OmniChannelSystem.Rest.SDK.${GITHUB_REF/refs\/tags\/$tagPath\/v/}.nupkg"
+      pkgPath: "GS_OmniChannelSystem.Rest.SDK"
       tagPath: "ocs-sdk"
       nugetFeed: "https://api.nuget.org/v3/index.json"
     steps:
@@ -36,4 +36,4 @@ jobs:
       run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} --configuration Release
 
     - name: Push
-      run: dotnet nuget push ${env:pkgPath} --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
+      run: dotnet nuget push ${env:pkgPath}.${env:VERSION}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
