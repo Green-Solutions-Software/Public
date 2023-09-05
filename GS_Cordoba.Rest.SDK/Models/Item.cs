@@ -1,9 +1,4 @@
-﻿using GS.Cordoba.Rest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 
 namespace GS.Cordoba.Rest.SDK.Models

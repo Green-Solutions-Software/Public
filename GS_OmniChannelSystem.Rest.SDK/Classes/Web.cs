@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace GS.OmniChannelSystem.Rest.SDK.Classes
+﻿namespace GS.OmniChannelSystem.Rest.SDK.Classes
 {
     public class Web
     {

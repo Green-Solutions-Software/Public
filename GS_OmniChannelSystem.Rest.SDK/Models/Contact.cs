@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Text;
 using GS.OmniChannelSystem.Rest.SDK.Classes;
 
 namespace GS.OmniChannelSystem.Rest.SDK.Models

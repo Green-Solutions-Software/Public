@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.IO;
-using GS.OmniChannelSystem.Rest.SDK.Models;
+﻿using GS.OmniChannelSystem.Rest.SDK.Models;
 using GS.OmniChannelSystem.Rest.SDK.Interfaces;
 
 namespace GS.OmniChannelSystem.Rest.SDK.Client

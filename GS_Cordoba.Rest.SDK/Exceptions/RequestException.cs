@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
 
 namespace GS.Cordoba.Rest.SDK.Exceptions
 {
@@ -30,7 +29,7 @@ namespace GS.Cordoba.Rest.SDK.Exceptions
 
         public class CURLWriter
         {
-            public string Execute(RestRequest request, IRestResponse response, IEnumerable<Parameter> parameters)
+            public string Execute(RestRequest request, RestResponse response, IEnumerable<Parameter> parameters)
             {
                 List<string> sb = new List<string>();
                 try
@@ -95,11 +94,11 @@ namespace GS.Cordoba.Rest.SDK.Exceptions
 
         }
 
-        public RequestException(RestClient client, RestRequest request, IRestResponse response, System.Net.HttpStatusCode status, string message, string content)
+        public RequestException(RestClient client, RestRequest request, RestResponse response, System.Net.HttpStatusCode status, string message, string content)
             : base(string.Format("Error while {0} on {1} {2}: {3} [{5}]",
                     request.Resource,
                     request.Method.ToString(),
-                    client.BaseUrl,
+                    client.Options.BaseUrl,
                     (status + ", " + message + ", " + getErrorObject(content).Message + ", " + getErrorObject(content).ExceptionMessage).Trim(),
                     getParameters(client.DefaultParameters.Concat(request.Parameters)),
                     new CURLWriter().Execute(request, response, client.DefaultParameters.Concat(request.Parameters))

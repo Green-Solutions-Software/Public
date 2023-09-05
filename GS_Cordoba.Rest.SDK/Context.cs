@@ -7,7 +7,6 @@ using GS.Cordoba.Rest.SDK.Models;
 using GS.Cordoba.Rest.SDK.Interfaces;
 using RestSharp;
 using GS.Cordoba.Rest.SDK.Classes;
-using GS.Cordoba.Rest.SDK.Exceptions;
 
 namespace GS.Cordoba.Rest
 {
@@ -138,7 +137,7 @@ namespace GS.Cordoba.Rest
         protected Task<T> get<T>(string resource, object id) where T : class, new()
         {
             var client = createClient();
-            var request = new RestRequest(resource, Method.GET);
+            var request = new RestRequest(resource, Method.Get);
             request.AddUrlSegment("id", id.ToString());
             return executeRequest<T>(request);
         }
@@ -146,7 +145,7 @@ namespace GS.Cordoba.Rest
         protected Task<Paginated<T>> find<T>(string resource, string search, int pageIndex, int pageSize, string orderBy, long[] ids = null) where T : class, new()
         {
             var client = createClient();
-            var request = new RestRequest(resource, Method.GET);
+            var request = new RestRequest(resource, Method.Get);
             request.AddParameter("search", search);
             request.AddParameter("pageIndex", pageIndex);
             request.AddParameter("pageSize", pageSize);
@@ -441,7 +440,7 @@ namespace GS.Cordoba.Rest
         public Task<PaginatedSearch> Search(string search, int pageIndex, int pageSize, string orderBy, SearchArgs args)
         {
             var client = createClient();
-            var request = new RestRequest("api/search", Method.GET);
+            var request = new RestRequest("api/search", Method.Get);
             request.AddParameter("search", search);
             request.AddParameter("pageIndex", pageIndex);
             request.AddParameter("pageSize", pageSize);
@@ -493,7 +492,7 @@ namespace GS.Cordoba.Rest
         public Task MemberMessage(long id, MemberMessageArgs args)
         {
             var client = createClient();
-            var request = new RestRequest("api/mailings/membermessage/{id}", Method.POST);
+            var request = new RestRequest("api/mailings/membermessage/{id}", Method.Post);
             request.AddParameter("Content-Type", "application/json", ParameterType.HttpHeader);
             request.AddUrlSegment("id", id.ToString());
             request.AddJsonBody(args);
@@ -504,7 +503,7 @@ namespace GS.Cordoba.Rest
         public Task<string> ValidateAccount(string user, string password, int level = 0)
         {
             var client = createClient();
-            var request = new RestRequest("api/account/validate", Method.GET);
+            var request = new RestRequest("api/account/validate", Method.Get);
             request.AddParameter("user", user);
             request.AddParameter("password", password);
             request.AddParameter("level", level);
@@ -514,7 +513,7 @@ namespace GS.Cordoba.Rest
         public Task<AccountInfo> LoginAccount(string user, string password, int level = 0)
         {
             var client = createClient();
-            var request = new RestRequest("api/account/login", Method.GET);
+            var request = new RestRequest("api/account/login", Method.Get);
             request.AddParameter("user", user);
             request.AddParameter("password", password);
             request.AddParameter("level", level);
@@ -524,7 +523,7 @@ namespace GS.Cordoba.Rest
         public Task<AccountInfo> AccountInfo()
         {
             var client = createClient();
-            var request = new RestRequest("api/account/info", Method.GET);
+            var request = new RestRequest("api/account/info", Method.Get);
             return executeRequest<AccountInfo>(request);
         }
 
@@ -547,7 +546,7 @@ namespace GS.Cordoba.Rest
         public Task<Basket.Summary> AddToPrintList(BuyOrPrintSignage model)
         {
             var client = createClient();
-            var request = new RestRequest("api/baskets/printlist/add", Method.POST);
+            var request = new RestRequest("api/baskets/printlist/add", Method.Post);
             request.AddParameter("Content-Type", "application/json", ParameterType.HttpHeader);
             request.AddJsonBody(model);
             return executeRequestWithoutCache<Basket.Summary>(request);
@@ -556,7 +555,7 @@ namespace GS.Cordoba.Rest
         public Task<Basket.Summary> DeleteFromPrintList(long id)
         {
             var client = createClient();
-            var request = new RestRequest("api/baskets/printlist/delete/{id}", Method.POST);
+            var request = new RestRequest("api/baskets/printlist/delete/{id}", Method.Post);
             request.AddUrlSegment("id", id.ToString());
             return executeRequestWithoutCache<Basket.Summary>(request);
         }
@@ -564,7 +563,7 @@ namespace GS.Cordoba.Rest
         public Task<ProgressHub> PrintListPrint(PrintSettings settings)
         {
             var client = createClient();
-            var request = new RestRequest("api/baskets/printlist/print", Method.POST);
+            var request = new RestRequest("api/baskets/printlist/print", Method.Post);
             request.AddParameter("Content-Type", "application/json", ParameterType.HttpHeader);
             request.AddJsonBody(settings);
             return executeRequestWithoutCache<ProgressHub>(request);
@@ -573,7 +572,7 @@ namespace GS.Cordoba.Rest
         public Task<ProgressHub> PrintListPrintTemp(BuyOrPrintSignage model)
         {
             var client = createClient();
-            var request = new RestRequest("api/baskets/printlist/temp/print", Method.POST);
+            var request = new RestRequest("api/baskets/printlist/temp/print", Method.Post);
             request.AddParameter("Content-Type", "application/json", ParameterType.HttpHeader);
             request.AddJsonBody(model);
             return executeRequestWithoutCache<ProgressHub>(request);
@@ -582,7 +581,7 @@ namespace GS.Cordoba.Rest
         public Task PrintListClear()
         {
             var client = createClient();
-            var request = new RestRequest("api/baskets/printlist/clear", Method.POST);
+            var request = new RestRequest("api/baskets/printlist/clear", Method.Post);
             return executeRequestWithoutCache(request);
         }
 
