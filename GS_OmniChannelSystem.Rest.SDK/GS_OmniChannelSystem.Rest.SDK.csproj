@@ -15,6 +15,7 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageTags>Green-Solutions GreenSolutions</PackageTags>
 	<PackageReleaseNotes>https://github.com/Green-Solutions-Software/Public</PackageReleaseNotes>
+	<PackageReadmeFile>https://github.com/Green-Solutions-Software/Public</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
