@@ -1,5 +1,23 @@
 
-# Omni Channel System (OCS)
+public enum Apellation : short
+    {
+        [VD.Locale.Texts.Description("Firma")]
+        Company,
+        [VD.Locale.Texts.Description("Herr")]
+        Mr,
+        [VD.Locale.Texts.Description("Frau")]
+        Mrs,
+        [VD.Locale.Texts.Description("Keine")]
+        None,
+        [VD.Locale.Texts.Description("Divers")]
+        Diverse,
+        [VD.Locale.Texts.Description("Fräulein")]
+        Miss,
+        [VD.Locale.Texts.Description("Dame")]
+        Ms,
+        [VD.Locale.Texts.Description("Doktor")]
+        DR
+    }# Omni Channel System (OCS)
 ## REST API
 
 
@@ -218,6 +236,7 @@
 > [Clean up caches](#Caches-clean-up)
 
 **[Data structures](#Data-structures)**
+
 > [Account info](#Accountinfo)
 
 > [Article](#Article)
@@ -225,6 +244,8 @@
 > [BasketType](#Baskettype)
 
 > [ChannelType](#ChannelType)
+
+> [Apellation](#Apellation)
 
 > [CreateCashdeskArgs](#CreateCashdeskArgs)
 
@@ -3116,6 +3137,31 @@ public enum TransactionType : short
     RadiusDelivery,
     Download,
     Cashdesc
+}
+
+```
+
+## Apellation
+
+```csharp
+public enum Apellation : short
+{
+    [VD.Locale.Texts.Description("Firma")]
+    Company, // 0
+    [VD.Locale.Texts.Description("Herr")]
+    Mr, // 1
+    [VD.Locale.Texts.Description("Frau")]
+    Mrs, // 2
+    [VD.Locale.Texts.Description("Keine")]
+    None, // 3
+    [VD.Locale.Texts.Description("Divers")]
+    Diverse, // 4
+    [VD.Locale.Texts.Description("Fräulein")]
+    Miss, // 5
+    [VD.Locale.Texts.Description("Dame")]
+    Ms, // 6
+    [VD.Locale.Texts.Description("Doktor")]
+    DR // 7
 }
 
 ```
