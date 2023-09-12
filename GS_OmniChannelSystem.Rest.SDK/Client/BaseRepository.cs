@@ -1,5 +1,4 @@
-﻿using GS.OmniChannelSystem.Rest.SDK.Interfaces;
-using GS.OmniChannelSystem.Rest.SDK.Models;
+﻿using GS.OmniChannelSystem.Rest.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

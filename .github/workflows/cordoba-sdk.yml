@@ -10,15 +10,12 @@ jobs:
     timeout-minutes: 15
     env:
       restoreProject: "GS_Cordoba.Rest.SDK/GS_Cordoba.Rest.SDK.csproj"
-      pkgPath: "GS_Cordoba.Rest.SDK.nupkg"
+      pkgPath: "GS_Cordoba.Rest.SDK"
       tagPath: "cordoba-sdk"
       nugetFeed: "https://api.nuget.org/v3/index.json"
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.6  
+      uses: actions/checkout@v3
 
     - name: Verify commit exists in origin/master
       run: |
@@ -30,13 +27,13 @@ jobs:
       shell: bash
 
     - name: Restore Packages
-      run: MSBuild GS_Cordoba.Rest.sln --% /t:restore /p:Configuration=Release /clp:Summary;ErrorsOnly /m
+      run: dotnet restore GS_Cordoba.Rest.sln --configuration Release
 
     - name: Build
-      run: MSBuild GS_Cordoba.Rest.sln --% /p:Configuration=Release /clp:Summary;ErrorsOnly /m  
+      run: dotnet build GS_Cordoba.Rest.sln --configuration Release
 
     - name: Pack
-      run: nuget pack ${env:restoreProject} -IncludeReferencedProjects -OutputFileNamesWithoutVersion -Version ${env:VERSION} -Properties Configuration=Release 
+      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} --configuration Release
 
     - name: Push
-      run: nuget push ${env:pkgPath} ${{ secrets.NUGETAPI }} -Source ${env:nugetFeed}
+      run: dotnet nuget push ${env:pkgPath}.${env:VERSION}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed} 

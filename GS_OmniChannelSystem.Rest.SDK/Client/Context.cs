@@ -1,7 +1,6 @@
 ﻿using GS.OmniChannelSystem.Rest.SDK.Api.Args;
 using GS.OmniChannelSystem.Rest.SDK.Classes;
 using GS.OmniChannelSystem.Rest.SDK.Exceptions;
-using GS.OmniChannelSystem.Rest.SDK.Interfaces;
 using GS.OmniChannelSystem.Rest.SDK.Models;
 using RestSharp;
 using System;
