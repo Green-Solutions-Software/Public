@@ -7990,36 +7990,36 @@ would look like this as a data uri
 # ValidateCashdeskArgs
 ```json
 {
-    "BarcodeQR" : "xxx", // gescannter QR-Code
-    "Chainstore" : "Standort", // Nummer des Standort
-    "TotalCosts":9.97, // Gesamtkosten
-    "Currency": "EUR", // Währung,
+    "BarcodeQR" : "xxx", // scanned QR-Code
+    "Chainstore" : "Standort", // Chainstore number
+    "TotalCosts":9.97, // Total
+    "Currency": "EUR", // Currency,
     "Items":[
         {
-            "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
-            "Info":"Schneckentod 150g", // Bon Zeile
-            "Price":2.99, // Einzelpreis
-            "Quantity":2, // Menge
-            "TotalPrice":5.98, // Gesamtrpreis
-            "TaxRate":19.00, // MwSt. Satz
-            "TotalDiscount" : null, // Rabatt
-            "PriceNet" : false, // Rabattierbar?
-            "Categories":[ // Kategorien
+            "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Unique Identifier GUID
+            "ArticleKey" : "4755884", // Productnumber
+            "EAN" : "123456789012", // GTIN
+            "Info":"Schneckentod 150g", // Receipt Row
+            "Price":2.99, // Price
+            "Quantity":2, // Quantity
+            "TotalPrice":5.98, // Total Price
+            "TaxRate":19.00, // Tax Rate
+            "TotalDiscount" : null, // Total Discount
+            "PriceNet" : false, // Discount possible?
+            "Categories":[ // Categories (Raw)
                 {"ID" : 1, "Number" : "4711"},
             ]
         },
         {
-            "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
-            "ArticleKey" : "4755884", // Artikelnummer
-            "EAN" : "123456789012", // EAN
+            "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Unique Identifier GUID
+            "ArticleKey" : "4755884", // Productnumber
+            "EAN" : "123456789012", // GTIN
             "Info":"Blumenkelle",
             "Price":3.99,
             "Quantity":1,
             "TotalPrice":3.99,
             "TaxRate":19.00,
-            "TotalDiscount" : 10.0 // Rabatt
+            "TotalDiscount" : 10.0 // Discount
         }
     ]
 }
@@ -8028,81 +8028,81 @@ would look like this as a data uri
 # ValidateCashdeskResult
 ```json
 {
-    // Bon drucken?
+    // Print Receipt?
     "PrintReceipt" : false,
     
-    // Kunde
+    // Customer
     "Owner": {
         // Member ID
         "ID" : 47,
-        // Kundennummer
+        // Customer Number
         "Number" : "4711"
     },
 
-    // Rabatt auf Einkauf
+    // Discount on purchase
     "TotalDiscountAbsolut" : "10", // 10€
     
-    // Warenkorb
+    // Cart
     "CashDesk" : {
         "Items":[
             {
-                "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
-                "ArticleKey" : "4755884", // Artikelnummer
-                "EAN" : "123456789012", // EAN
-                "Info":"Schneckentod 150g", // Bon Zeile
-                "Price":2.99, // Einzelpreis
-                "Quantity":2, // Menge
-                "TotalPrice":5.98, // Gesamtrpreis
-                "TaxRate":19.00, // MwSt. Satz
-                "TotalDiscount" : null, // Rabatt
-                "PriceNet" : false, // Rabattierbar?
-                "Categories":[ // Kategorien
+                "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Unique Identifier GUID
+                "ArticleKey" : "4755884", // Productnumber
+                "EAN" : "123456789012", // GTIN
+                "Info":"Schneckentod 150g", // Receipt Row
+                "Price":2.99, // Price
+                "Quantity":2, // Quantity
+                "TotalPrice":5.98, // Total Price
+                "TaxRate":19.00, // Tax Rate
+                "TotalDiscount" : null, // Discount
+                "PriceNet" : false, // Discount possible?
+                "Categories":[ // Categories
                     {"ID" : 1, Number = "4711"},
                 ]
             },
             {
-                "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Eindeutige GUID
-                "ArticleKey" : "4755884", // Artikelnummer
-                "EAN" : "123456789012", // EAN
+                "Guid": "CE36FDC5-A21F-4D6C-8DC9-62303251C6C0", // Unique Identifier GUID
+                "ArticleKey" : "4755884", // Productnumber
+                "EAN" : "123456789012", // GTIN
                 "Info":"Blumenkelle",
                 "Price":3.99,
                 "Quantity":1,
                 "TotalPrice":3.99,
                 "TaxRate":19.00,
-                "TotalDiscount" : 10.0 // Rabatt
+                "TotalDiscount" : 10.0 // Discount
             }
         ]
     },
 
-    // Resultierende Coupons
+    // Activated Vouchers
     "Vouchers" : [
         // 5€ Discount
         {
             "Voucher" : {"ID" : 100},
             "Items" : [ // Affected product
                 {
-                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", 
                     "TotalDiscountAbsolut" : 5, // 5 €
-                    "ArticleKey" : "4755884", // Artikelnummer
-                    "EAN" : "123456789012", // EAN
-                    "Info":"Schneckentod 150g", // Bon Zeile
-                    "Price":2.99, // Einzelpreis
-                    "Quantity":2 // Menge
+                    "ArticleKey" : "4755884",
+                    "EAN" : "123456789012", 
+                    "Info":"Schneckentod 150g", 
+                    "Price":2.99, 
+                    "Quantity":2 
                     
                 }
             ]
         },
-        // Giveaway article
+        // Giveaway product
         {
             "Voucher" : {"ID" : 200},
-            "Items" : [ // new giveaway article
+            "Items" : [ // new giveaway product
                 {
-                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", // Eindeutige GUID
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB",
                     "TotalDiscountAbsolut" : null, // 5 €
-                    "ArticleKey" : "4755887", // Artikelnummer
-                    "EAN" : "123456789012", // EAN
-                    "Info":"Schneckentod 150g", // Bon Zeile
-                    "Quantity":2 // Menge
+                    "ArticleKey" : "4755887", 
+                    "EAN" : "123456789012", 
+                    "Info":"Schneckentod 150g",
+                    "Quantity":2 
                 }
             ]
         },
