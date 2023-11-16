@@ -8040,7 +8040,8 @@ would look like this as a data uri
     },
 
     // Discount on purchase
-    "TotalDiscountAbsolut" : "10", // 10€
+    "TotalDiscount" : "10", // 10€
+    "TotalDiscountPercent" : "10", // 10%
     
     // Cart
     "CashDesk" : {
@@ -8054,7 +8055,8 @@ would look like this as a data uri
                 "Quantity":2, // Quantity
                 "TotalPrice":5.98, // Total Price
                 "TaxRate":19.00, // Tax Rate
-                "TotalDiscount" : null, // Discount
+                "TotalDiscount" : null, // Discount €
+                "TotalDiscountPercent" : null, // Discount Percent
                 "PriceNet" : false, // Discount possible?
                 "Categories":[ // Categories
                     {"ID" : 1, Number = "4711"},
@@ -8082,7 +8084,23 @@ would look like this as a data uri
             "Items" : [ // Affected product
                 {
                     "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", 
-                    "TotalDiscountAbsolut" : 5, // 5 €
+                    "TotalDiscount" : 5, // 5 €
+                    "ArticleKey" : "4755884",
+                    "EAN" : "123456789012", 
+                    "Info":"Schneckentod 150g", 
+                    "Price":2.99, 
+                    "Quantity":2 
+                    
+                }
+            ]
+        },
+        // 5%
+        {
+            "Voucher" : {"ID" : 100},
+            "Items" : [ // Affected product
+                {
+                    "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB", 
+                    "TotalDiscountPercent" : 5, // 5%
                     "ArticleKey" : "4755884",
                     "EAN" : "123456789012", 
                     "Info":"Schneckentod 150g", 
@@ -8098,7 +8116,7 @@ would look like this as a data uri
             "Items" : [ // new giveaway product
                 {
                     "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB",
-                    "TotalDiscountAbsolut" : null, // 5 €
+                    "TotalDiscount" : null, // 5 €
                     "ArticleKey" : "4755887", 
                     "EAN" : "123456789012", 
                     "Info":"Schneckentod 150g",
