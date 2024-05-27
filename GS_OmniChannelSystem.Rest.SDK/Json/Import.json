@@ -41,7 +41,6 @@
                     "ToMonth": null,
                     "From": null,
                     "To": null,
-                    "StockQuantity": 100,
                     "External_Key": null,
                     "External_RowVersion": null,
                     "External_COR_ID": null,
