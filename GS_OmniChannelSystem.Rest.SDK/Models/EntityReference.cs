@@ -96,6 +96,16 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public string Code { get; set; }
 
     }
+    public class EntityReferenceWithNumber : EntityReference
+    {
+        public EntityReferenceWithNumber()
+            : base()
+        {
+
+        }
+
+        public string Number { get; set; }
+    }
 
     public class EntityReferenceWithKey : EntityReference
     {
