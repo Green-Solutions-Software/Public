@@ -14,6 +14,7 @@
         public long ArticleKeyPriceID { get; set; }
         public int? Quantity { get; set; } // ab x Stück
         public double Price { get; set; } // 10 EUR
+        public double? PriceUVP { get; set; }
         public double? PriceUnitAmount { get; set; } // Pro 10
         public PriceUnitType? ValueUnitType { get; set; } // Liter
         public double? PriceOld { get; set; }
