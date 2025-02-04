@@ -51,7 +51,6 @@ namespace GS.OmniChannelSystem.Rest.SDK.Models
         public DeliverType? DeliverType2 { get; set; } // EP/HVP
         public PriceUnitType? DeliverUnitType2 { get; set; } // Stck
         public int? StockQuantity { get; set; }
-        public int? MinimumOrderQuantity { get; set; }
         public string StorageLocation { get; set; }
         public string EAN { get; set; }
         public EntityReference Country { get; set; }
