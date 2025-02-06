@@ -28,11 +28,11 @@ jobs:
       shell: pwsh
 
     - name: Restore Packages
-      run: dotnet restore GS_OmniChannelSystem.Rest.sln --configuration Release
+      run: dotnet restore GS_OmniChannelSystem.Rest.sln -c Release
       shell: pwsh
 
     - name: Build
-      run: dotnet build GS_OmniChannelSystem.Rest.sln --configuration Release
+      run: dotnet build GS_OmniChannelSystem.Rest.sln -c Release
       shell: pwsh
 
     - name: Pack
