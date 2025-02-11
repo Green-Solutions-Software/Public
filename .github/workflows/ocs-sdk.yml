@@ -15,24 +15,24 @@ jobs:
       nugetFeed: "https://api.nuget.org/v3/index.json"
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Verify commit exists in origin/master
-      shell: pwsh
+      shell: cmd
       run: |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
         git branch --remote --contains | grep origin/master
 
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/$tagPath\/v/}" >> $GITHUB_ENV
-      shell: pwsh
+      shell: cmd
 
     - name: Build
       run: dotnet build GS_OmniChannelSystem.Rest.sln -c Release
       shell: pwsh
 
     - name: Pack
-      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} --configuration Release
+      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} -c Release
       shell: pwsh
 
     - name: Push
