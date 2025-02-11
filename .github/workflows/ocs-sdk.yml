@@ -37,7 +37,7 @@ jobs:
       shell: pwsh
 
     - name: Pack
-      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${{ steps.get_version.outputs.version }} -c Release
+      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} -c Release
       shell: pwsh
 
     - name: Push
