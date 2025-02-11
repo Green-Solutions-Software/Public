@@ -30,6 +30,7 @@ jobs:
         if ($TAG -match 'v(\d+\.\d+\.\d+)') {
           $VERSION = $matches[1]
           Write-Output "Extracted version: $VERSION"
+          echo "VERSION=$VERSION" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         }
 
     - name: Build
@@ -37,9 +38,9 @@ jobs:
       shell: pwsh
 
     - name: Pack
-      run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} -c Release
+      run: dotnet pack ${env:restoreProject} -p:PackageVersion=$env:VERSION -c Release
       shell: pwsh
 
     - name: Push
-      run: dotnet nuget push ${env:pkgPath}.${env:VERSION}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
+      run: dotnet nuget push ${env:pkgPath}.$env:VERSION.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
       shell: pwsh
