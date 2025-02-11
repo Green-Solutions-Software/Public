@@ -23,9 +23,14 @@ jobs:
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
         git branch --remote --contains | Select-String origin/master
 
-    - id: get_version
-      name: Get version
-      uses: jannemattila/get-version-from-tag@v4
+    - name: Get version
+      shell: pwsh
+      run: |
+        $TAG = $env:GITHUB_REF -replace 'refs/tags/', ''
+        if ($TAG -match 'v(\d+\.\d+\.\d+)') {
+          $VERSION = $matches[1]
+          Write-Output "Extracted version: $VERSION"
+        }
 
     - name: Build
       run: dotnet build GS_OmniChannelSystem.Rest.sln -c Release
@@ -36,5 +41,5 @@ jobs:
       shell: pwsh
 
     - name: Push
-      run: dotnet nuget push ${env:pkgPath}.${{ steps.get_version.outputs.version }}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
+      run: dotnet nuget push ${env:pkgPath}.${env:VERSION}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
       shell: pwsh
