@@ -27,10 +27,6 @@ jobs:
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/$tagPath\/v/}" >> $GITHUB_ENV
       shell: pwsh
 
-    - name: Restore Packages
-      run: dotnet restore GS_OmniChannelSystem.Rest.sln -c Release
-      shell: pwsh
-
     - name: Build
       run: dotnet build GS_OmniChannelSystem.Rest.sln -c Release
       shell: pwsh
