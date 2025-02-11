@@ -29,12 +29,12 @@ jobs:
 
     - name: Build
       run: dotnet build GS_OmniChannelSystem.Rest.sln -c Release
-      shell: pwsh
+      shell: cmd
 
     - name: Pack
       run: dotnet pack ${env:restoreProject} -p:PackageVersion=${env:VERSION} -c Release
-      shell: pwsh
+      shell: cmd
 
     - name: Push
       run: dotnet nuget push ${env:pkgPath}.${env:VERSION}.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
-      shell: pwsh
+      shell: cmd
