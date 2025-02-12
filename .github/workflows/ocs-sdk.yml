@@ -42,5 +42,5 @@ jobs:
       shell: pwsh
 
     - name: Push
-      run: dotnet nuget push ${env:pkgPath}.$env:VERSION.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
+      run: dotnet nuget push ${env:restoreProject}/bin/Release/${env:pkgPath}.$env:VERSION.nupkg --api-key ${{ secrets.NUGETAPI }} --source ${env:nugetFeed}
       shell: pwsh
