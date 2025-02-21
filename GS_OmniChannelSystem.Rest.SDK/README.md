@@ -8040,8 +8040,14 @@ would look like this as a data uri
     },
 
     // Discount on purchase
-    "TotalDiscount" : "10", // 10€
-    "TotalDiscountPercent" : "10", // 10%
+    "TotalDiscount" : 10, // 10€
+    "TotalDiscountPercent" : 10, // 10%
+
+    // Bonus for the purchase
+    "TotalBonus" : 15, // 15€
+
+    // Bonus to pay with
+    "Bonus" : 10, // 10€
     
     // Cart
     "CashDesk" : {
@@ -8116,7 +8122,8 @@ would look like this as a data uri
             "Items" : [ // new giveaway product
                 {
                     "Guid": "F1DD0B89-BBCF-4B09-BFA5-AD7CF6A2C0BB",
-                    "TotalDiscount" : null, // 5 €
+                    "TotalDiscount
+                    " : null, // 5 €
                     "ArticleKey" : "4755887", 
                     "EAN" : "123456789012", 
                     "Info":"Schneckentod 150g",
