@@ -8045,9 +8045,10 @@ would look like this as a data uri
 
     // Bonus for the purchase
     "TotalBonus" : 15, // 15€
+    "TotalPoints" : 15, // 15 Points
 
     // Bonus to pay with
-    "Bonus" : 10, // 10€
+    "RedeemBonus" : 10, // 10€
     
     // Cart
     "CashDesk" : {
