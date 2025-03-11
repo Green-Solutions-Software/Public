@@ -3098,7 +3098,7 @@ public enum EventType : short
     DebitCardValidateByMember = 53, // Kunde hat Kundenkarte verifiziert
     DebitCardCantValidateByMember = 54, // Kunde konnte Kundenkarte nicht verifizieren
     VoucherDevalued = 55, // Gutschein/Prämie/Extra Punkte eingelöst
-    PurchaseCompleted = 56 // Einkauf abgeschlossen
+    PurchaseCompleted = 57 // Einkauf abgeschlossen
 }
 
 ```
