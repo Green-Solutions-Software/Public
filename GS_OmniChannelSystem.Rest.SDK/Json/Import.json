@@ -7,7 +7,6 @@
             "Name": "Acer Palmatum Bloodgood",
             "Name2": "Fächerahorn Bloodgood",
             "Name3": null,
-            "Description": "Dies ist eine lange Beschreibung",
             "ShortDescription": "Dies ist eine kurze Beschreibung",
             "Members": null,
             "Photos": null,
@@ -218,6 +217,20 @@
                 }
             ],
             "Texts": [
+                {
+                    "ArticleTextID": 0,
+                    "Position": 0,
+                    "Type": 31,
+                    "Title": "Beschreibung",
+                    "Value": "Dies ist eine lange Beschreibung",
+                    "External_Key": null,
+                    "External_RowVersion": null,
+                    "External_COR_ID": null,
+                    "External_DM_ID": null,
+                    "External_COR_Owner": null,
+                    "RowVersion": null,
+                    "Deleted": false
+                },
                 {
                     "ArticleTextID": 0,
                     "Position": 0,
