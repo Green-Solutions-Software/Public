@@ -455,6 +455,14 @@ namespace GS.OmniChannelSystem.Rest.SDK.Client
             }
         }
 
+        public IPricelistItemsRepository PricelistItems
+        {
+            get
+            {
+                return new PricelistItemsRepository(this.Context);
+            }
+        }
+
         public ICategoriesRepository Categories
         {
             get

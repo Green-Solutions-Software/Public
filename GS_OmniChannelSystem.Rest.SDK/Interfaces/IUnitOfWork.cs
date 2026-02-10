@@ -60,6 +60,7 @@ namespace GS.OmniChannelSystem.Rest.SDK.Interfaces
         ICurrenciesRepository Currencies { get; }
         ICacheRepository Cache { get; }
         IChainStoresRepository ChainStores { get; }
+        IPricelistItemsRepository PricelistItems { get; }
 
         string Files(long fileId, int width, int height, StretchMode? stretchMode = StretchMode.ProportionalExact);
         string Files(long fileId);
